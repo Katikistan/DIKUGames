@@ -14,16 +14,32 @@ public class Player {
         this.shape = shape;
     }
     private void UpdateDirection() {
+        shape.Direction.X = moveLeft + moveRight;
 
     }
     public void Move() {
-    // TODO: move the shape and guard against the window borders
+        if (shape.Position.X > 0 && (shape.Position.X + shape.Extent.X) < 1) {
+            shape.Move();
+        }
+        
     }
     public void SetMoveLeft(bool val) {
-    // TODO:set moveLeft appropriately and call UpdateDirection()
+        if (val) {
+            moveLeft = -MOVEMENT_SPEED;
+            UpdateDirection();
+        }
+        else {
+            moveLeft = 0.0f;
+        }
     }
     public void SetMoveRight(bool val) {
-    // TODO:set moveRight appropriately and call UpdateDirection()
+        if (val) {
+            moveRight = MOVEMENT_SPEED;
+            UpdateDirection();
+        }
+        else {
+            moveRight = 0.0f;
+        }
     }
     
     public void Render() {
