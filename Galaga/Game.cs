@@ -1,4 +1,5 @@
 using System.IO;
+using System.Collections.Generic;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
@@ -11,6 +12,7 @@ namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private Player player;
     private GameEventBus eventBus;
+    private EntityContainer<Enemy> enemies;
     public Game(WindowArgs windowArgs) : base(windowArgs) {
         eventBus = new GameEventBus();
         eventBus.InitializeEventBus(new List<GameEventType> { GameEventType.InputEvent });
@@ -19,6 +21,15 @@ public class Game : DIKUGame, IGameEventProcessor {
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("Assets", "Images", "Player.png")));
+        
+        List<Image> images = ImageStride.CreateStrides (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
+        const int numEnemies = 8;
+        enemies = new EntityContainer<Enemy>(numEnemies);
+        for (int i = 0; i < numEnemies; i++) {
+            enemies.AddEntity(new Enemy(
+                new DynamicShape(new Vec2F(0.1f + (float)i * 0.1f, 0.9f), new Vec2F(0.1f, 0.1f)),
+                new ImageStride(80, images)));
+        }
     }
     private void KeyPress(KeyboardKey key) {
         switch (key) {
@@ -59,6 +70,7 @@ public class Game : DIKUGame, IGameEventProcessor {
     public override void Render() {
         window.Clear();
         player.Render();
+        enemies.RenderEntities();
     }
     public override void Update() {
         // ProcessEvent(eventBus);
