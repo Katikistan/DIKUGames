@@ -9,6 +9,6 @@ public class Player {
         this.shape = shape;
     }
     public void Render() {
-    // TODO: render the player entity
+        entity.RenderEntity();    
     }
 }
