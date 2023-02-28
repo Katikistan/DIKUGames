@@ -18,28 +18,30 @@ public class Player {
 
     }
     public void Move() {
-        if (shape.Position.X > 0 && (shape.Position.X + shape.Extent.X) < 1) {
-            shape.Move();
+        shape.Move();
+        if (shape.Position.X <= 0.0f) {
+            shape.Position.X = 0.0f; 
         }
-        
+        else if ((shape.Position.X + shape.Extent.X) >= 1.0f) {
+                shape.Position.X = 1.0f - shape.Extent.X;
+        }
+ 
     }
     public void SetMoveLeft(bool val) {
         if (val) {
             moveLeft = -MOVEMENT_SPEED;
-            UpdateDirection();
-        }
-        else {
+        } else {
             moveLeft = 0.0f;
         }
+        UpdateDirection();
     }
     public void SetMoveRight(bool val) {
         if (val) {
             moveRight = MOVEMENT_SPEED;
-            UpdateDirection();
-        }
-        else {
+        } else {
             moveRight = 0.0f;
         }
+        UpdateDirection();
     }
     
     public void Render() {
