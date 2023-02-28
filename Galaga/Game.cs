@@ -7,7 +7,6 @@ using DIKUArcade;
 using DIKUArcade.GUI;
 using DIKUArcade.Events;
 using DIKUArcade.Input;
-using System.Collections.Generic;
 namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private Player player;
