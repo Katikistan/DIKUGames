@@ -7,7 +7,6 @@ public class Player {
     private float moveRight = 0.0f;
     private const float MOVEMENT_SPEED = 0.01f;
     
-
     private Entity entity;
     private DynamicShape shape;
     public Player(DynamicShape shape, IBaseImage image) {
@@ -45,7 +44,8 @@ public class Player {
         UpdateDirection();
     }
     public Vec2F GetPosition() {
-        return shape.Position;
+        Vec2F position = new Vec2F (shape.Position.X + shape.Extent.X / 2.0f, shape.Position.Y);
+        return (position);
     } 
     
     public void Render() {
