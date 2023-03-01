@@ -15,16 +15,22 @@ public class Game : DIKUGame, IGameEventProcessor {
     private EntityContainer<Enemy> enemies;
     private EntityContainer<PlayerShot> playerShots;
     private IBaseImage playerShotImage;
+    private AnimationContainer enemyExplosions;
+    private List<Image> explosionStrides;
+    private const int EXPLOSION_LENGTH_MS = 500;
     public Game(WindowArgs windowArgs) : base(windowArgs) {
         eventBus = new GameEventBus();
         eventBus.InitializeEventBus(new List<GameEventType> { GameEventType.InputEvent });
         window.SetKeyEventHandler(KeyHandler);
         eventBus.Subscribe(GameEventType.InputEvent, this);
+
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("Assets", "Images", "Player.png")));
-        
-        List<Image> images = ImageStride.CreateStrides (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
+
+
+        List<Image> images = ImageStride.CreateStrides 
+        (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
         const int numEnemies = 8;
         enemies = new EntityContainer<Enemy>(numEnemies);
         for (int i = 0; i < numEnemies; i++) {
@@ -32,8 +38,13 @@ public class Game : DIKUGame, IGameEventProcessor {
                 new DynamicShape(new Vec2F(0.1f + (float)i * 0.1f, 0.9f), new Vec2F(0.1f, 0.1f)),
                 new ImageStride(80, images)));
         }
+
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
+
+        enemyExplosions = new AnimationContainer(numEnemies);
+        explosionStrides = ImageStride.CreateStrides(8,
+        Path.Combine("Assets", "Images", "Explosion.png"));
     }
     private void IterateShots() {
         playerShots.Iterate(shot => {
@@ -46,7 +57,9 @@ public class Game : DIKUGame, IGameEventProcessor {
                     CollisionData collision = CollisionDetection.Aabb(dynamicShot,enemy.Shape);
                     if (collision.Collision) {
                         shot.DeleteEntity();
+                        AddExplosion(enemy.Shape.Position,enemy.Shape.Extent);
                         enemy.DeleteEntity();
+                        
                     }
                 });
             }
@@ -90,6 +103,14 @@ public class Game : DIKUGame, IGameEventProcessor {
                 break;
         } 
     }
+    public void AddExplosion(Vec2F position, Vec2F extent) {
+        ImageStride explosionStride = new ImageStride(EXPLOSION_LENGTH_MS/8,explosionStrides);
+        enemyExplosions.AddAnimation(new StationaryShape(position,extent),EXPLOSION_LENGTH_MS,
+        explosionStride);
+
+    // TODO: add explosion to the AnimationContainer
+    }
+
     public void ProcessEvent(GameEvent gameEvent) {
     // Leave this empty for now
     }
@@ -97,12 +118,14 @@ public class Game : DIKUGame, IGameEventProcessor {
         player.Render();
         enemies.RenderEntities();
         playerShots.RenderEntities();
+        enemyExplosions.RenderAnimations();
 
     }
     public override void Update() {
         // ProcessEvent(eventBus);
         player.Move();
         IterateShots();
+
         
     }
     
