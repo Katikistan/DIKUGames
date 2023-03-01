@@ -43,7 +43,8 @@ public class Player {
         }
         UpdateDirection();
     }
-    public Vec2F GetPosition() {
+    public Vec2F GetPosition() { 
+        //Position adjusted to make bullets shot from middle of ship
         Vec2F position = new Vec2F (shape.Position.X + shape.Extent.X / 2.0f, shape.Position.Y);
         return (position);
     } 
