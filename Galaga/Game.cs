@@ -7,11 +7,14 @@ using DIKUArcade;
 using DIKUArcade.GUI;
 using DIKUArcade.Events;
 using DIKUArcade.Input;
+using DIKUArcade.Physics;
 namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private Player player;
     private GameEventBus eventBus;
     private EntityContainer<Enemy> enemies;
+    private EntityContainer<PlayerShot> playerShots;
+    private IBaseImage playerShotImage;
     public Game(WindowArgs windowArgs) : base(windowArgs) {
         eventBus = new GameEventBus();
         eventBus.InitializeEventBus(new List<GameEventType> { GameEventType.InputEvent });
@@ -29,7 +32,27 @@ public class Game : DIKUGame, IGameEventProcessor {
                 new DynamicShape(new Vec2F(0.1f + (float)i * 0.1f, 0.9f), new Vec2F(0.1f, 0.1f)),
                 new ImageStride(80, images)));
         }
+        playerShots = new EntityContainer<PlayerShot>();
+        playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
     }
+    private void IterateShots() {
+        playerShots.Iterate(shot => {
+            shot.Shape.Move();
+            if (shot.Shape.Position.Y > 1.0f) {
+                shot.DeleteEntity();
+            } else {
+                enemies.Iterate(enemy => {
+                    DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
+                    CollisionData collision = CollisionDetection.Aabb(dynamicShot,enemy.Shape);
+                    if (collision.Collision) {
+                        shot.DeleteEntity();
+                        enemy.DeleteEntity();
+                    }
+                });
+            }
+        });
+    }
+
     private void KeyPress(KeyboardKey key) {
         switch (key) {
             case KeyboardKey.Escape:
@@ -51,6 +74,10 @@ public class Game : DIKUGame, IGameEventProcessor {
             case KeyboardKey.Right:
                 player.SetMoveRight(false);
                 break;
+            case KeyboardKey.Space:
+                playerShots.AddEntity(new PlayerShot(
+                    player.GetPosition(), playerShotImage));
+                break;
         }
     }
     private void KeyHandler(KeyboardAction action, KeyboardKey key) {
@@ -67,13 +94,16 @@ public class Game : DIKUGame, IGameEventProcessor {
     // Leave this empty for now
     }
     public override void Render() {
-        window.Clear();
         player.Render();
         enemies.RenderEntities();
+        playerShots.RenderEntities();
+
     }
     public override void Update() {
         // ProcessEvent(eventBus);
         player.Move();
+        IterateShots();
+        
     }
     
 }
