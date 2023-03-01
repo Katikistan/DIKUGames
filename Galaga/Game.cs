@@ -38,15 +38,16 @@ public class Game : DIKUGame, IGameEventProcessor {
     private void IterateShots() {
         playerShots.Iterate(shot => {
             shot.Shape.Move();
-            if (shot.Shape.Position.Y >= 0.021f) {
+            if (shot.Shape.Position.Y > 1.0f) {
                 shot.DeleteEntity();
             } else {
                 enemies.Iterate(enemy => {
                     DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
                     CollisionData collision = CollisionDetection.Aabb(dynamicShot,enemy.Shape);
-                    if (collision.Collision)
+                    if (collision.Collision) {
                         shot.DeleteEntity();
                         enemy.DeleteEntity();
+                    }
                 });
             }
         });
@@ -74,6 +75,8 @@ public class Game : DIKUGame, IGameEventProcessor {
                 player.SetMoveRight(false);
                 break;
             case KeyboardKey.Space:
+                playerShots.AddEntity(new PlayerShot(
+                    player.GetPosition(), playerShotImage));
                 break;
         }
     }
@@ -91,7 +94,6 @@ public class Game : DIKUGame, IGameEventProcessor {
     // Leave this empty for now
     }
     public override void Render() {
-        // window.Clear();
         player.Render();
         enemies.RenderEntities();
         playerShots.RenderEntities();
