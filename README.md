@@ -1,3 +1,4 @@
+# Hold 6: Oliver Sørensen, Bogi Syderbø, Thomas Risom Pedersen
 # DIKUGames
 Repo for solving assignments with DIKUArcade for DIKU course Software Development
 
