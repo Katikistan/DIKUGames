@@ -14,6 +14,7 @@ public class Game : DIKUGame, IGameEventProcessor {
     private Player player;
     private GameEventBus eventBus; // For keyboard input
     private ISquadron squadron;
+    private List<Image> images;
     // Fields for playershots
     private EntityContainer<PlayerShot> playerShots;
     private IBaseImage playerShotImage;
@@ -41,11 +42,10 @@ public class Game : DIKUGame, IGameEventProcessor {
         eventBus.Subscribe(GameEventType.PlayerEvent, player);
 
         // Adds enemies to the game
-        List<Image> images = ImageStride.CreateStrides 
+        images = ImageStride.CreateStrides 
         (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
         const int numEnemies = 8;
-        squadron = new Squadronline();
-        squadron.CreateEnemies(images);
+
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
@@ -74,7 +74,21 @@ public class Game : DIKUGame, IGameEventProcessor {
             }
         });
     }
-
+    private void RandSquad() {
+        Random rand = new Random();
+        switch (rand.Next(2)) {
+            case 0:
+            squadron = new Squadronline();
+            break;
+            case 1:
+            squadron = new Squadronline();
+            break;
+            case 2:
+            squadron = new Squadronline();
+            break;
+        }
+        squadron.CreateEnemies(images);
+    }
     private void KeyPress(KeyboardKey key) { // When a key is pressed
         switch (key) {
             case KeyboardKey.Escape:
@@ -150,6 +164,9 @@ public class Game : DIKUGame, IGameEventProcessor {
 
     }
     public override void Update() {
+        if (squadron.Enemies.CountEntities() == 0) {
+            RandSquad();
+        }
         eventBus.ProcessEventsSequentially();
         player.Move();
         IterateShots();
