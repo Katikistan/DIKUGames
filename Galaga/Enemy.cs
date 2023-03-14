@@ -32,7 +32,7 @@ public class Enemy : Entity {
         if (isEnraged == true) {
             img = new ImageStride (80, enragedimg);
         }
-        if (hitPoints <= 0) {
+        if (hitPoints <= 0) {
             return true;
         }
         return false;
