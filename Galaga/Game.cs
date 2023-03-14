@@ -67,10 +67,10 @@ public class Game : DIKUGame, IGameEventProcessor {
                     DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
                     CollisionData collision = CollisionDetection.Aabb(dynamicShot,enemy.Shape);
                     if (collision.Collision) { // Shot hit enemy
-                        if (enemy.CollisionUpdate()) {
                         shot.DeleteEntity();
-                        AddExplosion(enemy.Shape.Position,enemy.Shape.Extent);
-                        enemy.DeleteEntity();
+                        if (enemy.IsEnemyDead()) {
+                            AddExplosion(enemy.Shape.Position,enemy.Shape.Extent);
+                            enemy.DeleteEntity();
                         }
                     }
                 });
