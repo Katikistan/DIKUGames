@@ -1,0 +1,32 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>5</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>550</x><y>310</y><w>135</w><h>140</h></coordinates><panel_attributes>Game
+--
+player: Player 
+eventBus: GameEventBus 
+enemies: EntityContainer&lt;Enemy&gt; 
+playerShots: EntityContainer&lt;PlayerShot&gt;
+playerShotImage: IBaseImage 
+enemyExplosions: AnimationContainer 
+explosionStrides: List&lt;Image&gt; 
+ EXPLOSION_LENGTH_MS:const int
+--
+IterateShots()
+KeyPress(key)
+KeyRelease(key)
+KeyHandler(action, key)
+AddExplosion(position, extent)
+ProcessEvent(gameEvent)
+Render()
+Update()
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>585</x><y>225</y><w>260</w><h>65</h></coordinates><panel_attributes>GameEventBus
+--
+_initialized : bool 
+_eventProcessors: Dictionary&lt;GameEventType, ICollection&lt;IGameEventProcessor&gt;&gt;
+_eventQueues: Dictionary&lt;GameEventType,  GameEventQueue&lt;GameEvent&gt;&gt; 
+_timedEventLists: List&lt;TimedGameEvent&gt;[] 
+--
+InitializeEventBus()
+Subscribe()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>450</x><y>240</y><w>105</w><h>30</h></coordinates><panel_attributes>&lt;&lt; IGameEventProcessor &gt;&gt;
+--
+ProcessEvent(gameEvent)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>495</x><y>265</y><w>65</w><h>105</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;190;110;190</additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>285</y><w>85</w><h>105</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;190;150;190;150;10</additional_attributes></element></diagram>
