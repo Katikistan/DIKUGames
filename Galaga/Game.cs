@@ -13,7 +13,7 @@ namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private Player player;
     private GameEventBus eventBus; // For keyboard input
-    private ISquadron squadron = new Squadronline();
+    private ISquadron squadron = new SquadronLine();
     private List<Image> images;
     // Fields for playershots
     private EntityContainer<PlayerShot> playerShots;
@@ -44,13 +44,12 @@ public class Game : DIKUGame, IGameEventProcessor {
         // Adds enemies to the game
         images = ImageStride.CreateStrides 
         (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
-        const int numEnemies = 8;
         squadron.CreateEnemies(images);
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
         // adds explosions for when enimies are hit
-        enemyExplosions = new AnimationContainer(numEnemies);
+        enemyExplosions = new AnimationContainer(1);
         explosionStrides = ImageStride.CreateStrides(8,
         Path.Combine("Assets", "Images", "Explosion.png"));
     }
@@ -79,7 +78,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         if (squadron.Enemies.CountEntities() == 0) {
             switch (rand.Next(3)) {
                 case 0:
-                    squadron = new Squadronline();
+                    squadron = new SquadronLine();
                     break;
                 case 1:
                     squadron = new SquadronSquare();

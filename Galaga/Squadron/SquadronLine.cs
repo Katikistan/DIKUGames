@@ -6,11 +6,11 @@ using DIKUArcade.Math;
 
 namespace Galaga.Squadron;
 
-public class Squadronline : ISquadron {
+public class SquadronLine : ISquadron {
     public EntityContainer<Enemy> Enemies {get;}
     public int MaxEnemies {get;}
     
-    public Squadronline () {
+    public SquadronLine () {
         MaxEnemies = 6;
         Enemies = new EntityContainer<Enemy>(MaxEnemies);
     }
@@ -22,7 +22,7 @@ public class Squadronline : ISquadron {
         }
         for (int i = 0; i < MaxEnemies/2; i++) {
             Enemies.AddEntity(new Enemy(
-                new DynamicShape(new Vec2F(0.5f + (float)i * 0.1f, 0.9f), new Vec2F(0.1f, 0.1f)),
+                new DynamicShape(new Vec2F(0.55f + (float)i * 0.1f, 0.9f), new Vec2F(0.1f, 0.1f)),
                 new ImageStride(80, enemyStride)));
         }
     }
