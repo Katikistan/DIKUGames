@@ -7,7 +7,7 @@ using System.IO;
 namespace Galaga;
 public class Enemy : Entity {
     private int hitPoints = 3;
-    private float speed;
+    private float speed = 0.01f;
     List<Image> enragedimg = ImageStride.CreateStrides (2, Path.Combine("Assets", "Images", "RedMonster.png"));
     public Enemy(DynamicShape shape, IBaseImage image) : base(shape, image){
     }
@@ -17,7 +17,7 @@ public class Enemy : Entity {
             return true;
         } else if (hitPoints <= 2) {
             Image = new ImageStride (80, enragedimg);
-            speed += 1;
+            speed += 0.01f;
         }
         return false;
     }

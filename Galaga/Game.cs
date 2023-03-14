@@ -8,11 +8,12 @@ using DIKUArcade.GUI;
 using DIKUArcade.Events;
 using DIKUArcade.Input;
 using DIKUArcade.Physics;
+using Galaga.Squadron;
 namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private Player player;
     private GameEventBus eventBus; // For keyboard input
-    private EntityContainer<Enemy> enemies;
+    private ISquadron squadron;
     // Fields for playershots
     private EntityContainer<PlayerShot> playerShots;
     private IBaseImage playerShotImage;
@@ -43,12 +44,8 @@ public class Game : DIKUGame, IGameEventProcessor {
         List<Image> images = ImageStride.CreateStrides 
         (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
         const int numEnemies = 8;
-        enemies = new EntityContainer<Enemy>(numEnemies);
-        for (int i = 0; i < numEnemies; i++) {
-            enemies.AddEntity(new Enemy(
-                new DynamicShape(new Vec2F(0.1f + (float)i * 0.1f, 0.9f), new Vec2F(0.1f, 0.1f)),
-                new ImageStride(80, images)));
-        }
+        squadron = new Squadronline();
+        squadron.CreateEnemies(images);
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
@@ -63,7 +60,7 @@ public class Game : DIKUGame, IGameEventProcessor {
             if (shot.Shape.Position.Y > 1.0f) { // Shot hit border
                 shot.DeleteEntity();
             } else {
-                enemies.Iterate(enemy => { 
+                squadron.Enemies.Iterate(enemy => { 
                     DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
                     CollisionData collision = CollisionDetection.Aabb(dynamicShot,enemy.Shape);
                     if (collision.Collision) { // Shot hit enemy
@@ -147,7 +144,7 @@ public class Game : DIKUGame, IGameEventProcessor {
     }
     public override void Render() { //Rendering entities
         player.Render();
-        enemies.RenderEntities();
+        squadron.Enemies.RenderEntities();
         playerShots.RenderEntities();
         enemyExplosions.RenderAnimations();
 
