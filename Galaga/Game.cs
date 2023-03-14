@@ -13,7 +13,7 @@ namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private Player player;
     private GameEventBus eventBus; // For keyboard input
-    private ISquadron squadron;
+    private ISquadron squadron = new Squadronline();
     private List<Image> images;
     // Fields for playershots
     private EntityContainer<PlayerShot> playerShots;
@@ -45,7 +45,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         images = ImageStride.CreateStrides 
         (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
         const int numEnemies = 8;
-
+        squadron.CreateEnemies(images);
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
@@ -76,18 +76,21 @@ public class Game : DIKUGame, IGameEventProcessor {
     }
     private void RandSquad() {
         System.Random rand = new System.Random();
-        switch (rand.Next(2)) {
-            case 0:
-            squadron = new Squadronline();
-            break;
-            case 1:
-            squadron = new Squadronline();
-            break;
-            case 2:
-            squadron = new Squadronline();
-            break;
+        if (squadron.Enemies.CountEntities() == 0) {
+            switch (rand.Next(3)) {
+                case 0:
+                    squadron = new Squadronline();
+                    break;
+                case 1:
+                    squadron = new SquadronSquare();
+                    break;
+                case 2:
+                    squadron = new SquadronTriangle();
+                    break;
+            }
+            squadron.CreateEnemies(images);
         }
-        squadron.CreateEnemies(images);
+        
     }
     private void KeyPress(KeyboardKey key) { // When a key is pressed
         switch (key) {
@@ -164,9 +167,7 @@ public class Game : DIKUGame, IGameEventProcessor {
 
     }
     public override void Update() {
-        if (squadron.Enemies.CountEntities() == 0) {
-            RandSquad();
-        }
+        RandSquad();
         eventBus.ProcessEventsSequentially();
         player.Move();
         IterateShots();
