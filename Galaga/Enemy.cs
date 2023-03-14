@@ -1,6 +1,8 @@
-using System;
+using System.Collections.Generic;
 using DIKUArcade.Entities;
+using DIKUArcade.Math;
 using DIKUArcade.Graphics;
+using System.IO;
 
 namespace Galaga;
 public class Enemy : Entity {
@@ -21,18 +23,22 @@ public class Enemy : Entity {
         set { isEnraged = value;}
         }
 
-    public void CollisionUpdate() {
+    public bool CollisionUpdate() {
         hitPoints -=1;
         if (hitPoints == 1) {
             isEnraged = true;
             speed += 1;
         }
         if (isEnraged == true) {
-            img = "RedMonster.png";
+            img = new ImageStride (80, enragedimg);
         }
+        if (hitPoints <= 0) {
+            return true;
+        }
+        return false;
     }
     public Enemy(DynamicShape shape, IBaseImage image) : base(shape, image){
         img = image;
     }
-    List<Image> images = ImageStride.CreateStrides (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
+    List<Image> enragedimg = ImageStride.CreateStrides (4, Path.Combine("Assets", "Images", "RedMonster.png"));
 }

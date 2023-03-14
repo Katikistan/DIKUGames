@@ -21,16 +21,23 @@ public class Game : DIKUGame, IGameEventProcessor {
     private List<Image> explosionStrides;
     private const int EXPLOSION_LENGTH_MS = 500;
     public Game(WindowArgs windowArgs) : base(windowArgs) {
-        // Allows for user keyboard input
-        eventBus = new GameEventBus();
-        eventBus.InitializeEventBus(new List<GameEventType> { GameEventType.InputEvent, GameEventType.PlayerEvent });
-        window.SetKeyEventHandler(KeyHandler);
-        eventBus.Subscribe(GameEventType.InputEvent, this);
-
         // Creates a player object for the game
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("Assets", "Images", "Player.png")));
+
+        // Allows for user keyboard input
+        eventBus = new GameEventBus();
+        eventBus.InitializeEventBus(
+            new List<GameEventType> {
+                GameEventType.InputEvent,
+                GameEventType.WindowEvent, 
+                GameEventType.PlayerEvent 
+            });
+        window.SetKeyEventHandler(KeyHandler);
+        eventBus.Subscribe(GameEventType.InputEvent, this);
+        eventBus.Subscribe(GameEventType.WindowEvent, this);
+        eventBus.Subscribe(GameEventType.PlayerEvent, player);
 
         // Adds enemies to the game
         List<Image> images = ImageStride.CreateStrides 
@@ -68,39 +75,42 @@ public class Game : DIKUGame, IGameEventProcessor {
             }
         });
     }
-    public void ProcessEvent(GameEvent gameEvent) {
-        if (gameEvent.EventType == GameEventType.PlayerEvent) {
-            switch (gameEvent) {
-                case :
-                    
-                    break;
-                case :
-                    
-                    break;
-            }
-        }
-    }
 
     private void KeyPress(KeyboardKey key) { // When a key is pressed
         switch (key) {
             case KeyboardKey.Escape:
-                window.CloseWindow();
+                    eventBus.RegisterEvent (new GameEvent {
+                    EventType = GameEventType.WindowEvent,
+                    Message = "WINDOW CLOSE"
+                    });
                 break;
             case KeyboardKey.Left:
-                player.SetMoveLeft(true);
+                    eventBus.RegisterEvent (new GameEvent {
+                    EventType = GameEventType.PlayerEvent,
+                    Message = "MOVE LEFT"
+                    });
                 break;
             case KeyboardKey.Right:
-                player.SetMoveRight(true);
+                    eventBus.RegisterEvent (new GameEvent {
+                    EventType = GameEventType.PlayerEvent,
+                    Message = "MOVE RIGHT"
+                    });
                 break;
         }
     }
     private void KeyRelease(KeyboardKey key) { // When a key is realeased 
          switch (key) {
             case KeyboardKey.Left:
-                player.SetMoveLeft(false);
+                    eventBus.RegisterEvent (new GameEvent {
+                    EventType = GameEventType.PlayerEvent,
+                    Message = "REALESE LEFT"
+                    });
                 break;
             case KeyboardKey.Right:
-                player.SetMoveRight(false);
+                    eventBus.RegisterEvent (new GameEvent {
+                    EventType = GameEventType.PlayerEvent,
+                    Message = "REALESE RIGHT"
+                    });
                 break;
             case KeyboardKey.Space: 
                 playerShots.AddEntity(new PlayerShot(
@@ -125,7 +135,13 @@ public class Game : DIKUGame, IGameEventProcessor {
     }
 
     public void ProcessEvent(GameEvent gameEvent) {
-    // Leave this empty for now
+        if (gameEvent.EventType == GameEventType.WindowEvent) {
+            switch (gameEvent.Message) {
+                    case "WINDOW CLOSE":
+                        window.CloseWindow();
+                        break;
+            }
+        }   
     }
     public override void Render() { //Rendering entities
         player.Render();
@@ -135,6 +151,7 @@ public class Game : DIKUGame, IGameEventProcessor {
 
     }
     public override void Update() {
+        eventBus.ProcessEventsSequentially();
         player.Move();
         IterateShots();
     }
