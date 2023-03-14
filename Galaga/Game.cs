@@ -75,7 +75,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         });
     }
     private void RandSquad() {
-        Random rand = new Random();
+        System.Random rand = new System.Random();
         switch (rand.Next(2)) {
             case 0:
             squadron = new Squadronline();
