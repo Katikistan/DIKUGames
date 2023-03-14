@@ -23,7 +23,7 @@ public class Game : DIKUGame, IGameEventProcessor {
     public Game(WindowArgs windowArgs) : base(windowArgs) {
         // Allows for user keyboard input
         eventBus = new GameEventBus();
-        eventBus.InitializeEventBus(new List<GameEventType> { GameEventType.InputEvent });
+        eventBus.InitializeEventBus(new List<GameEventType> { GameEventType.InputEvent, GameEventType.PlayerEvent });
         window.SetKeyEventHandler(KeyHandler);
         eventBus.Subscribe(GameEventType.InputEvent, this);
 
@@ -67,6 +67,18 @@ public class Game : DIKUGame, IGameEventProcessor {
                 });
             }
         });
+    }
+    public void ProcessEvent(GameEvent gameEvent) {
+        if (gameEvent.EventType == GameEventType.PlayerEvent) {
+            switch (gameEvent) {
+                case :
+                    
+                    break;
+                case :
+                    
+                    break;
+            }
+        }
     }
 
     private void KeyPress(KeyboardKey key) { // When a key is pressed
