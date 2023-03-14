@@ -30,7 +30,7 @@ public class Enemy : Entity {
             speed += 1;
         }
         if (isEnraged == true) {
-            img = new ImageStride (80, enragedimg);
+            Image = new ImageStride (80, enragedimg);
         }
         if (hitPoints <= 0) {
             return true;
@@ -40,5 +40,5 @@ public class Enemy : Entity {
     public Enemy(DynamicShape shape, IBaseImage image) : base(shape, image){
         img = image;
     }
-    List<Image> enragedimg = ImageStride.CreateStrides (4, Path.Combine("Assets", "Images", "RedMonster.png"));
+    List<Image> enragedimg = ImageStride.CreateStrides (2, Path.Combine("Assets", "Images", "RedMonster.png"));
 }
