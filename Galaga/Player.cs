@@ -9,61 +9,26 @@ public class Player : IGameEventProcessor {
     private float moveLeft = 0.0f;
     private float moveRight = 0.0f;
     private const float MOVEMENT_SPEED = 0.01f;
-    
     private Entity entity;
     private DynamicShape shape;
-    private GameEventBus eventBus; // For keyboard input
     public Player(DynamicShape shape, IBaseImage image) {
         entity = new Entity(shape, image);
         this.shape = shape;
-        eventBus = new GameEventBus();
-        eventBus.InitializeEventBus(new List<GameEventType> { GameEventType.PlayerEvent });
-        eventBus.Subscribe(GameEventType.PlayerEvent, this);
     }
-    private void KeyPress(KeyboardKey key) { // When a key is pressed
-        eventBus.RegisterEvent (new GameEvent {
-            EventType = [from], [to], [message], [StringArg1], [StringArg2],
-            [ObjectArg1], [IntArg1], [Id]
-            });
-
-        switch (key) {
-            case KeyboardKey.Left:
-                SetMoveLeft(true);
-                break;
-            case KeyboardKey.Right:
-                SetMoveRight(true);
-                break;
-        }
-    }
-    private void KeyRelease(KeyboardKey key) { // When a key is realeased 
-         switch (key) {
-            case KeyboardKey.Left:
-                SetMoveLeft(false);
-                break;
-            case KeyboardKey.Right:
-                SetMoveRight(false);
-                break;
-        }
-    }
-    private void KeyHandler(KeyboardAction action, KeyboardKey key) {
-        switch (action) {
-            case KeyboardAction.KeyPress:
-                KeyPress(key);
-                break;
-            case KeyboardAction.KeyRelease:
-                KeyRelease(key);
-                break;
-        } 
-    }
-
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.PlayerEvent) {
-            switch (gameEvent) {
-                case Left:
-                    player.Move
+            switch (gameEvent.Message) {
+                case "MOVE LEFT":
+                    SetMoveLeft(true);
                     break;
-                case Right:
-                    player.Move
+                case "MOVE RIGHT":
+                    SetMoveRight(true);
+                    break;
+                case "REALESE LEFT":
+                    SetMoveLeft(false);
+                    break;
+                case "REALESE RIGHT":
+                    SetMoveRight(false);
                     break;
             }
         }
@@ -72,7 +37,7 @@ public class Player : IGameEventProcessor {
         shape.Direction.X = moveLeft + moveRight;
 
     }
-    private void Move() {
+    public void Move() {
         shape.Move();
         if (shape.Position.X <= 0.0f) {
             shape.Position.X = 0.0f; 
