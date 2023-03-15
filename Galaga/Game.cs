@@ -1,39 +1,51 @@
-using System.IO;
-using System.Collections.Generic;
-using DIKUArcade.Entities;
-using DIKUArcade.Graphics;
-using DIKUArcade.Math;
 using DIKUArcade;
-using DIKUArcade.GUI;
+using DIKUArcade.Entities;
 using DIKUArcade.Events;
+using DIKUArcade.Graphics;
+using DIKUArcade.GUI;
 using DIKUArcade.Input;
+using DIKUArcade.Math;
 using DIKUArcade.Physics;
+using Galaga.MovementStrategy;
 using Galaga.Squadron;
+using System.Collections.Generic;
+using System.IO;
+
 namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
-    private Player player;
-    private GameEventBus eventBus; // For keyboard input
-    private ISquadron squadron;
+    private GameEventBus eventBus;
+    private Player player;    
+    
+    // enemy fields
+    private ISquadron squadron = new SquadronLine();
+    private List<Image> blueMonster;
+    private List<Image> greenMonster;
+    
+    private IMovementStrategy movestrat;
+
     // Fields for playershots
     private EntityContainer<PlayerShot> playerShots;
     private IBaseImage playerShotImage;
+    
     // Fields for explosion
     private AnimationContainer enemyExplosions;
     private List<Image> explosionStrides;
     private const int EXPLOSION_LENGTH_MS = 500;
+    
     public Game(WindowArgs windowArgs) : base(windowArgs) {
         // Creates a player object for the game
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("Assets", "Images", "Player.png")));
 
-        // Allows for user keyboard input
+        // Eventbus and eventypes subscribed to
         eventBus = new GameEventBus();
         eventBus.InitializeEventBus(
             new List<GameEventType> {
                 GameEventType.InputEvent,
                 GameEventType.WindowEvent, 
-                GameEventType.PlayerEvent 
+                GameEventType.PlayerEvent,
+                GameEventType.MovementEvent
             });
         window.SetKeyEventHandler(KeyHandler);
         eventBus.Subscribe(GameEventType.InputEvent, this);
@@ -41,16 +53,20 @@ public class Game : DIKUGame, IGameEventProcessor {
         eventBus.Subscribe(GameEventType.PlayerEvent, player);
 
         // Adds enemies to the game
-        List<Image> images = ImageStride.CreateStrides 
+        // images = ImageStride.CreateStrides 
+        // (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
+        blueMonster = ImageStride.CreateStrides 
         (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
-        const int numEnemies = 8;
-        squadron = new Squadronline();
-        squadron.CreateEnemies(images);
+        greenMonster = ImageStride.CreateStrides 
+        (2, Path.Combine("Assets", "Images", "GreenMonster.png"));
+        squadron.CreateEnemies(blueMonster,greenMonster);
+        movestrat = new ZigZagDown();
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
+        
         // adds explosions for when enimies are hit
-        enemyExplosions = new AnimationContainer(numEnemies);
+        enemyExplosions = new AnimationContainer(1);
         explosionStrides = ImageStride.CreateStrides(8,
         Path.Combine("Assets", "Images", "Explosion.png"));
     }
@@ -74,7 +90,25 @@ public class Game : DIKUGame, IGameEventProcessor {
             }
         });
     }
-
+    private void RandSquad() {
+        //randomize movestrat 
+        System.Random rand = new System.Random();
+        if (squadron.Enemies.CountEntities() == 0) {
+            switch (rand.Next(3)) {
+                case 0:
+                    squadron = new SquadronLine();
+                    break;
+                case 1:
+                    squadron = new SquadronSquare();
+                    break;
+                case 2:
+                    squadron = new SquadronTriangle();
+                    break;
+            }
+            squadron.CreateEnemies(blueMonster,greenMonster);
+        }
+        
+    }
     private void KeyPress(KeyboardKey key) { // When a key is pressed
         switch (key) {
             case KeyboardKey.Escape:
@@ -150,6 +184,8 @@ public class Game : DIKUGame, IGameEventProcessor {
 
     }
     public override void Update() {
+        RandSquad();
+        movestrat.MoveEnemies(squadron.Enemies);
         eventBus.ProcessEventsSequentially();
         player.Move();
         IterateShots();

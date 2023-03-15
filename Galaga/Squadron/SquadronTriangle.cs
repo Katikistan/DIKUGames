@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using DIKUArcade.Graphics;
 using DIKUArcade.Entities;
+using DIKUArcade.Graphics;
 using DIKUArcade.Math;
+using System.Collections.Generic;
 
 namespace Galaga.Squadron;
 
@@ -19,24 +19,34 @@ public class SquadronTriangle : ISquadron {
         MaxEnemies = 6;
         Enemies = new EntityContainer<Enemy>(MaxEnemies);
     }
-    public void CreateEnemies (List<Image> enemyStride) {
+    public void CreateEnemies (List<Image> enemyStride, List<Image> alternativeEnemyStride) {
         
-        var imagestride = new ImageStride(80, enemyStride);
-        var ext = new Vec2F(0.1f, 0.1f);
+        ImageStride blueMonster = new ImageStride(80, enemyStride);
+        ImageStride greenMonster = new ImageStride(80, alternativeEnemyStride);
+        Vec2F ext = new Vec2F(0.1f, 0.1f);
 
         // Create triangle 1 (left)
-        Enemies.AddEntity(new Enemy(new DynamicShape(new Vec2F(t1.X, t1.Y + 0.1f), ext), imagestride));
-        Enemies.AddEntity(new Enemy(new DynamicShape(new Vec2F(t1.X + 0.05f, t1.Y), ext), imagestride));
-        Enemies.AddEntity(new Enemy(new DynamicShape(new Vec2F(t1.X - 0.05f, t1.Y), ext), imagestride));
+        Enemies.AddEntity(new Enemy(
+            new DynamicShape(new Vec2F(t1.X, t1.Y + 0.1f), ext), blueMonster));
+        Enemies.AddEntity(new Enemy(
+            new DynamicShape(new Vec2F(t1.X + 0.05f, t1.Y), ext), blueMonster));
+        Enemies.AddEntity(new Enemy(
+            new DynamicShape(new Vec2F(t1.X - 0.05f, t1.Y), ext), blueMonster));
 
         // Create triangle 2 (right)
-        Enemies.AddEntity(new Enemy(new DynamicShape(new Vec2F(t2.X, t2.Y + 0.1f), ext), imagestride));
-        Enemies.AddEntity(new Enemy(new DynamicShape(new Vec2F(t2.X + 0.05f, t2.Y), ext), imagestride));
-        Enemies.AddEntity(new Enemy(new DynamicShape(new Vec2F(t2.X - 0.05f, t2.Y), ext), imagestride));
+        Enemies.AddEntity(new Enemy(
+            new DynamicShape(new Vec2F(t2.X, t2.Y + 0.1f), ext), blueMonster));
+        Enemies.AddEntity(new Enemy(
+            new DynamicShape(new Vec2F(t2.X + 0.05f, t2.Y), ext), blueMonster));
+        Enemies.AddEntity(new Enemy(
+            new DynamicShape(new Vec2F(t2.X - 0.05f, t2.Y), ext), blueMonster));
 
         // Create triangle 3 (centre)
-        Enemies.AddEntity(new Enemy(new DynamicShape(new Vec2F(t3.X - ext.X/2, t3.Y - 0.1f), ext), imagestride));
-        Enemies.AddEntity(new Enemy(new DynamicShape(new Vec2F(t3.X - ext.X/2 + 0.05f, t3.Y), ext), imagestride));
-        Enemies.AddEntity(new Enemy(new DynamicShape(new Vec2F(t3.X - ext.X/2 - 0.05f, t3.Y), ext), imagestride));
+        Enemies.AddEntity(new Enemy(
+            new DynamicShape(new Vec2F(t3.X - ext.X/2, t3.Y - 0.1f), ext), greenMonster));
+        Enemies.AddEntity(new Enemy(
+            new DynamicShape(new Vec2F(t3.X - ext.X/2 + 0.05f, t3.Y), ext), greenMonster));
+        Enemies.AddEntity(new Enemy(
+            new DynamicShape(new Vec2F(t3.X - ext.X/2 - 0.05f, t3.Y), ext), greenMonster));
     }
 }
