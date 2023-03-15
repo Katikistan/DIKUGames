@@ -8,6 +8,14 @@ using DIKUArcade.Math;
 namespace Galaga;
 //IGameEventProcessor 
 public class Enemy : Entity {
+    private Vec2F startpos;
+    public Vec2F Startpos {
+        get {return startpos;}
+    }
+    private DynamicShape shape;
+    public DynamicShape SShape {
+        get {return shape;}
+    }
     private int hitPoints = 3;
     private bool enraged = false;
     public bool Enraged { get => enraged;}
@@ -16,6 +24,8 @@ public class Enemy : Entity {
     List<Image> enragedimg = ImageStride.CreateStrides 
     (2, Path.Combine("Assets", "Images", "RedMonster.png"));
     public Enemy(DynamicShape shape, IBaseImage image) : base(shape, image) {
+        this.shape = shape;
+        startpos = new Vec2F(shape.Position.X,shape.Position.Y);
     }
     public bool IsEnemyDead() {
         hitPoints -=1;
@@ -24,7 +34,7 @@ public class Enemy : Entity {
         } else if (hitPoints <= 2) {
             enraged = true;
             Image = new ImageStride (80, enragedimg);
-            speed += 0.002f;
+            speed = 0.004f;
         }
         return false;
     }
