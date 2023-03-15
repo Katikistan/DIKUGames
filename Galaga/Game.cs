@@ -60,7 +60,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         greenMonster = ImageStride.CreateStrides 
         (2, Path.Combine("Assets", "Images", "GreenMonster.png"));
         squadron.CreateEnemies(blueMonster,greenMonster);
-        movestrat = new Down();
+        movestrat = new ZigZagDown();
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
