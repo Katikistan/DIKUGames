@@ -1,8 +1,8 @@
 using DIKUArcade.Entities;
-using DIKUArcade.Graphics;
-using DIKUArcade.Math;
 using DIKUArcade.Events;
+using DIKUArcade.Graphics;
 using DIKUArcade.Input;
+using DIKUArcade.Math;
 namespace Galaga;
 public class Player : IGameEventProcessor {
     private float moveLeft = 0.0f;

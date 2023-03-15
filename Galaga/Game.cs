@@ -1,53 +1,67 @@
-using System.IO;
-using System.Collections.Generic;
-using DIKUArcade.Entities;
-using DIKUArcade.Graphics;
-using DIKUArcade.Math;
 using DIKUArcade;
-using DIKUArcade.GUI;
+using DIKUArcade.Entities;
 using DIKUArcade.Events;
+using DIKUArcade.Graphics;
+using DIKUArcade.GUI;
 using DIKUArcade.Input;
+using DIKUArcade.Math;
 using DIKUArcade.Physics;
+using System.Collections.Generic;
+using System.IO;
 using Galaga.Squadron;
 namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
-    private Player player;
-    private GameEventBus eventBus; // For keyboard input
+    private GameEventBus eventBus;
+    private Player player;    
+    
+    // enemy fields
     private ISquadron squadron = new SquadronLine();
-    private List<Image> images;
+    private List<Image> blueMonster;
+    private List<Image> greenMonster;
+    
     // Fields for playershots
     private EntityContainer<PlayerShot> playerShots;
     private IBaseImage playerShotImage;
+    
     // Fields for explosion
     private AnimationContainer enemyExplosions;
     private List<Image> explosionStrides;
     private const int EXPLOSION_LENGTH_MS = 500;
+    
     public Game(WindowArgs windowArgs) : base(windowArgs) {
         // Creates a player object for the game
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("Assets", "Images", "Player.png")));
 
-        // Allows for user keyboard input
+        // Eventbus and eventypes subscribed to
         eventBus = new GameEventBus();
         eventBus.InitializeEventBus(
             new List<GameEventType> {
                 GameEventType.InputEvent,
                 GameEventType.WindowEvent, 
-                GameEventType.PlayerEvent 
+                GameEventType.PlayerEvent,
+                GameEventType.MovementEvent
             });
         window.SetKeyEventHandler(KeyHandler);
         eventBus.Subscribe(GameEventType.InputEvent, this);
         eventBus.Subscribe(GameEventType.WindowEvent, this);
         eventBus.Subscribe(GameEventType.PlayerEvent, player);
+        // eventBus.Subscribe(GameEventType.MovementEvent, squadron);
 
         // Adds enemies to the game
-        images = ImageStride.CreateStrides 
+        // images = ImageStride.CreateStrides 
+        // (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
+        blueMonster = ImageStride.CreateStrides 
         (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
-        squadron.CreateEnemies(images);
+        greenMonster = ImageStride.CreateStrides 
+        (2, Path.Combine("Assets", "Images", "GreenMonster.png"));
+        squadron.CreateEnemies(blueMonster,greenMonster);
+        
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
+        
         // adds explosions for when enimies are hit
         enemyExplosions = new AnimationContainer(1);
         explosionStrides = ImageStride.CreateStrides(8,
@@ -87,7 +101,7 @@ public class Game : DIKUGame, IGameEventProcessor {
                     squadron = new SquadronTriangle();
                     break;
             }
-            squadron.CreateEnemies(images);
+            squadron.CreateEnemies(blueMonster,greenMonster);
         }
         
     }
