@@ -6,9 +6,11 @@ using DIKUArcade.GUI;
 using DIKUArcade.Input;
 using DIKUArcade.Math;
 using DIKUArcade.Physics;
+using Galaga.MovementStrategy;
+using Galaga.Squadron;
 using System.Collections.Generic;
 using System.IO;
-using Galaga.Squadron;
+
 namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private GameEventBus eventBus;
@@ -19,6 +21,8 @@ public class Game : DIKUGame, IGameEventProcessor {
     private List<Image> blueMonster;
     private List<Image> greenMonster;
     
+    private IMovementStrategy movestrat;
+
     // Fields for playershots
     private EntityContainer<PlayerShot> playerShots;
     private IBaseImage playerShotImage;
@@ -47,7 +51,6 @@ public class Game : DIKUGame, IGameEventProcessor {
         eventBus.Subscribe(GameEventType.InputEvent, this);
         eventBus.Subscribe(GameEventType.WindowEvent, this);
         eventBus.Subscribe(GameEventType.PlayerEvent, player);
-        // eventBus.Subscribe(GameEventType.MovementEvent, squadron);
 
         // Adds enemies to the game
         // images = ImageStride.CreateStrides 
@@ -57,7 +60,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         greenMonster = ImageStride.CreateStrides 
         (2, Path.Combine("Assets", "Images", "GreenMonster.png"));
         squadron.CreateEnemies(blueMonster,greenMonster);
-        
+        movestrat = new Down();
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
@@ -88,6 +91,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         });
     }
     private void RandSquad() {
+        //randomize movestrat 
         System.Random rand = new System.Random();
         if (squadron.Enemies.CountEntities() == 0) {
             switch (rand.Next(3)) {
@@ -181,6 +185,7 @@ public class Game : DIKUGame, IGameEventProcessor {
     }
     public override void Update() {
         RandSquad();
+        movestrat.MoveEnemies(squadron.Enemies);
         eventBus.ProcessEventsSequentially();
         player.Move();
         IterateShots();

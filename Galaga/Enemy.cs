@@ -9,8 +9,10 @@ namespace Galaga;
 //IGameEventProcessor 
 public class Enemy : Entity {
     private int hitPoints = 3;
-    public bool Enraged { get; }
+    private bool enraged = false;
+    public bool Enraged { get => enraged;}
     private float speed = 0.01f;
+    public float Speed { get => speed;}
     List<Image> enragedimg = ImageStride.CreateStrides 
     (2, Path.Combine("Assets", "Images", "RedMonster.png"));
     public Enemy(DynamicShape shape, IBaseImage image) : base(shape, image) {
@@ -20,6 +22,7 @@ public class Enemy : Entity {
         if (hitPoints <= 0) {
             return true;
         } else if (hitPoints <= 2) {
+            enraged = true;
             Image = new ImageStride (80, enragedimg);
             speed += 0.01f;
         }

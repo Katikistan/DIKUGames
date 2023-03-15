@@ -1,15 +1,13 @@
-// using DIKUArcade.Entities;
-// using DIKUArcade.Math;
+using DIKUArcade.Entities;
 
-// namespace Galaga.MovementStrategy;
-// public class NoMove {
-//     private void MoveEnemy(Enemy enemy) {
-//         enemy.Shape.MoveX;
-            // brug speed og direction
-//     }
-//     public void MoveEnemies (EntityContainer<Enemy> enemies) {
-//         foreach (Enemy enemy in enemies) {
-//             MoveEnemy(enemy);
-//         }
-//     }
-// }
+namespace Galaga.MovementStrategy;
+public class NoMove : IMovementStrategy {
+    public void MoveEnemy(Enemy enemy) {
+
+    }
+    public void MoveEnemies (EntityContainer<Enemy> enemies) {
+        foreach (Enemy enemy in enemies) {
+            MoveEnemy(enemy);
+        }
+    }
+}
