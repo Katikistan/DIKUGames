@@ -8,8 +8,8 @@ public class ZigZagDown : IMovementStrategy {
     private const float s = 0.0003f;
 
     public void MoveEnemy(Enemy enemy) {
-        const float x0 = 0.1f;
-        const float y0 = 0.0f;
+        float x0 = enemy.Startpos.X;
+        float y0 = enemy.Startpos.Y;
         float pi = (float)Math.PI;
         float yi = enemy.Shape.Position.Y + s;
         float sin = (float)Math.Sin((2 * pi *(y0-yi))/p);
