@@ -220,6 +220,7 @@ public class Game : DIKUGame, IGameEventProcessor {
 
     public override void Update() {
         eventBus.ProcessEventsSequentially();
+
         if (health.Lives > 0) {
             squadron.Enemies.Iterate(enemy => {
                 if (enemy.Shape.Position.Y < 0.0f) {
