@@ -15,14 +15,9 @@ namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private GameEventBus eventBus;
     private int level = 1;
+    private GameOver gameOverScreen;
     private Player player;
     private Health health;
-
-    // text fields
-    private GameOver gameOverScreen;
-    // private Text gameOverText;
-    // private Text levelText;
-
     // enemy fields
     private ISquadron squadron = new SquadronLine();
     private int squadronNum = 0;
@@ -70,7 +65,6 @@ public class Game : DIKUGame, IGameEventProcessor {
         (2, Path.Combine("Assets", "Images", "GreenMonster.png"));
 
         squadron.CreateEnemies(blueMonster,greenMonster);
-
         movestrat = new ZigZagDown();
 
         // adds playershots to the game
@@ -82,18 +76,6 @@ public class Game : DIKUGame, IGameEventProcessor {
         explosionStrides = ImageStride.CreateStrides(8,
         Path.Combine("Assets", "Images", "Explosion.png"));
         gameOverScreen = new GameOver();
-        // Text for game over screen
-        // gameOverText = new Text (
-        //     "Game over",
-        //     new Vec2F(0.32f,0.2f),
-        //     new Vec2F(0.5f,0.5f));
-        // gameOverText.SetColor(new Vec3I(255, 255, 255));
-
-        // levelText = new Text (
-        //     $"Level: {level.ToString()}",
-        //     new Vec2F(0.4f,0.2f),
-        //     new Vec2F(0.4f,0.4f));
-        // levelText.SetColor(new Vec3I(255, 255, 255));
     }
     private void IterateShots() { // Checks if any shots have hit the border or any enemies
         playerShots.Iterate(shot => {
@@ -121,7 +103,6 @@ public class Game : DIKUGame, IGameEventProcessor {
             squadronNum = (squadronNum + 1) % 3;
             level += 1;
             gameOverScreen.SetLevel(level);
-            // levelText.SetText($"Level: {level.ToString()}");
             switch (squadronNum) {
                 case 0:
                     squadron = new SquadronLine();
@@ -138,7 +119,6 @@ public class Game : DIKUGame, IGameEventProcessor {
                 enemy.IncreaseSpeed(level*0.0002f);
             }
         }
-
     }
     private void KeyPress(KeyboardKey key) { // When a key is pressed
         switch (key) {
@@ -197,7 +177,6 @@ public class Game : DIKUGame, IGameEventProcessor {
         enemyExplosions.AddAnimation(new StationaryShape(position,extent),EXPLOSION_LENGTH_MS,
         explosionStride);
     }
-
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.WindowEvent) {
             switch (gameEvent.Message) {
@@ -216,8 +195,6 @@ public class Game : DIKUGame, IGameEventProcessor {
             health.RenderHealth();
         } else {
             gameOverScreen.Render();
-            // gameOverText.RenderText();
-            // levelText.RenderText();
         }
     }
 
