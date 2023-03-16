@@ -8,7 +8,7 @@ namespace Galaga.Squadron;
 public class SquadronLine : ISquadron {
     public EntityContainer<Enemy> Enemies {get;}
     public int MaxEnemies {get;}
-    
+
     public SquadronLine () {
         MaxEnemies = 6;
         Enemies = new EntityContainer<Enemy>(MaxEnemies);

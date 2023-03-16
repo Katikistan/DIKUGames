@@ -10,7 +10,6 @@ public class Health {
         health = 3;
         display = new Text ("Lives: " + health.ToString(), position, extent);
         display.SetColor(new Vec3I(255, 255, 255));
-       
     }
     /// <summary>
     /// Decrements the health field by one and updates Text

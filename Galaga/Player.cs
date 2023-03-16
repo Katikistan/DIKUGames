@@ -39,12 +39,11 @@ public class Player : IGameEventProcessor {
     public void Move() {
         shape.Move();
         if (shape.Position.X <= 0.0f) {
-            shape.Position.X = 0.0f; 
+            shape.Position.X = 0.0f;
+        } else if ((shape.Position.X + shape.Extent.X) >= 1.0f) {
+            shape.Position.X = 1.0f - shape.Extent.X;
         }
-        else if ((shape.Position.X + shape.Extent.X) >= 1.0f) {
-                shape.Position.X = 1.0f - shape.Extent.X;
-        }
- 
+
     }
     private void SetMoveLeft(bool val) {
         if (val) {
@@ -62,13 +61,13 @@ public class Player : IGameEventProcessor {
         }
         UpdateDirection();
     }
-    public Vec2F GetPosition() { 
+    public Vec2F GetPosition() {
         //Position adjusted to make bullets shot from middle of ship.
-        Vec2F position = new Vec2F (shape.Position.X + shape.Extent.X / 2.0f, shape.Position.Y);
+        Vec2F position = new Vec2F(shape.Position.X + shape.Extent.X / 2.0f, shape.Position.Y);
         return (position);
-    } 
-    
+    }
+
     public void Render() {
-        entity.RenderEntity();    
+        entity.RenderEntity();
     }
 }

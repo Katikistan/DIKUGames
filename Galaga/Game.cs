@@ -42,8 +42,8 @@ public class Game : DIKUGame, IGameEventProcessor {
 
         // Adds health and text in bottom of window
         health = new Health(
-            new Vec2F(0.02f,-0.42f),
-            new Vec2F(0.4f,0.49f));
+            new Vec2F(0.02f, -0.42f),
+            new Vec2F(0.4f, 0.49f));
 
         // Eventbus and eventypes subscribed to
         eventBus = new GameEventBus();
@@ -64,7 +64,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         greenMonster = ImageStride.CreateStrides
         (2, Path.Combine("Assets", "Images", "GreenMonster.png"));
 
-        squadron.CreateEnemies(blueMonster,greenMonster);
+        squadron.CreateEnemies(blueMonster, greenMonster);
         movestrat = new ZigZagDown();
 
         // adds playershots to the game
@@ -85,11 +85,11 @@ public class Game : DIKUGame, IGameEventProcessor {
             } else {
                 squadron.Enemies.Iterate(enemy => {
                     DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
-                    CollisionData collision = CollisionDetection.Aabb(dynamicShot,enemy.Shape);
+                    CollisionData collision = CollisionDetection.Aabb(dynamicShot, enemy.Shape);
                     if (collision.Collision) { // Shot hit enemy
                         shot.DeleteEntity();
                         if (enemy.IsEnemyDead()) {
-                            AddExplosion(enemy.Shape.Position,enemy.Shape.Extent);
+                            AddExplosion(enemy.Shape.Position, enemy.Shape.Extent);
                             enemy.DeleteEntity();
                         }
                     }
@@ -114,47 +114,47 @@ public class Game : DIKUGame, IGameEventProcessor {
                     squadron = new SquadronTriangle();
                     break;
             }
-            squadron.CreateEnemies(blueMonster,greenMonster);
+            squadron.CreateEnemies(blueMonster, greenMonster);
             foreach (Enemy enemy in squadron.Enemies) {
-                enemy.IncreaseSpeed(level*0.0002f);
+                enemy.IncreaseSpeed(level * 0.0002f);
             }
         }
     }
     private void KeyPress(KeyboardKey key) { // When a key is pressed
         switch (key) {
             case KeyboardKey.Escape:
-                    eventBus.RegisterEvent (new GameEvent {
+                eventBus.RegisterEvent(new GameEvent {
                     EventType = GameEventType.WindowEvent,
                     Message = "WINDOW CLOSE"
-                    });
+                });
                 break;
             case KeyboardKey.Left:
-                    eventBus.RegisterEvent (new GameEvent {
+                eventBus.RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "MOVE LEFT"
-                    });
+                });
                 break;
             case KeyboardKey.Right:
-                    eventBus.RegisterEvent (new GameEvent {
+                eventBus.RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "MOVE RIGHT"
-                    });
+                });
                 break;
         }
     }
     private void KeyRelease(KeyboardKey key) { // When a key is realeased
-         switch (key) {
+        switch (key) {
             case KeyboardKey.Left:
-                    eventBus.RegisterEvent (new GameEvent {
+                eventBus.RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "REALESE LEFT"
-                    });
+                });
                 break;
             case KeyboardKey.Right:
-                    eventBus.RegisterEvent (new GameEvent {
+                eventBus.RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "REALESE RIGHT"
-                    });
+                });
                 break;
             case KeyboardKey.Space:
                 playerShots.AddEntity(new PlayerShot(
@@ -173,16 +173,18 @@ public class Game : DIKUGame, IGameEventProcessor {
         }
     }
     public void AddExplosion(Vec2F position, Vec2F extent) {
-        ImageStride explosionStride = new ImageStride(EXPLOSION_LENGTH_MS/8,explosionStrides);
-        enemyExplosions.AddAnimation(new StationaryShape(position,extent),EXPLOSION_LENGTH_MS,
-        explosionStride);
+        ImageStride explosionStride = new ImageStride(EXPLOSION_LENGTH_MS / 8, explosionStrides);
+        enemyExplosions.AddAnimation(new StationaryShape
+            (position, extent),
+            EXPLOSION_LENGTH_MS,
+            explosionStride);
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.WindowEvent) {
             switch (gameEvent.Message) {
-                    case "WINDOW CLOSE":
-                        window.CloseWindow();
-                        break;
+                case "WINDOW CLOSE":
+                    window.CloseWindow();
+                    break;
             }
         }
     }
@@ -200,7 +202,6 @@ public class Game : DIKUGame, IGameEventProcessor {
 
     public override void Update() {
         eventBus.ProcessEventsSequentially();
-
         if (health.Lives > 0) {
             squadron.Enemies.Iterate(enemy => {
                 if (enemy.Shape.Position.Y < 0.0f) {

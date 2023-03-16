@@ -6,21 +6,25 @@ using System.Collections.Generic;
 namespace Galaga.Squadron;
 
 public class SquadronTriangle : ISquadron {
-    public EntityContainer<Enemy> Enemies {get;}
-    public int MaxEnemies {get;}
-    
+    public EntityContainer<Enemy> Enemies {
+        get;
+    }
+    public int MaxEnemies {
+        get;
+    }
+
     // Triangle 1 center
     private Vec2F t1 = new Vec2F(0.2f, 0.7f);
     // Triangle 2 center
     private Vec2F t2 = new Vec2F(0.7f, 0.7f);
     // Triangle 3 center
     private Vec2F t3 = new Vec2F(0.5f, 0.9f);
-    public SquadronTriangle () {
+    public SquadronTriangle() {
         MaxEnemies = 6;
         Enemies = new EntityContainer<Enemy>(MaxEnemies);
     }
-    public void CreateEnemies (List<Image> enemyStride, List<Image> alternativeEnemyStride) {
-        
+    public void CreateEnemies(List<Image> enemyStride, List<Image> alternativeEnemyStride) {
+
         ImageStride blueMonster = new ImageStride(80, enemyStride);
         ImageStride greenMonster = new ImageStride(80, alternativeEnemyStride);
         Vec2F ext = new Vec2F(0.1f, 0.1f);
@@ -43,10 +47,10 @@ public class SquadronTriangle : ISquadron {
 
         // Create triangle 3 (centre)
         Enemies.AddEntity(new Enemy(
-            new DynamicShape(new Vec2F(t3.X - ext.X/2, t3.Y - 0.1f), ext), greenMonster));
+            new DynamicShape(new Vec2F(t3.X - ext.X / 2, t3.Y - 0.1f), ext), greenMonster));
         Enemies.AddEntity(new Enemy(
-            new DynamicShape(new Vec2F(t3.X - ext.X/2 + 0.05f, t3.Y), ext), greenMonster));
+            new DynamicShape(new Vec2F(t3.X - ext.X / 2 + 0.05f, t3.Y), ext), greenMonster));
         Enemies.AddEntity(new Enemy(
-            new DynamicShape(new Vec2F(t3.X - ext.X/2 - 0.05f, t3.Y), ext), greenMonster));
+            new DynamicShape(new Vec2F(t3.X - ext.X / 2 - 0.05f, t3.Y), ext), greenMonster));
     }
 }
