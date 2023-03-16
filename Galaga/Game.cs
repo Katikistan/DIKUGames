@@ -37,11 +37,11 @@ public class Game : DIKUGame, IGameEventProcessor {
         // Creates a player object for the game
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
-            new Image(Path.Combine("Assets", "Images", "Player.png")));
+            new Image(Path.Combine("Assets", "Images", "Player.png"))); 
         
         health = new Health(
-            new Vec2F(0.3f,0.3f),
-            new Vec2F(0.4f,0.4f));
+            new Vec2F(0.05f,-0.4f),
+            new Vec2F(0.5f,0.5f));
 
         // Eventbus and eventypes subscribed to
         eventBus = new GameEventBus();
