@@ -16,8 +16,8 @@ public class Game : DIKUGame, IGameEventProcessor {
     private GameEventBus eventBus;
     private Player player;
     private Health health = new Health(
-        new Vec2F(0.1f,0.1f),
-        new Vec2F(0.1f,0.1f)
+        new Vec2F(0.1f,0.2f),
+        new Vec2F(0.9f,0.1f)
     );
 
     // enemy fields
@@ -98,7 +98,6 @@ public class Game : DIKUGame, IGameEventProcessor {
         });
     }
     private void NewSquad() {
-
         if (squadron.Enemies.CountEntities() == 0) {
             squadronNum = (squadronNum + 1) % 3;
             System.Console.WriteLine(squadronNum);
@@ -185,18 +184,29 @@ public class Game : DIKUGame, IGameEventProcessor {
         }
     }
     public override void Render() { //Rendering entities
-        player.Render();
-        squadron.Enemies.RenderEntities();
-        playerShots.RenderEntities();
-        enemyExplosions.RenderAnimations();
-
+        if (health.Lives > 0) {
+            player.Render();
+            squadron.Enemies.RenderEntities();
+            playerShots.RenderEntities();
+            enemyExplosions.RenderAnimations();
+            health.RenderHealth();
+        } else {// game over
+        }
     }
     public override void Update() {
-        NewSquad();
-        movestrat.MoveEnemies(squadron.Enemies);
-        eventBus.ProcessEventsSequentially();
-        player.Move();
-        IterateShots();
+        foreach (Enemy enemy in squadron.Enemies) {
+            if (enemy.Shape.Position.Y <= 0.0f) {
+                enemy.DeleteEntity();
+                health.LoseHealth();
+            }
+        }
+        if (health.Lives > 0) {
+            NewSquad();
+            movestrat.MoveEnemies(squadron.Enemies);
+            eventBus.ProcessEventsSequentially();
+            player.Move();
+            IterateShots();
+        }
     }
 
 }
