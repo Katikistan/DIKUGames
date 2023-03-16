@@ -19,13 +19,12 @@ public class Game : DIKUGame, IGameEventProcessor {
         new Vec2F(0.1f,0.2f),
         new Vec2F(0.9f,0.1f)
     );
-
+    private int level = 1;
     // enemy fields
     private ISquadron squadron = new SquadronLine();
     private int squadronNum = 0;
     private List<Image> blueMonster;
     private List<Image> greenMonster;
-
     private IMovementStrategy movestrat;
 
     // Fields for playershots
@@ -104,6 +103,7 @@ public class Game : DIKUGame, IGameEventProcessor {
     private void NewSquad() {
         if (squadron.Enemies.CountEntities() == 0) {
             squadronNum = (squadronNum + 1) % 3;
+            level += 1;
             switch (squadronNum) {
                 case 0:
                     squadron = new SquadronLine();
@@ -116,6 +116,11 @@ public class Game : DIKUGame, IGameEventProcessor {
                     break;
             }
             squadron.CreateEnemies(blueMonster,greenMonster);
+            foreach (Enemy enemy in squadron.Enemies) {
+                enemy.IncreaseSpeed(level*0.0002f);
+                System.Console.WriteLine(enemy.Speed);
+                System.Console.WriteLine(level);
+            }            
         }
 
     }
@@ -197,6 +202,7 @@ public class Game : DIKUGame, IGameEventProcessor {
             System.Console.WriteLine("game over");
         }
     }
+
     public override void Update() {
         eventBus.ProcessEventsSequentially();
         squadron.Enemies.Iterate(enemy => {

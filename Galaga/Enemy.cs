@@ -17,8 +17,6 @@ public class Enemy : Entity {
         get {return shape;}
     }
     private int hitPoints = 3;
-    private bool enraged = false;
-    public bool Enraged { get => enraged;}
     private float speed = 0.001f;
     public float Speed { get => speed;}
     List<Image> enragedimg = ImageStride.CreateStrides
@@ -31,13 +29,14 @@ public class Enemy : Entity {
         hitPoints -=1;
         if (hitPoints <= 0) {
             return true;
-        } else if (hitPoints <= 2) {
-            enraged = true;
+        } else if (hitPoints == 2) {
             Image = new ImageStride (80, enragedimg);
-            speed = 0.002f;
+            speed += 0.001f;
         }
         return false;
     }
-
+    public void IncreaseSpeed(float increacse) {
+        speed += increacse;
+    }
 
 }
