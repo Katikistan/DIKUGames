@@ -16,6 +16,9 @@ public class Game : DIKUGame, IGameEventProcessor {
     private GameEventBus eventBus;
     private Player player;
     private Health health;
+
+    private Text gameOverText;
+    private Text levelText;
     private int level = 1;
     // enemy fields
     private ISquadron squadron = new SquadronLine();
@@ -79,6 +82,17 @@ public class Game : DIKUGame, IGameEventProcessor {
         explosionStrides = ImageStride.CreateStrides(8,
         Path.Combine("Assets", "Images", "Explosion.png"));
 
+        gameOverText = new Text (
+            "Game over", 
+            new Vec2F(0.3f,0.3f), 
+            new Vec2F(0.4f,0.4f));
+        gameOverText.SetColor(new Vec3I(255, 255, 255)); 
+        
+        levelText = new Text (
+            "Level: " + level.ToString() + "  ", 
+            new Vec2F(0.2f,0.2f), 
+            new Vec2F(0.4f,0.4f));
+        levelText.SetColor(new Vec3I(255, 255, 255));    
     }
     private void IterateShots() { // Checks if any shots have hit the border or any enemies
         playerShots.Iterate(shot => {
@@ -105,6 +119,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         if (squadron.Enemies.CountEntities() == 0) {
             squadronNum = (squadronNum + 1) % 3;
             level += 1;
+            levelText.SetText("Level: " + level.ToString());
             switch (squadronNum) {
                 case 0:
                     squadron = new SquadronLine();
@@ -198,19 +213,20 @@ public class Game : DIKUGame, IGameEventProcessor {
             enemyExplosions.RenderAnimations();
             health.RenderHealth();
         } else {
-            System.Console.WriteLine("game over");
+            gameOverText.RenderText();
+            levelText.RenderText();
         }
     }
 
     public override void Update() {
         eventBus.ProcessEventsSequentially();
-        squadron.Enemies.Iterate(enemy => {
-            if (enemy.Shape.Position.Y < 0.0f) {
-                enemy.DeleteEntity();
-                health.LoseHealth();
-            }
-        });
         if (health.Lives > 0) {
+            squadron.Enemies.Iterate(enemy => {
+                if (enemy.Shape.Position.Y < 0.0f) {
+                    enemy.DeleteEntity();
+                    health.LoseHealth();
+                }
+            });
             NewSquad();
             movestrat.MoveEnemies(squadron.Enemies);
             player.Move();
