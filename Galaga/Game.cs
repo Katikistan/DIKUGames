@@ -14,12 +14,15 @@ using System.IO;
 namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private GameEventBus eventBus;
+    private int level = 1;
     private Player player;
     private Health health;
 
-    private Text gameOverText;
-    private Text levelText;
-    private int level = 1;
+    // text fields
+    private GameOver gameOverScreen;
+    // private Text gameOverText;
+    // private Text levelText;
+
     // enemy fields
     private ISquadron squadron = new SquadronLine();
     private int squadronNum = 0;
@@ -40,11 +43,12 @@ public class Game : DIKUGame, IGameEventProcessor {
         // Creates a player object for the game
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
-            new Image(Path.Combine("Assets", "Images", "Player.png"))); 
-        
+            new Image(Path.Combine("Assets", "Images", "Player.png")));
+
+        // Adds health and text in bottom of window
         health = new Health(
-            new Vec2F(0.05f,-0.4f),
-            new Vec2F(0.5f,0.5f));
+            new Vec2F(0.02f,-0.42f),
+            new Vec2F(0.4f,0.49f));
 
         // Eventbus and eventypes subscribed to
         eventBus = new GameEventBus();
@@ -59,11 +63,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         eventBus.Subscribe(GameEventType.WindowEvent, this);
         eventBus.Subscribe(GameEventType.PlayerEvent, player);
 
-
-
         // Adds enemies to the game
-        // images = ImageStride.CreateStrides
-        // (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
         blueMonster = ImageStride.CreateStrides
         (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
         greenMonster = ImageStride.CreateStrides
@@ -81,18 +81,19 @@ public class Game : DIKUGame, IGameEventProcessor {
         enemyExplosions = new AnimationContainer(1);
         explosionStrides = ImageStride.CreateStrides(8,
         Path.Combine("Assets", "Images", "Explosion.png"));
+        gameOverScreen = new GameOver();
+        // Text for game over screen
+        // gameOverText = new Text (
+        //     "Game over",
+        //     new Vec2F(0.32f,0.2f),
+        //     new Vec2F(0.5f,0.5f));
+        // gameOverText.SetColor(new Vec3I(255, 255, 255));
 
-        gameOverText = new Text (
-            "Game over", 
-            new Vec2F(0.3f,0.3f), 
-            new Vec2F(0.4f,0.4f));
-        gameOverText.SetColor(new Vec3I(255, 255, 255)); 
-        
-        levelText = new Text (
-            "Level: " + level.ToString() + "  ", 
-            new Vec2F(0.2f,0.2f), 
-            new Vec2F(0.4f,0.4f));
-        levelText.SetColor(new Vec3I(255, 255, 255));    
+        // levelText = new Text (
+        //     $"Level: {level.ToString()}",
+        //     new Vec2F(0.4f,0.2f),
+        //     new Vec2F(0.4f,0.4f));
+        // levelText.SetColor(new Vec3I(255, 255, 255));
     }
     private void IterateShots() { // Checks if any shots have hit the border or any enemies
         playerShots.Iterate(shot => {
@@ -114,12 +115,13 @@ public class Game : DIKUGame, IGameEventProcessor {
             }
         });
     }
-    
+
     private void NewSquad() {
-        if (squadron.Enemies.CountEntities() == 0) {
+        if (squadron.Enemies.CountEntities() == 0 && health.Lives > 0) {
             squadronNum = (squadronNum + 1) % 3;
             level += 1;
-            levelText.SetText("Level: " + level.ToString());
+            gameOverScreen.SetLevel(level);
+            // levelText.SetText($"Level: {level.ToString()}");
             switch (squadronNum) {
                 case 0:
                     squadron = new SquadronLine();
@@ -134,7 +136,7 @@ public class Game : DIKUGame, IGameEventProcessor {
             squadron.CreateEnemies(blueMonster,greenMonster);
             foreach (Enemy enemy in squadron.Enemies) {
                 enemy.IncreaseSpeed(level*0.0002f);
-            }            
+            }
         }
 
     }
@@ -213,8 +215,9 @@ public class Game : DIKUGame, IGameEventProcessor {
             enemyExplosions.RenderAnimations();
             health.RenderHealth();
         } else {
-            gameOverText.RenderText();
-            levelText.RenderText();
+            gameOverScreen.Render();
+            // gameOverText.RenderText();
+            // levelText.RenderText();
         }
     }
 
