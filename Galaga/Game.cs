@@ -14,24 +14,29 @@ using System.IO;
 namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private GameEventBus eventBus;
-    private Player player;    
-    
+    private Player player;
+    private Health health = new Health(
+        new Vec2F(0.1f,0.1f),
+        new Vec2F(0.1f,0.1f)
+    );
+
     // enemy fields
     private ISquadron squadron = new SquadronLine();
+    private int squadronNum = 0;
     private List<Image> blueMonster;
     private List<Image> greenMonster;
-    
+
     private IMovementStrategy movestrat;
 
     // Fields for playershots
     private EntityContainer<PlayerShot> playerShots;
     private IBaseImage playerShotImage;
-    
+
     // Fields for explosion
     private AnimationContainer enemyExplosions;
     private List<Image> explosionStrides;
     private const int EXPLOSION_LENGTH_MS = 500;
-    
+
     public Game(WindowArgs windowArgs) : base(windowArgs) {
         // Creates a player object for the game
         player = new Player(
@@ -43,9 +48,8 @@ public class Game : DIKUGame, IGameEventProcessor {
         eventBus.InitializeEventBus(
             new List<GameEventType> {
                 GameEventType.InputEvent,
-                GameEventType.WindowEvent, 
-                GameEventType.PlayerEvent,
-                GameEventType.MovementEvent
+                GameEventType.WindowEvent,
+                GameEventType.PlayerEvent
             });
         window.SetKeyEventHandler(KeyHandler);
         eventBus.Subscribe(GameEventType.InputEvent, this);
@@ -53,18 +57,21 @@ public class Game : DIKUGame, IGameEventProcessor {
         eventBus.Subscribe(GameEventType.PlayerEvent, player);
 
         // Adds enemies to the game
-        // images = ImageStride.CreateStrides 
+        // images = ImageStride.CreateStrides
         // (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
-        blueMonster = ImageStride.CreateStrides 
+        blueMonster = ImageStride.CreateStrides
         (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
-        greenMonster = ImageStride.CreateStrides 
+        greenMonster = ImageStride.CreateStrides
         (2, Path.Combine("Assets", "Images", "GreenMonster.png"));
+
         squadron.CreateEnemies(blueMonster,greenMonster);
+
         movestrat = new ZigZagDown();
+
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
         playerShotImage = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
-        
+
         // adds explosions for when enimies are hit
         enemyExplosions = new AnimationContainer(1);
         explosionStrides = ImageStride.CreateStrides(8,
@@ -76,7 +83,7 @@ public class Game : DIKUGame, IGameEventProcessor {
             if (shot.Shape.Position.Y > 1.0f) { // Shot hit border
                 shot.DeleteEntity();
             } else {
-                squadron.Enemies.Iterate(enemy => { 
+                squadron.Enemies.Iterate(enemy => {
                     DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
                     CollisionData collision = CollisionDetection.Aabb(dynamicShot,enemy.Shape);
                     if (collision.Collision) { // Shot hit enemy
@@ -90,11 +97,12 @@ public class Game : DIKUGame, IGameEventProcessor {
             }
         });
     }
-    private void RandSquad() {
-        //randomize movestrat 
-        System.Random rand = new System.Random();
+    private void NewSquad() {
+
         if (squadron.Enemies.CountEntities() == 0) {
-            switch (rand.Next(3)) {
+            squadronNum = (squadronNum + 1) % 3;
+            System.Console.WriteLine(squadronNum);
+            switch (squadronNum) {
                 case 0:
                     squadron = new SquadronLine();
                     break;
@@ -107,7 +115,7 @@ public class Game : DIKUGame, IGameEventProcessor {
             }
             squadron.CreateEnemies(blueMonster,greenMonster);
         }
-        
+
     }
     private void KeyPress(KeyboardKey key) { // When a key is pressed
         switch (key) {
@@ -131,7 +139,7 @@ public class Game : DIKUGame, IGameEventProcessor {
                 break;
         }
     }
-    private void KeyRelease(KeyboardKey key) { // When a key is realeased 
+    private void KeyRelease(KeyboardKey key) { // When a key is realeased
          switch (key) {
             case KeyboardKey.Left:
                     eventBus.RegisterEvent (new GameEvent {
@@ -145,7 +153,7 @@ public class Game : DIKUGame, IGameEventProcessor {
                     Message = "REALESE RIGHT"
                     });
                 break;
-            case KeyboardKey.Space: 
+            case KeyboardKey.Space:
                 playerShots.AddEntity(new PlayerShot(
                     player.GetPosition(), playerShotImage));
                 break;
@@ -159,9 +167,9 @@ public class Game : DIKUGame, IGameEventProcessor {
             case KeyboardAction.KeyRelease:
                 KeyRelease(key);
                 break;
-        } 
+        }
     }
-    public void AddExplosion(Vec2F position, Vec2F extent) { 
+    public void AddExplosion(Vec2F position, Vec2F extent) {
         ImageStride explosionStride = new ImageStride(EXPLOSION_LENGTH_MS/8,explosionStrides);
         enemyExplosions.AddAnimation(new StationaryShape(position,extent),EXPLOSION_LENGTH_MS,
         explosionStride);
@@ -174,7 +182,7 @@ public class Game : DIKUGame, IGameEventProcessor {
                         window.CloseWindow();
                         break;
             }
-        }   
+        }
     }
     public override void Render() { //Rendering entities
         player.Render();
@@ -184,11 +192,11 @@ public class Game : DIKUGame, IGameEventProcessor {
 
     }
     public override void Update() {
-        RandSquad();
+        NewSquad();
         movestrat.MoveEnemies(squadron.Enemies);
         eventBus.ProcessEventsSequentially();
         player.Move();
         IterateShots();
     }
-    
+
 }
