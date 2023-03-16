@@ -15,17 +15,13 @@ namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
     private GameEventBus eventBus;
     private Player player;
-    private Health health = new Health(
-        new Vec2F(0.1f,0.2f),
-        new Vec2F(0.9f,0.1f)
-    );
-
+    private Health health;
+    private int level = 1;
     // enemy fields
     private ISquadron squadron = new SquadronLine();
     private int squadronNum = 0;
     private List<Image> blueMonster;
     private List<Image> greenMonster;
-
     private IMovementStrategy movestrat;
 
     // Fields for playershots
@@ -42,6 +38,10 @@ public class Game : DIKUGame, IGameEventProcessor {
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("Assets", "Images", "Player.png")));
+        
+        health = new Health(
+            new Vec2F(0.3f,0.3f),
+            new Vec2F(0.4f,0.4f));
 
         // Eventbus and eventypes subscribed to
         eventBus = new GameEventBus();
@@ -55,6 +55,8 @@ public class Game : DIKUGame, IGameEventProcessor {
         eventBus.Subscribe(GameEventType.InputEvent, this);
         eventBus.Subscribe(GameEventType.WindowEvent, this);
         eventBus.Subscribe(GameEventType.PlayerEvent, player);
+
+
 
         // Adds enemies to the game
         // images = ImageStride.CreateStrides
@@ -76,6 +78,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         enemyExplosions = new AnimationContainer(1);
         explosionStrides = ImageStride.CreateStrides(8,
         Path.Combine("Assets", "Images", "Explosion.png"));
+
     }
     private void IterateShots() { // Checks if any shots have hit the border or any enemies
         playerShots.Iterate(shot => {
@@ -97,10 +100,11 @@ public class Game : DIKUGame, IGameEventProcessor {
             }
         });
     }
+    
     private void NewSquad() {
         if (squadron.Enemies.CountEntities() == 0) {
             squadronNum = (squadronNum + 1) % 3;
-            System.Console.WriteLine(squadronNum);
+            level += 1;
             switch (squadronNum) {
                 case 0:
                     squadron = new SquadronLine();
@@ -113,6 +117,9 @@ public class Game : DIKUGame, IGameEventProcessor {
                     break;
             }
             squadron.CreateEnemies(blueMonster,greenMonster);
+            foreach (Enemy enemy in squadron.Enemies) {
+                enemy.IncreaseSpeed(level*0.0002f);
+            }            
         }
 
     }
@@ -190,23 +197,24 @@ public class Game : DIKUGame, IGameEventProcessor {
             playerShots.RenderEntities();
             enemyExplosions.RenderAnimations();
             health.RenderHealth();
-        } else {// game over
+        } else {
+            System.Console.WriteLine("game over");
         }
     }
+
     public override void Update() {
-        foreach (Enemy enemy in squadron.Enemies) {
-            if (enemy.Shape.Position.Y <= 0.0f) {
+        eventBus.ProcessEventsSequentially();
+        squadron.Enemies.Iterate(enemy => {
+            if (enemy.Shape.Position.Y < 0.0f) {
                 enemy.DeleteEntity();
                 health.LoseHealth();
             }
-        }
+        });
         if (health.Lives > 0) {
             NewSquad();
             movestrat.MoveEnemies(squadron.Enemies);
-            eventBus.ProcessEventsSequentially();
             player.Move();
             IterateShots();
         }
     }
-
 }
