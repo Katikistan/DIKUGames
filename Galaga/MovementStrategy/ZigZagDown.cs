@@ -16,8 +16,6 @@ public class ZigZagDown : IMovementStrategy {
         float xi = x0 + a * sin;
         enemy.Shape.Position.Y -= enemy.Speed;
         enemy.Shape.Position.X = xi;
-
-            
     }
     public void MoveEnemies (EntityContainer<Enemy> enemies) {
         foreach (Enemy enemy in enemies) {

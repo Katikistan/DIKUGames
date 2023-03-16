@@ -6,7 +6,7 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 
 namespace Galaga;
-//IGameEventProcessor 
+//IGameEventProcessor
 public class Enemy : Entity {
     private Vec2F startpos;
     public Vec2F Startpos {
@@ -19,9 +19,9 @@ public class Enemy : Entity {
     private int hitPoints = 3;
     private bool enraged = false;
     public bool Enraged { get => enraged;}
-    private float speed = 0.002f;
+    private float speed = 0.001f;
     public float Speed { get => speed;}
-    List<Image> enragedimg = ImageStride.CreateStrides 
+    List<Image> enragedimg = ImageStride.CreateStrides
     (2, Path.Combine("Assets", "Images", "RedMonster.png"));
     public Enemy(DynamicShape shape, IBaseImage image) : base(shape, image) {
         this.shape = shape;
@@ -34,10 +34,10 @@ public class Enemy : Entity {
         } else if (hitPoints <= 2) {
             enraged = true;
             Image = new ImageStride (80, enragedimg);
-            speed = 0.004f;
+            speed = 0.002f;
         }
         return false;
     }
 
-   
+
 }
