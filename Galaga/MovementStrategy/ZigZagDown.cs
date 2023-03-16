@@ -20,6 +20,7 @@ public class ZigZagDown : IMovementStrategy {
     public void MoveEnemies (EntityContainer<Enemy> enemies) {
         foreach (Enemy enemy in enemies) {
             MoveEnemy(enemy);
+
         }
     }
 }
