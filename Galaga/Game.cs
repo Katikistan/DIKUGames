@@ -195,7 +195,6 @@ public class Game : DIKUGame, IGameEventProcessor {
             playerShots.RenderEntities();
             enemyExplosions.RenderAnimations();
             health.RenderHealth();
-            gameOverScreen.Render();
         } else {
             gameOverScreen.Render();
         }
