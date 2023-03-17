@@ -42,7 +42,7 @@ public class Game : DIKUGame, IGameEventProcessor {
 
         // Adds health and text in bottom of window
         health = new Health(
-            new Vec2F(0.02f, -0.42f),
+            new Vec2F(0.02f, -0.35f),
             new Vec2F(0.4f, 0.49f));
 
         // Eventbus and eventypes subscribed to
