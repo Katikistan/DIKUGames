@@ -42,8 +42,8 @@ public class Game : DIKUGame, IGameEventProcessor {
 
         // Adds health and text in bottom of window
         health = new Health(
-            new Vec2F(0.02f, -0.35f),
-            new Vec2F(0.4f, 0.49f));
+            new Vec2F(0.05f, -0.4f),
+            new Vec2F(0.5f, 0.5f));
 
         // Eventbus and eventypes subscribed to
         eventBus = new GameEventBus();
@@ -195,6 +195,7 @@ public class Game : DIKUGame, IGameEventProcessor {
             playerShots.RenderEntities();
             enemyExplosions.RenderAnimations();
             health.RenderHealth();
+            gameOverScreen.Render();
         } else {
             gameOverScreen.Render();
         }
