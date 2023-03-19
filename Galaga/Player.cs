@@ -1,7 +1,6 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
-using DIKUArcade.Input;
 using DIKUArcade.Math;
 namespace Galaga;
 public class Player : IGameEventProcessor {
@@ -34,7 +33,6 @@ public class Player : IGameEventProcessor {
     }
     private void UpdateDirection() {
         shape.Direction.X = moveLeft + moveRight;
-
     }
     public void Move() {
         shape.Move();
@@ -43,7 +41,6 @@ public class Player : IGameEventProcessor {
         } else if ((shape.Position.X + shape.Extent.X) >= 1.0f) {
             shape.Position.X = 1.0f - shape.Extent.X;
         }
-
     }
     private void SetMoveLeft(bool val) {
         if (val) {
@@ -66,7 +63,6 @@ public class Player : IGameEventProcessor {
         Vec2F position = new Vec2F(shape.Position.X + shape.Extent.X / 2.0f, shape.Position.Y);
         return (position);
     }
-
     public void Render() {
         entity.RenderEntity();
     }
