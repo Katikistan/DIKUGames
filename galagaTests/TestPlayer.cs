@@ -24,8 +24,11 @@ public class TestPlayer {
             Message = "MOVE LEFT"
         });
         player.RegisterEvent(EventMoveLeft);
+        player.ProcessEvent(gameEvent.Message);
         // (work in progress, men samme format kan måske bruges andre steder)
-        Assert.Pass();
+        player.Move();
+        playerPos = player.GetPosition();
+        Assert.IsEqual(playerPos.X == 0.44f);
     }
     public void TestMoveRight() {
         Assert.Pass();
