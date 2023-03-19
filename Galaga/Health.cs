@@ -15,6 +15,8 @@ public class Health {
     /// Decrements the health field by one and updates Text
     /// such that is has the correct health value
     /// </summary>
+
+    // static active state?
     public void LoseHealth () {
         health -= 1;
         display.SetText("Lives:" + health.ToString());

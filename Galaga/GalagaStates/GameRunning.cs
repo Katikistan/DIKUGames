@@ -3,7 +3,7 @@ using DIKUArcade.Events;
 using DIKUArcade.State;
 using DIKUArcade.Input;
 namespace Galaga.GalagaStates;
-public class GameRunning : IGameState, IGameEventProcessor<GameEventType> {
+public class GameRunning : IGameState, IGameEventProcessor {
     private static GameRunning instance = null;
     public static GameRunning GetInstance() {
         if (GameRunning.instance == null) {
@@ -12,7 +12,7 @@ public class GameRunning : IGameState, IGameEventProcessor<GameEventType> {
         }
         return GameRunning.instance;
     }
-    public void ProcessEvent(GameEvent<GameEventType> gameEvent) {
+    public void ProcessEvent(GameEvent gameEvent) {
     }
     public void InitializeGameState() {
         GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);

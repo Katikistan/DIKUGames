@@ -6,8 +6,10 @@ using DIKUArcade.GUI;
 using DIKUArcade.Input;
 using DIKUArcade.Math;
 using DIKUArcade.Physics;
+using DIKUArcade.State;
 using Galaga.MovementStrategy;
 using Galaga.Squadron;
+using Galaga.GalagaStates;
 using System.Collections.Generic;
 using System.IO;
 
@@ -16,6 +18,8 @@ public class Game : DIKUGame, IGameEventProcessor {
     private GameEventBus eventBus;
     private int level = 1;
     private GameOver gameOverScreen;
+    private IGameState activeState = MainMenu.GetInstance();
+    //sub til activestates gameevents 
     private Player player;
     private Health health;
     // enemy fields

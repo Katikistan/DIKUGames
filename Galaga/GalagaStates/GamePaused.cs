@@ -1,9 +1,8 @@
-using DIKUArcade.Events.Generic;
 using DIKUArcade.Events;
 using DIKUArcade.State;
 using DIKUArcade.Input;
 namespace Galaga.GalagaStates;
-public class GamePaused : IGameState, IGameEventProcessor<GameEventType> {
+public class GamePaused : IGameState, IGameEventProcessor {
     private static GamePaused instance = null;
     public static GamePaused GetInstance() {
         if (GamePaused.instance == null) {
@@ -12,7 +11,7 @@ public class GamePaused : IGameState, IGameEventProcessor<GameEventType> {
         }
         return GamePaused.instance;
     }
-    public void ProcessEvent(GameEvent<GameEventType> gameEvent) {
+    public void ProcessEvent(GameEvent gameEvent) {
     }
     public void InitializeGameState() {
         GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);
