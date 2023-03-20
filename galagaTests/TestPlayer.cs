@@ -40,14 +40,14 @@ public class TestPlayer {
         GalagaBus.GetBus().ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.AreEqual(playerPos.X, 0.44f);
+        Assert.That(playerPos.X,Is.EqualTo(0.44f));
     }
     public void TestMoveRight() {
         GalagaBus.GetBus().RegisterEvent(EventMoveRight);
         GalagaBus.GetBus().ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.AreEqual(playerPos.X, 0.46f);
+        Assert.That(playerPos.X,Is.EqualTo(0.46f));
     }
     public void TestNotOutOfBoundsLeft() {
         player = new Player(
@@ -57,7 +57,7 @@ public class TestPlayer {
         GalagaBus.GetBus().ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.AreEqual(playerPos.X, 0.0f);
+        Assert.That(playerPos.X,Is.EqualTo(0.0f));
     }
     public void TestNotOutOfBoundsRight() {
         player = new Player(
@@ -67,7 +67,7 @@ public class TestPlayer {
         GalagaBus.GetBus().ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.AreEqual(playerPos.X, 1.0f - 0.1f);
+        Assert.That(playerPos.X,Is.EqualTo(0.9f));
     }
     public void TestMoveLeftRight() {
         GalagaBus.GetBus().RegisterEvent(EventMoveLeft);
@@ -76,7 +76,7 @@ public class TestPlayer {
         player.Move();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.AreEqual(playerPos.X, 0.45f);
+        Assert.That(playerPos.X,Is.EqualTo(0.45f));
     }
     public void TestMoveWrongLeft() {
         EventMoveLeft = (new GameEvent {
@@ -87,6 +87,6 @@ public class TestPlayer {
         GalagaBus.GetBus().ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.AreEqual(0.45f, playerPos.X);
+        Assert.That(playerPos.X,Is.EqualTo(0.45f));
     }
 }

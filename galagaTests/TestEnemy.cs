@@ -9,8 +9,8 @@ namespace galagaTests;
 // be tested.
 [TestFixture]
 public class TestEnemy {
-    private List<Image> enemyStride;
-    private Enemy enemy;
+    private List<Image> ?enemyStride;
+    private Enemy ?enemy;
     [SetUp]
     public void Setup() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
@@ -25,22 +25,22 @@ public class TestEnemy {
     // Test the enraged state of enemy
     [Test]
     public void enragedTest() {
-        enemy.IsEnemyDead();
-        Assert.AreEqual(0.002f, enemy.Speed);
+        enemy?.IsEnemyDead();
+        Assert.AreEqual(0.002f, enemy?.Speed);
     }
 
     // Test if the enemy dies
     [Test]
     public void deathTest() {
-        enemy.IsEnemyDead();
-        enemy.IsEnemyDead();
-        Assert.AreEqual(enemy.IsEnemyDead(), true);
+        enemy?.IsEnemyDead();
+        enemy?.IsEnemyDead();
+        Assert.AreEqual(true,enemy?.IsEnemyDead());
     }
 
     // Test the IncreaseSpeed method
     [Test]
     public void increaseSpeedTest() {
-        enemy.IncreaseSpeed(0.001f);
-        Assert.AreEqual(0.002f, enemy.Speed);
+        enemy?.IncreaseSpeed(0.001f);
+        Assert.AreEqual(0.002f, enemy?.Speed);
     }
 }

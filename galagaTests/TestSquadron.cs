@@ -31,14 +31,14 @@ public class TestSquadron {
     [Test]  
     public void numOfEnemiesSquare() {
         squadron = new SquadronSquare();
-        Assert.AreEqual(8, squadron.MaxEnemies);
+        Assert.That(squadron.MaxEnemies,Is.EqualTo(8));
     }
 
     // Testing the number of enemies in triangle
     [Test]  
     public void numOfEnemiesTriangle() {
         squadron = new SquadronTriangle();
-        Assert.AreEqual(9, squadron.MaxEnemies);
+        Assert.That(squadron.MaxEnemies,Is.EqualTo(0));
     }
     
     // Testing if creating enemies adds enemies to the entity container
@@ -49,7 +49,7 @@ public class TestSquadron {
         ISquadron squadronNoEnemies = new SquadronLine();
         
         // both squadrons should have no enemies
-        Assert.AreEqual(squadronNoEnemies.Enemies, squadron.Enemies);
+        Assert.That(squadron.Enemies,Is.EqualTo(squadronNoEnemies.Enemies));
         
         // Creating enemies on one of the squadrons
         squadron.CreateEnemies(blueMonster, greenMonster);

@@ -9,7 +9,7 @@ public class StateTransformer{
     public static GameStateType TransformStringToState(string state) {
         switch (state) {
             case "GAME_RUNNING":
-                    return GameStateType.GameRunning;
+                return GameStateType.GameRunning;
             case "GAME_PAUSED":
                 return GameStateType.GamePaused;
             case "MAIN_MENU":
