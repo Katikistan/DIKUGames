@@ -26,7 +26,7 @@ public class TestEnemy {
     [Test]
     public void enragedTest() {
         enemy?.IsEnemyDead();
-        Assert.AreEqual(0.002f, enemy?.Speed);
+        Assert.That(enemy?.Speed,Is.EqualTo(0.002f));
     }
 
     // Test if the enemy dies
@@ -34,13 +34,14 @@ public class TestEnemy {
     public void deathTest() {
         enemy?.IsEnemyDead();
         enemy?.IsEnemyDead();
-        Assert.AreEqual(true,enemy?.IsEnemyDead());
+        Assert.That(enemy?.IsEnemyDead(),Is.EqualTo(true));
     }
 
     // Test the IncreaseSpeed method
     [Test]
     public void increaseSpeedTest() {
         enemy?.IncreaseSpeed(0.001f);
-        Assert.AreEqual(0.002f, enemy?.Speed);
+        Assert.That(enemy?.Speed,Is.EqualTo(0.002f));
+
     }
 }

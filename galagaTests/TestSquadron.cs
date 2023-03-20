@@ -8,9 +8,9 @@ namespace galagaTests;
 
 [TestFixture]
 public class TestSquadron {
-    private ISquadron squadron;
+    private ISquadron ?squadron;
     private List<Image> blueMonster;
-    private List<Image> greenMonster; 
+    private List<Image> greenMonster;
     [SetUp]
     public void Setup() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
@@ -21,41 +21,41 @@ public class TestSquadron {
     }
 
     // Testing the number of enemies in line
-    [Test]  
+    [Test]
     public void numOfEnemiesLine() {
         squadron = new SquadronLine();
-        Assert.AreEqual(6, squadron.MaxEnemies);
+        Assert.That(squadron.MaxEnemies,Is.EqualTo(6));
     }
-    
+
     // Testing the number of enemies in square
-    [Test]  
+    [Test]
     public void numOfEnemiesSquare() {
         squadron = new SquadronSquare();
         Assert.That(squadron.MaxEnemies,Is.EqualTo(8));
     }
 
     // Testing the number of enemies in triangle
-    [Test]  
+    [Test]
     public void numOfEnemiesTriangle() {
         squadron = new SquadronTriangle();
-        Assert.That(squadron.MaxEnemies,Is.EqualTo(0));
+        Assert.That(squadron.MaxEnemies,Is.EqualTo(9));
     }
-    
+
     // Testing if creating enemies adds enemies to the entity container
-    [Test]  
+    [Test]
     public void createEnemiesTest() {
         // Creating two squadron lines
         squadron = new SquadronLine();
         ISquadron squadronNoEnemies = new SquadronLine();
-        
+
         // both squadrons should have no enemies
         Assert.That(squadron.Enemies,Is.EqualTo(squadronNoEnemies.Enemies));
-        
+
         // Creating enemies on one of the squadrons
         squadron.CreateEnemies(blueMonster, greenMonster);
-        
+
         // Making sure squadron is not unchanged after creating enemies
-        Assert.AreNotEqual(squadronNoEnemies.Enemies, squadron.Enemies);
+        Assert.That(squadron.Enemies,Is.Not.EqualTo(squadronNoEnemies.Enemies));
     }
 
 }
