@@ -15,16 +15,15 @@ public class GameRunning : IGameState, IGameEventProcessor {
     public void ProcessEvent(GameEvent gameEvent) {
     }
     public void InitializeGameState() {
-        GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);
-        GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
-
+        // GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);
+        // GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
     }
     public void ResetState() {
-        GameRunning.instance = new GameRunning();
-        GameRunning.instance.InitializeGameState();
+        // GameRunning.instance = new GameRunning();
+        // GameRunning.instance.InitializeGameState();
     }
     public void UpdateState() {
-        GalagaBus.GetBus().ProcessEventsSequentially();
+        // GalagaBus.GetBus().ProcessEventsSequentially();
     }
     public void RenderState() {}
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {}

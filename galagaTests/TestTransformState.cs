@@ -4,9 +4,7 @@ namespace galagaTests;
 [TestFixture]
 public class TestTransformState {
     [SetUp]
-    public void Setup() {
-        // DIKUArcade.GUI.Window.CreateOpenGLContext();
-    }
+    public void Setup() {}
     [Test]
     public void TestTransformStringToState() {
         GameStateType GameRunning = StateTransformer.TransformStringToState("GAME_RUNNING");

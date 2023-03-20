@@ -8,9 +8,9 @@ namespace galagaTests;
 
 [TestFixture]
 public class TestSquadron {
-    private ISquadron ?squadron;
-    private List<Image> blueMonster;
-    private List<Image> greenMonster;
+    private ISquadron squadron = null!;
+    private List<Image> blueMonster = null!;
+    private List<Image> greenMonster = null!;
     [SetUp]
     public void Setup() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();

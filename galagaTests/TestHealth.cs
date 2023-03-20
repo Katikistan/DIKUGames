@@ -3,7 +3,7 @@ using Galaga;
 namespace galagaTests;
 [TestFixture]
 public class TestHealth {
-    private Health health;
+    private Health health = null!;
     [SetUp]
     public void Setup() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();

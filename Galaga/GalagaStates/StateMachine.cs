@@ -10,7 +10,20 @@ public class StateMachine : IGameEventProcessor {
         ActiveState = MainMenu.GetInstance();
     }
     public void ProcessEvent(GameEvent gameEvent) {
-    //todo
+        if (gameEvent.EventType == GameEventType.GameStateEvent) {
+            switch (gameEvent.StringArg1) {
+                case "MAIN_MENU":
+                    SwitchState(GameStateType.MainMenu);
+                    break;
+                case "GAME_PAUSED":
+                    SwitchState(GameStateType.GamePaused);
+                    break;
+                case "GAME_RUNNING":
+                    SwitchState(GameStateType.GameRunning);
+                    break;
+
+            }
+        }
     }
     private void SwitchState(GameStateType stateType) {
         switch (stateType) {
@@ -23,8 +36,6 @@ public class StateMachine : IGameEventProcessor {
             case GameStateType.MainMenu:
                 ActiveState = MainMenu.GetInstance();
                 break;
-            default:
-                throw new ArgumentException("Invalid GameStateType");
         }
     }
 }
