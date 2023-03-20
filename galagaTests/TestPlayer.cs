@@ -6,9 +6,7 @@ using Galaga;
 namespace galagaTests;
 [TestFixture]
 public class TestPlayer {
-    private Player player = new Player(
-            new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
-            new Image(Path.Combine("Galga","Assets", "Images", "Player.png")));
+    private Player player;
     private GameEvent EventMoveLeft;
     private GameEvent EventMoveRight;
     [SetUp]
@@ -16,7 +14,7 @@ public class TestPlayer {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
-            new Image(Path.Combine("Galaga","Assets", "Images", "Player.png")));
+            new Image(Path.Combine("..","Galaga","Assets", "Images", "Player.png")));
         Vec2F playerPos = player.GetPosition();
         EventMoveLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
@@ -33,7 +31,7 @@ public class TestPlayer {
         player.ProcessEvent(EventMoveLeft);
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.Equals(playerPos.X, 0.44f);
+        Assert.AreEqual(playerPos.X, 0.44f);
     }
 
 

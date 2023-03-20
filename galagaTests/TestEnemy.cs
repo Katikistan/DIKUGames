@@ -4,17 +4,18 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using Galaga;
 namespace galagaTests;
-
 // Any relevant methods and their effect on
 // the enrage-state of the Enemy class should
 // be tested.
+[TestFixture]
 public class TestEnemy {
     private List<Image> enemyStride;
     private Enemy enemy;
     [SetUp]
     public void Setup() {
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
         enemyStride = ImageStride.CreateStrides
-        (4, Path.Combine("Assets", "Images", "BlueMonster.png"));
+        (4, Path.Combine("..","Galaga","Assets", "Images", "BlueMonster.png"));
 
         ImageStride blueMonster = new ImageStride(80, enemyStride);
         enemy = new Enemy (
