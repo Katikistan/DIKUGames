@@ -1,11 +1,11 @@
 using System;
 using Galaga.GalagaStates;
 namespace galagaTests;
-
+[TestFixture]
 public class TestTransformState {
     [SetUp]
     public void Setup() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        // DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
     [Test]
     public void TestTransformStringToState() {
@@ -15,7 +15,7 @@ public class TestTransformState {
         Assert.That(GameRunning, Is.EqualTo(GameStateType.GameRunning));
         Assert.That(GamePaused, Is.EqualTo(GameStateType.GamePaused));
         Assert.That(MainMenu, Is.EqualTo(GameStateType.MainMenu));
-        ArgumentException? ExceptionTest = Assert.Throws<ArgumentException>(() => 
+        ArgumentException? ExceptionTest = Assert.Throws<ArgumentException>(() =>
         StateTransformer.TransformStringToState(""));
         Assert.That(ExceptionTest?.Message, Is.EqualTo("Invalid GameStateType string"));
     }

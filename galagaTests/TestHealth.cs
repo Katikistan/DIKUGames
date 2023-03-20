@@ -1,6 +1,3 @@
-using DIKUArcade.Entities;
-using DIKUArcade.Events;
-using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using Galaga;
 namespace galagaTests;
@@ -16,14 +13,14 @@ public class TestHealth {
     }
     [Test]
     public void TestLoseHealth() {
-        Assert.AreEqual(3, health.Lives);
+        Assert.That(health.Lives,Is.EqualTo(3));
         health.LoseHealth();
-        Assert.AreEqual(2, health.Lives);
+        Assert.That(health.Lives,Is.EqualTo(2));
         health.LoseHealth();
-        Assert.AreEqual(1, health.Lives);
+        Assert.That(health.Lives,Is.EqualTo(1));
         health.LoseHealth();
-        Assert.AreEqual(0, health.Lives);
+        Assert.That(health.Lives,Is.EqualTo(0));
         health.LoseHealth();
-        Assert.AreEqual(0, health.Lives);
+        Assert.That(health.Lives,Is.EqualTo(0));
     }
 }

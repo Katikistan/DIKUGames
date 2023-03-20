@@ -20,7 +20,7 @@ public class TestPlayer {
             new Image(Path.Combine("..","Galaga","Assets", "Images", "Player.png")));
         Vec2F playerPos = player.GetPosition();
         GalagaBus.GetBus().Subscribe(GameEventType.PlayerEvent, player);
-        
+
         EventMoveLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
             Message = "MOVE LEFT"
