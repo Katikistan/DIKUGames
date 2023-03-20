@@ -1,3 +1,4 @@
+using Galaga.MovementStrategy;
 namespace galagaTests;
 
 public class TestMovementStrategy {

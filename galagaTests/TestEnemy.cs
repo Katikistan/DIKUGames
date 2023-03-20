@@ -1,3 +1,4 @@
+using Galaga;
 namespace galagaTests;
 
 public class TestEnemy {
