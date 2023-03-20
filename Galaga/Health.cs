@@ -16,7 +16,7 @@ public class Health {
     /// such that is has the correct health value
     /// </summary>
 
-    // static active state?
+    // static active state? til at kunne skifte til game over state bla.
     public void LoseHealth () {
         health -= 1;
         display.SetText("Lives:" + health.ToString());

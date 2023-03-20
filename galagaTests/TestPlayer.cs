@@ -2,31 +2,41 @@ using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
+using Galaga;
 namespace galagaTests;
-
+[TestFixture]
 public class TestPlayer {
-    private Player player;
-    private GameEventBus eventbus;
+    private Player player = new Player(
+            new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
+            new Image(Path.Combine("Galga","Assets", "Images", "Player.png")));
+    private GameEvent EventMoveLeft;
+    private GameEvent EventMoveRight;
     [SetUp]
     public void Setup() {
-        // måske lav en eventbus istedet
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
-            new Image(Path.Combine("Assets", "Images", "Player.png")));
-        DIKUArcade.Window.CreateOpenGLContext();
-        GalagaBus.GetBus().Subscribe(GameEventType.PlayerEvent, this);
-        GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
-    }
-    [Test]
-    public void TestMoveLeft() {
-        EventMoveLeft = GalagaBus.GetBus().RegisterEvent(new GameEvent {
+            new Image(Path.Combine("Galaga","Assets", "Images", "Player.png")));
+        Vec2F playerPos = player.GetPosition();
+        EventMoveLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
             Message = "MOVE LEFT"
         });
-        player.RegisterEvent(EventMoveLeft);
-        // (work in progress, men samme format kan måske bruges andre steder)
-        Assert.Pass();
+        EventMoveRight = (new GameEvent {
+            EventType = GameEventType.PlayerEvent,
+            Message = "MOVE Right"
+        });
     }
+    [Test]
+    public void TestMoveLeft() {
+        GalagaBus.GetBus().RegisterEvent(EventMoveLeft);
+        player.ProcessEvent(EventMoveLeft);
+        player.Move();
+        Vec2F playerPos = player.GetPosition();
+        Assert.Equals(playerPos.X, 0.44f);
+    }
+
+
     public void TestMoveRight() {
         Assert.Pass();
     }
@@ -39,7 +49,7 @@ public class TestPlayer {
     public void TestNotOutOfBoundsLeft() {
         Assert.Pass();
     }
-    public void TestNotOutOfBoundsLeft() {
+    public void TestNotOutOfBoundsRight() {
         Assert.Pass();
     }
 }

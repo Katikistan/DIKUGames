@@ -1,3 +1,4 @@
+using Galaga.Squadron;
 namespace galagaTests;
 
 public class TestSquadron {

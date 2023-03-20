@@ -19,7 +19,7 @@ public class Game : DIKUGame, IGameEventProcessor {
     private int level = 1;
     private GameOver gameOverScreen;
     private IGameState activeState = MainMenu.GetInstance();
-    //sub til activestates gameevents 
+    //sub til activestates gameevents
     private Player player;
     private Health health;
     // enemy fields
@@ -162,7 +162,7 @@ public class Game : DIKUGame, IGameEventProcessor {
                 break;
             case KeyboardKey.Space:
                 playerShots.AddEntity(new PlayerShot(
-                    player.GetPosition(), playerShotImage));
+                    player.GetPositionMiddle(), playerShotImage));
                 break;
         }
     }
