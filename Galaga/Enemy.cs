@@ -26,7 +26,7 @@ public class Enemy : Entity {
         get => speed;
     }
     List<Image> enragedimg = ImageStride.CreateStrides
-    (2, Path.Combine("Assets", "Images", "RedMonster.png"));
+    (2, Path.Combine("..", "Galaga", "Assets", "Images", "RedMonster.png"));
     public Enemy(DynamicShape shape, IBaseImage image) : base(shape, image) {
         this.shape = shape;
         startpos = new Vec2F(shape.Position.X, shape.Position.Y);
