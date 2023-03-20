@@ -7,10 +7,10 @@ using Galaga.MovementStrategy;
 namespace galagaTests;
 [TestFixture]
 public class TestMovementStrategy {
-    private Enemy enemy1;
-    private Enemy enemy2;
-    private List<Image> enemyStride;
-    EntityContainer<Enemy> enemies;
+    private Enemy enemy1 = null!;
+    private Enemy enemy2 = null!;
+    private List<Image> enemyStride = null!;
+    EntityContainer<Enemy> enemies = null!;
     [SetUp]
     public void Setup() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();

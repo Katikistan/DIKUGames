@@ -18,11 +18,11 @@ public class GamePaused : IGameState, IGameEventProcessor {
         GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
     }
     public void ResetState() {
-        GamePaused.instance = new GamePaused();
-        GamePaused.instance.InitializeGameState();
+        // GamePaused.instance = new GamePaused();
+        // GamePaused.instance.InitializeGameState();
     }
     public void UpdateState() {
-        GalagaBus.GetBus().ProcessEventsSequentially();
+        // GalagaBus.GetBus().ProcessEventsSequentially();
     }
     public void RenderState() {}
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {}
