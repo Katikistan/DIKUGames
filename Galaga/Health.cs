@@ -6,6 +6,9 @@ public class Health {
         get {return health;}
         }
     private Text display;
+    public Text Display {
+        get {return display;}
+        }
     public Health (Vec2F position, Vec2F extent) {
         health = 3;
         display = new Text ("Lives: " + health.ToString(), position, extent);
@@ -18,8 +21,10 @@ public class Health {
 
     // static active state? til at kunne skifte til game over state bla.
     public void LoseHealth () {
-        health -= 1;
-        display.SetText("Lives:" + health.ToString());
+        if (health > 0) {
+            health -= 1;
+            display.SetText("Lives:" + health.ToString());
+        }
     }
     public void RenderHealth () {
         display.RenderText();
