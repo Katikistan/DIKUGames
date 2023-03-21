@@ -31,35 +31,22 @@ public class GamePaused : IGameState {
             );
         maxMenuButtons = 2;
         activeMenuButton = 0;
-<<<<<<< HEAD
-        PauseText = new Text("Paused",
-            new Vec2F(0.375f, 0.05f),
-            new Vec2F(0.7f, 0.7f));
-        menuButtons = new Text[maxMenuButtons];
-        menuButtons[0] = new Text ("Continue",
-            new Vec2F(0.42f, 0.2f),
-            new Vec2F(0.4f, 0.4f));
-        menuButtons[1] = new Text ("Main Menu",
-            new Vec2F(0.4f, 0.1f),
-            new Vec2F(0.4f, 0.4f));
-=======
         PauseText = new Text(
             "Paused",
-            new Vec2F(0.375f, 0.4f),
-            new Vec2F(0.4f, 0.4f)
+            new Vec2F(0.375f, 0.05f),
+            new Vec2F(0.7f, 0.7f)
             );
         menuButtons = new Text[maxMenuButtons];
         menuButtons[0] = new Text (
             "Continue",
-            new Vec2F(0.375f, 0.3f),
+            new Vec2F(0.42f, 0.2f),
             new Vec2F(0.4f, 0.4f)
             );
         menuButtons[1] = new Text (
             "Main Menu",
-            new Vec2F(0.4f, 0.2f),
+            new Vec2F(0.4f, 0.1f),
             new Vec2F(0.4f, 0.4f)
             );
->>>>>>> 43c90f3abfe982a06e07543a00d02de3d09612af
     }
     public void ResetState() {
         instance = new GamePaused();
