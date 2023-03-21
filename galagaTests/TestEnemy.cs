@@ -21,8 +21,10 @@ public class TestEnemy {
 
         ImageStride blueMonster = new ImageStride(80, enemyStride);
         enemy = new Enemy (
-            new DynamicShape(new Vec2F(0.5f, 0.5f), new Vec2F(0.1f, 0.1f)),
-            blueMonster);
+            new DynamicShape
+            (new Vec2F(0.5f, 0.5f), new Vec2F(0.1f, 0.1f)),
+            blueMonster
+            );
     }
     // Test the enraged state of enemy
     [Test]

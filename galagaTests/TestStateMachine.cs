@@ -5,7 +5,7 @@ namespace galagaTests;
 public class StateMachineTesting {
     private StateMachine stateMachine = null!;
     
-    public StateMachineTesting () {
+    public StateMachineTesting() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
         GalagaBus.GetBus().InitializeEventBus(
             new List<GameEventType> {
@@ -26,8 +26,7 @@ public class StateMachineTesting {
     }
     [Test]
     public void TestEventGamePaused() {
-        GalagaBus.GetBus().RegisterEvent(
-            new GameEvent {
+        GalagaBus.GetBus().RegisterEvent(new GameEvent {
                 EventType = GameEventType.GameStateEvent,
                 Message = "CHANGE_STATE",
                 StringArg1 = "GAME_PAUSED"
