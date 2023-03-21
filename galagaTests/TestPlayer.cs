@@ -58,6 +58,7 @@ public class TestPlayer {
         player = new Player(
             new DynamicShape(new Vec2F(0.0f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..","Galaga","Assets", "Images", "Player.png")));
+            
         TesteventBus.RegisterEvent(EventMoveLeft);
         TesteventBus.ProcessEventsSequentially();
         player.Move();
@@ -68,6 +69,7 @@ public class TestPlayer {
         player = new Player(
             new DynamicShape(new Vec2F(1.0f - 0.1f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..","Galaga","Assets", "Images", "Player.png")));
+            
         TesteventBus.RegisterEvent(EventMoveRight);
         TesteventBus.ProcessEventsSequentially();
         player.Move();
