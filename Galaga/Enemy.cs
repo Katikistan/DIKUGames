@@ -15,7 +15,7 @@ public class Enemy : Entity {
         }
     }
     private DynamicShape shape;
-    public DynamicShape SShape {
+    public DynamicShape _Shape {
         get {
             return shape;
         }
@@ -41,8 +41,8 @@ public class Enemy : Entity {
         }
         return false;
     }
-    public void IncreaseSpeed(float increacse) {
-        speed += increacse;
+    public void IncreaseSpeed(float increase) {
+        speed += increase;
     }
 
 }
