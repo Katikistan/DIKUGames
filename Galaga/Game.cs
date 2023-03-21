@@ -15,7 +15,7 @@ using System.IO;
 
 namespace Galaga;
 public class Game : DIKUGame, IGameEventProcessor {
-    private GameEventBus eventBus;
+    private StateMachine stateMachine;
     private int level = 1;
     private GameOver gameOverScreen;
     private IGameState activeState = MainMenu.GetInstance();
@@ -48,19 +48,21 @@ public class Game : DIKUGame, IGameEventProcessor {
         health = new Health(
             new Vec2F(0.04f, -0.42f),
             new Vec2F(0.4f, 0.5f));
-
-        // Eventbus and eventypes subscribed to
-        eventBus = new GameEventBus();
-        eventBus.InitializeEventBus(
+        stateMachine = new StateMachine();
+        // GalagaBus.GetBus() and eventypes subscribed to
+ 
+        GalagaBus.GetBus().InitializeEventBus(
             new List<GameEventType> {
                 GameEventType.InputEvent,
                 GameEventType.WindowEvent,
-                GameEventType.PlayerEvent
+                GameEventType.PlayerEvent,
+                GameEventType.GameStateEvent
             });
         window.SetKeyEventHandler(KeyHandler);
-        eventBus.Subscribe(GameEventType.InputEvent, this);
-        eventBus.Subscribe(GameEventType.WindowEvent, this);
-        eventBus.Subscribe(GameEventType.PlayerEvent, player);
+        GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
+        GalagaBus.GetBus().Subscribe(GameEventType.WindowEvent, this);
+        GalagaBus.GetBus().Subscribe(GameEventType.PlayerEvent, player);
+        GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, player);
 
         // Adds enemies to the game
         blueMonster = ImageStride.CreateStrides
@@ -127,19 +129,19 @@ public class Game : DIKUGame, IGameEventProcessor {
     private void KeyPress(KeyboardKey key) { // When a key is pressed
         switch (key) {
             case KeyboardKey.Escape:
-                eventBus.RegisterEvent(new GameEvent {
+                GalagaBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.WindowEvent,
                     Message = "WINDOW CLOSE"
                 });
                 break;
             case KeyboardKey.Left:
-                eventBus.RegisterEvent(new GameEvent {
+                GalagaBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "MOVE LEFT"
                 });
                 break;
             case KeyboardKey.Right:
-                eventBus.RegisterEvent(new GameEvent {
+                GalagaBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "MOVE RIGHT"
                 });
@@ -149,13 +151,13 @@ public class Game : DIKUGame, IGameEventProcessor {
     private void KeyRelease(KeyboardKey key) { // When a key is realeased
         switch (key) {
             case KeyboardKey.Left:
-                eventBus.RegisterEvent(new GameEvent {
+                GalagaBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "REALESE LEFT"
                 });
                 break;
             case KeyboardKey.Right:
-                eventBus.RegisterEvent(new GameEvent {
+                GalagaBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "REALESE RIGHT"
                 });
@@ -193,6 +195,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         }
     }
     public override void Render() { //Rendering entities
+    //statemachine.activestate.render();
         if (health.Lives > 0) {
             player.Render();
             squadron.Enemies.RenderEntities();
@@ -205,7 +208,7 @@ public class Game : DIKUGame, IGameEventProcessor {
     }
 
     public override void Update() {
-        eventBus.ProcessEventsSequentially();
+        GalagaBus.GetBus().ProcessEventsSequentially();
         if (health.Lives > 0) {
             squadron.Enemies.Iterate(enemy => {
                 if (enemy.Shape.Position.Y < 0.0f) {
