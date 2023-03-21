@@ -22,6 +22,7 @@ public class StateMachine : IGameEventProcessor {
                 case ("NEW_STATE","GAME_RUNNING"):
                     SwitchState(GameStateType.GameRunning);
                     ActiveState.ResetState();
+                    SwitchState(GameStateType.GameRunning);
                     break;
 
             }

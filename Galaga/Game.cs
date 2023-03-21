@@ -20,7 +20,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
         GalagaBus.GetBus().Subscribe(GameEventType.WindowEvent, this);
         GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, stateMachine);
-        GalagaBus.GetBus().Flush();
+        // GalagaBus.GetBus().Flush();
 
     }
     public void ProcessEvent(GameEvent gameEvent) {
