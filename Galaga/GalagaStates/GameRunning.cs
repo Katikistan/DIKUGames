@@ -14,6 +14,7 @@ namespace Galaga.GalagaStates;
 public class GameRunning : IGameState {
     private static GameRunning instance = null;
     private GameOver gameOverScreen;
+    private Entity backGroundImage;
     private int level = 1;
     private Player player;
     private Health health;
@@ -41,6 +42,12 @@ public class GameRunning : IGameState {
     }
 
     public void InitializeGameState() {
+        backGroundImage = new Entity(
+            new StationaryShape(
+                new Vec2F(0.0f, 0.0f),
+                new Vec2F(1.0f, 1.0f)),
+                new Image(Path.Combine(
+                "..", "Galaga", "Assets", "Images", "SpaceBackground.png")));
         // Creates a player object for the game
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
@@ -151,6 +158,7 @@ public class GameRunning : IGameState {
         }
     }
     public void RenderState() {
+        backGroundImage.RenderEntity();
         if (health.Lives > 0) {
             player.Render();
             squadron.Enemies.RenderEntities();

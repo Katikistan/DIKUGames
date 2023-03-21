@@ -38,8 +38,8 @@ public class MainMenu : IGameState {
             new Vec2F(0.4f, 0.4f));
     }
     public void ResetState() {
-        instance = new MainMenu();
-        instance.InitializeGameState();
+         MainMenu.instance = new MainMenu();
+         MainMenu.instance.InitializeGameState();
     }
     public void UpdateState() {
     }
@@ -78,7 +78,7 @@ public class MainMenu : IGameState {
                     GalagaBus.GetBus().RegisterEvent(
                         new GameEvent{
                         EventType = GameEventType.GameStateEvent,
-                        Message = "CHANGE_STATE",
+                        Message = "NEW_STATE",
                         StringArg1 = "GAME_RUNNING"
                         });
                 } else {

@@ -1,6 +1,7 @@
 using DIKUArcade;
 using DIKUArcade.Events;
 using DIKUArcade.GUI;
+using DIKUArcade.Input;
 using Galaga.GalagaStates;
 using System.Collections.Generic;
 namespace Galaga;
@@ -15,10 +16,11 @@ public class Game : DIKUGame, IGameEventProcessor {
                 GameEventType.PlayerEvent,
                 GameEventType.GameStateEvent
             });
-        window.SetKeyEventHandler(keyHandler);
+        window.SetKeyEventHandler(KeyHandler);
+        GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
         GalagaBus.GetBus().Subscribe(GameEventType.WindowEvent, this);
         GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, stateMachine);
-        GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, stateMachine);
+        GalagaBus.GetBus().Flush();
 
     }
     public void ProcessEvent(GameEvent gameEvent) {
@@ -29,20 +31,15 @@ public class Game : DIKUGame, IGameEventProcessor {
                     break;
             }
         }
-        else if (gameEvent.EventType == GameEventType.GameStateEvent) {
-            switch (gameEvent.Message) {
-                case "CHANGE_STATE":
-                    window.SetKeyEventHandler(stateMachine.ActiveState.HandleKeyEvent);
-                    break;
-            }
-        }
+    }
+    private void KeyHandler(KeyboardAction action, KeyboardKey key) {
+        stateMachine.ActiveState.HandleKeyEvent(action,key);
     }
     public override void Render() { //Rendering entities
         stateMachine.ActiveState.RenderState();
     }
-    public void
+
     public override void Update() {
-        window.SetKeyEventHandler(stateMachine.ActiveState.HandleKeyEvent);
         GalagaBus.GetBus().ProcessEventsSequentially();
         stateMachine.ActiveState.UpdateState();
     }
