@@ -57,7 +57,7 @@ public class GameRunning : IGameState {
         (2, Path.Combine("Assets", "Images", "GreenMonster.png"));
 
         squadron.CreateEnemies(blueMonster, greenMonster);
-        movestrat = new ZigZagDown();
+        movestrat = new NoMove();
 
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
@@ -68,7 +68,6 @@ public class GameRunning : IGameState {
         explosionStrides = ImageStride.CreateStrides(8,
         Path.Combine("Assets", "Images", "Explosion.png"));
         gameOverScreen = new GameOver();
-
         GalagaBus.GetBus().Subscribe(GameEventType.PlayerEvent, player);
     }
     public void AddExplosion(Vec2F position, Vec2F extent) {
@@ -82,14 +81,17 @@ public class GameRunning : IGameState {
         playerShots.Iterate(shot => {
             shot.Shape.Move();
             if (shot.Shape.Position.Y > 1.0f) { // Shot hit border
+                System.Console.WriteLine("delete shot");
                 shot.DeleteEntity();
             } else {
                 squadron.Enemies.Iterate(enemy => {
                     DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
                     CollisionData collision = CollisionDetection.Aabb(dynamicShot, enemy.Shape);
                     if (collision.Collision) { // Shot hit enemy
+                        System.Console.WriteLine("delete shot");
                         shot.DeleteEntity();
                         if (enemy.IsEnemyDead()) {
+                            System.Console.WriteLine("delete enemy");
                             AddExplosion(enemy.Shape.Position, enemy.Shape.Extent);
                             enemy.DeleteEntity();
                         }
@@ -97,6 +99,14 @@ public class GameRunning : IGameState {
                 });
             }
         });
+    }
+    private void NewMoveStrat() {
+        if (level == 2) {
+            movestrat = new Down();
+        }
+        else if (level == 5) {
+            movestrat = new ZigZagDown();
+        }
     }
 
     private void NewSquad() {
@@ -115,6 +125,7 @@ public class GameRunning : IGameState {
                     squadron = new SquadronTriangle();
                     break;
             }
+            NewMoveStrat();
             squadron.CreateEnemies(blueMonster, greenMonster);
             foreach (Enemy enemy in squadron.Enemies) {
                 enemy.IncreaseSpeed(level * 0.0002f);

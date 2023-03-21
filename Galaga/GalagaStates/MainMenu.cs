@@ -6,7 +6,7 @@ using DIKUArcade.Input;
 using DIKUArcade.Math;
 using System.IO;
 namespace Galaga.GalagaStates;
-public class MainMenu : IGameState/*, IGameEventProcessor*/ {
+public class MainMenu : IGameState {
     private static MainMenu instance = null;
     private Entity backGroundImage;
     private Text[] menuButtons;
@@ -20,7 +20,7 @@ public class MainMenu : IGameState/*, IGameEventProcessor*/ {
         return MainMenu.instance;
     }
 
-    public void InitializeGameState() { 
+    public void InitializeGameState() {
         backGroundImage = new Entity(
             new StationaryShape(
                 new Vec2F(0.0f, 0.0f),
@@ -34,7 +34,7 @@ public class MainMenu : IGameState/*, IGameEventProcessor*/ {
             new Vec2F(0.375f, 0.3f),
             new Vec2F(0.4f, 0.4f));
         menuButtons[1] = new Text ("Quit",
-            new Vec2F(0.375f, 0.3f),
+            new Vec2F(0.4f, 0.2f),
             new Vec2F(0.4f, 0.4f));
     }
     public void ResetState() {
@@ -64,32 +64,6 @@ public class MainMenu : IGameState/*, IGameEventProcessor*/ {
         if (action == KeyboardAction.KeyPress) {
                 KeyPress(key);
         }
-        // if (action == KeyboardAction.KeyPress)
-        //     switch(key) {
-        //         case KeyboardKey.Up:
-        //             activeMenuButton = 0;
-        //             break;
-        //         case KeyboardKey.Down:
-        //             activeMenuButton = 1;
-        //             break;
-        //         case KeyboardKey.Enter:
-        //             if (activeMenuButton == 0) {
-        //                 GalagaBus.GetBus().RegisterEvent(
-        //                     new GameEvent{
-        //                     EventType = GameEventType.GameStateEvent,
-        //                     Message = "CHANGE_STATE",
-        //                     StringArg1 = "GAME_RUNNING"
-        //                     });
-        //             } else {
-        //                 GalagaBus.GetBus().RegisterEvent(
-        //                     new GameEvent {
-        //                     EventType = GameEventType.WindowEvent,
-        //                     Message = "CLOSE_GAME",
-        //                     StringArg1 = "WINDOW_CLOSE"
-        //                     });
-        //             }
-        //             break;
-        //     }
     }
     private void KeyPress(KeyboardKey key) { // When a key is pressed
         switch (key) {
