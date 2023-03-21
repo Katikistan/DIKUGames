@@ -4,9 +4,11 @@ namespace galagaTests;
 [TestFixture]
 public class TestHealth {
     private Health health = null!;
+    public TestHealth() {
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
+    }
     [SetUp]
     public void Setup() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
         health = new Health(
             new Vec2F(0.04f, -0.42f),
             new Vec2F(0.4f, 0.5f));

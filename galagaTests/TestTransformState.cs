@@ -3,8 +3,6 @@ using Galaga.GalagaStates;
 namespace galagaTests;
 [TestFixture]
 public class TestTransformState {
-    [SetUp]
-    public void Setup() {}
     [Test]
     public void TestTransformStringToState() {
         GameStateType GameRunning = StateTransformer.TransformStringToState("GAME_RUNNING");

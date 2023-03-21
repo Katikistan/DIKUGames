@@ -11,9 +11,12 @@ public class TestSquadron {
     private ISquadron squadron = null!;
     private List<Image> blueMonster = null!;
     private List<Image> greenMonster = null!;
+    public TestSquadron () {
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
+    }
     [SetUp]
     public void Setup() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        // DIKUArcade.GUI.Window.CreateOpenGLContext();
         blueMonster = ImageStride.CreateStrides
         (4, Path.Combine("..", "Galaga", "Assets", "Images", "BlueMonster.png"));
         greenMonster = ImageStride.CreateStrides

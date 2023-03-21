@@ -1,5 +1,4 @@
 using DIKUArcade.Entities;
-using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using Galaga;
@@ -11,9 +10,11 @@ public class TestMovementStrategy {
     private Enemy enemy2 = null!;
     private List<Image> enemyStride = null!;
     EntityContainer<Enemy> enemies = null!;
+    public TestMovementStrategy() {
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
+    }
     [SetUp]
     public void Setup() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
         enemyStride = ImageStride.CreateStrides
         (4, Path.Combine("..", "Galaga", "Assets", "Images", "BlueMonster.png"));
         ImageStride blueMonster = new ImageStride(80, enemyStride);

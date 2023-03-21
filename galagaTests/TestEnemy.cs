@@ -9,11 +9,13 @@ namespace galagaTests;
 // be tested.
 [TestFixture]
 public class TestEnemy {
-    private List<Image> ?enemyStride;
-    private Enemy ?enemy;
+    private List<Image> enemyStride = null!;
+    private Enemy enemy = null!;
+    public TestEnemy() {
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
+    }
     [SetUp]
     public void Setup() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
         enemyStride = ImageStride.CreateStrides
         (4, Path.Combine("..","Galaga","Assets", "Images", "BlueMonster.png"));
 
@@ -25,23 +27,23 @@ public class TestEnemy {
     // Test the enraged state of enemy
     [Test]
     public void enragedTest() {
-        enemy?.IsEnemyDead();
-        Assert.That(enemy?.Speed,Is.EqualTo(0.002f));
+        enemy.IsEnemyDead();
+        Assert.That(enemy.Speed,Is.EqualTo(0.002f));
     }
 
     // Test if the enemy dies
     [Test]
     public void deathTest() {
-        enemy?.IsEnemyDead();
-        enemy?.IsEnemyDead();
-        Assert.That(enemy?.IsEnemyDead(),Is.EqualTo(true));
+        enemy.IsEnemyDead();
+        enemy.IsEnemyDead();
+        Assert.That(enemy.IsEnemyDead(),Is.EqualTo(true));
     }
 
     // Test the IncreaseSpeed method
     [Test]
     public void increaseSpeedTest() {
-        enemy?.IncreaseSpeed(0.001f);
-        Assert.That(enemy?.Speed,Is.EqualTo(0.002f));
+        enemy.IncreaseSpeed(0.001f);
+        Assert.That(enemy.Speed,Is.EqualTo(0.002f));
 
     }
 }

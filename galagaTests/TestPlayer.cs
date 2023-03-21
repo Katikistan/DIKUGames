@@ -11,10 +11,11 @@ public class TestPlayer {
     private GameEvent EventMoveLeft;
     private GameEvent EventMoveRight;
     private GameEvent EventNothing;
+    public TestPlayer() {
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
+    }
     [SetUp]
     public void Setup() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
-
         TesteventBus = new GameEventBus();
         TesteventBus.InitializeEventBus(
             new List<GameEventType> { GameEventType.PlayerEvent });

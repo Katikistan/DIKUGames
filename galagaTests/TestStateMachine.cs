@@ -2,19 +2,22 @@ using Galaga.GalagaStates;
 using DIKUArcade.Events;
 using Galaga;
 namespace galagaTests;
-[TestFixture]
 public class StateMachineTesting {
-    private StateMachine stateMachine;
-    [SetUp]
-    public void InitiateStateMachine() {
+    private StateMachine stateMachine = null!;
+    
+    public StateMachineTesting () {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
         GalagaBus.GetBus().InitializeEventBus(
             new List<GameEventType> {
                 GameEventType.GameStateEvent,
                 GameEventType.InputEvent,
                 GameEventType.WindowEvent
-                 });
+                });
+    }
+    [SetUp]
+    public void InitiateStateMachine() {
         stateMachine = new StateMachine();
+        GalagaBus.GetBus().Flush();
         GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, stateMachine);
     }
 
