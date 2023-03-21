@@ -9,15 +9,19 @@ public class StateMachine : IGameEventProcessor {
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.GameStateEvent) {
-            switch (gameEvent.StringArg1) {
-                case "MAIN_MENU":
+            switch (gameEvent.Message, gameEvent.StringArg1) {
+                case ("CHANGE_STATE","MAIN_MENU"):
                     SwitchState(GameStateType.MainMenu);
                     break;
-                case "GAME_PAUSED":
+                case ("CHANGE_STATE","GAME_PAUSED"):
                     SwitchState(GameStateType.GamePaused);
                     break;
-                case "GAME_RUNNING":
+                case ("CHANGE_STATE","GAME_RUNNING"):
                     SwitchState(GameStateType.GameRunning);
+                    break;
+                case ("NEW_STATE","GAME_RUNNING"):
+                    SwitchState(GameStateType.GameRunning);
+                    ActiveState.ResetState();
                     break;
 
             }

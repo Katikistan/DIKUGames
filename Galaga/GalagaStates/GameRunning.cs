@@ -14,6 +14,7 @@ namespace Galaga.GalagaStates;
 public class GameRunning : IGameState {
     private static GameRunning instance = null;
     private GameOver gameOverScreen;
+    private Entity backGroundImage;
     private int level = 1;
     private Player player;
     private Health health;
@@ -41,6 +42,12 @@ public class GameRunning : IGameState {
     }
 
     public void InitializeGameState() {
+        backGroundImage = new Entity(
+            new StationaryShape(
+                new Vec2F(0.0f, 0.0f),
+                new Vec2F(1.0f, 1.0f)),
+                new Image(Path.Combine(
+                "..", "Galaga", "Assets", "Images", "SpaceBackground.png")));
         // Creates a player object for the game
         player = new Player(
             new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
@@ -57,7 +64,7 @@ public class GameRunning : IGameState {
         (2, Path.Combine("Assets", "Images", "GreenMonster.png"));
 
         squadron.CreateEnemies(blueMonster, greenMonster);
-        movestrat = new ZigZagDown();
+        movestrat = new NoMove();
 
         // adds playershots to the game
         playerShots = new EntityContainer<PlayerShot>();
@@ -68,7 +75,6 @@ public class GameRunning : IGameState {
         explosionStrides = ImageStride.CreateStrides(8,
         Path.Combine("Assets", "Images", "Explosion.png"));
         gameOverScreen = new GameOver();
-
         GalagaBus.GetBus().Subscribe(GameEventType.PlayerEvent, player);
     }
     public void AddExplosion(Vec2F position, Vec2F extent) {
@@ -82,14 +88,17 @@ public class GameRunning : IGameState {
         playerShots.Iterate(shot => {
             shot.Shape.Move();
             if (shot.Shape.Position.Y > 1.0f) { // Shot hit border
+                System.Console.WriteLine("delete shot");
                 shot.DeleteEntity();
             } else {
                 squadron.Enemies.Iterate(enemy => {
                     DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
                     CollisionData collision = CollisionDetection.Aabb(dynamicShot, enemy.Shape);
                     if (collision.Collision) { // Shot hit enemy
+                        System.Console.WriteLine("delete shot");
                         shot.DeleteEntity();
                         if (enemy.IsEnemyDead()) {
+                            System.Console.WriteLine("delete enemy");
                             AddExplosion(enemy.Shape.Position, enemy.Shape.Extent);
                             enemy.DeleteEntity();
                         }
@@ -97,6 +106,14 @@ public class GameRunning : IGameState {
                 });
             }
         });
+    }
+    private void NewMoveStrat() {
+        if (level == 2) {
+            movestrat = new Down();
+        }
+        else if (level == 5) {
+            movestrat = new ZigZagDown();
+        }
     }
 
     private void NewSquad() {
@@ -115,6 +132,7 @@ public class GameRunning : IGameState {
                     squadron = new SquadronTriangle();
                     break;
             }
+            NewMoveStrat();
             squadron.CreateEnemies(blueMonster, greenMonster);
             foreach (Enemy enemy in squadron.Enemies) {
                 enemy.IncreaseSpeed(level * 0.0002f);
@@ -140,6 +158,7 @@ public class GameRunning : IGameState {
         }
     }
     public void RenderState() {
+        backGroundImage.RenderEntity();
         if (health.Lives > 0) {
             player.Render();
             squadron.Enemies.RenderEntities();
