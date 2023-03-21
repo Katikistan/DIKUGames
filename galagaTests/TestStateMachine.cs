@@ -17,7 +17,6 @@ public class StateMachineTesting {
     [SetUp]
     public void InitiateStateMachine() {
         stateMachine = new StateMachine();
-        GalagaBus.GetBus().Flush();
         GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, stateMachine);
     }
 
