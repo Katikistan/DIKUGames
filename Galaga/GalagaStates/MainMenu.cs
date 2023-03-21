@@ -31,10 +31,10 @@ public class MainMenu : IGameState {
         activeMenuButton = 0;
         menuButtons = new Text[maxMenuButtons];
         menuButtons[0] = new Text ("New Game",
-            new Vec2F(0.375f, 0.3f),
+            new Vec2F(0.375f, 0.2f),
             new Vec2F(0.4f, 0.4f));
         menuButtons[1] = new Text ("Quit",
-            new Vec2F(0.4f, 0.2f),
+            new Vec2F(0.46f, 0.1f),
             new Vec2F(0.4f, 0.4f));
     }
     public void ResetState() {
