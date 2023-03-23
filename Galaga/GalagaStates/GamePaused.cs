@@ -13,6 +13,8 @@ public class GamePaused : IGameState {
     private Text PauseText;
     private int activeMenuButton;
     private int maxMenuButtons;
+    private const int CONTINUE = 0;
+    private const int MAIN_MENU = 1;
     public static GamePaused GetInstance() {
         if (GamePaused.instance == null) {
             GamePaused.instance = new GamePaused();
@@ -30,76 +32,75 @@ public class GamePaused : IGameState {
                 "..", "Galaga", "Assets", "Images", "SpaceBackground.png"))
             );
         maxMenuButtons = 2;
-        activeMenuButton = 0;
+        activeMenuButton = CONTINUE;
         PauseText = new Text(
             "Paused",
             new Vec2F(0.375f, 0.05f),
             new Vec2F(0.7f, 0.7f)
             );
         menuButtons = new Text[maxMenuButtons];
-        menuButtons[0] = new Text (
+        menuButtons[CONTINUE] = new Text(
             "Continue",
             new Vec2F(0.42f, 0.2f),
             new Vec2F(0.4f, 0.4f)
             );
-        menuButtons[1] = new Text (
+        menuButtons[MAIN_MENU] = new Text(
             "Main Menu",
             new Vec2F(0.4f, 0.1f),
             new Vec2F(0.4f, 0.4f)
             );
     }
     public void ResetState() {
-        instance = new GamePaused();
-        instance.InitializeGameState();
+        GamePaused.instance = null;
+
     }
     public void UpdateState() {
     }
     public void RenderState() {
         backGroundImage.RenderEntity();
         Vec3I white = new Vec3I(255, 255, 255);
-        Vec3I red = new Vec3I(255,0,0);
+        Vec3I red = new Vec3I(255, 0, 0);
         PauseText.SetColor(white);
-        switch(activeMenuButton) {
-            case(0):
-                menuButtons[0].SetColor(red);
-                menuButtons[1].SetColor(white);
+        switch (activeMenuButton) {
+            case (CONTINUE):
+                menuButtons[CONTINUE].SetColor(red);
+                menuButtons[MAIN_MENU].SetColor(white);
                 break;
-            case(1):
-                menuButtons[0].SetColor(white);
-                menuButtons[1].SetColor(red);
+            case (MAIN_MENU):
+                menuButtons[CONTINUE].SetColor(white);
+                menuButtons[MAIN_MENU].SetColor(red);
                 break;
         }
         PauseText.RenderText();
-        menuButtons[0].RenderText();
-        menuButtons[1].RenderText();
+        menuButtons[CONTINUE].RenderText();
+        menuButtons[MAIN_MENU].RenderText();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {
-                KeyPress(key);
+            KeyPress(key);
         }
     }
-    private void KeyPress(KeyboardKey key) { // When a key is pressed
+    private void KeyPress(KeyboardKey key) { 
         switch (key) {
             case KeyboardKey.Up:
-                activeMenuButton = 0;
+                activeMenuButton = CONTINUE;
                 break;
             case KeyboardKey.Down:
-                activeMenuButton = 1;
+                activeMenuButton = MAIN_MENU;
                 break;
             case KeyboardKey.Enter:
-                if (activeMenuButton == 0) {
-                    GalagaBus.GetBus().RegisterEvent(new GameEvent{
+                if (activeMenuButton == CONTINUE) {
+                    GalagaBus.GetBus().RegisterEvent(new GameEvent {
                         EventType = GameEventType.GameStateEvent,
-                        Message = "CHANGE_STATE",
+                        Message = "RESUME_STATE",
                         StringArg1 = "GAME_RUNNING"
-                        });
+                    });
                 } else {
-                    activeMenuButton = 0;
                     GalagaBus.GetBus().RegisterEvent(new GameEvent {
                         EventType = GameEventType.GameStateEvent,
                         Message = "CHANGE_STATE",
                         StringArg1 = "MAIN_MENU"
-                        });
+                    });
                 }
                 break;
         }

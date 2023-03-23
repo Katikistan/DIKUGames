@@ -12,6 +12,8 @@ public class MainMenu : IGameState {
     private Text[] menuButtons;
     private int activeMenuButton;
     private int maxMenuButtons;
+    private const int NEW_GAME = 0;
+    private const int QUIT = 1;
     public static MainMenu GetInstance() {
         if (MainMenu.instance == null) {
             MainMenu.instance = new MainMenu();
@@ -28,66 +30,63 @@ public class MainMenu : IGameState {
                 new Image(Path.Combine(
                 "..", "Galaga", "Assets", "Images", "TitleImage.png")));
         maxMenuButtons = 2;
-        activeMenuButton = 0;
+        activeMenuButton = NEW_GAME;
         menuButtons = new Text[maxMenuButtons];
-        menuButtons[0] = new Text ("New Game",
+        menuButtons[NEW_GAME] = new Text("New Game",
             new Vec2F(0.375f, 0.2f),
             new Vec2F(0.4f, 0.4f));
-        menuButtons[1] = new Text ("Quit",
+        menuButtons[QUIT] = new Text("Quit",
             new Vec2F(0.46f, 0.1f),
             new Vec2F(0.4f, 0.4f));
     }
     public void ResetState() {
-         MainMenu.instance = new MainMenu();
-         MainMenu.instance.InitializeGameState();
+        MainMenu.instance = null;
     }
     public void UpdateState() {
     }
     public void RenderState() {
         backGroundImage.RenderEntity();
         Vec3I white = new Vec3I(255, 255, 255);
-        Vec3I red = new Vec3I(255,0,0);
-        switch(activeMenuButton) {
-            case(0):
-                menuButtons[0].SetColor(red);
-                menuButtons[1].SetColor(white);
+        Vec3I red = new Vec3I(255, 0, 0);
+        switch (activeMenuButton) {
+            case (NEW_GAME):
+                menuButtons[NEW_GAME].SetColor(red);
+                menuButtons[QUIT].SetColor(white);
                 break;
-            case(1):
-                menuButtons[0].SetColor(white);
-                menuButtons[1].SetColor(red);
+            case (QUIT):
+                menuButtons[NEW_GAME].SetColor(white);
+                menuButtons[QUIT].SetColor(red);
                 break;
         }
-        menuButtons[0].RenderText();
-        menuButtons[1].RenderText();
+        menuButtons[NEW_GAME].RenderText();
+        menuButtons[QUIT].RenderText();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {
-                KeyPress(key);
+            KeyPress(key);
         }
     }
-    private void KeyPress(KeyboardKey key) { // When a key is pressed
+    private void KeyPress(KeyboardKey key) { 
         switch (key) {
             case KeyboardKey.Up:
-                activeMenuButton = 0;
+                activeMenuButton = NEW_GAME;
                 break;
             case KeyboardKey.Down:
-                activeMenuButton = 1;
+                activeMenuButton = QUIT;
                 break;
             case KeyboardKey.Enter:
-                if (activeMenuButton == 0) {
-                    GalagaBus.GetBus().RegisterEvent(
-                        new GameEvent{
+                if (activeMenuButton == NEW_GAME) {
+                    GalagaBus.GetBus().RegisterEvent(new GameEvent {
                         EventType = GameEventType.GameStateEvent,
-                        Message = "NEW_STATE",
+                        Message = "CHANGE_STATE",
                         StringArg1 = "GAME_RUNNING"
-                        });
+                    });
                 } else {
-                    GalagaBus.GetBus().RegisterEvent(
-                        new GameEvent {
+                    GalagaBus.GetBus().RegisterEvent(new GameEvent {
                         EventType = GameEventType.WindowEvent,
                         Message = "CLOSE_GAME",
                         StringArg1 = "WINDOW_CLOSE"
-                        });
+                    });
                 }
                 break;
         }

@@ -1,4 +1,3 @@
-using DIKUArcade;
 using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
@@ -27,12 +26,10 @@ public class GameRunning : IGameState {
     // Fields for playershots
     private EntityContainer<PlayerShot> playerShots;
     private IBaseImage playerShotImage;
-
     // Fields for explosion
     private AnimationContainer enemyExplosions;
     private List<Image> explosionStrides;
     private const int EXPLOSION_LENGTH_MS = 500;
-
     public static GameRunning GetInstance() {
         if (GameRunning.instance == null) {
             GameRunning.instance = new GameRunning();
@@ -40,7 +37,6 @@ public class GameRunning : IGameState {
         }
         return GameRunning.instance;
     }
-
     public void InitializeGameState() {
         backGroundImage = new Entity(
             new StationaryShape(
@@ -77,71 +73,8 @@ public class GameRunning : IGameState {
         gameOverScreen = new GameOver();
         GalagaBus.GetBus().Subscribe(GameEventType.PlayerEvent, player);
     }
-    public void AddExplosion(Vec2F position, Vec2F extent) {
-        ImageStride explosionStride = new ImageStride(EXPLOSION_LENGTH_MS / 8, explosionStrides);
-        enemyExplosions.AddAnimation(new StationaryShape
-            (position, extent),
-            EXPLOSION_LENGTH_MS,
-            explosionStride);
-    }
-    private void IterateShots() { // Checks if any shots have hit the border or any enemies
-        playerShots.Iterate(shot => {
-            shot.Shape.Move();
-            if (shot.Shape.Position.Y > 1.0f) { // Shot hit border
-                System.Console.WriteLine("delete shot");
-                shot.DeleteEntity();
-            } else {
-                squadron.Enemies.Iterate(enemy => {
-                    DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
-                    CollisionData collision = CollisionDetection.Aabb(dynamicShot, enemy.Shape);
-                    if (collision.Collision) { // Shot hit enemy
-                        System.Console.WriteLine("delete shot");
-                        shot.DeleteEntity();
-                        if (enemy.IsEnemyDead()) {
-                            System.Console.WriteLine("delete enemy");
-                            AddExplosion(enemy.Shape.Position, enemy.Shape.Extent);
-                            enemy.DeleteEntity();
-                        }
-                    }
-                });
-            }
-        });
-    }
-    private void NewMoveStrat() {
-        if (level == 2) {
-            movestrat = new Down();
-        }
-        else if (level == 5) {
-            movestrat = new ZigZagDown();
-        }
-    }
-
-    private void NewSquad() {
-        if (squadron.Enemies.CountEntities() == 0 && health.Lives > 0) {
-            squadronNum = (squadronNum + 1) % 3;
-            level += 1;
-            gameOverScreen.SetLevel(level);
-            switch (squadronNum) {
-                case 0:
-                    squadron = new SquadronLine();
-                    break;
-                case 1:
-                    squadron = new SquadronSquare();
-                    break;
-                case 2:
-                    squadron = new SquadronTriangle();
-                    break;
-            }
-            NewMoveStrat();
-            squadron.CreateEnemies(blueMonster, greenMonster);
-            foreach (Enemy enemy in squadron.Enemies) {
-                enemy.IncreaseSpeed(level * 0.0002f);
-            }
-        }
-    }
     public void ResetState() {
-        instance = new GameRunning();
-        instance.InitializeGameState();
+        GameRunning.instance = null;
     }
     public void UpdateState() {
         if (health.Lives > 0) {
@@ -151,7 +84,7 @@ public class GameRunning : IGameState {
                     health.LoseHealth();
                 }
             });
-            NewSquad();
+            NextLevel();
             movestrat.MoveEnemies(squadron.Enemies);
             player.Move();
             IterateShots();
@@ -169,7 +102,17 @@ public class GameRunning : IGameState {
             gameOverScreen.Render();
         }
     }
-    private void KeyPress(KeyboardKey key) { // When a key is pressed
+    public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
+        switch (action) {
+            case KeyboardAction.KeyPress:
+                KeyPress(key);
+                break;
+            case KeyboardAction.KeyRelease:
+                KeyRelease(key);
+                break;
+        }
+    }
+    private void KeyPress(KeyboardKey key) {
         switch (key) {
             case KeyboardKey.Left:
                 GalagaBus.GetBus().RegisterEvent(new GameEvent {
@@ -184,15 +127,15 @@ public class GameRunning : IGameState {
                 });
                 break;
             case KeyboardKey.Escape:
-                GalagaBus.GetBus().RegisterEvent(new GameEvent{
+                GalagaBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.GameStateEvent,
                     Message = "CHANGE_STATE",
                     StringArg1 = "GAME_PAUSED"
                 });
-                    break;
+                break;
         }
     }
-    private void KeyRelease(KeyboardKey key) { // When a key is realeased
+    private void KeyRelease(KeyboardKey key) {
         switch (key) {
             case KeyboardKey.Left:
                 GalagaBus.GetBus().RegisterEvent(new GameEvent {
@@ -212,14 +155,63 @@ public class GameRunning : IGameState {
                 break;
         }
     }
-    public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
-        switch (action) {
-            case KeyboardAction.KeyPress:
-                KeyPress(key);
-                break;
-            case KeyboardAction.KeyRelease:
-                KeyRelease(key);
-                break;
+    private void AddExplosion(Vec2F position, Vec2F extent) {
+        ImageStride explosionStride = new ImageStride(EXPLOSION_LENGTH_MS / 8, explosionStrides);
+        enemyExplosions.AddAnimation(new StationaryShape
+            (position, extent),
+            EXPLOSION_LENGTH_MS,
+            explosionStride);
+    }
+    private void IterateShots() { // Checks if any shots have hit the border or any enemies
+        playerShots.Iterate(shot => {
+            shot.Shape.Move();
+            if (shot.Shape.Position.Y > 1.0f) { // Shot hit border
+                shot.DeleteEntity();
+            } else {
+                squadron.Enemies.Iterate(enemy => {
+                    DynamicShape dynamicShot = shot.Shape.AsDynamicShape();
+                    CollisionData collision = CollisionDetection.Aabb(dynamicShot, enemy.Shape);
+                    if (collision.Collision) { // Shot hit enemy
+                        shot.DeleteEntity();
+                        enemy.LoseHP();
+                        if (enemy.IsDead()) { 
+                            AddExplosion(enemy.Shape.Position, enemy.Shape.Extent);
+                            enemy.DeleteEntity();
+                        }
+                    }
+                });
+            }
+        });
+    }
+    private void NewMoveStrat() {
+        if (level == 2) { // enemies won't move until level 2
+            movestrat = new Down();
+        } else if (level == 5) { // enemies will Zigzag from level 5
+            movestrat = new ZigZagDown();
         }
     }
+    private void NextLevel() {
+        if (squadron.Enemies.CountEntities() == 0 && health.Lives > 0) {
+            squadronNum = (squadronNum + 1) % 3; // rotates between the 3 squadrons
+            level += 1;
+            gameOverScreen.SetLevel(level);
+            switch (squadronNum) {
+                case 0:
+                    squadron = new SquadronLine();
+                    break;
+                case 1:
+                    squadron = new SquadronSquare();
+                    break;
+                case 2:
+                    squadron = new SquadronTriangle();
+                    break;
+            }
+            NewMoveStrat(); // will check if movestrat should be changed
+            squadron.CreateEnemies(blueMonster, greenMonster);
+            foreach (Enemy enemy in squadron.Enemies) {
+                enemy.IncreaseSpeed(level * 0.0002f); // Applies level speed buff for enemies
+            }
+        }
+    }
+
 }
