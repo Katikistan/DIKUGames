@@ -10,14 +10,14 @@ public class ZigZagDown : IMovementStrategy {
     public void MoveEnemy(Enemy enemy) {
         float x0 = enemy.Startpos.X;
         float y0 = enemy.Startpos.Y;
-        float pi = (float)Math.PI;
+        float pi = (float) Math.PI;
         float yi = enemy.Shape.Position.Y + s;
-        float sin = (float)Math.Sin((2 * pi *(y0-yi))/p);
+        float sin = (float) Math.Sin((2 * pi * (y0 - yi)) / p);
         float xi = x0 + a * sin;
         enemy.Shape.Position.Y -= enemy.Speed;
         enemy.Shape.Position.X = xi;
     }
-    public void MoveEnemies (EntityContainer<Enemy> enemies) {
+    public void MoveEnemies(EntityContainer<Enemy> enemies) {
         foreach (Enemy enemy in enemies) {
             MoveEnemy(enemy);
 
