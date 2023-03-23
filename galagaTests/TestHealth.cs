@@ -15,14 +15,14 @@ public class TestHealth {
     }
     [Test]
     public void TestLoseHealth() {
-        Assert.That(health.Lives,Is.EqualTo(3));
+        Assert.That(health.Lives, Is.EqualTo(3));
         health.LoseHealth();
-        Assert.That(health.Lives,Is.EqualTo(2));
+        Assert.That(health.Lives, Is.EqualTo(2));
         health.LoseHealth();
-        Assert.That(health.Lives,Is.EqualTo(1));
+        Assert.That(health.Lives, Is.EqualTo(1));
         health.LoseHealth();
-        Assert.That(health.Lives,Is.EqualTo(0));
+        Assert.That(health.Lives, Is.EqualTo(0));
         health.LoseHealth();
-        Assert.That(health.Lives,Is.EqualTo(0));
+        Assert.That(health.Lives, Is.EqualTo(0));
     }
 }

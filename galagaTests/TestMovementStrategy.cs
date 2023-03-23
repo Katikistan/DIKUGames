@@ -18,11 +18,11 @@ public class TestMovementStrategy {
         enemyStride = ImageStride.CreateStrides
         (4, Path.Combine("..", "Galaga", "Assets", "Images", "BlueMonster.png"));
         ImageStride blueMonster = new ImageStride(80, enemyStride);
-        enemy1 = new Enemy (
+        enemy1 = new Enemy(
             new DynamicShape(new Vec2F(0.3f, 0.1f), new Vec2F(0.1f, 0.1f)),
             blueMonster
             );
-        enemy2 = new Enemy (
+        enemy2 = new Enemy(
             new DynamicShape(new Vec2F(0.6f, 0.1f), new Vec2F(0.1f, 0.1f)),
             blueMonster
             );
@@ -37,8 +37,8 @@ public class TestMovementStrategy {
         // Store position after movement in a variable
         Vec2F enemy1pos = new Vec2F(enemy1._Shape.Position.X, enemy1._Shape.Position.Y);
         // Position should be equal to the starting position
-        Assert.That(enemy1pos.X,Is.EqualTo(enemy1.Startpos.X));
-        Assert.That(enemy1pos.Y,Is.EqualTo(enemy1.Startpos.Y));
+        Assert.That(enemy1pos.X, Is.EqualTo(enemy1.Startpos.X));
+        Assert.That(enemy1pos.Y, Is.EqualTo(enemy1.Startpos.Y));
     }
     // Test of Down on an enemy
     [Test]
@@ -49,8 +49,8 @@ public class TestMovementStrategy {
         // Store position after movement in a variable
         Vec2F enemy1pos = new Vec2F(enemy1._Shape.Position.X, enemy1._Shape.Position.Y);
         // Position should be moved by one Speed down
-        Assert.That(enemy1pos.X,Is.EqualTo(enemy1.Startpos.X));
-        Assert.That(enemy1pos.Y,Is.EqualTo(enemy1.Startpos.Y - enemy1.Speed));
+        Assert.That(enemy1pos.X, Is.EqualTo(enemy1.Startpos.X));
+        Assert.That(enemy1pos.Y, Is.EqualTo(enemy1.Startpos.Y - enemy1.Speed));
     }
     // Test of ZigZagDown on an enemy
     [Test]
@@ -65,12 +65,12 @@ public class TestMovementStrategy {
         // Position should be moved by defined formula
         float a = 0.05f;
         float p = 0.045f;
-        float pi = (float)Math.PI;
+        float pi = (float) Math.PI;
         float x0 = enemy1.Startpos.X;
         float y0 = enemy1.Startpos.Y;
-        float sin = (float)Math.Sin((2 * pi *(y0-yi))/p);
-        Assert.That(enemy1pos.X,Is.EqualTo(x0 + a * sin));
-        Assert.That(enemy1pos.Y,Is.EqualTo(enemy1.Startpos.Y - enemy1.Speed));
+        float sin = (float) Math.Sin((2 * pi * (y0 - yi)) / p);
+        Assert.That(enemy1pos.X, Is.EqualTo(x0 + a * sin));
+        Assert.That(enemy1pos.Y, Is.EqualTo(enemy1.Startpos.Y - enemy1.Speed));
 
     }
     // Test of MoveEnemies with NoMove
@@ -87,10 +87,10 @@ public class TestMovementStrategy {
         Vec2F enemy1pos = new Vec2F(enemy1._Shape.Position.X, enemy1._Shape.Position.Y);
         Vec2F enemy2pos = new Vec2F(enemy2._Shape.Position.X, enemy2._Shape.Position.Y);
         // Position should be moved by one Speed down
-        Assert.That(enemy1pos.X,Is.EqualTo(enemy1.Startpos.X));
-        Assert.That(enemy1pos.Y,Is.EqualTo(enemy1.Startpos.Y));
-        Assert.That(enemy2pos.X,Is.EqualTo(enemy2.Startpos.X));
-        Assert.That(enemy2pos.Y,Is.EqualTo(enemy2.Startpos.Y));
+        Assert.That(enemy1pos.X, Is.EqualTo(enemy1.Startpos.X));
+        Assert.That(enemy1pos.Y, Is.EqualTo(enemy1.Startpos.Y));
+        Assert.That(enemy2pos.X, Is.EqualTo(enemy2.Startpos.X));
+        Assert.That(enemy2pos.Y, Is.EqualTo(enemy2.Startpos.Y));
     }
     // Test of MoveEnemies with Down
     [Test]
@@ -106,12 +106,12 @@ public class TestMovementStrategy {
         Vec2F enemy1pos = new Vec2F(enemy1._Shape.Position.X, enemy1._Shape.Position.Y);
         Vec2F enemy2pos = new Vec2F(enemy2._Shape.Position.X, enemy2._Shape.Position.Y);
         // Position should be moved by one Speed down
-        Assert.That(enemy1pos.X,Is.EqualTo(enemy1.Startpos.X));
-        Assert.That(enemy1pos.Y,Is.EqualTo(enemy1.Startpos.Y - enemy1.Speed));
-        Assert.That(enemy2pos.X,Is.EqualTo(enemy2.Startpos.X));
-        Assert.That(enemy2pos.Y,Is.EqualTo(enemy2.Startpos.Y - enemy2.Speed));
+        Assert.That(enemy1pos.X, Is.EqualTo(enemy1.Startpos.X));
+        Assert.That(enemy1pos.Y, Is.EqualTo(enemy1.Startpos.Y - enemy1.Speed));
+        Assert.That(enemy2pos.X, Is.EqualTo(enemy2.Startpos.X));
+        Assert.That(enemy2pos.Y, Is.EqualTo(enemy2.Startpos.Y - enemy2.Speed));
     }
-     // Test of MoveEnemies with ZigZagDown
+    // Test of MoveEnemies with ZigZagDown
     [Test]
     public void ZigZagDownEnemiesTest() {
         // Add entities to enemies
@@ -130,16 +130,16 @@ public class TestMovementStrategy {
         // Position should be moved by defined formula
         float a = 0.05f;
         float p = 0.045f;
-        float pi = (float)Math.PI;
+        float pi = (float) Math.PI;
         float x10 = enemy1.Startpos.X;
         float y10 = enemy1.Startpos.Y;
         float x20 = enemy2.Startpos.X;
         float y20 = enemy2.Startpos.Y;
-        float sin1 = (float)Math.Sin((2 * pi *(y10-y1i))/p);
-        float sin2 = (float)Math.Sin((2 * pi *(y10-y2i))/p);
-        Assert.That(enemy1pos.X,Is.EqualTo(x10 + a * sin1));
-        Assert.That(enemy1pos.Y,Is.EqualTo(enemy1.Startpos.Y - enemy1.Speed));
-        Assert.That(enemy2pos.X,Is.EqualTo(x20 + a * sin2));
-        Assert.That(enemy2pos.Y,Is.EqualTo(enemy2.Startpos.Y - enemy2.Speed));
+        float sin1 = (float) Math.Sin((2 * pi * (y10 - y1i)) / p);
+        float sin2 = (float) Math.Sin((2 * pi * (y10 - y2i)) / p);
+        Assert.That(enemy1pos.X, Is.EqualTo(x10 + a * sin1));
+        Assert.That(enemy1pos.Y, Is.EqualTo(enemy1.Startpos.Y - enemy1.Speed));
+        Assert.That(enemy2pos.X, Is.EqualTo(x20 + a * sin2));
+        Assert.That(enemy2pos.Y, Is.EqualTo(enemy2.Startpos.Y - enemy2.Speed));
     }
 }
