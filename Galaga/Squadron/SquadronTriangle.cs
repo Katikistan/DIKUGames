@@ -20,7 +20,7 @@ public class SquadronTriangle : ISquadron {
     // Triangle 3 center
     private Vec2F t3 = new Vec2F(0.5f, 0.9f);
     public SquadronTriangle() {
-        MaxEnemies = 6;
+        MaxEnemies = 9;
         Enemies = new EntityContainer<Enemy>(MaxEnemies);
     }
     public void CreateEnemies(List<Image> enemyStride, List<Image> alternativeEnemyStride) {

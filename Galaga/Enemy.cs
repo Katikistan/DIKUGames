@@ -15,7 +15,7 @@ public class Enemy : Entity {
         }
     }
     private DynamicShape shape;
-    public DynamicShape SShape {
+    public DynamicShape _Shape {
         get {
             return shape;
         }
@@ -26,23 +26,30 @@ public class Enemy : Entity {
         get => speed;
     }
     List<Image> enragedimg = ImageStride.CreateStrides
-    (2, Path.Combine("Assets", "Images", "RedMonster.png"));
+    (2, Path.Combine("..", "Galaga", "Assets", "Images", "RedMonster.png"));
     public Enemy(DynamicShape shape, IBaseImage image) : base(shape, image) {
         this.shape = shape;
         startpos = new Vec2F(shape.Position.X, shape.Position.Y);
     }
-    public bool IsEnemyDead() {
+    public void MakeEnraged() {
+            Image = new ImageStride(80, enragedimg);
+            speed = 0.002f;
+    }
+    public void LoseHP() {
         hitPoints -= 1;
+        if (hitPoints == 2) {
+            MakeEnraged();
+        }
+    }
+    public bool IsDead() {
         if (hitPoints <= 0) {
             return true;
-        } else if (hitPoints == 2) {
-            Image = new ImageStride(80, enragedimg);
-            speed += 0.001f;
+        } else {
+            return false;
         }
-        return false;
     }
-    public void IncreaseSpeed(float increacse) {
-        speed += increacse;
+    public void IncreaseSpeed(float increase) {
+        speed += increase;
     }
 
 }
