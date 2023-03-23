@@ -31,15 +31,22 @@ public class Enemy : Entity {
         this.shape = shape;
         startpos = new Vec2F(shape.Position.X, shape.Position.Y);
     }
-    public bool IsEnemyDead() {
+    public void MakeEnraged() {
+            Image = new ImageStride(80, enragedimg);
+            speed = 0.002f;
+    }
+    public void LoseHP() {
         hitPoints -= 1;
+        if (hitPoints == 2) {
+            MakeEnraged();
+        }
+    }
+    public bool IsDead() {
         if (hitPoints <= 0) {
             return true;
-        } else if (hitPoints == 2) {
-            Image = new ImageStride(80, enragedimg);
-            speed += 0.001f;
+        } else {
+            return false;
         }
-        return false;
     }
     public void IncreaseSpeed(float increase) {
         speed += increase;

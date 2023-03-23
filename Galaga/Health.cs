@@ -3,15 +3,19 @@ using DIKUArcade.Math;
 public class Health {
     private int health;
     public int Lives {
-        get {return health;}
+        get {
+            return health;
         }
+    }
     private Text display;
     public Text Display {
-        get {return display;}
+        get {
+            return display;
         }
-    public Health (Vec2F position, Vec2F extent) {
+    }
+    public Health(Vec2F position, Vec2F extent) {
         health = 3;
-        display = new Text ("Lives: " + health.ToString(), position, extent);
+        display = new Text("Lives: " + health.ToString(), position, extent);
         display.SetColor(new Vec3I(255, 255, 255));
     }
     /// <summary>
@@ -20,13 +24,13 @@ public class Health {
     /// </summary>
 
     // static active state? til at kunne skifte til game over state bla.
-    public void LoseHealth () {
+    public void LoseHealth() {
         if (health > 0) {
             health -= 1;
             display.SetText("Lives:" + health.ToString());
         }
     }
-    public void RenderHealth () {
+    public void RenderHealth() {
         display.RenderText();
     }
 }

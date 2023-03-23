@@ -20,8 +20,6 @@ public class Game : DIKUGame, IGameEventProcessor {
         GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
         GalagaBus.GetBus().Subscribe(GameEventType.WindowEvent, this);
         GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, stateMachine);
-        // GalagaBus.GetBus().Flush();
-
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.WindowEvent) {
@@ -33,7 +31,7 @@ public class Game : DIKUGame, IGameEventProcessor {
         }
     }
     private void KeyHandler(KeyboardAction action, KeyboardKey key) {
-        stateMachine.ActiveState.HandleKeyEvent(action,key);
+        stateMachine.ActiveState.HandleKeyEvent(action, key);
     }
     public override void Render() { //Rendering entities
         stateMachine.ActiveState.RenderState();
