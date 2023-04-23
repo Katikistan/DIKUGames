@@ -6,6 +6,10 @@ namespace Breakout.Blocks;
 
 public class Block : Entity {
     private int value;
+    public int Value {
+        get { return Value; }
+        set { Value = value; }
+    }
     private int health;
     private Vec2F position;
     public Block(DynamicShape shape, IBaseImage image) : base(shape, image) {
