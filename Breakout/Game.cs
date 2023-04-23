@@ -4,6 +4,7 @@ using DIKUArcade.GUI;
 using DIKUArcade.Input;
 namespace Breakout;
 public class Game : DIKUGame, IGameEventProcessor {
+    private Player Player;
     public Game(WindowArgs windowArgs) : base(windowArgs) {
         BreakoutBus.GetBus().InitializeEventBus(
             new List<GameEventType> {
@@ -13,7 +14,6 @@ public class Game : DIKUGame, IGameEventProcessor {
             });
         BreakoutBus.GetBus().Subscribe(GameEventType.InputEvent, this);
         BreakoutBus.GetBus().Subscribe(GameEventType.WindowEvent, this);
-        private Player Player;
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.WindowEvent) {
