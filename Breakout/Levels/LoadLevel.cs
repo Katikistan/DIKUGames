@@ -5,7 +5,7 @@ namespace Breakout.Levels;
 public class LevelLoader {
     private string path;
     private  string[] txtlines;
-    public Dictionary<char,string> Meta;
+    public Dictionary<string,string> Meta;
     public Dictionary<char,string> Legend;
     public char[][] Map;
     public LevelLoader() {
@@ -18,7 +18,10 @@ public class LevelLoader {
         ReadMap();
         System.Console.WriteLine(Map[5][3]);
         ReadMeta();
+        System.Console.WriteLine(Meta["Name"]);
         ReadLegend();
+        System.Console.WriteLine(Legend['a']);
+
     }
     private void ReadMap() {
         int MapStart = Array.IndexOf(txtlines, "Map:");
@@ -28,10 +31,10 @@ public class LevelLoader {
             Map[i-1] = txtlines[i].ToCharArray();
         }
     }
-    private void ReadMeta(string[] txtlines){
+    private void ReadMeta(){
         int MetaStart = Array.IndexOf(txtlines, "Meta:");
         int MetaEnd = Array.IndexOf(txtlines, "Meta/");
-
+        Meta = new Dictionary<string, string>();
         for (int i = MetaStart + 1; i < MetaEnd; i++)
         {
             string line = txtlines[i];
@@ -41,9 +44,10 @@ public class LevelLoader {
             Meta[symbol] = imagePath;
         }
     }
-    private void ReadLegend(string[] txtlines) {
+    private void ReadLegend() {
         int legendStart = Array.IndexOf(txtlines, "Legend:");
         int legendEnd = Array.IndexOf(txtlines, "Legend/");
+        Legend = new Dictionary<char, string>();
         for (int i = legendStart+1; i < legendEnd; i++){
             char symbol = txtlines[i][0];
             string imagePath = txtlines[i].Substring(2);
