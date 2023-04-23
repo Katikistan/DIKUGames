@@ -33,12 +33,12 @@ public class LevelLoader {
         int MetaEnd = Array.IndexOf(txtlines, "Meta/");
 
         for (int i = MetaStart + 1; i < MetaEnd; i++)
-        {
+        { // ikke rigtigt det skal ind i en dictonary
             string line = txtlines[i];
             string[] parts = line.Split(": ");
-            string symbol = parts[0];
-            string imagePath = parts[1];
-            Meta[symbol] = imagePath;
+            string key = parts[0];
+            string value = parts[1];
+            Meta[key] = Value;
         }
     }
     private void ReadLegend(string[] txtlines) {
@@ -46,8 +46,8 @@ public class LevelLoader {
         int legendEnd = Array.IndexOf(txtlines, "Legend/");
         for (int i = legendStart+1; i < legendEnd; i++){
             char symbol = txtlines[i][0];
-            string imagePath = txtlines[i].Substring(2);
-            Legend[symbol] = imagePath;
+            string imagefile = txtlines[i].Substring(2);
+            Legend[symbol] = imagefile;
         }
     }
 }
