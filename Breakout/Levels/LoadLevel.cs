@@ -28,7 +28,7 @@ public class LevelLoader {
             Map[i-1] = txtlines[i].ToCharArray();
         }
     }
-    private void ReadMeta(string[] txtlines){
+    private void ReadMeta(){
         int MetaStart = Array.IndexOf(txtlines, "Meta:");
         int MetaEnd = Array.IndexOf(txtlines, "Meta/");
 
@@ -41,7 +41,7 @@ public class LevelLoader {
             Meta[key] = Value;
         }
     }
-    private void ReadLegend(string[] txtlines) {
+    private void ReadLegend() {
         int legendStart = Array.IndexOf(txtlines, "Legend:");
         int legendEnd = Array.IndexOf(txtlines, "Legend/");
         for (int i = legendStart+1; i < legendEnd; i++){
