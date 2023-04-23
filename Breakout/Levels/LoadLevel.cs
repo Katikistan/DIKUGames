@@ -1,0 +1,55 @@
+using System.IO;
+using System.Collections.Generic;
+
+namespace Breakout.Levels;
+public class LevelLoader {
+    private string path;
+    private  string[] txtlines;
+    public Dictionary<char,string> Meta;
+    public Dictionary<char,string> Legend;
+    public char[][] Map;
+    public LevelLoader() {
+    }
+    public void LoadLevel(string level) {
+        //tjek om filen eksisterer
+        this.path = Path.Combine(
+        "..", "Breakout", "Assets", "Levels", level);
+        this.txtlines = File.ReadAllLines(path);
+        ReadMap();
+        System.Console.WriteLine(Map[5][3]);
+        ReadMeta();
+        ReadLegend();
+    }
+    private void ReadMap() {
+        int MapStart = Array.IndexOf(txtlines, "Map:");
+        int MapEnd = Array.IndexOf(txtlines, "Map/");
+        Map = new char[MapEnd - 2][];
+        for (int i = MapStart + 1; i < MapEnd - 1; i++) {
+            Map[i-1] = txtlines[i].ToCharArray();
+        }
+    }
+    private void ReadMeta(string[] txtlines){
+        int MetaStart = Array.IndexOf(txtlines, "Meta:");
+        int MetaEnd = Array.IndexOf(txtlines, "Meta/");
+
+        for (int i = MetaStart + 1; i < MetaEnd; i++)
+        {
+            string line = txtlines[i];
+            string[] parts = line.Split(": ");
+            string symbol = parts[0];
+            string imagePath = parts[1];
+            Meta[symbol] = imagePath;
+        }
+    }
+    private void ReadLegend(string[] txtlines) {
+        int legendStart = Array.IndexOf(txtlines, "Legend:");
+        int legendEnd = Array.IndexOf(txtlines, "Legend/");
+        for (int i = legendStart+1; i < legendEnd; i++){
+            char symbol = txtlines[i][0];
+            string imagePath = txtlines[i].Substring(2);
+            Legend[symbol] = imagePath;
+        }
+    }
+}
+
+
