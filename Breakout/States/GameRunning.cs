@@ -55,12 +55,14 @@ public class GameRunning : IGameState {
     private void KeyPress(KeyboardKey key) {
         switch (key) {
             case KeyboardKey.Left:
+            case KeyboardKey.A:
                 BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "MOVE LEFT"
                 });
                 break;
             case KeyboardKey.Right:
+            case KeyboardKey.D:
                 BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "MOVE RIGHT"
@@ -77,12 +79,14 @@ public class GameRunning : IGameState {
     private void KeyRelease(KeyboardKey key) {
         switch (key) {
             case KeyboardKey.Left:
+            case KeyboardKey.A:
                 BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "REALESE LEFT"
                 });
                 break;
             case KeyboardKey.Right:
+            case KeyboardKey.D:
                 BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
                     Message = "REALESE RIGHT"
