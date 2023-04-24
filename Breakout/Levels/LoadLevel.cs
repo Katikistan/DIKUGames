@@ -41,7 +41,7 @@ public class LevelLoader {
             string[] parts = line.Split(": ");
             string key = parts[0];
             string value = parts[1];
-            Meta[key] = Value;
+            Meta[key] = value;
         }
     }
     private void ReadLegend() {

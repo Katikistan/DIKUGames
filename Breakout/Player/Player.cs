@@ -13,6 +13,7 @@ public class Player : Entity, IGameEventProcessor {
         this.shape = base.Shape.AsDynamicShape();
     }
      public void ProcessEvent(GameEvent gameEvent) {
+        System.Console.WriteLine("here");
         if (gameEvent.EventType == GameEventType.PlayerEvent) {
             switch (gameEvent.Message) {
                 case "MOVE LEFT":
