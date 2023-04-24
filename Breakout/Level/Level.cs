@@ -1,7 +1,6 @@
 using System.IO;
 using System.Collections.Generic;
-using Breakout.Levels;
-namespace Breakout;
+namespace Breakout.Levels;
 
 public class Level {
     public char[][] ?Map;

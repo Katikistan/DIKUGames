@@ -2,7 +2,6 @@ using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-
 namespace Breakout.Players;
 public class Player : Entity, IGameEventProcessor {
     private float moveLeft = 0.0f;
@@ -11,9 +10,9 @@ public class Player : Entity, IGameEventProcessor {
     private DynamicShape shape;
     public Player(DynamicShape shape, IBaseImage image) : base(shape, image) {
         this.shape = base.Shape.AsDynamicShape();
+        BreakoutBus.GetBus().Subscribe(GameEventType.PlayerEvent, this);
     }
-     public void ProcessEvent(GameEvent gameEvent) {
-        System.Console.WriteLine("here");
+    public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.PlayerEvent) {
             switch (gameEvent.Message) {
                 case "MOVE LEFT":
@@ -58,13 +57,7 @@ public class Player : Entity, IGameEventProcessor {
         }
         UpdateDirection();
     }
-    public Vec2F GetPositionMiddle() {
-        //Position adjusted to make bullets shot from middle of ship.
-        Vec2F position = new Vec2F(shape.Position.X + shape.Extent.X / 2.0f, shape.Position.Y);
-        return (position);
-    }
     public Vec2F GetPosition() {
-        //Position adjusted to make bullets shot from middle of ship.
         Vec2F position = new Vec2F(shape.Position.X, shape.Position.Y);
         return (position);
     }

@@ -11,7 +11,7 @@ using System.IO;
 namespace Breakout.States;
 public class GameRunning : IGameState {
     private static GameRunning instance = null;
-    private Players.Player player;
+    private Player player;
     private Entity background;
     public static GameRunning GetInstance() {
         if (GameRunning.instance == null) {
@@ -27,10 +27,10 @@ public class GameRunning : IGameState {
                 new Vec2F(1.0f, 1.0f)),
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
-        player = new Players.Player(
-            new DynamicShape(new Vec2F(0.045f, 0.08f), new Vec2F(0.1f, 0.01f)),
+        player = new Player (
+            new DynamicShape(new Vec2F(0.425f, 0.05f), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..","Breakout","Assets", "Images", "player.png")));
-        BreakoutBus.GetBus().Subscribe(GameEventType.PlayerEvent, player);
+
     }
     public void ResetState() {
         GameRunning.instance = null;
@@ -40,7 +40,6 @@ public class GameRunning : IGameState {
         player.Render();
     }
     public void UpdateState() {
-        BreakoutBus.GetBus().ProcessEventsSequentially();
         player.Move();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {

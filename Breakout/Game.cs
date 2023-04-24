@@ -10,7 +10,6 @@ namespace Breakout;
 public class Game : DIKUGame, IGameEventProcessor {
     private StateMachine stateMachine;
     public Game(WindowArgs windowArgs) : base(windowArgs) {
-        stateMachine = new StateMachine();
         BreakoutBus.GetBus().InitializeEventBus(
             new List<GameEventType> {
                 GameEventType.InputEvent,
@@ -21,6 +20,8 @@ public class Game : DIKUGame, IGameEventProcessor {
         window.SetKeyEventHandler(KeyHandler);
         BreakoutBus.GetBus().Subscribe(GameEventType.InputEvent, this);
         BreakoutBus.GetBus().Subscribe(GameEventType.WindowEvent, this);
+
+        stateMachine = new StateMachine();
         BreakoutBus.GetBus().Subscribe(GameEventType.GameStateEvent, stateMachine);
     }
     public void ProcessEvent(GameEvent gameEvent) {
@@ -35,10 +36,9 @@ public class Game : DIKUGame, IGameEventProcessor {
     private void KeyHandler(KeyboardAction action, KeyboardKey key) {
         stateMachine.ActiveState.HandleKeyEvent(action, key);
     }
-    public override void Render() { //Rendering entities
+    public override void Render() {
         stateMachine.ActiveState.RenderState();
     }
-
     public override void Update() {
         BreakoutBus.GetBus().ProcessEventsSequentially();
         stateMachine.ActiveState.UpdateState();
