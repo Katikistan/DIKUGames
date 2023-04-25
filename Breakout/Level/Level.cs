@@ -17,14 +17,14 @@ public class Level {
 
     public Level (string startlevel) {
         this.levelLoader = new LevelLoader(Path.Combine("..","Assets", "Levels"));
-        this.levelLoader.ReadLevel(startlevel);
+        this.levelLoader.LoadLevel(startlevel);
         this.Map = levelLoader.Map;
         this.Meta = levelLoader.Meta;
         this.Legend = levelLoader.Legend;
     }
 
     public void NewLevel(string nextlevel) {
-        levelLoader.ReadLevel(nextlevel);
+        levelLoader.LoadLevel(nextlevel);
         this.Map = levelLoader.Map;
         this.Meta = levelLoader.Meta;
         this.Legend = levelLoader.Legend;
