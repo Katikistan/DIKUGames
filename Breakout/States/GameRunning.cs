@@ -34,7 +34,8 @@ public class GameRunning : IGameState {
             new DynamicShape(new Vec2F(0.425f, 0.05f), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..","Breakout","Assets", "Images", "player.png")));
 
-        level = new Level("level3.txt");
+        level = new Level("emptylevel.txt");
+        level.DrawMap();
         }
     public void ResetState() {
         GameRunning.instance = null;
@@ -42,10 +43,20 @@ public class GameRunning : IGameState {
     public void RenderState() {
         background.RenderEntity();
         player.Render();
-        level.DrawMap();
+
+    }
+    public void IterateBlocks() {
+        if (level.Map != null) {
+            level.blocks.Iterate(block => {
+                if (block.IsDead()) { // Shot hit border
+                    block.DeleteEntity();
+                }
+            });
+        }
     }
     public void UpdateState() {
         player.Move();
+        IterateBlocks();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         switch (action) {

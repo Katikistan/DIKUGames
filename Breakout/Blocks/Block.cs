@@ -32,9 +32,13 @@ public class Block : Entity {
         if (!Unbreakable) {
             health -= 1;
         }
+        if (IsDead()) {
+            DeleteEntity();
+        }
+
     }
     public bool IsDead() {
-        if (health <= 0 && !Unbreakable) {
+        if (health <= 0) {
             return true;
         } else {
             return false;

@@ -29,13 +29,14 @@ public class LevelLoader {
     private void ReadMap() {
         //tjekker om der er et map i filen
         if (Array.IndexOf(txtlines, "Map:") == -1){
-            throw new ArgumentException("Error: no map found in level file");
-        }
-        int MapStart = Array.IndexOf(txtlines, "Map:");
-        int MapEnd = Array.IndexOf(txtlines, "Map/");
-        Map = new char[MapEnd - 2][];
-        for (int i = MapStart + 1; i < MapEnd - 1; i++) {
-            Map[i-1] = txtlines[i].ToCharArray();
+            Map = null;
+        } else {
+            int MapStart = Array.IndexOf(txtlines, "Map:");
+            int MapEnd = Array.IndexOf(txtlines, "Map/");
+            Map = new char[MapEnd - 2][];
+            for (int i = MapStart + 1; i < MapEnd - 1; i++) {
+                Map[i-1] = txtlines[i].ToCharArray();
+            }
         }
     }
     private void ReadMeta(){
