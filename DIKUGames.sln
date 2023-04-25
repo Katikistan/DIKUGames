@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "galagaTests", "galagaTests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breakout", "Breakout\Breakout.csproj", "{F1ABA746-BF86-4CD3-B9DD-8B8A65C75286}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreakoutTests", "BreakoutTests\BreakoutTests.csproj", "{2D559A03-36F7-4392-9F77-9956622D2BF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,18 @@ Global
 		{F1ABA746-BF86-4CD3-B9DD-8B8A65C75286}.Release|x64.Build.0 = Release|Any CPU
 		{F1ABA746-BF86-4CD3-B9DD-8B8A65C75286}.Release|x86.ActiveCfg = Release|Any CPU
 		{F1ABA746-BF86-4CD3-B9DD-8B8A65C75286}.Release|x86.Build.0 = Release|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Debug|x64.Build.0 = Debug|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Debug|x86.Build.0 = Debug|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Release|x64.ActiveCfg = Release|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Release|x64.Build.0 = Release|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Release|x86.ActiveCfg = Release|Any CPU
+		{2D559A03-36F7-4392-9F77-9956622D2BF1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{19AD68B8-B1AB-408E-A22A-01C436AF9A9E} = {14D28CBA-806A-40A9-90F2-0D9D5A764576}
