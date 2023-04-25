@@ -1,3 +1,5 @@
+using Breakout.Blocks;
+using DIKUArcade.Entities;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -16,7 +18,7 @@ public class Level {
     public LevelLoader levelLoader;
     EntityContainer<Breakout.Blocks.Block> blocks;
     public Level (string startlevel) {
-        this.levelLoader = new LevelLoader();
+        this.levelLoader = new LevelLoader(Path.Combine("..","Assets", "Levels"));
         this.levelLoader.ReadLevel(startlevel);
         this.Map = levelLoader.Map;
         this.Meta = levelLoader.Meta;

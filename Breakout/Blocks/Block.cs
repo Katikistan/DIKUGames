@@ -10,31 +10,42 @@ public class Block : Entity {
         get { return value; }
         set { Value = value; }
     }
-    private bool isUnbreakable;
-    public bool IsUnbreakable {
-        get { return isUnbreakable; }
-        set { isUnbreakable = value; }
+    private bool unbreakable;
+    public bool Unbreakable {
+        get { return unbreakable; }
+        set { unbreakable = value; }
     }
-    private int health;
+    private bool hardned;
+    public bool Hardned {
+        get { return hardned; }
+        set { hardned = value; }
+    }
+    private int health = 1;
     private Vec2F position;
+<<<<<<< HEAD
     private StationaryShape shape;
     public Block(StationaryShape shape, IBaseImage image) : base(shape, image) {
+=======
+    public Block(DynamicShape shape, IBaseImage image) : base(shape, image) {
+>>>>>>> e9c25efef91a7966ecae4e1f0f3752ce8aed77f1
         position = new Vec2F(shape.Position.X, shape.Position.Y);
-        this.shape = shape;
+    }
+    public void applyMeta() {
     }
     public void LoseHealth() {
-        if (isUnbreakable == false) {
+        if (!Unbreakable) {
             health -= 1;
         }
     }
     public bool IsDead() {
-        if (health <= 0 && isUnbreakable == false) {
+        if (health <= 0 && !Unbreakable) {
             return true;
         } else {
-            return false;   
+            return false;
         }
     }
     public void Render() {
         RenderEntity();
     }
 }
+

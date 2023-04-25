@@ -3,97 +3,138 @@ using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using Breakout.Players;
-namespace BreakoutTests.Player;
+namespace BreakoutTests.Players;
 [TestFixture]
 public class TestPlayer {
     private GameEventBus TesteventBus = null!;
     private Player player = null!;
-    private GameEvent EventMoveLeft;
-    private GameEvent EventMoveRight;
-    private GameEvent EventNothing;
+    private GameEvent eventMoveLeft;
+    private GameEvent eventMoveRight;
+    private GameEvent eventRealeseLeft;
+    private GameEvent eventRealeseRight;
+    private float startPosX;
+    private float startPosY;
+    private float movementSpeed;
     public TestPlayer() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
     [SetUp]
     public void Setup() {
+        movementSpeed = 0.01f;
+        startPosX = 0.425f;
+        startPosY = 0.05f;
         TesteventBus = new GameEventBus();
         TesteventBus.InitializeEventBus(
             new List<GameEventType> { GameEventType.PlayerEvent });
-
         player = new Player (
-            new DynamicShape(new Vec2F(0.425f, 0.05f), new Vec2F(0.15f, 0.04f)),
+            new DynamicShape(new Vec2F(startPosX, startPosY), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..","Breakout","Assets", "Images", "player.png")));
-        Vec2F playerPos = player.GetPosition();
         TesteventBus.Subscribe(GameEventType.PlayerEvent, player);
 
-        EventMoveLeft = (new GameEvent {
+        eventMoveLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
             Message = "MOVE LEFT"
         });
-        EventMoveRight = (new GameEvent {
+        eventMoveRight = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
             Message = "MOVE RIGHT"
         });
-        EventNothing = (new GameEvent {
+        eventRealeseLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
-            Message = ""
+            Message = "REALESE LEFT"
+        });
+        eventRealeseRight = (new GameEvent {
+            EventType = GameEventType.PlayerEvent,
+            Message = "REALESE RIGHT"
         });
     }
     [Test]
+    public void TestGetPosition() {
+        Vec2F playerPos = player.GetPosition();
+        Assert.That((playerPos.X), Is.EqualTo(playerPos.X));
+        Assert.That((playerPos.Y), Is.EqualTo(playerPos.Y));
+    }
+    [Test]
     public void TestMoveLeft() {
-        TesteventBus.RegisterEvent(EventMoveLeft);
+        TesteventBus.RegisterEvent(eventMoveLeft);
         TesteventBus.ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.That(playerPos.X, Is.EqualTo(0.44f));
+        Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
     }
+    [Test]
     public void TestMoveRight() {
-        TesteventBus.RegisterEvent(EventMoveRight);
+        TesteventBus.RegisterEvent(eventMoveRight);
         TesteventBus.ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.That(playerPos.X, Is.EqualTo(0.46f));
+        Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
     }
+    [Test]
+    public void TestRealeseLeft() {
+        TesteventBus.RegisterEvent(eventMoveLeft);
+        TesteventBus.ProcessEventsSequentially();
+        player.Move();
+        TesteventBus.RegisterEvent(eventRealeseLeft);
+        TesteventBus.ProcessEventsSequentially();
+        player.Move();
+        Vec2F playerPos = player.GetPosition();
+        Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
+    }
+    [Test]
+    public void TestRealeseRight() {
+        TesteventBus.RegisterEvent(eventMoveRight);
+        TesteventBus.ProcessEventsSequentially();
+        player.Move();
+        TesteventBus.RegisterEvent(eventRealeseRight);
+        TesteventBus.ProcessEventsSequentially();
+        player.Move();
+        Vec2F playerPos = player.GetPosition();
+        Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
+    }
+    [Test]
     public void TestNotOutOfBoundsLeft() {
         player = new Player(
             new DynamicShape(new Vec2F(0.0f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..","Breakout","Assets", "Images", "player.png")));
 
-        TesteventBus.RegisterEvent(EventMoveLeft);
+        TesteventBus.RegisterEvent(eventMoveLeft);
         TesteventBus.ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(0.0f));
     }
+    [Test]
     public void TestNotOutOfBoundsRight() {
         player = new Player(
             new DynamicShape(new Vec2F(1.0f - 0.1f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..","Breakout","Assets", "Images", "player.png")));
-
-        TesteventBus.RegisterEvent(EventMoveRight);
+        TesteventBus.RegisterEvent(eventMoveRight);
         TesteventBus.ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(0.9f));
     }
+    [Test]
     public void TestMoveLeftRight() {
-        TesteventBus.RegisterEvent(EventMoveLeft);
-        TesteventBus.RegisterEvent(EventMoveRight);
+        TesteventBus.RegisterEvent(eventMoveLeft);
+        TesteventBus.RegisterEvent(eventMoveRight);
         TesteventBus.ProcessEventsSequentially();
         player.Move();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.That(playerPos.X, Is.EqualTo(0.45f));
+        Assert.That(playerPos.X, Is.EqualTo(startPosX));
     }
+    [Test]
     public void TestMoveWrongLeft() {
-        EventMoveLeft = (new GameEvent {
+        eventMoveLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
             Message = "move left"
         });
-        TesteventBus.RegisterEvent(EventMoveLeft);
+        TesteventBus.RegisterEvent(eventMoveLeft);
         TesteventBus.ProcessEventsSequentially();
         player.Move();
         Vec2F playerPos = player.GetPosition();
-        Assert.That(playerPos.X, Is.EqualTo(0.45f));
+        Assert.That(playerPos.X, Is.EqualTo(startPosX));
     }
 }
