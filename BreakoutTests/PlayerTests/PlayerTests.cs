@@ -53,7 +53,6 @@ public class TestPlayer {
         Vec2F playerPos = player.GetPosition();
         Assert.That((playerPos.X), Is.EqualTo(playerPos.X));
         Assert.That((playerPos.Y), Is.EqualTo(playerPos.Y));
-        // Assert.That((playerPos.X,playerPos.Y), Is.EqualTo(startPosX,playerPos.Y));
     }
     [Test]
     public void TestMoveLeft() {
