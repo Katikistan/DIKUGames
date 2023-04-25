@@ -3,6 +3,9 @@ using DIKUArcade.Entities;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using DIKUArcade.Graphics;
+using DIKUArcade.Math;
+using DIKUArcade.Entities;
 namespace Breakout.Levels;
 
 public class Level {
@@ -13,8 +16,7 @@ public class Level {
     public Dictionary<char,string> ?Legend;
 
     public LevelLoader levelLoader;
-    public EntityContainer<Block> Blocks;
-
+    EntityContainer<Breakout.Blocks.Block> blocks;
     public Level (string startlevel) {
         this.levelLoader = new LevelLoader(Path.Combine("..","Assets", "Levels"));
         this.levelLoader.LoadLevel(startlevel);
@@ -30,17 +32,25 @@ public class Level {
         this.Legend = levelLoader.Legend;
     }
     public void DrawMap() {
+        blocks = new EntityContainer<Breakout.Blocks.Block>(324);
+        var block_extentX = 1f/(float)Map[0].Length;
+        var block_extentY = block_extentX/3f;       
+
         for (int i = 0; i < Map.Length; i++) {
-            for (int j = 0; i < Map[i].Length; j++) {
-                // lav block og giv den farve først, dernæst når block er lavet så apply den meta data der evt skal tilføjes
-                string value = "";
-                if (Legend.TryGetValue(Map[i][j], out value)) {
-                    System.Console.WriteLine(value);
-                }
-                if (Meta.TryGetValue(Char.ToString(Map[i][j]), out value)) {
-                    System.Console.WriteLine(value);
+            for (int j = 0; j < Map[i].Length; j++) {
+                string colour = "";
+
+                Legend.TryGetValue(Map[i][j], out colour);
+
+                if (Map[i][j] != '-') {
+
+                    blocks.AddEntity(new Breakout.Blocks.Block(
+                        new StationaryShape(new Vec2F((block_extentX * (float)j), 1.0f - (block_extentY * (float)i)), new Vec2F(block_extentX, block_extentY)),
+                        new Image(Path.Combine("..","Breakout","Assets", "Images", colour))
+                        ));
+                    }
                 }
             }
-        }
+        blocks.RenderEntities();
     }
 }
