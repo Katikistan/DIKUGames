@@ -17,8 +17,8 @@ public class Block : Entity {
     }
     private int health;
     private Vec2F position;
-    private DynamicShape shape;
-    public Block(DynamicShape shape, IBaseImage image) : base(shape, image) {
+    private StationaryShape shape;
+    public Block(StationaryShape shape, IBaseImage image) : base(shape, image) {
         position = new Vec2F(shape.Position.X, shape.Position.Y);
         this.shape = shape;
     }
