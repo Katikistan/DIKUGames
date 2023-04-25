@@ -11,6 +11,7 @@ public class Level {
     public Dictionary<char,string> ?Legend;
 
     public LevelLoader levelLoader;
+    public EntityContainer<Block> Blocks;
 
     public Level (string startlevel) {
         this.levelLoader = new LevelLoader();
