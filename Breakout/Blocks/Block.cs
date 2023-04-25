@@ -22,7 +22,8 @@ public class Block : Entity {
     }
     private int health = 1;
     private Vec2F position;
-    public Block(DynamicShape shape, IBaseImage image) : base(shape, image) {
+    private StationaryShape shape;
+    public Block(StationaryShape shape, IBaseImage image) : base(shape, image) {
         position = new Vec2F(shape.Position.X, shape.Position.Y);
     }
     public void applyMeta() {
@@ -43,4 +44,3 @@ public class Block : Entity {
         RenderEntity();
     }
 }
-
