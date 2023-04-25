@@ -16,17 +16,17 @@ public class Level {
     public Dictionary<char,string> ?Legend;
 
     public LevelLoader levelLoader;
-    EntityContainer<Breakout.Blocks.Block> blocks;
+    EntityContainer<Block> blocks;
     public Level (string startlevel) {
-        this.levelLoader = new LevelLoader(Path.Combine("..","Assets", "Levels"));
-        this.levelLoader.LoadLevel(startlevel);
+        this.levelLoader = new LevelLoader(Path.Combine("..","Breakout","Assets","Levels"));
+        this.levelLoader.ReadLevel(startlevel);
         this.Map = levelLoader.Map;
         this.Meta = levelLoader.Meta;
         this.Legend = levelLoader.Legend;
     }
 
     public void NewLevel(string nextlevel) {
-        levelLoader.LoadLevel(nextlevel);
+        levelLoader.ReadLevel(nextlevel);
         this.Map = levelLoader.Map;
         this.Meta = levelLoader.Meta;
         this.Legend = levelLoader.Legend;
@@ -34,7 +34,7 @@ public class Level {
     public void DrawMap() {
         blocks = new EntityContainer<Breakout.Blocks.Block>(324);
         var block_extentX = 1f/(float)Map[0].Length;
-        var block_extentY = block_extentX/3f;       
+        var block_extentY = block_extentX/3f;
 
         for (int i = 0; i < Map.Length; i++) {
             for (int j = 0; j < Map[i].Length; j++) {
