@@ -7,14 +7,13 @@ public class LevelLoaderTests
     private LevelLoader ?levelLoader;
     [SetUp]
     public void Setup() {
-        string path = Path.Combine("..", "BreakoutTests", "Assets", "Levels");
-        levelLoader = new LevelLoader(path);
+        levelLoader = new LevelLoader(Path.Combine ("..","..","..","Assets", "Levels"));
     }
 // test man kan loade et nyt level
     [Test]
     public void ReadLevelTest() {
         bool validFile = levelLoader.ReadLevel("level1.txt");
-        bool invalidFile = levelLoader.ReadLevel("");
+        bool invalidFile = levelLoader.ReadLevel("nolevel.txt");
         Assert.That(validFile, Is.EqualTo(true));
         Assert.That(invalidFile, Is.EqualTo(false));
     }
@@ -25,9 +24,9 @@ public class LevelLoaderTests
         Assert.That(levelLoader.Map[2][1], Is.EqualTo('a'));
         Assert.That(levelLoader.Map[4][1], Is.EqualTo('0'));
         Assert.That(levelLoader.Map[4][8], Is.EqualTo('0'));
-        Assert.That(levelLoader.Map[5][4], Is.EqualTo('%'));
-        Assert.That(levelLoader.Map[6][4], Is.EqualTo('1'));
-        Assert.That(levelLoader.Map[7][4], Is.EqualTo('%'));
+        Assert.That(levelLoader.Map[5][5], Is.EqualTo('%'));
+        Assert.That(levelLoader.Map[6][5], Is.EqualTo('1'));
+        Assert.That(levelLoader.Map[7][5], Is.EqualTo('%'));
         Assert.That(levelLoader.Map[10][10], Is.EqualTo('%'));
         Assert.That(levelLoader.Map[11][10], Is.EqualTo('-'));
         levelLoader.ReadLevel("level2.txt");
@@ -36,10 +35,10 @@ public class LevelLoaderTests
         Assert.That(levelLoader.Map[4][1], Is.EqualTo('-'));
         Assert.That(levelLoader.Map[4][8], Is.EqualTo('-'));
         Assert.That(levelLoader.Map[5][4], Is.EqualTo('j'));
-        Assert.That(levelLoader.Map[5][4], Is.EqualTo('i'));
-        Assert.That(levelLoader.Map[6][4], Is.EqualTo('j'));
-        Assert.That(levelLoader.Map[7][4], Is.EqualTo('-'));
-        Assert.That(levelLoader.Map[7][4], Is.EqualTo('k'));
+        Assert.That(levelLoader.Map[5][5], Is.EqualTo('i'));
+        Assert.That(levelLoader.Map[6][5], Is.EqualTo('j'));
+        Assert.That(levelLoader.Map[7][5], Is.EqualTo('-'));
+        Assert.That(levelLoader.Map[8][5], Is.EqualTo('k'));
         Assert.That(levelLoader.Map[10][10], Is.EqualTo('-'));
         Assert.That(levelLoader.Map[11][10], Is.EqualTo('-'));
         // levelLoader.ReadLevel("Nomap.txt");
@@ -47,11 +46,15 @@ public class LevelLoaderTests
     [Test]
     public void ReadMetaTest() {
         levelLoader.ReadLevel("level1.txt");
-        Assert.That(levelLoader.Meta[""], Is.EqualTo(""));
+        Assert.That(levelLoader.Meta["Name"], Is.EqualTo("LEVEL 1"));
+        Assert.That(levelLoader.Meta["Time"], Is.EqualTo("300"));
+        Assert.That(levelLoader.Meta["Hardened"], Is.EqualTo("#"));
+        Assert.That(levelLoader.Meta["PowerUp"], Is.EqualTo("2"));
         levelLoader.ReadLevel("level2.txt");
-        Assert.That(levelLoader.Meta[""], Is.EqualTo(""));
+        Assert.That(levelLoader.Meta["Name"], Is.EqualTo("LEVEL 2"));
+        Assert.That(levelLoader.Meta["Time"], Is.EqualTo("180"));
+        Assert.That(levelLoader.Meta["PowerUp"], Is.EqualTo("i"));
         // levelLoader.ReadLevel("NoMeta.txt");
-
     }
     [Test]
     public void ReadLegendTest() {
