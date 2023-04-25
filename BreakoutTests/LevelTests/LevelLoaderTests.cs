@@ -50,12 +50,12 @@ public class LevelLoaderTests
         levelLoader.LoadLevel("level1.txt");
         Assert.That(levelLoader.Meta["Name"], Is.EqualTo("LEVEL 1"));
         Assert.That(levelLoader.Meta["Time"], Is.EqualTo("300"));
-        Assert.That(levelLoader.Meta["Hardened"], Is.EqualTo("#"));
-        Assert.That(levelLoader.Meta["PowerUp"], Is.EqualTo("2"));
+        Assert.That(levelLoader.Meta["#"], Is.EqualTo("Hardened"));
+        Assert.That(levelLoader.Meta["2"], Is.EqualTo("PowerUp"));
         levelLoader.LoadLevel("level2.txt");
         Assert.That(levelLoader.Meta["Name"], Is.EqualTo("LEVEL 2"));
         Assert.That(levelLoader.Meta["Time"], Is.EqualTo("180"));
-        Assert.That(levelLoader.Meta["PowerUp"], Is.EqualTo("i"));
+        Assert.That(levelLoader.Meta["i"], Is.EqualTo("PowerUp"));
         ArgumentException? ExceptionTest = Assert.Throws<ArgumentException>(() =>
         levelLoader.LoadLevel("NoMeta.txt"));
         Assert.That(ExceptionTest?.Message, Is.EqualTo("Error: no Meta found in level file"));
