@@ -3,19 +3,17 @@ using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Input;
 using DIKUArcade.Math;
-using DIKUArcade.Physics;
 using DIKUArcade.State;
 using Breakout.Levels;
 using Breakout.Players;
-using Breakout.Blocks;
-using System.Collections.Generic;
-using System.IO;
+
 namespace Breakout.States;
 public class GameRunning : IGameState {
-    private static GameRunning instance = null;
-    private Player player;
-    public Level level;
-    private Entity background;
+    private static GameRunning ?instance = null;
+    private Player player = null!;
+    private Level level = null!;
+    private Entity background = null!;
+    public int score = 0;
     public static GameRunning GetInstance() {
         if (GameRunning.instance == null) {
             GameRunning.instance = new GameRunning();
@@ -33,19 +31,30 @@ public class GameRunning : IGameState {
         player = new Player (
             new DynamicShape(new Vec2F(0.425f, 0.05f), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..","Breakout","Assets", "Images", "player.png")));
-
-        level = new Level("level3.txt");
-        }
+        // lvl liste
+        level = new Level(); //lvllst][0]
+        level.NewLevel("central-mass.txt");
+    }
     public void ResetState() {
         GameRunning.instance = null;
     }
     public void RenderState() {
         background.RenderEntity();
         player.Render();
-        level.DrawMap();
+        level.blocks.RenderEntities();
+    }
+    /// <summary>
+    /// </summary>
+    private void IterateBlocks() {
+        level.blocks.Iterate(block => {
+            if (block.IsDeleted()) {
+                score += block.Value;
+            }
+        });
     }
     public void UpdateState() {
         player.Move();
+        IterateBlocks();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         switch (action) {

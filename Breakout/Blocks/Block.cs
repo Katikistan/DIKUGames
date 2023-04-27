@@ -1,44 +1,32 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-
 namespace Breakout.Blocks;
 
-public class Block : Entity {
-    private int value;
-    public int Value {
-        get { return value; }
-        set { Value = value; }
-    }
-    private bool unbreakable;
-    public bool Unbreakable {
-        get { return unbreakable; }
-        set { unbreakable = value; }
-    }
-    private bool hardned;
-    public bool Hardned {
-        get { return hardned; }
-        set { hardned = value; }
-    }
-    private int health = 1;
-    private Vec2F position;
-    private StationaryShape shape;
+public abstract class Block : Entity {
+
+    internal int value = 100;
+    /// <summary>
+    /// Amount of points given to player when block is destroyed.
+    /// </summary>
+    public int Value { get { return value; } }
+    internal int health = 1;
+    public int Health { get { return health; } }
+    internal Vec2F position; // why safe the pos
+
     public Block(StationaryShape shape, IBaseImage image) : base(shape, image) {
         position = new Vec2F(shape.Position.X, shape.Position.Y);
     }
-    public void applyMeta() {
-    }
+    /// <summary>
+    /// Decreases Block health, if health is less than 1 the block is marked for deletion.
+    /// </summary>
     public void LoseHealth() {
-        if (!Unbreakable) {
-            health -= 1;
+        health -= 1;
+        if (health <= 0) {
+            DeleteEntity();
         }
     }
-    public bool IsDead() {
-        if (health <= 0 && !Unbreakable) {
-            return true;
-        } else {
-            return false;
-        }
+    public void ApplyMeta() {
     }
     public void Render() {
         RenderEntity();
