@@ -2,10 +2,10 @@ namespace Breakout.Levels;
 public class LevelLoader {
     private string txtfile = null!;
     private string path;
-    private  string[] txtlines = null!;
-    public Dictionary<string,string> ?Meta = null;
-    public Dictionary<char,string> ?Legend = null;
-    public char[][] ?Map = null;
+    private string[] txtlines = null!;
+    public Dictionary<string, string> ?Meta;
+    public Dictionary<char, string> ?Legend;
+    public char[][]? Map = null;
     /// <summary>
     /// A levelLoader used in Level to extract Map, Meta and Legend from a txt file.
     /// </summary>
@@ -20,14 +20,13 @@ public class LevelLoader {
     /// <returns>Returns false if level file could not be read else true.</returns>
     public bool ReadLevel(string level) {
         this.txtfile = Path.Combine(path, level);
-        if (File.Exists(txtfile)){
+        if (File.Exists(txtfile)) {
             this.txtlines = File.ReadAllLines(txtfile);
             ReadMap();
             ReadMeta();
             ReadLegend();
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -42,11 +41,11 @@ public class LevelLoader {
             int MapEnd = Array.IndexOf(txtlines, "Map/");
             Map = new char[MapEnd - 2][];
             for (int i = MapStart + 1; i < MapEnd - 1; i++) {
-                Map[i-1] = txtlines[i].ToCharArray();
+                Map[i - 1] = txtlines[i].ToCharArray();
             }
         }
     }
-    private void ReadMeta(){
+    private void ReadMeta() {
         if (Array.IndexOf(txtlines, "Meta:") == -1 ||
             Array.IndexOf(txtlines, "Meta/") == -1) {
             // txt file dosent contain a start or end to Meta section.
@@ -76,10 +75,9 @@ public class LevelLoader {
     public bool MapValid() {
         if (Map != null && Legend != null) {
             return true;
-        } else  {
+        } else {
             return false;
         }
-
     }
     private void ReadLegend() {
         if (Array.IndexOf(txtlines, "Legend:") == -1 ||
@@ -90,10 +88,10 @@ public class LevelLoader {
             int legendStart = Array.IndexOf(txtlines, "Legend:");
             int legendEnd = Array.IndexOf(txtlines, "Legend/");
             Legend = new Dictionary<char, string>();
-            for (int i = legendStart+1; i < legendEnd; i++){
+            for (int i = legendStart + 1; i < legendEnd; i++) {
                 char symbol = txtlines[i][0];
                 string imagefile = txtlines[i].Substring(3);
-                string imagepath = Path.Combine(path.Replace(@"Levels", "Images\\"),imagefile);
+                string imagepath = Path.Combine(path.Replace(@"Levels", "Images\\"), imagefile);
                 if (File.Exists(imagepath)) {
                     Legend[symbol] = imagefile;
                 }

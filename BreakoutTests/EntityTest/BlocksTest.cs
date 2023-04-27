@@ -1,5 +1,4 @@
 using DIKUArcade.Entities;
-using System;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using Breakout.Blocks;
@@ -13,8 +12,8 @@ public class TestBlock {
     [SetUp]
     public void Setup() {
         defaultblock = new DefaultBlock(
-            new StationaryShape(new Vec2F(0.5f,0.5f), new Vec2F(0.5f,0.5f)),
-            new Image(Path.Combine("..","Breakout","Assets", "Images", "blue-block.png")));
+            new StationaryShape(new Vec2F(0.5f, 0.5f), new Vec2F(0.5f, 0.5f)),
+            new Image(Path.Combine("..", "Breakout", "Assets", "Images", "blue-block.png")));
     }
     [Test]
     public void TestIsEntity() {
