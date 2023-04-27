@@ -6,6 +6,7 @@ using DIKUArcade.Math;
 using DIKUArcade.State;
 using Breakout.Levels;
 using Breakout.Players;
+using System.IO;
 
 namespace Breakout.States;
 public class GameRunning : IGameState {
@@ -41,7 +42,7 @@ public class GameRunning : IGameState {
     public void RenderState() {
         background.RenderEntity();
         player.Render();
-        level.Render();
+        level.blocks.RenderEntities();
     }
     /// <summary>
     /// </summary>

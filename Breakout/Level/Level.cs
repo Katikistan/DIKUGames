@@ -2,6 +2,9 @@ using Breakout.Blocks;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
+using System.Collections.Generic;
+using System.IO;
+
 namespace Breakout.Levels;
 public class Level {
     private char[][] Map = null!;

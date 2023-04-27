@@ -1,8 +1,8 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-namespace Breakout.Blocks;
 
+namespace Breakout.Blocks;
 public abstract class Block : Entity {
 
     internal int value = 100;
