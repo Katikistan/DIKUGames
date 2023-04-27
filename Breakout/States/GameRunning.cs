@@ -9,7 +9,7 @@ using Breakout.Players;
 
 namespace Breakout.States;
 public class GameRunning : IGameState {
-    private static GameRunning ?instance = null;
+    private static GameRunning? instance = null;
     private Player player = null!;
     private Level level = null!;
     private Entity background = null!;
@@ -28,12 +28,12 @@ public class GameRunning : IGameState {
                 new Vec2F(1.0f, 1.0f)),
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
-        player = new Player (
+        player = new Player(
             new DynamicShape(new Vec2F(0.425f, 0.05f), new Vec2F(0.15f, 0.04f)),
-            new Image(Path.Combine("..","Breakout","Assets", "Images", "player.png")));
+            new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         // lvl liste
         level = new Level(); //lvllst][0]
-        level.NewLevel("central-mass.txt");
+        level.NewLevel("level1.txt");
     }
     public void ResetState() {
         GameRunning.instance = null;
@@ -41,7 +41,7 @@ public class GameRunning : IGameState {
     public void RenderState() {
         background.RenderEntity();
         player.Render();
-        level.blocks.RenderEntities();
+        level.Render();
     }
     /// <summary>
     /// </summary>
@@ -86,7 +86,7 @@ public class GameRunning : IGameState {
                 BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.WindowEvent,
                     StringArg1 = "WINDOW_CLOSE"
-                    });
+                });
                 break;
         }
     }

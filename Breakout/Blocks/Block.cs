@@ -9,10 +9,12 @@ public abstract class Block : Entity {
     /// <summary>
     /// Amount of points given to player when block is destroyed.
     /// </summary>
-    public int Value { get { return value; } }
+    public int Value {get { return value; }
+    }
     internal int health = 1;
-    public int Health { get { return health; } }
-    internal Vec2F position; // why safe the pos
+    public int Health { get { return health; }
+    }
+    internal Vec2F position; 
 
     public Block(StationaryShape shape, IBaseImage image) : base(shape, image) {
         position = new Vec2F(shape.Position.X, shape.Position.Y);
