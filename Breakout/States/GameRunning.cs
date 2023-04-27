@@ -33,7 +33,7 @@ public class GameRunning : IGameState {
             new Image(Path.Combine("..","Breakout","Assets", "Images", "player.png")));
         // lvl liste
         level = new Level(); //lvllst][0]
-        level.NewLevel("level1.txt");
+        level.NewLevel("central-mass.txt");
     }
     public void ResetState() {
         GameRunning.instance = null;
@@ -43,6 +43,8 @@ public class GameRunning : IGameState {
         player.Render();
         level.blocks.RenderEntities();
     }
+    /// <summary>
+    /// </summary>
     private void IterateBlocks() {
         level.blocks.Iterate(block => {
             if (block.IsDeleted()) {

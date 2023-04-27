@@ -1,7 +1,9 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
-using DIKUArcade.Math;
 namespace Breakout.Blocks;
+/// <summary>
+/// Default block has 1 health points and grants player 100 points when destroyed.
+/// </summary>
 public class DefaultBlock : Block {
     public DefaultBlock(StationaryShape shape, IBaseImage image) : base(shape, image) {
     }

@@ -1,6 +1,3 @@
-using System.IO;
-using System.Collections.Generic;
-
 namespace Breakout.Levels;
 public class LevelLoader {
     private string txtfile = null!;
@@ -9,11 +6,19 @@ public class LevelLoader {
     public Dictionary<string,string> ?Meta = null;
     public Dictionary<char,string> ?Legend = null;
     public char[][] ?Map = null;
+    /// <summary>
+    /// A levelLoader used in Level to extract Map, Meta and Legend from a txt file.
+    /// </summary>
+    /// <param name="path">The file path level files will be read from</param>
     public LevelLoader(string path) {
         this.path = path;
     }
+    /// <summary>
+    /// Will try to read a level file
+    /// </summary>
+    /// <param name="level"></param>
+    /// <returns>Returns false if level file could not be read else true.</returns>
     public bool ReadLevel(string level) {
-        //tjek om filen eksisterer
         this.txtfile = Path.Combine(path, level);
         if (File.Exists(txtfile)){
             this.txtlines = File.ReadAllLines(txtfile);
@@ -26,9 +31,11 @@ public class LevelLoader {
             return false;
         }
     }
+
     private void ReadMap() {
-        // skal tjekke map filen ikke har en linje der er for lang eller bred
-        if (Array.IndexOf(txtlines, "Map:") == -1 || Array.IndexOf(txtlines, "Map/") == -1){
+        if (Array.IndexOf(txtlines, "Map:") == -1 ||
+            Array.IndexOf(txtlines, "Map/") == -1) {
+            // txt file dosent contain a start or end to Map section.
             Map = null;
         } else {
             int MapStart = Array.IndexOf(txtlines, "Map:");
@@ -40,8 +47,9 @@ public class LevelLoader {
         }
     }
     private void ReadMeta(){
-        //tjekker om der er Meta i filen
-        if (Array.IndexOf(txtlines, "Meta:") == -1 || Array.IndexOf(txtlines, "Meta/") == -1){
+        if (Array.IndexOf(txtlines, "Meta:") == -1 ||
+            Array.IndexOf(txtlines, "Meta/") == -1) {
+            // txt file dosent contain a start or end to Meta section.
             Meta = null;
         } else {
             int MetaStart = Array.IndexOf(txtlines, "Meta:");
@@ -49,19 +57,34 @@ public class LevelLoader {
             Meta = new Dictionary<string, string>();
             for (int i = MetaStart + 1; i < MetaEnd; i++) {
                 string[] parts = txtlines[i].Split(": ");
-                string key = parts[0];
-                string value = parts[1];
-                if (value.Length == 1) {
-                    Meta[value] = key;
-                } else {
-                    Meta[key] = value;
+                if (parts.Length == 2) {
+                    string key = parts[0];
+                    string value = parts[1];
+                    if (value.Length == 1) {
+                        Meta[value] = key;
+                    } else {
+                        Meta[key] = value;
+                    }
                 }
             }
         }
     }
+    /// <summary>
+    /// Checks that a loaded level has a Map and Legend data.
+    /// </summary>
+    /// <returns>Returns true if level file has Map and LegendData else false.</returns>
+    public bool MapValid() {
+        if (Map != null && Legend != null) {
+            return true;
+        } else  {
+            return false;
+        }
+
+    }
     private void ReadLegend() {
-        //tjekker om der er Legend i filen
-        if (Array.IndexOf(txtlines, "Legend:") == -1 || Array.IndexOf(txtlines, "Legend/") == -1){
+        if (Array.IndexOf(txtlines, "Legend:") == -1 ||
+            Array.IndexOf(txtlines, "Legend/") == -1) {
+            // txt file dosent contain a start or end to Legend section.
             Legend = null;
         } else {
             int legendStart = Array.IndexOf(txtlines, "Legend:");
@@ -70,7 +93,10 @@ public class LevelLoader {
             for (int i = legendStart+1; i < legendEnd; i++){
                 char symbol = txtlines[i][0];
                 string imagefile = txtlines[i].Substring(3);
-                Legend[symbol] = imagefile;
+                string imagepath = Path.Combine(path.Replace(@"Levels", "Images\\"),imagefile);
+                if (File.Exists(imagepath)) {
+                    Legend[symbol] = imagefile;
+                }
             }
         }
     }

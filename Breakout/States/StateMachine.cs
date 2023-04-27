@@ -9,6 +9,8 @@ public class StateMachine : IGameEventProcessor {
         BreakoutBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);
         ActiveState = GameRunning.GetInstance();
     }
+    /// <summary>
+    /// </summary>
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.GameStateEvent) {
             switch (gameEvent.Message) {
