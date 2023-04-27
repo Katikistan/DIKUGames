@@ -55,6 +55,8 @@ public class Level {
                 }
             }
         }
-
+    }
+    public void Render() {
+        blocks.RenderEntities();
     }
 }

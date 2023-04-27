@@ -41,7 +41,7 @@ public class GameRunning : IGameState {
     public void RenderState() {
         background.RenderEntity();
         player.Render();
-        level.blocks.RenderEntities();
+        level.Render();
     }
     /// <summary>
     /// </summary>
