@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Breakout.States;
 public class GameRunning : IGameState {
-    private static GameRunning? instance = null;
+    private static GameRunning instance = null;
     private Player player = null!;
     private Level level = null!;
     private Entity background = null!;

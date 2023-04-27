@@ -28,8 +28,6 @@ public abstract class Block : Entity {
             DeleteEntity();
         }
     }
-    public void ApplyMeta() {
-    }
     public void Render() {
         RenderEntity();
     }
