@@ -50,12 +50,6 @@ public class TestPlayer {
         });
     }
     [Test]
-    public void TestGetPosition() {
-        playerPos = player.GetPosition();
-        Assert.That((playerPos.X), Is.EqualTo(playerPos.X));
-        Assert.That((playerPos.Y), Is.EqualTo(playerPos.Y));
-    }
-    [Test]
     public void TestMoveLeft() {
         TesteventBus.RegisterEvent(eventMoveLeft);
         TesteventBus.ProcessEventsSequentially();
