@@ -1,0 +1,33 @@
+<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>168</x><y>105</y><w>112</w><h>35</h></coordinates><panel_attributes>&lt;&lt;entity&gt;&gt;
+Levelloader
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>147</x><y>217</y><w>147</w><h>42</h></coordinates><panel_attributes>&lt;&lt;entity&gt;&gt;
+Level
+--
+Levelloader
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>105</y><w>175</w><h>42</h></coordinates><panel_attributes>&lt;&lt;entity, GameEventProcessor&gt;&gt;
+Game
+--
+GameRunning</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>637</x><y>224</y><w>147</w><h>35</h></coordinates><panel_attributes>&lt;&lt;entity, GameEventProcessor&gt;&gt;
+Player
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>637</x><y>105</y><w>147</w><h>35</h></coordinates><panel_attributes>&lt;&lt;GameEventBus&gt;&gt;
+BreakoutBus
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>133</y><w>112</w><h>98</h></coordinates><panel_attributes>lt=-
+&lt;&lt;Level data extraction&gt;&gt;</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>742</x><y>133</y><w>105</w><h>105</h></coordinates><panel_attributes>lt=-
+&lt;&lt;GameEvent relaying&gt;&gt;</panel_attributes><additional_attributes>10;130;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>224</y><w>182</w><h>70</h></coordinates><panel_attributes>&lt;&lt;IGameState&gt;&gt;
+GameRunning
+
+--
+Level
+Player
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>462</x><y>140</y><w>77</w><h>98</h></coordinates><panel_attributes>lt=-
+&lt;&lt;Key handling&gt;&gt;</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>287</x><y>224</y><w>105</w><h>28</h></coordinates><panel_attributes>lt=-
+&lt;&lt;Level rendering&gt;&gt;</panel_attributes><additional_attributes>130;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>553</x><y>238</y><w>98</w><h>28</h></coordinates><panel_attributes>lt=-
+&lt;&lt;Player rendering&gt;&gt;</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>546</x><y>112</y><w>105</w><h>28</h></coordinates><panel_attributes>lt=-
+&lt;&lt;GameEvent relaying&gt;&gt;</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>Relation</id><coordinates><x>546</x><y>133</y><w>161</w><h>105</h></coordinates><panel_attributes>lt=-
+&lt;&lt;GameEvent registration&gt;&gt;</panel_attributes><additional_attributes>130;10;10;130</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>224</y><w>77</w><h>35</h></coordinates><panel_attributes>&lt;&lt;entity&gt;&gt;
+Block
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>70</x><y>224</y><w>91</w><h>28</h></coordinates><panel_attributes>lt=-
+&lt;&lt;Block Creation&gt;&gt;</panel_attributes><additional_attributes>10;20;110;20</additional_attributes></element></diagram>
