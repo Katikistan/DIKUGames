@@ -14,8 +14,12 @@ public class Level {
     private LevelLoader levelLoader;
     public EntityContainer<Block> blocks;
     public EntityContainer<Block> Blocks { get {return blocks;} }
+    public LevelLoader LevelLoader {
+        get {return levelLoader; }
+        set {levelLoader = value; }
+    }
     public Level() {
-        this.levelLoader = new LevelLoader(Path.Combine("..", "Breakout", "Assets", "Levels"));
+        this.levelLoader = new LevelLoader();
         this.blocks = new EntityContainer<Block>(0);
     }
     /// <summary>

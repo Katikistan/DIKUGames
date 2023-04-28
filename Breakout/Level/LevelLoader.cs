@@ -13,8 +13,8 @@ public class LevelLoader {
     /// A levelLoader used in Level to extract Map, Meta and Legend from a txt file.
     /// </summary>
     /// <param name="path">The file path level files will be read from</param>
-    public LevelLoader(string path) {
-        this.path = path;
+    public LevelLoader() {
+        this.path = Path.Combine("..", "Breakout", "Assets", "Levels");
     }
     /// <summary>
     /// Will try to read a level file
@@ -32,6 +32,9 @@ public class LevelLoader {
         } else {
             return false;
         }
+    }
+    public void ChangePath(string path) {
+        this.path = path;
     }
     public bool MapValid() {
         if (Map != null && Legend != null && Meta != null) {
@@ -70,12 +73,7 @@ public class LevelLoader {
                     // meta section contains ": " and can be spilt in 2
                     string key = parts[0];
                     string value = parts[1];
-                    if (value.Length == 1) {
-                        // Meta is related to a block therefore symbol becomes key
-                        Meta[value] = key;
-                    } else {
-                        Meta[key] = value;
-                    }
+                    Meta[key] = value;
                 }
             }
         }
