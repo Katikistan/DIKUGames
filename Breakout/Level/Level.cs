@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Breakout.Levels;
 public class Level {
-    private char[][] Map;
+    private string[] Map;
     private Dictionary<string, string> Meta;
     private Dictionary<char, string> Legend;
     private LevelLoader levelLoader;
@@ -24,7 +24,7 @@ public class Level {
     /// <param name="level">Level text file that will become the new playable level.</param>
     public bool NewLevel(string level) {
         levelLoader.ReadLevel(level);
-        if (levelLoader.MapValid()) { // LevelData contains map and legend   
+        if (levelLoader.MapValid()) { // LevelData contains map and legend
             this.Map = levelLoader.Map;
             this.Meta = levelLoader.Meta;
             this.Legend = levelLoader.Legend;
@@ -41,7 +41,7 @@ public class Level {
         // Map can be filled with blocks without crashing
         blocks = new EntityContainer<Block>(324);
         // pos and extent for blocks
-        float x = 1f /  12f; 
+        float x = 1f /  12f;
         float y = (1f /  12f) / 3f;
         string colour;
         IBaseImage image;
@@ -51,7 +51,7 @@ public class Level {
                 shape = new StationaryShape(
                     new Vec2F((x * (float) j), 1.0f - (y * (float) i)),
                     new Vec2F(x, y));
-                if (Legend.TryGetValue(Map[i][j], out colour!)) { 
+                if (Legend.TryGetValue(Map[i][j], out colour!)) {
                     // Key has a vaild colour file
                     image = new Image(
                         Path.Combine("..", "Breakout", "Assets", "Images", colour));

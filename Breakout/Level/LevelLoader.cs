@@ -8,7 +8,7 @@ public class LevelLoader {
     private string[] txtlines;
     public Dictionary<string, string> Meta = null;
     public Dictionary<char, string> Legend = null;
-    public char[][] Map = null;
+    public string[] Map = null;
     /// <summary>
     /// A levelLoader used in Level to extract Map, Meta and Legend from a txt file.
     /// </summary>
@@ -49,9 +49,9 @@ public class LevelLoader {
         } else {
             int MapStart = Array.IndexOf(txtlines, "Map:");
             int MapEnd = Array.IndexOf(txtlines, "Map/");
-            Map = new char[MapEnd - 2][];
+            Map = new string[MapEnd - 2];
             for (int i = MapStart + 1; i < MapEnd - 1; i++) {
-                Map[i - 1] = txtlines[i].ToCharArray();
+                Map[i - 1] = txtlines[i];
             }
         }
     }
@@ -66,11 +66,11 @@ public class LevelLoader {
             Meta = new Dictionary<string, string>();
             for (int i = MetaStart + 1; i < MetaEnd; i++) {
                 string[] parts = txtlines[i].Split(": ");
-                if (parts.Length == 2) { 
+                if (parts.Length == 2) {
                     // meta section contains ": " and can be spilt in 2
                     string key = parts[0];
                     string value = parts[1];
-                    if (value.Length == 1) { 
+                    if (value.Length == 1) {
                         // Meta is related to a block therefore symbol becomes key
                         Meta[value] = key;
                     } else {
