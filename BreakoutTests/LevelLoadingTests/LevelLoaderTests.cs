@@ -21,6 +21,7 @@ public class LevelLoaderTests {
     }
     [Test]
     public void TestReadMap() {
+        // Testing map is read correctly
         levelLoader.ReadLevel("level1.txt");
         Assert.That(levelLoader.Map![0][0], Is.EqualTo('-'));
         Assert.That(levelLoader.Map[2][1], Is.EqualTo('a'));
@@ -31,6 +32,7 @@ public class LevelLoaderTests {
         Assert.That(levelLoader.Map[7][5], Is.EqualTo('%'));
         Assert.That(levelLoader.Map[10][10], Is.EqualTo('%'));
         Assert.That(levelLoader.Map[11][10], Is.EqualTo('-'));
+        // Test new map is read
         levelLoader.ReadLevel("level2.txt");
         Assert.That(levelLoader.Map[0][0], Is.EqualTo('-'));
         Assert.That(levelLoader.Map[2][1], Is.EqualTo('h'));
@@ -55,23 +57,24 @@ public class LevelLoaderTests {
         levelLoader.ReadLevel("level1.txt");
         Assert.That(levelLoader.Meta!["Name"], Is.EqualTo("LEVEL 1"));
         Assert.That(levelLoader.Meta["Time"], Is.EqualTo("300"));
-        // checking that symbols becomes keys and not values
+        // Checking that symbols becomes keys and not values
         Assert.That(levelLoader.Meta["#"], Is.EqualTo("Hardened"));
         Assert.That(levelLoader.Meta["2"], Is.EqualTo("PowerUp"));
         levelLoader.ReadLevel("level2.txt");
+        // Meta changes to new level
         Assert.That(levelLoader.Meta["Name"], Is.EqualTo("LEVEL 2"));
         Assert.That(levelLoader.Meta["Time"], Is.EqualTo("180"));
         Assert.That(levelLoader.Meta["i"], Is.EqualTo("PowerUp"));
-        levelLoader.ReadLevel("NoMeta.txt");
-        Assert.That(levelLoader.Meta, Is.EqualTo(null));
     }
     [Test]
     public void TestInvalidMeta() {
         levelLoader.ReadLevel("NoMeta.txt");
         Assert.That(levelLoader.Meta, Is.EqualTo(null));
+
         levelLoader.ReadLevel("WrongMeta.txt");
-        string meta;
         Assert.That(levelLoader.Meta != null);
+        
+        string meta;
         levelLoader.Meta!.TryGetValue("Name LEVEL 1", out meta!);
         Assert.That(meta, Is.EqualTo(null));
         levelLoader.Meta.TryGetValue("Name", out meta!);
@@ -94,15 +97,15 @@ public class LevelLoaderTests {
         Assert.That(levelLoader.Legend['i'], Is.EqualTo("teal-block.png"));
         Assert.That(levelLoader.Legend['j'], Is.EqualTo("blue-block.png"));
         Assert.That(levelLoader.Legend['k'], Is.EqualTo("brown-block.png"));
-        levelLoader.ReadLevel("NoLegend.txt");
-        Assert.That(levelLoader.Legend, Is.EqualTo(null));
     }
     [Test]
     public void TestInvalidLegend() {
         levelLoader.ReadLevel("NoLegend.txt");
         Assert.That(levelLoader.Legend, Is.EqualTo(null));
+        
         levelLoader.ReadLevel("NonExistingImg.txt");
         Assert.That(levelLoader.Legend != null);
+        
         string legend;
         levelLoader.Legend!.TryGetValue('T', out legend!);
         Assert.That(legend, Is.EqualTo(null));

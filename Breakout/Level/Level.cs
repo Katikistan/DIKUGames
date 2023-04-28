@@ -2,14 +2,15 @@ using Breakout.Blocks;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace Breakout.Levels;
 public class Level {
-    private char[][] Map = null!;
-    private Dictionary<string, string> Meta = null!;
-    private Dictionary<char, string> Legend = null!;
+    private string[] Map;
+    private Dictionary<string, string> Meta;
+    private Dictionary<char, string> Legend;
     private LevelLoader levelLoader;
     public EntityContainer<Block> blocks;
     public EntityContainer<Block> Blocks { get {return blocks;} }
@@ -22,13 +23,11 @@ public class Level {
     /// </summary>
     /// <param name="level">Level text file that will become the new playable level.</param>
     public bool NewLevel(string level) {
-        //next map if level input is not valid
         levelLoader.ReadLevel(level);
-        this.Map = levelLoader.Map!;
-        this.Meta = levelLoader.Meta!;
-        this.Legend = levelLoader.Legend!;
-        if (levelLoader.MapValid()) {
-            System.Console.WriteLine(levelLoader.MapValid());
+        if (levelLoader.MapValid()) { // LevelData contains map and legend
+            this.Map = levelLoader.Map;
+            this.Meta = levelLoader.Meta;
+            this.Legend = levelLoader.Legend;
             CreateBlocks();
             return true;
         } else {
@@ -39,27 +38,26 @@ public class Level {
     /// Uses Map, Legend and Meta to draw blocks and apply metadata in the level.
     /// </summary>
     private void CreateBlocks() {
+        // Map can be filled with blocks without crashing
         blocks = new EntityContainer<Block>(324);
-        float block_extentX = 1f / (float) 12;
-        float block_extentY = block_extentX / 3f;
+        // pos and extent for blocks
+        float x = 1f /  12f;
+        float y = (1f /  12f) / 3f;
         string colour;
         IBaseImage image;
         StationaryShape shape;
         for (int i = 0; i < Map.Length - 1; i++) {
             for (int j = 0; j < Map[i].Length; j++) {
                 shape = new StationaryShape(
-                    new Vec2F((block_extentX * (float) j), 1.0f - (block_extentY * (float) i)),
-                    new Vec2F(block_extentX, block_extentY));
-                Legend.TryGetValue(Map[i][j], out colour!);
-                if (colour != null) {
+                    new Vec2F((x * (float) j), 1.0f - (y * (float) i)),
+                    new Vec2F(x, y));
+                if (Legend.TryGetValue(Map[i][j], out colour!)) {
+                    // Key has a vaild colour file
                     image = new Image(
                         Path.Combine("..", "Breakout", "Assets", "Images", colour));
                     blocks.AddEntity(new DefaultBlock(shape, image));
                 }
             }
         }
-    }
-    public void Render() {
-        blocks.RenderEntities();
     }
 }

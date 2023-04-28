@@ -4,12 +4,11 @@ using System.IO;
 
 namespace Breakout.Levels;
 public class LevelLoader {
-    private string txtfile = null!;
     private string path;
-    private string[] txtlines = null!;
-    public Dictionary<string, string> ?Meta;
-    public Dictionary<char, string> ?Legend;
-    public char[][]? Map = null;
+    private string[] txtlines;
+    public Dictionary<string, string> Meta = null;
+    public Dictionary<char, string> Legend = null;
+    public string[] Map = null;
     /// <summary>
     /// A levelLoader used in Level to extract Map, Meta and Legend from a txt file.
     /// </summary>
@@ -21,14 +20,21 @@ public class LevelLoader {
     /// Will try to read a level file
     /// </summary>
     /// <param name="level"></param>
-    /// <returns>Returns false if level file could not be read else true.</returns>
+    /// <returns>Returns false if level file could not be read, else true.</returns>
     public bool ReadLevel(string level) {
-        this.txtfile = Path.Combine(path, level);
+        string txtfile = Path.Combine(path, level);
         if (File.Exists(txtfile)) {
             this.txtlines = File.ReadAllLines(txtfile);
             ReadMap();
             ReadMeta();
             ReadLegend();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public bool MapValid() {
+        if (Map != null && Legend != null && Meta != null) {
             return true;
         } else {
             return false;
@@ -43,9 +49,9 @@ public class LevelLoader {
         } else {
             int MapStart = Array.IndexOf(txtlines, "Map:");
             int MapEnd = Array.IndexOf(txtlines, "Map/");
-            Map = new char[MapEnd - 2][];
+            Map = new string[MapEnd - 2];
             for (int i = MapStart + 1; i < MapEnd - 1; i++) {
-                Map[i - 1] = txtlines[i].ToCharArray();
+                Map[i - 1] = txtlines[i];
             }
         }
     }
@@ -61,9 +67,11 @@ public class LevelLoader {
             for (int i = MetaStart + 1; i < MetaEnd; i++) {
                 string[] parts = txtlines[i].Split(": ");
                 if (parts.Length == 2) {
+                    // meta section contains ": " and can be spilt in 2
                     string key = parts[0];
                     string value = parts[1];
                     if (value.Length == 1) {
+                        // Meta is related to a block therefore symbol becomes key
                         Meta[value] = key;
                     } else {
                         Meta[key] = value;
@@ -76,13 +84,6 @@ public class LevelLoader {
     /// Checks that a loaded level has a Map and Legend data.
     /// </summary>
     /// <returns>Returns true if level file has Map and LegendData else false.</returns>
-    public bool MapValid() {
-        if (Map != null && Legend != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     private void ReadLegend() {
         if (Array.IndexOf(txtlines, "Legend:") == -1 ||
             Array.IndexOf(txtlines, "Legend/") == -1) {
@@ -95,7 +96,7 @@ public class LevelLoader {
             for (int i = legendStart + 1; i < legendEnd; i++) {
                 char symbol = txtlines[i][0];
                 string imagefile = txtlines[i].Substring(3);
-                string imagepath = Path.Combine(path.Replace(@"Levels", "Images\\"), imagefile);
+                string imagepath = Path.Combine(path.Replace(@"Levels", "Images/"), imagefile);
                 if (File.Exists(imagepath)) {
                     Legend[symbol] = imagefile;
                 }
