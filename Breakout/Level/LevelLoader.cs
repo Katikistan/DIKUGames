@@ -34,7 +34,7 @@ public class LevelLoader {
         }
     }
     public bool MapValid() {
-        if (Map != null && Legend != null) {
+        if (Map != null && Legend != null && Meta != null) {
             return true;
         } else {
             return false;
