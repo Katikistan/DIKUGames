@@ -12,7 +12,7 @@ namespace Breakout.States;
 public class GameRunning : IGameState {
     private static GameRunning instance = null;
     private Player player = null!;
-    private Level level = null!;
+    private LevelManager levelManager = null!;
     private Entity background = null!;
     public int score = 0;
     public static GameRunning GetInstance() {
@@ -29,33 +29,21 @@ public class GameRunning : IGameState {
                 new Vec2F(1.0f, 1.0f)),
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
-        player = new Player(
-            new DynamicShape(new Vec2F(0.425f, 0.05f), new Vec2F(0.15f, 0.04f)),
-            new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        // lvl liste
-        level = new Level(); //lvllst][0]
-        level.NewLevel("level1.txt");
+        levelManager = new LevelManager();
+        levelManager.NewLevel("level1.txt");
     }
     public void ResetState() {
         GameRunning.instance = null;
     }
     public void RenderState() {
         background.RenderEntity();
-        player.Render();
-        level.blocks.RenderEntities();
+        levelManager.Render();
     }
     /// <summary>
     /// </summary>
-    private void IterateBlocks() {
-        level.blocks.Iterate(block => {
-            if (block.IsDeleted()) {
-                score += block.Value;
-            }
-        });
-    }
+
     public void UpdateState() {
-        player.Move();
-        IterateBlocks();
+        levelManager.Update();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         switch (action) {

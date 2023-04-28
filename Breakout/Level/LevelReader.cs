@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace Breakout.Levels;
-public class LevelLoader {
+public class LevelReader {
     private string path;
     private string[] txtlines;
     public Dictionary<string, string> Meta = null;
     public Dictionary<char, string> Legend = null;
     public string[] Map = null;
     /// <summary>
-    /// A levelLoader used in Level to extract Map, Meta and Legend from a txt file.
+    /// A levelReader used in Level to extract Map, Meta and Legend from a txt file.
     /// </summary>
     /// <param name="path">The file path level files will be read from</param>
-    public LevelLoader() {
+    public LevelReader() {
         this.path = Path.Combine("..", "Breakout", "Assets", "Levels");
     }
     /// <summary>

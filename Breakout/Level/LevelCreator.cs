@@ -7,31 +7,33 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace Breakout.Levels;
-public class Level {
+public class LevelCreator {
     private string[] Map;
     private Dictionary<string, string> Meta;
     private Dictionary<char, string> Legend;
-    private LevelLoader levelLoader;
-    public EntityContainer<Block> blocks;
+    private LevelReader levelReader;
+    private EntityContainer<Block> blocks;
     public EntityContainer<Block> Blocks { get {return blocks;} }
-    public LevelLoader LevelLoader {
-        get {return levelLoader; }
-        set {levelLoader = value; }
+    public LevelReader LevelReader {
+        get {return levelReader; }
+        set {levelReader = value; }
     }
-    public Level() {
-        this.levelLoader = new LevelLoader();
+    public LevelCreator() {
+        this.levelReader = new LevelReader();
         this.blocks = new EntityContainer<Block>(0);
     }
     /// <summary>
     /// Reads a file level and creates block in Level.
     /// </summary>
     /// <param name="level">Level text file that will become the new playable level.</param>
-    public bool NewLevel(string level) {
-        levelLoader.ReadLevel(level);
-        if (levelLoader.MapValid()) { // LevelData contains map and legend
-            this.Map = levelLoader.Map;
-            this.Meta = levelLoader.Meta;
-            this.Legend = levelLoader.Legend;
+    public bool CreateLevel(string level) {
+        System.Console.WriteLine("here");
+        levelReader.ReadLevel(level);
+        if (levelReader.MapValid()) { // LevelData contains map and legend
+            System.Console.WriteLine("here");
+            this.Map = levelReader.Map;
+            this.Meta = levelReader.Meta;
+            this.Legend = levelReader.Legend;
             CreateBlocks();
             return true;
         } else {
@@ -56,6 +58,7 @@ public class Level {
                     new Vec2F((x * (float) j), 1.0f - (y * (float) i)),
                     new Vec2F(x, y));
                 if (Legend.TryGetValue(Map[i][j], out colour!)) {
+                    System.Console.WriteLine("here also");
                     // Key has a vaild colour file
                     image = new Image(
                         Path.Combine("..", "Breakout", "Assets", "Images", colour));
