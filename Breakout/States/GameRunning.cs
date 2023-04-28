@@ -5,13 +5,11 @@ using DIKUArcade.Input;
 using DIKUArcade.Math;
 using DIKUArcade.State;
 using Breakout.Levels;
-using Breakout.Players;
 using System.IO;
 
 namespace Breakout.States;
 public class GameRunning : IGameState {
     private static GameRunning instance = null;
-    private Player player = null!;
     private LevelManager levelManager = null!;
     private Entity background = null!;
     public int score = 0;
@@ -39,9 +37,6 @@ public class GameRunning : IGameState {
         background.RenderEntity();
         levelManager.Render();
     }
-    /// <summary>
-    /// </summary>
-
     public void UpdateState() {
         levelManager.Update();
     }

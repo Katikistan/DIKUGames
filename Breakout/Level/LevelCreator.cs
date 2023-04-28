@@ -2,7 +2,6 @@ using Breakout.Blocks;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -27,10 +26,8 @@ public class LevelCreator {
     /// </summary>
     /// <param name="level">Level text file that will become the new playable level.</param>
     public bool CreateLevel(string level) {
-        System.Console.WriteLine("here");
         levelReader.ReadLevel(level);
         if (levelReader.MapValid()) { // LevelData contains map and legend
-            System.Console.WriteLine("here");
             this.Map = levelReader.Map;
             this.Meta = levelReader.Meta;
             this.Legend = levelReader.Legend;
@@ -58,7 +55,6 @@ public class LevelCreator {
                     new Vec2F((x * (float) j), 1.0f - (y * (float) i)),
                     new Vec2F(x, y));
                 if (Legend.TryGetValue(Map[i][j], out colour!)) {
-                    System.Console.WriteLine("here also");
                     // Key has a vaild colour file
                     image = new Image(
                         Path.Combine("..", "Breakout", "Assets", "Images", colour));
