@@ -33,9 +33,6 @@ public class LevelReader {
             return false;
         }
     }
-    public void ChangePath(string path) {
-        this.path = path;
-    }
     public bool MapValid() {
         if (Map != null && Legend != null && Meta != null) {
             return true;
@@ -43,7 +40,6 @@ public class LevelReader {
             return false;
         }
     }
-
     private void ReadMap() {
         if (Array.IndexOf(txtlines, "Map:") == -1 ||
             Array.IndexOf(txtlines, "Map/") == -1) {
@@ -94,7 +90,8 @@ public class LevelReader {
             for (int i = legendStart + 1; i < legendEnd; i++) {
                 char symbol = txtlines[i][0];
                 string imagefile = txtlines[i].Substring(3);
-                string imagepath = Path.Combine(path.Replace(@"Levels", "Images/"), imagefile);
+                string imagepath = Path.Combine(
+                    path.Replace(@"Levels", "Images/"), imagefile);
                 if (File.Exists(imagepath)) {
                     Legend[symbol] = imagefile;
                 }

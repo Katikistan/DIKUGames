@@ -6,11 +6,11 @@ using DIKUArcade.Math;
 using DIKUArcade.State;
 using Breakout.Levels;
 using System.IO;
-
 namespace Breakout.States;
 public class GameRunning : IGameState {
     private static GameRunning instance = null;
     private LevelManager levelManager = null!;
+    private Points points = null!;
     private Entity background = null!;
     public int score = 0;
     public static GameRunning GetInstance() {
@@ -29,6 +29,7 @@ public class GameRunning : IGameState {
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
         levelManager = new LevelManager();
         levelManager.NewLevel("level1.txt");
+        points = new Points();
     }
     public void ResetState() {
         GameRunning.instance = null;
@@ -36,6 +37,7 @@ public class GameRunning : IGameState {
     public void RenderState() {
         background.RenderEntity();
         levelManager.Render();
+        points.Render();
     }
     public void UpdateState() {
         levelManager.Update();
@@ -68,8 +70,16 @@ public class GameRunning : IGameState {
                 break;
             case KeyboardKey.Escape:
                 BreakoutBus.GetBus().RegisterEvent(new GameEvent {
-                    EventType = GameEventType.WindowEvent,
-                    StringArg1 = "WINDOW_CLOSE"
+                    EventType = GameEventType.GameStateEvent,
+                    Message = "CHANGE_STATE",
+                    StringArg1 = "GAME_PAUSED"
+                });
+                break;
+            case KeyboardKey.Space:
+                BreakoutBus.GetBus().RegisterEvent(new GameEvent {
+                    EventType = GameEventType.StatusEvent,
+                    Message = "GET POINTS",
+                    IntArg1 = 100
                 });
                 break;
         }

@@ -1,9 +1,8 @@
 using Breakout.Blocks;
 using DIKUArcade.Entities;
-using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using System.Collections.Generic;
-using System.IO;
+
 
 namespace Breakout.Levels;
 public class LevelCreator {
@@ -45,21 +44,21 @@ public class LevelCreator {
         blocks = new EntityContainer<Block>(324);
         // pos and extent for blocks
         float x = 1f /  12f;
-        float y = (1f /  12f) / 3f;
+        float y = (1f /  12f) / 2.5f;
         string colour;
-        IBaseImage image;
         StationaryShape shape;
+        Block block;
         for (int i = 0; i < Map.Length - 1; i++) {
             for (int j = 0; j < Map[i].Length; j++) {
                 shape = new StationaryShape(
                     new Vec2F((x * (float) j), 1.0f - (y * (float) i)),
                     new Vec2F(x, y));
                 if (Legend.TryGetValue(Map[i][j], out colour!)) {
-                    // Key has a vaild colour file
-                    image = new Image(
-                        Path.Combine("..", "Breakout", "Assets", "Images", colour));
-                    blocks.AddEntity(new DefaultBlock(shape, image));
+                    block = new DefaultBlock(shape, colour);
+                    // block = block as Hardened;
+                    blocks.AddEntity(block);
                 }
+
             }
         }
     }

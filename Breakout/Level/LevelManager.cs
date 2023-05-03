@@ -14,7 +14,7 @@ public class LevelManager {
     public LevelManager() {
         levelCreator = new LevelCreator();
         player = new Player(
-            new DynamicShape(new Vec2F(0.425f, 0.05f), new Vec2F(0.15f, 0.04f)),
+            new DynamicShape(new Vec2F(0.425f, 0.06f), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
     }
     public void NewLevel(string level) {
@@ -28,12 +28,18 @@ public class LevelManager {
             }
         });
     }
+    // private void CheckCollisions() {
+    //     PlayerCollsion.Collide(ball,Player)
+    //     BlockCollsion.Collide(Ball,Block)
+    //     WallCollsion.Collide(Ball)
+    // }
     public void Render() {
         player.Render();
         blocks.RenderEntities();
     }
     public void Update() {
-        IterateBlocks();
+        // IterateBlocks();
         player.Move();
+        blocks.ToString();
     }
 }
