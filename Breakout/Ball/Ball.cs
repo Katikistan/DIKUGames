@@ -5,7 +5,37 @@ using DIKUArcade.Math;
 
 namespace Breakout.Balls;
 public class Ball : Entity {
-    public Ball(DynamicShape shape, IBaseImage image) : base(shape, image) {
 
+    private Vec2F startpos;
+    public Vec2F Startpos {
+        get {
+            return startpos;
+        }
     }
+    private DynamicShape shape;
+    public DynamicShape _Shape {
+        get {
+            return shape;
+        }
+    }
+    private Vec2F direction;
+
+    public Ball(DynamicShape shape, IBaseImage image) : base(shape, image) {
+        this.shape = shape;
+    }
+
+    public void Move(){
+        if (_Shape.Position.Y <= 0.0 - _Shape.Extent.Y) {
+            this.DeleteEntity();
+        } else {
+        _Shape.Move();
+        }
+    }
+
+    public void Render(){
+        this.RenderEntity();
+        }
 }
+
+
+    
