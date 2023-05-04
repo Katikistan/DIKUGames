@@ -28,7 +28,7 @@ public class GameRunning : IGameState {
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
         levelManager = new LevelManager();
-        levelManager.NewLevel("level1.txt");
+        levelManager.NewLevel("columns.txt");
         points = new Points();
     }
     public void ResetState() {
@@ -83,14 +83,14 @@ public class GameRunning : IGameState {
             case KeyboardKey.A:
                 BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
-                    Message = "REALESE LEFT"
+                    Message = "RELEASE LEFT"
                 });
                 break;
             case KeyboardKey.Right:
             case KeyboardKey.D:
                 BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                     EventType = GameEventType.PlayerEvent,
-                    Message = "REALESE RIGHT"
+                    Message = "RELEASE RIGHT"
                 });
                 break;
         }
