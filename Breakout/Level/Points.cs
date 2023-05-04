@@ -22,7 +22,7 @@ public class Points : IGameEventProcessor {
                     CreateText();
                     break;
                 case "RESET POINTS":
-                    points = gameEvent.IntArg1;
+                    points = 0;
                     CreateText();
                     break;
             }

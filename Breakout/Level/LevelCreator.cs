@@ -46,6 +46,7 @@ public class LevelCreator {
         float x = 1f /  12f;
         float y = (1f /  12f) / 2.5f;
         string colour;
+        string meta;
         StationaryShape shape;
         Block block;
         for (int i = 0; i < Map.Length - 1; i++) {
@@ -54,11 +55,10 @@ public class LevelCreator {
                     new Vec2F((x * (float) j), 1.0f - (y * (float) i)),
                     new Vec2F(x, y));
                 if (Legend.TryGetValue(Map[i][j], out colour!)) {
-                    block = new DefaultBlock(shape, colour);
-                    // block = block as Hardened;
+                    Meta.TryGetValue(Map[i][j].ToString(), out meta!);
+                    block = BlockCreator.CreateBlock(shape,colour,meta);
                     blocks.AddEntity(block);
                 }
-
             }
         }
     }

@@ -75,13 +75,6 @@ public class GameRunning : IGameState {
                     StringArg1 = "GAME_PAUSED"
                 });
                 break;
-            case KeyboardKey.Space:
-                BreakoutBus.GetBus().RegisterEvent(new GameEvent {
-                    EventType = GameEventType.StatusEvent,
-                    Message = "GET POINTS",
-                    IntArg1 = 100
-                });
-                break;
         }
     }
     private void KeyRelease(KeyboardKey key) {

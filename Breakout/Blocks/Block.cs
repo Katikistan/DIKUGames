@@ -7,7 +7,7 @@ using System.IO;
 namespace Breakout.Blocks;
 public abstract class Block : Entity {
 
-    internal int value = 200;
+    internal int value = 100;
     /// <summary>
     /// Amount of points given to player when block is destroyed.
     /// </summary>
