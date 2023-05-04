@@ -42,11 +42,11 @@ public class TestPlayer {
         });
         eventRealeseLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
-            Message = "REALESE LEFT"
+            Message = "RELEASE LEFT"
         });
         eventRealeseRight = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
-            Message = "REALESE RIGHT"
+            Message = "RELEASE RIGHT"
         });
     }
     [Test]
