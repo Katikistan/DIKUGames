@@ -30,8 +30,6 @@ public class LevelManager {
         PlayerCollsion.Collide(balls, player);
         BlockCollsion.Collide(balls, blocks);
         WallCollsion.Collide(ball);
-
-
     }
     public void Render() {
         player.Render();
