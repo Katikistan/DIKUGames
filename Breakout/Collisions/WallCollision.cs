@@ -7,11 +7,14 @@ using DIKUArcade.Math;
 namespace Breakout.Collisions;
 public static class WallCollsion {
 
-    public static void Collide(Ball ball) {
-        CollideLeftWall(ball);
-        CollideRightWall(ball);
-        CollideTopWall(ball);
-        CollideBottom(ball);
+    public static void Collide(EntityContainer<Ball> balls) {
+        balls.Iterate( ball => {
+            CollideLeftWall(ball);
+            CollideRightWall(ball);
+            CollideTopWall(ball);
+            CollideBottom(ball); 
+            //ball.Move();
+        });
     }
 
     private static void CollideLeftWall(Ball ball) {
