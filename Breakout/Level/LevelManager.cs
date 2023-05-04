@@ -25,9 +25,9 @@ public class LevelManager {
         blocks = levelCreator.Blocks;
     }
     private void CheckCollisions() {
-        PlayerCollsion.Collide(balls, player);
-        BlockCollsion.Collide(balls, blocks);
-        WallCollsion.Collide(balls);
+        PlayerCollision.Collide(balls, player);
+        BlockCollision.Collide(balls, blocks);
+        WallCollision.Collide(balls);
     }
     public void Render() {
         player.Render();

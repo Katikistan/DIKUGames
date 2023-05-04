@@ -23,7 +23,7 @@ public static class BlockCollision {
 
                     switch (collisionDirection) {
                         case CollisionDirection.CollisionDirUp:
-                            ball.Shape.ChangeDirection((- currentDirection.X, - currentDirection.Y)); 
+                            ball._Shape.ChangeDirection(new Vec2F(- currentDirection.X, - currentDirection.Y)); 
                             break;
                         case CollisionDirection.CollisionDirDown:
                             // ball.Shape.ChangeDirection();
