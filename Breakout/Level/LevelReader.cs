@@ -33,6 +33,9 @@ public class LevelReader {
             return false;
         }
     }
+    public void ChangePath(string path) {
+        this.path = path;
+    }
     public bool MapValid() {
         if (Map != null && Legend != null && Meta != null) {
             return true;
@@ -69,7 +72,12 @@ public class LevelReader {
                     // meta section contains ": " and can be spilt in 2
                     string key = parts[0];
                     string value = parts[1];
-                    Meta[key] = value;
+                    if (value.Length == 1) {
+                        // value is a block symbol therefore switched around
+                        Meta[value] = key;
+                    } else {
+                        Meta[key] = value;
+                    }
                 }
             }
         }

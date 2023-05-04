@@ -10,7 +10,7 @@ public class DefaultBlock : Block {
     }
     public override void LoseHealth() {
         health -= 1;
-        if (health <= 0) {
+        if (health == 0) {
             DeleteEntity();
             GivePoints();
         }
