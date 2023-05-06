@@ -23,10 +23,10 @@ public class Player : Entity, IGameEventProcessor {
                 case "MOVE RIGHT":
                     SetMoveRight(true);
                     break;
-                case "REALESE LEFT":
+                case "RELEASE LEFT":
                     SetMoveLeft(false);
                     break;
-                case "REALESE RIGHT":
+                case "RELEASE RIGHT":
                     SetMoveRight(false);
                     break;
             }

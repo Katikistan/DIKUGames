@@ -13,34 +13,26 @@ public static class BlockCollision {
         balls.Iterate( ball => {
             // Iterating through every block
             blocks.Iterate( block => {
-                DynamicShape dynamicBall = ball.Shape.AsDynamicShape(); // ball as a dynamic shape
-                CollisionData collision = CollisionDetection.Aabb(dynamicBall, block.Shape); // Collision detection
+                CollisionData collision = CollisionDetection.Aabb(ball._Shape, block.Shape); // Collision detection
                 if (collision.Collision) { // True if there is collision between the ball and block
                     block.LoseHealth(); // Block loses health
-
                     CollisionDirection collisionDirection = collision.CollisionDir; // the direction of the collision
-                    Vec2F currentDirection = dynamicBall.Direction;
+                    Vec2F currentDirection = ball._Shape.Direction;
 
                     switch (collisionDirection) {
                         case CollisionDirection.CollisionDirUp:
-                            ball._Shape.ChangeDirection(new Vec2F(- currentDirection.X, - currentDirection.Y)); 
-                            
+                            ball._Shape.ChangeDirection(new Vec2F(currentDirection.X, - currentDirection.Y)); 
                             break;
                         case CollisionDirection.CollisionDirDown:
-                            // ball.Shape.ChangeDirection();
-                            ball._Shape.Direction.Y = -ball._Shape.Direction.Y; 
+                            ball._Shape.ChangeDirection(new Vec2F(currentDirection.X, - currentDirection.Y));
                             break;
                         case CollisionDirection.CollisionDirLeft:
-                            
-                            ball._Shape.Direction.X = -ball._Shape.Direction.X; 
-                            // ball.Shape.ChangeDirection();
+                            ball._Shape.ChangeDirection(new Vec2F(-currentDirection.X, currentDirection.Y)); 
                             break;
                         case CollisionDirection.CollisionDirRight:
-                            // ball.Shape.ChangeDirection();
-                            ball._Shape.Direction.X = -ball._Shape.Direction.X;
+                            ball._Shape.ChangeDirection(new Vec2F(-currentDirection.X, currentDirection.Y));
                             break;
                         case CollisionDirection.CollisionDirUnchecked:
-                            // ball.Shape.ChangeDirection();
                             break;
                     }
                 }
