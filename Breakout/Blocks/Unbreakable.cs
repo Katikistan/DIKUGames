@@ -7,7 +7,7 @@ public class Unbreakable : Block {
     /// <summary>
     /// Amount of points given to player when block is destroyed.
     /// </summary>
-    public Unbreakable(StationaryShape shape, string imageFile) : base(shape, imageFile) {
+    public Unbreakable(Shape shape, string imageFile) : base(shape, imageFile) {
         position = new Vec2F(shape.Position.X, shape.Position.Y);
     }
     /// <summary>
