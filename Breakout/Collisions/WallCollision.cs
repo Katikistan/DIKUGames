@@ -42,10 +42,10 @@ public static class WallCollsion {
                 EventType = GameEventType.StatusEvent,
                 Message = "LOSE HEALTH"
             });
-            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
-                EventType = GameEventType.StatusEvent,
-                Message = "NEW BALL"
-            });
+        BreakoutBus.GetBus().RegisterEvent(new GameEvent {
+            EventType = GameEventType.StatusEvent,
+            Message = "NEW BALL"
+        });
         }
     }
 }
