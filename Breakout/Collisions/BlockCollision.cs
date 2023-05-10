@@ -18,22 +18,13 @@ public static class BlockCollision {
                     block.LoseHealth(); // Block loses health
                     CollisionDirection collisionDirection = collision.CollisionDir; // the direction of the collision
                     Vec2F currentDirection = ball._Shape.Direction;
-
-                    switch (collisionDirection) {
-                        case CollisionDirection.CollisionDirUp:
-                            ball._Shape.ChangeDirection(new Vec2F(currentDirection.X, - currentDirection.Y)); 
-                            break;
-                        case CollisionDirection.CollisionDirDown:
-                            ball._Shape.ChangeDirection(new Vec2F(currentDirection.X, - currentDirection.Y));
-                            break;
-                        case CollisionDirection.CollisionDirLeft:
-                            ball._Shape.ChangeDirection(new Vec2F(-currentDirection.X, currentDirection.Y)); 
-                            break;
-                        case CollisionDirection.CollisionDirRight:
-                            ball._Shape.ChangeDirection(new Vec2F(-currentDirection.X, currentDirection.Y));
-                            break;
-                        case CollisionDirection.CollisionDirUnchecked:
-                            break;
+                    if ((collisionDirection == CollisionDirection.CollisionDirUp)
+                    | (collisionDirection == CollisionDirection.CollisionDirDown)){
+                        ball._Shape.ChangeDirection(new Vec2F(currentDirection.X, - currentDirection.Y));
+                    }
+                    else if ((collisionDirection == CollisionDirection.CollisionDirLeft)
+                    | (collisionDirection == CollisionDirection.CollisionDirRight)) {
+                        ball._Shape.ChangeDirection(new Vec2F(-currentDirection.X, currentDirection.Y));
                     }
                 }
             });
