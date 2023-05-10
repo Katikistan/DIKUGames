@@ -6,7 +6,7 @@ public class Health : IGameEventProcessor {
     private int health;
     private Text display;
     public Health() {
-        health = 1;
+        health = 3;
         display = new Text($"Lives: {health}", new Vec2F(0.8f, -0.275f), new Vec2F(0.25f, 0.35f));
         display.SetColor(new Vec3I(255, 255, 255));
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, this);

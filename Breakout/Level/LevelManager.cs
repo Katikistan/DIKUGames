@@ -33,8 +33,11 @@ public class LevelManager : IGameEventProcessor {
         if (gameEvent.EventType == GameEventType.StatusEvent) {
             switch (gameEvent.Message) {
                 case "CLEAR":
-                blocks.ClearContainer();
-                break;
+                    blocks.ClearContainer();
+                    break;
+                case "NEW BALL":
+                    balls.AddEntity(ball);
+                    break;
             }
         }
     }
