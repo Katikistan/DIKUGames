@@ -47,7 +47,7 @@ public class LevelCreator {
         float y = (1f /  12f) / 2.5f;
         string colour;
         string meta;
-        StationaryShape shape;
+        Shape shape;
         Block block;
         for (int i = 0; i < Map.Length - 1; i++) {
             for (int j = 0; j < Map[i].Length; j++) {

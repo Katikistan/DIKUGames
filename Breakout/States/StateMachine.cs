@@ -18,6 +18,7 @@ public class StateMachine : IGameEventProcessor {
                     SwitchState(StateTransformer.TransformStringToState(gameEvent.StringArg1));
                     break;
                 case ("CHANGE_STATE"):
+                    System.Console.WriteLine("change");
                     // Resumes a state and makes it the ActiveState
                     SwitchState(StateTransformer.TransformStringToState(gameEvent.StringArg1));
                     // Resets the state
@@ -38,6 +39,9 @@ public class StateMachine : IGameEventProcessor {
                 break;
             case GameStateType.MainMenu:
                 ActiveState = MainMenu.GetInstance();
+                break;
+            case GameStateType.GameLost:
+                ActiveState = GameLost.GetInstance();
                 break;
         }
     }

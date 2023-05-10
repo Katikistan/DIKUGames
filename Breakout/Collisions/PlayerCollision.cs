@@ -12,8 +12,7 @@ public static class PlayerCollision {
 
 
 
-    static float[] RotateVector2d(float x, float y, float radians)
-    {
+    static float[] RotateVector2d(float x, float y, float radians) {
         float[] result = new float[2];
         result[0] = (float)(x * Math.Cos(radians) - y * Math.Sin(radians));
         result[1] = (float)(x * Math.Sin(radians) + y * Math.Cos(radians));
@@ -39,11 +38,11 @@ public static class PlayerCollision {
             });
     }
 }
-    
-
-        
-    
 
 
 
-    
+
+
+
+
+

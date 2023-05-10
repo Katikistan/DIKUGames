@@ -6,9 +6,9 @@ namespace Breakout.Levels;
 public class LevelReader {
     private string path;
     private string[] txtlines;
-    public Dictionary<string, string> Meta = null;
-    public Dictionary<char, string> Legend = null;
-    public string[] Map = null;
+    public Dictionary<string, string> Meta;
+    public Dictionary<char, string> Legend;
+    public string[] Map;
     /// <summary>
     /// A levelReader used in Level to extract Map, Meta and Legend from a txt file.
     /// </summary>
@@ -23,6 +23,9 @@ public class LevelReader {
     /// <returns>Returns false if level file could not be read, else true.</returns>
     public bool ReadLevel(string level) {
         string txtfile = Path.Combine(path, level);
+        // Map = null;
+        // Meta = null;
+        // Legend = null;
         if (File.Exists(txtfile)) {
             this.txtlines = File.ReadAllLines(txtfile);
             ReadMap();
