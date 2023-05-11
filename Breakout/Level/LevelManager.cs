@@ -17,23 +17,18 @@ public class LevelManager : IGameEventProcessor {
         get { return player; }
     }
     private EntityContainer<Ball> balls;
-    private Ball ball;
-    public Ball Ball {
-        get { return ball; }
-    }
     public LevelManager() {
         levelCreator = new LevelCreator();
         player = new Player(
             new DynamicShape(new Vec2F(0.425f, 0.06f), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        ball = new Ball(new DynamicShape(new Vec2F(0.45f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f,0.015f)),
-        new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        balls = new EntityContainer<Ball>(2);
-        balls.AddEntity(ball);
+        balls = new EntityContainer<Ball>(3);
     }
     public void NewLevel(string level) {
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
+        balls.ClearContainer();
+        balls.AddEntity(BallCreator.CreateBall());
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.StatusEvent) {
@@ -42,9 +37,8 @@ public class LevelManager : IGameEventProcessor {
                     blocks.ClearContainer();
                     break;
                 case "NEW BALL":
-                    ball = new Ball(new DynamicShape(new Vec2F(0.45f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f,0.015f)),
-                    new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-                    balls.AddEntity(ball);
+                    System.Console.WriteLine("wow");
+                    balls.AddEntity(BallCreator.CreateBall());
                     break;
             }
         }
@@ -57,6 +51,11 @@ public class LevelManager : IGameEventProcessor {
         }
         return true;
     }
+    private void MoveBalls() {
+        foreach (Ball ball in balls) {
+            ball.Move();
+        }
+    }
     private void CheckCollisions() {
         PlayerCollision.Collide(balls, player);
         BlockCollision.Collide(balls, blocks);
@@ -65,11 +64,11 @@ public class LevelManager : IGameEventProcessor {
     public void Render() {
         player.Render();
         blocks.RenderEntities();
-        ball.Render();
+        balls.RenderEntities();
     }
     public void Update() {
         CheckCollisions();
         player.Move();
-        ball.Move();
+        MoveBalls();
     }
 }
