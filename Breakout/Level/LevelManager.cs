@@ -71,7 +71,7 @@ public class LevelManager : IGameEventProcessor {
     private void CheckCollisions() {
         PlayerCollision.Collide(balls, player);
         BlockCollision.Collide(balls, blocks);
-        WallCollsion.Collide(balls);
+        WallCollision.Collide(balls);
     }
     public void Render() {
         player.Render();
