@@ -18,12 +18,13 @@ public class TestPoints {
             new List<GameEventType> {
                 GameEventType.StatusEvent
             });
+        points = new Points();
+        BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, points);
 
     }
     [SetUp]
     public void Setup() {
         points = new Points();
-        BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, points);
         getPoints = (new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "GET POINTS",

@@ -2,7 +2,7 @@ using Breakout.Balls;
 using DIKUArcade.Entities;
 using DIKUArcade.Events;
 namespace Breakout.Collisions;
-public static class WallCollsion {
+public static class WallCollision {
     /// <summary>
     /// Will check for collsions between ball and walls.
     /// If ball hits a wall it's send the opposite direction.
