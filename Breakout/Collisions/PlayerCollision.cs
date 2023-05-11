@@ -1,12 +1,8 @@
 using Breakout.Balls;
 using Breakout.Players;
 using DIKUArcade.Entities;
-using DIKUArcade.Events;
-using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using DIKUArcade.Physics;
-using System;
-
 namespace Breakout.Collisions;
 public static class PlayerCollision {
     // static float[] RotateVector2d(float x, float y, float radians) {
