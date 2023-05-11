@@ -9,11 +9,11 @@ public class Hardened : Block {
     private string DamagedImg;
     private string Damaged;
     /// <summary>
-    /// Amount of points given to player when block is destroyed.
+    /// Hardened block has 2 health points and grants player 20 points when destroyed.
     /// </summary>
     public Hardened(Shape shape, string imageFile) : base(shape, imageFile) {
         position = new Vec2F(shape.Position.X, shape.Position.Y);
-        DamagedImg = imageFile.Insert(imageFile.Length-4, "-damaged");
+        DamagedImg = imageFile.Insert(imageFile.Length - 4, "-damaged");
         Damaged = Path.Combine("..", "Breakout", "Assets", "Images", DamagedImg);
         health = 2;
         value = 20;

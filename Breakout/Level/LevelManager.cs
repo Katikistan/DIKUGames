@@ -11,12 +11,14 @@ using Breakout.Balls;
 
 public class LevelManager : IGameEventProcessor {
     private LevelCreator levelCreator;
-    public EntityContainer<Block> blocks;
+    private EntityContainer<Block> blocks;
+    private EntityContainer<Ball> balls;
     private Player player;
     public Player Player {
-        get { return player; }
+        get {
+            return player;
+        }
     }
-    private EntityContainer<Ball> balls;
     public LevelManager() {
         levelCreator = new LevelCreator();
         player = new Player(
@@ -24,10 +26,14 @@ public class LevelManager : IGameEventProcessor {
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         balls = new EntityContainer<Ball>(3);
     }
+    /// <summary>
+    /// Removes balls and creates newlevel using string levelfile
+    /// </summary>
+    /// <param name="level">Name of the level file that will be loaded</param>
     public void NewLevel(string level) {
+        balls.ClearContainer();
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
-        balls.ClearContainer();
         balls.AddEntity(BallCreator.CreateBall());
     }
     public void ProcessEvent(GameEvent gameEvent) {
@@ -37,12 +43,15 @@ public class LevelManager : IGameEventProcessor {
                     blocks.ClearContainer();
                     break;
                 case "NEW BALL":
-                    System.Console.WriteLine("wow");
                     balls.AddEntity(BallCreator.CreateBall());
                     break;
             }
         }
     }
+    /// <summary>
+    /// Checks wheter if the level is containing any blocks that arent unbreakable.
+    /// </summary>
+    /// <returns>false if level has blocks other than unbreakable blocks, else true.</returns>
     public bool EmptyLevel() {
         foreach (Block block in blocks) {
             if (block is not Unbreakable) {
@@ -51,6 +60,9 @@ public class LevelManager : IGameEventProcessor {
         }
         return true;
     }
+    /// <summary>
+    /// Moves balls in the entitycontainer
+    /// </summary>
     private void MoveBalls() {
         foreach (Ball ball in balls) {
             ball.Move();

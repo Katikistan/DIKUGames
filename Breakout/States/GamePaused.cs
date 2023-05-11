@@ -10,12 +10,13 @@ namespace Breakout.States;
 public class GamePaused : IGameState {
     private static GamePaused instance = null;
     private Entity background;
-    private Text[] menuButtons;
+    private Text[] menuButtons = new Text[2];
     private Text PauseText;
     private int activeMenuButton;
-    private int maxMenuButtons;
     private const int CONTINUE = 0;
     private const int MAIN_MENU = 1;
+    private Vec3I white = new Vec3I(255, 255, 255);
+    private Vec3I red = new Vec3I(255, 0, 0);
     public static GamePaused GetInstance() {
         if (GamePaused.instance == null) {
             GamePaused.instance = new GamePaused();
@@ -23,7 +24,6 @@ public class GamePaused : IGameState {
         }
         return GamePaused.instance;
     }
-
     public void InitializeGameState() {
         background = new Entity(
             new StationaryShape(
@@ -31,14 +31,12 @@ public class GamePaused : IGameState {
                 new Vec2F(1.0f, 1.0f)),
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
-        maxMenuButtons = 2;
-        activeMenuButton = CONTINUE;
         PauseText = new Text(
             "Paused",
             new Vec2F(0.375f, 0.05f),
             new Vec2F(0.7f, 0.7f)
             );
-        menuButtons = new Text[maxMenuButtons];
+        activeMenuButton = CONTINUE;
         menuButtons[CONTINUE] = new Text(
             "Continue",
             new Vec2F(0.42f, 0.2f),
@@ -49,18 +47,15 @@ public class GamePaused : IGameState {
             new Vec2F(0.4f, 0.1f),
             new Vec2F(0.4f, 0.4f)
             );
+        PauseText.SetColor(white);
     }
     public void ResetState() {
         GamePaused.instance = null;
-
     }
     public void UpdateState() {
     }
     public void RenderState() {
         background.RenderEntity();
-        Vec3I white = new Vec3I(255, 255, 255);
-        Vec3I red = new Vec3I(255, 0, 0);
-        PauseText.SetColor(white);
         switch (activeMenuButton) {
             case (CONTINUE):
                 menuButtons[CONTINUE].SetColor(red);

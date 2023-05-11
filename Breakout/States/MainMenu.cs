@@ -10,11 +10,12 @@ namespace Breakout.States;
 public class MainMenu : IGameState {
     private static MainMenu instance = null;
     private Entity backGroundImage;
-    private Text[] menuButtons;
+    private Text[] menuButtons= new Text[2];
     private int activeMenuButton;
-    private int maxMenuButtons;
     private const int NEW_GAME = 0;
     private const int QUIT = 1;
+    private Vec3I white = new Vec3I(255, 255, 255);
+    private Vec3I red = new Vec3I(255, 0, 0);
     public static MainMenu GetInstance() {
         if (MainMenu.instance == null) {
             MainMenu.instance = new MainMenu();
@@ -22,7 +23,6 @@ public class MainMenu : IGameState {
         }
         return MainMenu.instance;
     }
-
     public void InitializeGameState() {
         backGroundImage = new Entity(
             new StationaryShape(
@@ -30,9 +30,7 @@ public class MainMenu : IGameState {
                 new Vec2F(1.0f, 1.0f)),
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "BreakoutTitleScreen.png")));
-        maxMenuButtons = 2;
         activeMenuButton = NEW_GAME;
-        menuButtons = new Text[maxMenuButtons];
         menuButtons[NEW_GAME] = new Text("New Game",
             new Vec2F(0.375f, 0.2f),
             new Vec2F(0.4f, 0.4f));
@@ -47,8 +45,6 @@ public class MainMenu : IGameState {
     }
     public void RenderState() {
         backGroundImage.RenderEntity();
-        Vec3I white = new Vec3I(255, 255, 255);
-        Vec3I red = new Vec3I(255, 0, 0);
         switch (activeMenuButton) {
             case (NEW_GAME):
                 menuButtons[NEW_GAME].SetColor(red);
