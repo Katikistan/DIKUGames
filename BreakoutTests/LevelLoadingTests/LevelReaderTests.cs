@@ -52,13 +52,13 @@ public class LevelReaderTests {
         levelReader.ReadLevel("level1.txt");
         Assert.That(levelReader.Meta!["Name"], Is.EqualTo("LEVEL 1"));
         Assert.That(levelReader.Meta["Time"], Is.EqualTo("300"));
-        Assert.That(levelReader.Meta["Hardened"], Is.EqualTo("#"));
-        Assert.That(levelReader.Meta["PowerUp"], Is.EqualTo("2"));
+        Assert.That(levelReader.Meta["#"], Is.EqualTo("Hardened"));
+        Assert.That(levelReader.Meta["2"], Is.EqualTo("PowerUp"));
         levelReader.ReadLevel("level2.txt");
         // Meta changes to new level
         Assert.That(levelReader.Meta["Name"], Is.EqualTo("LEVEL 2"));
         Assert.That(levelReader.Meta["Time"], Is.EqualTo("180"));
-        Assert.That(levelReader.Meta["PowerUp"], Is.EqualTo("i"));
+        Assert.That(levelReader.Meta["i"], Is.EqualTo("PowerUp"));
     }
 
     [Test]

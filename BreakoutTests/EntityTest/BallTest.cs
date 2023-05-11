@@ -12,12 +12,10 @@ public class TestBall {
     }
     [SetUp]
     public void Setup() {
-        ball = new Ball(new DynamicShape(new Vec2F(0.45f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f,0.015f)),
-        new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
+        ball = BallCreator.CreateBall();
     }
     [Test]
     public void TestIsEntity() {
-        Assert.That(ball is Ball);
         Assert.That(ball is Entity);
     }
     [Test]

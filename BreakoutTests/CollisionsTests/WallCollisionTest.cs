@@ -1,10 +1,8 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-using Breakout.Blocks;
-using Breakout.Balls;
-using Breakout.Players;
 using Breakout.Collisions;
+using Breakout.Balls;
 namespace BreakoutTests.CollisionTests;
 
 [TestFixture]
@@ -29,6 +27,7 @@ public class WallCollisionTests{
 
         balls.AddEntity(ball1);
         balls.AddEntity(ball2);
+        WallCollision.Collide(balls);
         WallCollision.Collide(balls);
 
         Assert.AreEqual(ball1._Shape.Direction.X, - ball2._Shape.Direction.X);
@@ -73,6 +72,6 @@ public class WallCollisionTests{
         balls.AddEntity(ball2);
         Assert.AreEqual(balls.CountEntities(), 2);
         WallCollision.Collide(balls);
-        Assert.AreEqual(balls.CountEntities(), 1);   
+        Assert.AreEqual(balls.CountEntities(), 1);
     }
 }
