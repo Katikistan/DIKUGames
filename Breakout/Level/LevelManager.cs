@@ -13,8 +13,14 @@ public class LevelManager : IGameEventProcessor {
     private LevelCreator levelCreator;
     public EntityContainer<Block> blocks;
     private Player player;
+    public Player Player {
+        get { return player; }
+    }
     private EntityContainer<Ball> balls;
     private Ball ball;
+    public Ball Ball {
+        get { return ball; }
+    }
     public LevelManager() {
         levelCreator = new LevelCreator();
         player = new Player(

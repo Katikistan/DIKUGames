@@ -8,6 +8,11 @@ public class Player : Entity, IGameEventProcessor {
     private float moveRight = 0.0f;
     private const float MOVEMENT_SPEED = 0.01f;
     private DynamicShape shape;
+    public DynamicShape _Shape {
+        get {
+            return shape;
+        }
+    }
     public Player(DynamicShape shape, IBaseImage image) : base(shape, image) {
         this.shape = base.Shape.AsDynamicShape();
         BreakoutBus.GetBus().Subscribe(GameEventType.PlayerEvent, this);

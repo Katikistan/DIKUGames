@@ -7,7 +7,6 @@ namespace BreakoutTests.EntityTest;
 [TestFixture]
 public class TestBall {
     private Ball ball;
-    private EntityContainer<Ball> balls;
     public TestBall() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
@@ -15,8 +14,6 @@ public class TestBall {
     public void Setup() {
         ball = new Ball(new DynamicShape(new Vec2F(0.45f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f,0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        balls = new EntityContainer<Ball>(2);
-        balls.AddEntity(ball);
     }
     [Test]
     public void TestIsEntity() {
