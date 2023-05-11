@@ -13,6 +13,9 @@ public class GamePaused : IGameState {
     private Text[] menuButtons = new Text[2];
     private Text PauseText;
     private int activeMenuButton;
+    public int ActiveMenuButton {
+        get { return activeMenuButton; }
+    }
     private const int CONTINUE = 0;
     private const int MAIN_MENU = 1;
     private Vec3I white = new Vec3I(255, 255, 255);
