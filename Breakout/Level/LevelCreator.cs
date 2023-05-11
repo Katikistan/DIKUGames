@@ -5,16 +5,27 @@ using System.Collections.Generic;
 
 
 namespace Breakout.Levels;
+    /// <summary>
+    /// Used to create a level from a string levelfile. Uses a level reader to read level file.
+    /// </summary>
 public class LevelCreator {
-    private string[] Map;
-    private Dictionary<string, string> Meta;
-    private Dictionary<char, string> Legend;
+    private string[] map;
+    private Dictionary<string, string> meta;
+    private Dictionary<char, string> legend;
     private LevelReader levelReader;
     private EntityContainer<Block> blocks;
-    public EntityContainer<Block> Blocks { get {return blocks;} }
+    public EntityContainer<Block> Blocks {
+        get {
+            return blocks;
+        }
+    }
     public LevelReader LevelReader {
-        get {return levelReader; }
-        set {levelReader = value; }
+        get {
+            return levelReader;
+        }
+        set {
+            levelReader = value;
+        }
     }
     public LevelCreator() {
         this.levelReader = new LevelReader();
@@ -27,9 +38,9 @@ public class LevelCreator {
     public bool CreateLevel(string level) {
         levelReader.ReadLevel(level);
         if (levelReader.MapValid()) { // LevelData contains map and legend
-            this.Map = levelReader.Map;
-            this.Meta = levelReader.Meta;
-            this.Legend = levelReader.Legend;
+            this.map = levelReader.Map;
+            this.meta = levelReader.Meta;
+            this.legend = levelReader.Legend;
             CreateBlocks();
             return true;
         } else {
@@ -37,26 +48,26 @@ public class LevelCreator {
         }
     }
     /// <summary>
-    /// Uses Map, Legend and Meta to draw blocks and apply metadata in the level.
+    /// Uses map, legend and meta to draw blocks and apply metadata in the level.
     /// </summary>
     private void CreateBlocks() {
-        // Map can be filled with blocks without crashing
+        // map can be filled with blocks without crashing
         blocks = new EntityContainer<Block>(324);
         // pos and extent for blocks
-        float x = 1f /  12f;
-        float y = (1f /  12f) / 2.5f;
+        float x = 1f / 12f;
+        float y = (1f / 12f) / 2.5f;
         string colour;
-        string meta;
+        string metadata;
         Shape shape;
         Block block;
-        for (int i = 0; i < Map.Length - 1; i++) {
-            for (int j = 0; j < Map[i].Length; j++) {
+        for (int i = 0; i < map.Length - 1; i++) {
+            for (int j = 0; j < map[i].Length; j++) {
                 shape = new StationaryShape(
                     new Vec2F((x * (float) j), 1.0f - (y * (float) i)),
                     new Vec2F(x, y));
-                if (Legend.TryGetValue(Map[i][j], out colour!)) {
-                    Meta.TryGetValue(Map[i][j].ToString(), out meta!);
-                    block = BlockCreator.CreateBlock(shape,colour,meta);
+                if (legend.TryGetValue(map[i][j], out colour!)) {
+                    meta.TryGetValue(map[i][j].ToString(), out metadata!);
+                    block = BlockCreator.CreateBlock(shape, colour, metadata);
                     blocks.AddEntity(block);
                 }
             }

@@ -22,15 +22,12 @@ public class Health : IGameEventProcessor {
     }
     /// <summary>
     /// Decrements the health field by one and updates Text
-    /// such that is has the correct health value
+    /// if health is 0 then state switches to game lost.
     /// </summary>
-
-    // static active state? til at kunne skifte til game over state bla.
     public void LoseHealth() {
         health -= 1;
         display.SetText("Lives:" + health.ToString());
         if (health <= 0) {
-            System.Console.WriteLine("wo");
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                 EventType = GameEventType.GameStateEvent,
                 Message = "CHANGE_STATE",

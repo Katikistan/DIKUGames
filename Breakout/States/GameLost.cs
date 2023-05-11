@@ -10,12 +10,13 @@ namespace Breakout.States;
 public class GameLost : IGameState {
     private static GameLost instance = null;
     private Entity background;
-    private Text[] menuButtons;
+    private Text[] menuButtons = new Text[2];
     private Text GameOverText;
     private int activeMenuButton;
-    private int maxMenuButtons;
     private const int MAIN_MENU = 0;
     private const int QUIT = 1;
+    private Vec3I white = new Vec3I(255, 255, 255);
+    private Vec3I red = new Vec3I(255, 0, 0);
     public static GameLost GetInstance() {
         if (GameLost.instance == null) {
             GameLost.instance = new GameLost();
@@ -30,24 +31,26 @@ public class GameLost : IGameState {
                 new Vec2F(1.0f, 1.0f)),
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
-        maxMenuButtons = 2;
-        activeMenuButton = MAIN_MENU;
+
         GameOverText = new Text(
             "Game over",
             new Vec2F(0.375f, 0.05f),
             new Vec2F(0.7f, 0.7f)
             );
-        menuButtons = new Text[maxMenuButtons];
+
         menuButtons[MAIN_MENU] = new Text(
             "Main Menu",
             new Vec2F(0.42f, 0.2f),
             new Vec2F(0.4f, 0.4f)
             );
+
         menuButtons[QUIT] = new Text(
             "Quit game",
             new Vec2F(0.4f, 0.1f),
             new Vec2F(0.4f, 0.4f)
             );
+        GameOverText.SetColor(white);
+        activeMenuButton = MAIN_MENU;
     }
     public void ResetState() {
         GameLost.instance = null;
@@ -57,17 +60,14 @@ public class GameLost : IGameState {
     }
     public void RenderState() {
         background.RenderEntity();
-        Vec3I white = new Vec3I(255, 255, 255);
-        Vec3I red = new Vec3I(255, 0, 0);
-        GameOverText.SetColor(white);
         switch (activeMenuButton) {
+            case (MAIN_MENU):
+                menuButtons[MAIN_MENU].SetColor(red);
+                menuButtons[QUIT].SetColor(white);
+                break;
             case (QUIT):
                 menuButtons[QUIT].SetColor(red);
                 menuButtons[MAIN_MENU].SetColor(white);
-                break;
-            case (MAIN_MENU):
-                menuButtons[QUIT].SetColor(white);
-                menuButtons[MAIN_MENU].SetColor(red);
                 break;
         }
         GameOverText.RenderText();

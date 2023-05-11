@@ -9,8 +9,6 @@ public class StateMachine : IGameEventProcessor {
         BreakoutBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);
         ActiveState = MainMenu.GetInstance();
     }
-    /// <summary>
-    /// </summary>
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.GameStateEvent) {
             switch (gameEvent.Message) {
@@ -18,7 +16,6 @@ public class StateMachine : IGameEventProcessor {
                     SwitchState(StateTransformer.TransformStringToState(gameEvent.StringArg1));
                     break;
                 case ("CHANGE_STATE"):
-                    System.Console.WriteLine("change");
                     // Resumes a state and makes it the ActiveState
                     SwitchState(StateTransformer.TransformStringToState(gameEvent.StringArg1));
                     // Resets the state

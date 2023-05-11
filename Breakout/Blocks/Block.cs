@@ -11,9 +11,17 @@ public abstract class Block : Entity {
     /// <summary>
     /// Amount of points given to player when block is destroyed.
     /// </summary>
-    public int Value {get { return value; }}
+    public int Value {
+        get {
+            return value;
+        }
+    }
     internal int health = 1;
-    public int Health { get { return health; }}
+    public int Health {
+        get {
+            return health;
+        }
+    }
     internal Vec2F position;
 
     public Block(Shape shape, string imageFile) :

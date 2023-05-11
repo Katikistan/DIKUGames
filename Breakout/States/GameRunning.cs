@@ -49,7 +49,7 @@ public class GameRunning : IGameState {
         health.Render();
     }
     private void LoadLevels() {
-        if (levels.Count == 0) {
+        if (levels.Count == 0) { // No levels left to load.
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                 EventType = GameEventType.GameStateEvent,
                 Message = "CHANGE_STATE",
@@ -57,8 +57,9 @@ public class GameRunning : IGameState {
             });
             return;
         } else if (levelManager.EmptyLevel()) {
-            levels.RemoveAt(0);
-            if (levels.Count > 0)
+            // If level contains no blocks except unbreakable blocks
+            levels.RemoveAt(0); // Removes current level form level list
+            if (levels.Count > 0) // Shouldnt try to access index 0 in an empty list
                 levelManager.NewLevel(levels[0]);
         }
     }

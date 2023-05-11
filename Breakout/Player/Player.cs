@@ -17,8 +17,6 @@ public class Player : Entity, IGameEventProcessor {
         this.shape = base.Shape.AsDynamicShape();
         BreakoutBus.GetBus().Subscribe(GameEventType.PlayerEvent, this);
     }
-    /// <summary>
-    /// </summary>
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.PlayerEvent) {
             switch (gameEvent.Message) {
@@ -40,8 +38,6 @@ public class Player : Entity, IGameEventProcessor {
     private void UpdateDirection() {
         shape.Direction.X = moveLeft + moveRight;
     }
-    /// <summary>
-    /// </summary>
     public void Move() {
         shape.Move();
         if (shape.Position.X <= 0.0f) {
@@ -66,14 +62,10 @@ public class Player : Entity, IGameEventProcessor {
         }
         UpdateDirection();
     }
-    /// <summary>
-    /// </summary>
     public Vec2F GetPosition() {
         Vec2F position = new Vec2F(shape.Position.X, shape.Position.Y);
         return (position);
     }
-    /// <summary>
-    /// </summary>
     public void Render() {
         RenderEntity();
     }
