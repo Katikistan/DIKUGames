@@ -1,10 +1,5 @@
 using DIKUArcade.Entities;
-using DIKUArcade.Events;
-using DIKUArcade.Graphics;
 using DIKUArcade.Input;
-using DIKUArcade.Math;
-using DIKUArcade.State;
-using System.IO;
 
 namespace Breakout.States;
 [TestFixture]

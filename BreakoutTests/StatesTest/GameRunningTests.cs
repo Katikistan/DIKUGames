@@ -1,18 +1,12 @@
 using DIKUArcade.Entities;
-using DIKUArcade.Events;
-using DIKUArcade.Graphics;
-using DIKUArcade.Input;
-using DIKUArcade.Math;
-using DIKUArcade.State;
-using System.IO;
 using Breakout.Levels;
 
 namespace Breakout.States;
 [TestFixture]
-public class GameRunningTest{
+public class GameRunningTest {
     private GameRunning gameRunning;
 
-    public GameRunningTest(){
+    public GameRunningTest() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
     [SetUp]
@@ -24,8 +18,8 @@ public class GameRunningTest{
     public void TestInitializeGameState() {
         Assert.AreNotEqual(gameRunning.LevelManager, null!);
         Assert.AreNotEqual(gameRunning.Points, null!);
-        Assert.AreNotEqual(gameRunning.Background, null!); 
-        
+        Assert.AreNotEqual(gameRunning.Background, null!);
+
         Assert.That(gameRunning.Health is Health);
         Assert.That(gameRunning.Background is Entity);
         Assert.That(gameRunning.Levels is List<string>);
@@ -37,7 +31,7 @@ public class GameRunningTest{
         Assert.AreEqual(gameRunning.Levels[2], "level3.txt");
     }
     [Test]
-    public void TestLoadLevels(){
+    public void TestLoadLevels() {
         // If levels is empty a new level is created
         Assert.AreEqual(gameRunning.Levels.Count, 3);
         for (int i = 0; i < gameRunning.Levels.Count; i++) {
