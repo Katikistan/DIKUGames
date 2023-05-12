@@ -10,6 +10,9 @@ namespace Breakout.States;
 public class MainMenu : IGameState {
     private static MainMenu instance = null;
     private Entity backGround;
+    public Entity BackGround {
+        get { return backGround; }
+    }
     private Text[] menuButtons = new Text[2];
     private int activeMenuButton;
     public int ActiveMenuButton {
