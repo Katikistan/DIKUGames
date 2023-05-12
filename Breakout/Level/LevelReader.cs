@@ -21,7 +21,7 @@ public class LevelReader {
     /// </summary>
     /// <param name="path">The file path level files will be read from</param>
     public LevelReader() {
-        this.path = Path.Combine(Constants.MAIN_PATH, "Assets","Levels");
+        this.path = Path.Combine(Constants.MAIN_PATH, "Assets", "Levels");
     }
     /// <summary>
     /// Will try to read a level file. Reads mapdata, leveldata and metadata.

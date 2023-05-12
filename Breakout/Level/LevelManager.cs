@@ -19,10 +19,15 @@ public class LevelManager : IGameEventProcessor {
             return player;
         }
     }
-
-    public EntityContainer<Block> Blocks { get => blocks; }
-    public EntityContainer<Ball> Balls { get => balls;  }
-    public LevelCreator LevelCreator { get => levelCreator;}
+    public EntityContainer<Block> Blocks {
+        get => blocks;
+    }
+    public EntityContainer<Ball> Balls {
+        get => balls;
+    }
+    public LevelCreator LevelCreator {
+        get => levelCreator;
+    }
 
     public LevelManager() {
         levelCreator = new LevelCreator();
@@ -38,7 +43,7 @@ public class LevelManager : IGameEventProcessor {
     /// <param name="level">Name of the level file that will be loaded</param>
     public void NewLevel(string level) {
         balls.ClearContainer();
-        bool wow = levelCreator.CreateLevel(level);
+        levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
         balls.AddEntity(BallCreator.CreateBall());
     }

@@ -1,15 +1,13 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-using Breakout.Blocks;
 using Breakout.Balls;
 using Breakout.Players;
 using Breakout.Collisions;
-using Breakout.Levels;
 namespace BreakoutTests.CollisionTests;
 
 [TestFixture]
-public class PlayerCollisionTest{
+public class PlayerCollisionTest {
     private Ball ballmid;
     private Ball ballleft;
     private Ball ballright;
@@ -20,25 +18,25 @@ public class PlayerCollisionTest{
     private Player player;
     [SetUp]
     public void Setup() {
-        ballleft = new Ball(new DynamicShape(new Vec2F(0.51399916f,0.1f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f,-0.015f)),
+        ballleft = new Ball(new DynamicShape(new Vec2F(0.51399916f, 0.1f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ballleftleft = new Ball(new DynamicShape(new Vec2F(0.425f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f,-0.015f)),
+        ballleftleft = new Ball(new DynamicShape(new Vec2F(0.425f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ballmid = new Ball(new DynamicShape(new Vec2F(0.475f, 0.3f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f,-0.015f)),
+        ballmid = new Ball(new DynamicShape(new Vec2F(0.475f, 0.3f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ballright = new Ball(new DynamicShape(new Vec2F(0.525f, 0.4f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f,-0.015f)),
+        ballright = new Ball(new DynamicShape(new Vec2F(0.525f, 0.4f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ballrightright = new Ball(new DynamicShape(new Vec2F(0.56f, 0.5f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f,-0.015f)),
+        ballrightright = new Ball(new DynamicShape(new Vec2F(0.56f, 0.5f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         player = new Player(
             new DynamicShape(new Vec2F(0.425f, 0.06f), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         balls = new EntityContainer<Ball>(5);
-        balls.AddEntity(ballleft); 
-        balls.AddEntity(ballleftleft);  
-        balls.AddEntity(ballmid); 
+        balls.AddEntity(ballleft);
+        balls.AddEntity(ballleftleft);
+        balls.AddEntity(ballmid);
         balls.AddEntity(ballright);
-        balls.AddEntity(ballrightright);   
+        balls.AddEntity(ballrightright);
 
 
 
@@ -48,67 +46,52 @@ public class PlayerCollisionTest{
     public void TestCollide() {
 
         // left side of player hit test
-        while(!PlayerCollision.Collide(balls,player)) {
-            balls.Iterate( ball => {
-                ball.Move();});
-        }   
+        while (!PlayerCollision.Collide(balls, player)) {
+            balls.Iterate(ball => {
+                ball.Move();
+            });
+        }
         Assert.AreEqual(ballleft._Shape.Direction.Y, 0.01409f);
         ballleft.DeleteEntity();
 
         // leftleft side of player hit test
 
-        while(!PlayerCollision.Collide(balls,player)) {
-            balls.Iterate( ball => {
-                ball.Move();});
-        } 
+        while (!PlayerCollision.Collide(balls, player)) {
+            balls.Iterate(ball => {
+                ball.Move();
+            });
+        }
         Assert.AreEqual(ballleftleft._Shape.Direction.Y, 0.0106f);
         ballleftleft.DeleteEntity();
 
         // middle of player hit test
 
-        while(!PlayerCollision.Collide(balls,player)) {
-            balls.Iterate( ball => {
-                ball.Move();});
-        } 
+        while (!PlayerCollision.Collide(balls, player)) {
+            balls.Iterate(ball => {
+                ball.Move();
+            });
+        }
         Assert.AreEqual(ballmid._Shape.Direction.Y, 0.015f);
         ballmid.DeleteEntity();
 
         // right side of player hit test
 
-        while(!PlayerCollision.Collide(balls,player)) {
-            balls.Iterate( ball => {
-                ball.Move();});
-        } 
+        while (!PlayerCollision.Collide(balls, player)) {
+            balls.Iterate(ball => {
+                ball.Move();
+            });
+        }
         Assert.AreEqual(ballright._Shape.Direction.Y, 0.01409f);
         ballright.DeleteEntity();
 
         // rightright side of player hit test
 
-        while(!PlayerCollision.Collide(balls,player)) {
-            balls.Iterate( ball => {
-                ball.Move();});
-        } 
+        while (!PlayerCollision.Collide(balls, player)) {
+            balls.Iterate(ball => {
+                ball.Move();
+            });
+        }
         Assert.AreEqual(ballrightright._Shape.Direction.Y, 0.0106f);
         ballrightright.DeleteEntity();
-
-
-
-        // while(!PlayerCollision.Collide(balls,player)) {
-        //     balls.Iterate( ball => {
-        //         ball.Move();});
-        // } 
-        // Assert.AreEqual(ballleftleft._Shape.Direction.Y, 0.01409f);
-        // ballleft.DeleteEntity();
-
-
-        //Assert.AreEqual(ball._Shape.Direction.Y, -0.015f);
-        //Assert.AreEqual(ballleft._Shape.Direction.Y, -0.015f);
-        //PlayerCollision.Collide(balls,player);
-        //Assert.AreEqual(ball._Shape.Direction.Y, 0.01409f);
-       // Assert.AreEqual(ballleft._Shape.Direction.Y, 0.0106f);
-
-
-
-
     }
 }

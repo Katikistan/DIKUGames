@@ -1,7 +1,5 @@
 using DIKUArcade.Entities;
-using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-using Breakout.Blocks;
 using Breakout.Balls;
 namespace BreakoutTests.EntityTest;
 [TestFixture]
@@ -21,7 +19,7 @@ public class TestBall {
     [Test]
     public void TestBallMove() {
         Vec2F startpos = ball._Shape.Position;
-        Vec2F ballDirection = new Vec2F(0.001f,0.015f);
+        Vec2F ballDirection = new Vec2F(0.001f, 0.015f);
         Vec2F newpos = new Vec2F(startpos.X + ballDirection.X, startpos.Y + ballDirection.Y);
         Assert.AreEqual(ball._Shape.Direction.X, ballDirection.X);
         Assert.AreEqual(ball._Shape.Direction.Y, ballDirection.Y);

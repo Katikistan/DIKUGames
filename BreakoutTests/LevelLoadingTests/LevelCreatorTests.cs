@@ -4,6 +4,7 @@ namespace BreakoutTests.LevelLoading;
 public class LevelCreatorTests {
     private LevelCreator levelCreator = null!;
     public LevelCreatorTests() {
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
     [SetUp]
     public void Setup() {
@@ -11,8 +12,13 @@ public class LevelCreatorTests {
     }
     [Test]
     public void TestNewLevel() {
-        Assert.That(levelCreator.CreateLevel("level1.txt"), Is.True);
-        Assert.That(levelCreator.CreateLevel("level2.txt"), Is.True);
-        Assert.That(levelCreator.CreateLevel("level3.txt"), Is.True);
+        levelCreator.CreateLevel("level1.txt");
+        Assert.That(levelCreator.Blocks.CountEntities(), Is.EqualTo(76));
+        levelCreator.CreateLevel("level2.txt");
+        Assert.That(levelCreator.Blocks.CountEntities(), Is.EqualTo(72));
+        levelCreator.CreateLevel("nolevel.txt");
+        // level isnt created beacuse nolevel.txt dosent exist.
+        Assert.That(levelCreator.Blocks.CountEntities(), Is.EqualTo(72));
+
     }
 }

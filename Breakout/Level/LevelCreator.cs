@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 
 namespace Breakout.Levels;
-    /// <summary>
-    /// Used to create a level from a string levelfile. Uses a level reader to read level file.
-    /// </summary>
+/// <summary>
+/// Used to create a level from a string levelfile. Uses a level reader to read level file.
+/// </summary>
 public class LevelCreator {
     private string[] map;
     private Dictionary<string, string> meta;
