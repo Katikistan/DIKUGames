@@ -15,6 +15,14 @@ public class GameRunning : IGameState {
     private Health health;
     private Entity background = null!;
     private List<string> levels;
+    // Public getters for testing
+    public Health Health { get => health; }
+    public Entity Background { get => background; }
+    public List<string> Levels { get => levels; }
+    public Points Points { get => points; }
+    public LevelManager LevelManager { get => levelManager;  }
+    public static GameRunning Instance { get => instance;}
+
     public static GameRunning GetInstance() {
         if (GameRunning.instance == null) {
             GameRunning.instance = new GameRunning();
@@ -31,13 +39,13 @@ public class GameRunning : IGameState {
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
         levelManager = new LevelManager();
         levels = new List<string>();
-        levels.Add("level1.txt");
-        levels.Add("level2.txt");
-        levels.Add("level3.txt");
-        levelManager.NewLevel(levels[0]);
+        Levels.Add("level1.txt");
+        Levels.Add("level2.txt");
+        Levels.Add("level3.txt");
+        LevelManager.NewLevel(Levels[0]);
         points = new Points();
         health = new Health();
-        BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, levelManager);
+        BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, LevelManager);
     }
     public void ResetState() {
         GameRunning.instance = null;
@@ -56,11 +64,11 @@ public class GameRunning : IGameState {
                 StringArg1 = "MAIN_MENU"
             });
             return;
-        } else if (levelManager.EmptyLevel()) {
+        } else if (LevelManager.EmptyLevel()) {
             // If level contains no blocks except unbreakable blocks
             levels.RemoveAt(0); // Removes current level form level list
-            if (levels.Count > 0) // Shouldnt try to access index 0 in an empty list
-                levelManager.NewLevel(levels[0]);
+            if (Levels.Count > 0) // Shouldnt try to access index 0 in an empty list
+                levelManager.NewLevel(Levels[0]);
         }
     }
     public void UpdateState() {
