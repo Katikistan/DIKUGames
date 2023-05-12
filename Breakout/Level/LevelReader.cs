@@ -21,7 +21,7 @@ public class LevelReader {
     /// </summary>
     /// <param name="path">The file path level files will be read from</param>
     public LevelReader() {
-        this.path = Path.Combine("..", "Breakout", "Assets", "Levels");
+        this.path = Path.Combine(Constants.MAIN_PATH, "Assets","Levels");
     }
     /// <summary>
     /// Will try to read a level file. Reads mapdata, leveldata and metadata.
@@ -30,9 +30,6 @@ public class LevelReader {
     /// <returns>false if level file could not be read, else true.</returns>
     public bool ReadLevel(string level) {
         string txtfile = Path.Combine(path, level);
-        // Map = null;
-        // Meta = null;
-        // Legend = null;
         if (File.Exists(txtfile)) {
             this.txtlines = File.ReadAllLines(txtfile);
             ReadMap();
@@ -42,13 +39,6 @@ public class LevelReader {
         } else {
             return false;
         }
-    }
-    /// <summary>
-    /// Changes path from where level files are read
-    /// </summary>
-    /// <param name="path">the path where the files are read from</param>
-    public void ChangePath(string path) {
-        this.path = path;
     }
     /// <summary>
     /// Checks if current level is valid i.e that it contains a map, legendata and metadata.

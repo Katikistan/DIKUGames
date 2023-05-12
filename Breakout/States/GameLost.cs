@@ -11,7 +11,7 @@ public class GameLost : IGameState {
     private static GameLost instance = null;
     private Entity background;
     private Text[] menuButtons = new Text[2];
-    private Text GameOverText;
+    private Text gameOverText;
     private int activeMenuButton;
     private const int MAIN_MENU = 0;
     private const int QUIT = 1;
@@ -32,7 +32,7 @@ public class GameLost : IGameState {
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
 
-        GameOverText = new Text(
+        gameOverText = new Text(
             "Game over",
             new Vec2F(0.375f, 0.05f),
             new Vec2F(0.7f, 0.7f)
@@ -49,7 +49,7 @@ public class GameLost : IGameState {
             new Vec2F(0.4f, 0.1f),
             new Vec2F(0.4f, 0.4f)
             );
-        GameOverText.SetColor(white);
+        gameOverText.SetColor(white);
         activeMenuButton = MAIN_MENU;
     }
     public void ResetState() {
@@ -70,7 +70,7 @@ public class GameLost : IGameState {
                 menuButtons[MAIN_MENU].SetColor(white);
                 break;
         }
-        GameOverText.RenderText();
+        gameOverText.RenderText();
         menuButtons[QUIT].RenderText();
         menuButtons[MAIN_MENU].RenderText();
     }

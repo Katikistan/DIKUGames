@@ -11,7 +11,7 @@ public class GamePaused : IGameState {
     private static GamePaused instance = null;
     private Entity background;
     private Text[] menuButtons = new Text[2];
-    private Text PauseText;
+    private Text pauseText;
     private int activeMenuButton;
     private const int CONTINUE = 0;
     private const int MAIN_MENU = 1;
@@ -31,7 +31,7 @@ public class GamePaused : IGameState {
                 new Vec2F(1.0f, 1.0f)),
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
-        PauseText = new Text(
+        pauseText = new Text(
             "Paused",
             new Vec2F(0.375f, 0.05f),
             new Vec2F(0.7f, 0.7f)
@@ -47,7 +47,7 @@ public class GamePaused : IGameState {
             new Vec2F(0.4f, 0.1f),
             new Vec2F(0.4f, 0.4f)
             );
-        PauseText.SetColor(white);
+        pauseText.SetColor(white);
     }
     public void ResetState() {
         GamePaused.instance = null;
@@ -66,7 +66,7 @@ public class GamePaused : IGameState {
                 menuButtons[MAIN_MENU].SetColor(red);
                 break;
         }
-        PauseText.RenderText();
+        pauseText.RenderText();
         menuButtons[CONTINUE].RenderText();
         menuButtons[MAIN_MENU].RenderText();
     }

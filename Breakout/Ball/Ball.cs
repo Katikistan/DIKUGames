@@ -13,7 +13,7 @@ public class Ball : Entity {
     }
 
     public void Move() {
-        _Shape.Move();
+        shape.Move();
     }
 
     public void Render() {
