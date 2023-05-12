@@ -10,8 +10,14 @@ namespace Breakout.States;
 public class GamePaused : IGameState {
     private static GamePaused instance = null;
     private Entity background;
+    public Entity Background {
+        get { return background; }
+    }
     private Text[] menuButtons = new Text[2];
     private Text pauseText;
+    public Text PauseText {
+        get { return pauseText; }
+    }
     private int activeMenuButton;
     public int ActiveMenuButton {
         get { return activeMenuButton; }

@@ -19,6 +19,11 @@ public class LevelManager : IGameEventProcessor {
             return player;
         }
     }
+
+    public EntityContainer<Block> Blocks { get => blocks; }
+    public EntityContainer<Ball> Balls { get => balls;  }
+    public LevelCreator LevelCreator { get => levelCreator;}
+
     public LevelManager() {
         levelCreator = new LevelCreator();
         player = new Player(
