@@ -12,6 +12,9 @@ public class MainMenu : IGameState {
     private Entity backGround;
     private Text[] menuButtons = new Text[2];
     private int activeMenuButton;
+    public int ActiveMenuButton {
+        get { return activeMenuButton; }
+    }
     private const int NEW_GAME = 0;
     private const int QUIT = 1;
     private Vec3I white = new Vec3I(255, 255, 255);
