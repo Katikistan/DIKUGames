@@ -24,12 +24,10 @@ public class WallCollisionTests{
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         ball2 = new Ball(new DynamicShape(new Vec2F(-0.1f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f,0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-
         balls.AddEntity(ball1);
         balls.AddEntity(ball2);
         WallCollision.Collide(balls);
         WallCollision.Collide(balls);
-
         Assert.AreEqual(ball1._Shape.Direction.X, - ball2._Shape.Direction.X);
     }
     [Test]
@@ -39,11 +37,9 @@ public class WallCollisionTests{
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         ball2 = new Ball(new DynamicShape(new Vec2F(1.0f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f,0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-
         balls.AddEntity(ball1);
         balls.AddEntity(ball2);
         WallCollision.Collide(balls);
-
         Assert.AreEqual(ball1._Shape.Direction.X, - ball2._Shape.Direction.X);
     }
     [Test]

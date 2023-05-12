@@ -1,28 +1,25 @@
-// using Breakout.Levels;
-// using Breakout.Blocks;
-// using Breakout.Balls;
-// using DIKUArcade.Math;
-// using Breakout.Players;
-// using DIKUArcade.Entities;
-// using System;
-// using System.Collections.Generic;
-// using System.IO;
+using Breakout.Levels;
+using Breakout;
+using DIKUArcade.Events;
 
-// namespace BreakoutTests.LevelLoading;
+namespace BreakoutTests.LevelLoading;
 
-// [TestFixture]
-// public class LevelManagerTests {
-//     LevelManager levelManager;
-//     [SetUp]
-//     public void Setup() {
-//         levelManager = new LevelManager();
-//         levelManager.NewLevel("level1.txt");
-//     }
-//     [Test]
-//     public void TestNewLevel() {
-//         Assert.AreEqual(levelManager.EmptyLevel(), true);
-//     }
-//     [Test]
-//     public void TestEmptyLevel() {
-//     }
-// }
+[TestFixture]
+public class LevelManagerTests {
+    LevelManager levelManager;
+    public LevelManagerTests() {
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
+    }
+    [SetUp]
+    public void Setup() {
+        levelManager = new LevelManager();
+    }
+    [Test]
+    public void TestNewLevel() {
+        Assert.That(levelManager.EmptyLevel(), Is.True);
+        levelManager.NewLevel("nolevel.txt");
+        Assert.That(levelManager.EmptyLevel(), Is.True);
+        levelManager.NewLevel("level1.txt");
+        Assert.That(levelManager.EmptyLevel(), Is.False);
+    }
+}
