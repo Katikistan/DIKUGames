@@ -5,6 +5,7 @@ using DIKUArcade.Math;
 using DIKUArcade.Physics;
 namespace Breakout.Collisions;
 public static class PlayerCollision {
+
     // static float[] RotateVector2d(float x, float y, float radians) {
     //     float[] result = new float[2];
     //     result[0] = (float)(x * Math.Cos(radians) - y * Math.Sin(radians));
@@ -15,7 +16,8 @@ public static class PlayerCollision {
     /// Will check for collsions between ball and the player,
     /// depending on where the ball hit the player, the balls directional vector is changed.
     /// </summary>
-    public static void Collide(EntityContainer<Ball>  balls, Player player) {
+    public static bool Collide(EntityContainer<Ball>  balls, Player player) {
+        bool hit = false;
         Vec2F vec = new Vec2F(0.0f,0.015f);
         Vec2F vec20 = new Vec2F(-0.0051f,0.01409f);
         Vec2F revVec20 = new Vec2F(0.0051f,0.01409f);
@@ -26,6 +28,7 @@ public static class PlayerCollision {
             // Iterating through every block
             CollisionData collision = CollisionDetection.Aabb(ball._Shape, player.Shape);
                 if (collision.Collision) { // True if there is collision between the ball and player
+                    hit = true;
                     float ballx = ball._Shape.Position.X+(ball._Shape.Extent.X/2); //Middle of ball
                     float playerExtentX = player.Shape.Extent.X;
                     if  (ballx < playerposx + (playerExtentX/5)) {
@@ -44,6 +47,7 @@ public static class PlayerCollision {
                     }
                 }
             });
+        return hit;
     }
 }
 
