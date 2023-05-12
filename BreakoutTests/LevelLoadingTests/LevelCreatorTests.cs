@@ -8,7 +8,6 @@ public class LevelCreatorTests {
     [SetUp]
     public void Setup() {
         levelCreator = new LevelCreator();
-        levelCreator.LevelReader.ChangePath(Path.Combine(@"../../../../", "Breakout", "Assets", "Levels"));
     }
     [Test]
     public void TestNewLevel() {

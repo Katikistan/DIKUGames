@@ -10,7 +10,6 @@ public class LevelReaderTests {
     [SetUp]
     public void Setup() {
         levelReader = new LevelReader();
-        levelReader.ChangePath(Path.Combine(@"../../../../", "Breakout", "Assets", "Levels"));
     }
     // test man kan loade et nyt level
     [Test]

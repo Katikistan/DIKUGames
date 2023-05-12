@@ -16,7 +16,8 @@ public class TestPoints {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
         BreakoutBus.GetBus().InitializeEventBus(
             new List<GameEventType> {
-                GameEventType.StatusEvent
+                GameEventType.StatusEvent,
+                GameEventType.PlayerEvent //Used in levelmanager test
             });
         points = new Points();
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, points);

@@ -24,8 +24,7 @@ public class BlockCollisionTests{
         balls = new EntityContainer<Ball>(2);
         balls.AddEntity(ball);
         levelCreator = new LevelCreator();
-        levelCreator.LevelReader.ChangePath(Path.Combine(@"../../../../", "Breakout", "Assets", "Levels"));
-        levelCreator.CreateLevel("level1.txt"); 
+        levelCreator.CreateLevel("level1.txt");
         blocks = levelCreator.Blocks;
     }
     [Test]

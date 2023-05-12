@@ -9,8 +9,8 @@ using System.IO;
 namespace Breakout.States;
 public class MainMenu : IGameState {
     private static MainMenu instance = null;
-    private Entity backGroundImage;
-    private Text[] menuButtons= new Text[2];
+    private Entity backGround;
+    private Text[] menuButtons = new Text[2];
     private int activeMenuButton;
     public int ActiveMenuButton {
         get { return activeMenuButton; }
@@ -27,7 +27,7 @@ public class MainMenu : IGameState {
         return MainMenu.instance;
     }
     public void InitializeGameState() {
-        backGroundImage = new Entity(
+        backGround = new Entity(
             new StationaryShape(
                 new Vec2F(0.0f, 0.0f),
                 new Vec2F(1.0f, 1.0f)),
@@ -47,7 +47,7 @@ public class MainMenu : IGameState {
     public void UpdateState() {
     }
     public void RenderState() {
-        backGroundImage.RenderEntity();
+        backGround.RenderEntity();
         switch (activeMenuButton) {
             case (NEW_GAME):
                 menuButtons[NEW_GAME].SetColor(red);

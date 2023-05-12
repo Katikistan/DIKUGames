@@ -19,12 +19,18 @@ public class LevelManager : IGameEventProcessor {
             return player;
         }
     }
+
+    public EntityContainer<Block> Blocks { get => blocks; }
+    public EntityContainer<Ball> Balls { get => balls;  }
+    public LevelCreator LevelCreator { get => levelCreator;}
+
     public LevelManager() {
         levelCreator = new LevelCreator();
         player = new Player(
             new DynamicShape(new Vec2F(0.425f, 0.06f), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         balls = new EntityContainer<Ball>(3);
+        blocks = new EntityContainer<Block>(0);
     }
     /// <summary>
     /// Removes balls and creates newlevel using string levelfile
@@ -32,7 +38,7 @@ public class LevelManager : IGameEventProcessor {
     /// <param name="level">Name of the level file that will be loaded</param>
     public void NewLevel(string level) {
         balls.ClearContainer();
-        levelCreator.CreateLevel(level);
+        bool wow = levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
         balls.AddEntity(BallCreator.CreateBall());
     }
