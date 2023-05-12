@@ -6,7 +6,7 @@ using Breakout.Players;
 namespace BreakoutTests.EntityTest;
 [TestFixture]
 public class TestPlayer {
-    private GameEventBus TesteventBus = null!;
+    private GameEventBus testEventBus = null!;
     private Player player = null!;
     private Vec2F playerPos = null!;
     private GameEvent eventMoveLeft;
@@ -24,13 +24,13 @@ public class TestPlayer {
         movementSpeed = 0.01f;
         startPosX = 0.425f;
         startPosY = 0.05f;
-        TesteventBus = new GameEventBus();
-        TesteventBus.InitializeEventBus(
+        testEventBus = new GameEventBus();
+        testEventBus.InitializeEventBus(
             new List<GameEventType> { GameEventType.PlayerEvent });
         player = new Player(
             new DynamicShape(new Vec2F(startPosX, startPosY), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        TesteventBus.Subscribe(GameEventType.PlayerEvent, player);
+        testEventBus.Subscribe(GameEventType.PlayerEvent, player);
 
         eventMoveLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
@@ -42,60 +42,60 @@ public class TestPlayer {
         });
         eventRealeseLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
-            Message = "REALESE LEFT"
+            Message = "RELEASE LEFT"
         });
         eventRealeseRight = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
-            Message = "REALESE RIGHT"
+            Message = "RELEASE RIGHT"
         });
     }
     [Test]
     public void TestPlayerIsCentered() {
         playerPos = player.GetPosition();
-        Assert.That(playerPos.X+ (player.Shape.Extent.X / 2f), Is.EqualTo(0.5));
+        Assert.That(playerPos.X + (player.Shape.Extent.X / 2f), Is.EqualTo(0.5));
     }
     [Test]
     public void TestMoveLeft() {
-        TesteventBus.RegisterEvent(eventMoveLeft);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveLeft);
+        testEventBus.ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
     }
     [Test]
     public void TestMoveRight() {
-        TesteventBus.RegisterEvent(eventMoveRight);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveRight);
+        testEventBus.ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
     }
     [Test]
     public void TestRealeseLeft() {
-        TesteventBus.RegisterEvent(eventMoveLeft);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveLeft);
+        testEventBus.ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         // Player moved to the left
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
         // Left key is released
-        TesteventBus.RegisterEvent(eventRealeseLeft);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventRealeseLeft);
+        testEventBus.ProcessEvents();
         player.Move();
         // Player pos is the same/hasn't moved
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
     }
     [Test]
     public void TestRealeseRight() {
-        TesteventBus.RegisterEvent(eventMoveRight);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveRight);
+        testEventBus.ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         // Player moved to the right
         Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
         // Right key is released
-        TesteventBus.RegisterEvent(eventRealeseRight);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventRealeseRight);
+        testEventBus.ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         // Player pos is the same/hasn't moved
@@ -106,8 +106,8 @@ public class TestPlayer {
         player = new Player(
             new DynamicShape(new Vec2F(0.0f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        TesteventBus.RegisterEvent(eventMoveLeft);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveLeft);
+        testEventBus.ProcessEvents();
         player.Move();
         player.Move();
         player.Move();
@@ -119,8 +119,8 @@ public class TestPlayer {
         player = new Player(
             new DynamicShape(new Vec2F(1.0f - 0.1f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        TesteventBus.RegisterEvent(eventMoveRight);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveRight);
+        testEventBus.ProcessEvents();
         player.Move();
         player.Move();
         player.Move();
@@ -129,9 +129,9 @@ public class TestPlayer {
     }
     [Test]
     public void TestMoveLeftRight() {
-        TesteventBus.RegisterEvent(eventMoveLeft);
-        TesteventBus.RegisterEvent(eventMoveRight);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveLeft);
+        testEventBus.RegisterEvent(eventMoveRight);
+        testEventBus.ProcessEvents();
         // Both left and right "keys" are pressed
         player.Move();
         player.Move();
@@ -140,17 +140,17 @@ public class TestPlayer {
     }
     [Test]
     public void TestMoveLeftRight2() {
-        TesteventBus.RegisterEvent(eventMoveLeft);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveLeft);
+        testEventBus.ProcessEvents();
         // Player moves to the left
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
         // Player realeses left key
-        TesteventBus.RegisterEvent(eventRealeseLeft);
+        testEventBus.RegisterEvent(eventRealeseLeft);
         // Player presses right key
-        TesteventBus.RegisterEvent(eventMoveRight);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveRight);
+        testEventBus.ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         // Player moved left and right back to start
@@ -162,8 +162,8 @@ public class TestPlayer {
             EventType = GameEventType.PlayerEvent,
             Message = "move left"
         });
-        TesteventBus.RegisterEvent(eventMoveLeft);
-        TesteventBus.ProcessEventsSequentially();
+        testEventBus.RegisterEvent(eventMoveLeft);
+        testEventBus.ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX));

@@ -7,10 +7,8 @@ public class StateMachine : IGameEventProcessor {
     }
     public StateMachine() {
         BreakoutBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);
-        ActiveState = GameRunning.GetInstance();
+        ActiveState = MainMenu.GetInstance();
     }
-    /// <summary>
-    /// </summary>
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.GameStateEvent) {
             switch (gameEvent.Message) {
@@ -32,6 +30,15 @@ public class StateMachine : IGameEventProcessor {
         switch (stateType) {
             case GameStateType.GameRunning:
                 ActiveState = GameRunning.GetInstance();
+                break;
+            case GameStateType.GamePaused:
+                ActiveState = GamePaused.GetInstance();
+                break;
+            case GameStateType.MainMenu:
+                ActiveState = MainMenu.GetInstance();
+                break;
+            case GameStateType.GameLost:
+                ActiveState = GameLost.GetInstance();
                 break;
         }
     }

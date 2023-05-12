@@ -14,7 +14,8 @@ public class Game : DIKUGame, IGameEventProcessor {
                 GameEventType.InputEvent,
                 GameEventType.WindowEvent,
                 GameEventType.PlayerEvent,
-                GameEventType.GameStateEvent
+                GameEventType.GameStateEvent,
+                GameEventType.StatusEvent
             });
         window.SetKeyEventHandler(KeyHandler);
         BreakoutBus.GetBus().Subscribe(GameEventType.InputEvent, this);
@@ -26,7 +27,7 @@ public class Game : DIKUGame, IGameEventProcessor {
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.WindowEvent) {
             switch (gameEvent.StringArg1) {
-                case "WINDOW_CLOSE":
+                case "WINDOW CLOSE":
                     window.CloseWindow();
                     break;
             }
