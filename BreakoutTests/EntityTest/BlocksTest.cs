@@ -1,5 +1,4 @@
 using DIKUArcade.Entities;
-using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using Breakout.Blocks;
 namespace BreakoutTests.EntityTest;

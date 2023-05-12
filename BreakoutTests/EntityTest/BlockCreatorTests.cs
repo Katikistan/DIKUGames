@@ -1,5 +1,4 @@
 using DIKUArcade.Entities;
-using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using Breakout.Blocks;
 namespace BreakoutTests.EntityTest;
@@ -18,13 +17,13 @@ public class BlockCreatorTest {
     }
     [Test]
     public void TestCreateBlock() {
-        block = BlockCreator.CreateBlock(shape,image,"");
+        block = BlockCreator.CreateBlock(shape, image, "");
         Assert.That(block is DefaultBlock);
-        block = BlockCreator.CreateBlock(shape,image,"nonexistingBlocktype");
+        block = BlockCreator.CreateBlock(shape, image, "nonexistingBlocktype");
         Assert.That(block is DefaultBlock);
-        block = BlockCreator.CreateBlock(shape,image,"Hardened");
+        block = BlockCreator.CreateBlock(shape, image, "Hardened");
         Assert.That(block is Hardened);
-        block = BlockCreator.CreateBlock(shape,image,"Unbreakable");
+        block = BlockCreator.CreateBlock(shape, image, "Unbreakable");
         Assert.That(block is Unbreakable);
     }
 }

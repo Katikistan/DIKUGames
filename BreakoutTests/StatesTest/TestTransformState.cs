@@ -1,4 +1,3 @@
-using System;
 using Breakout.States;
 namespace BreakoutTests.States;
 [TestFixture]

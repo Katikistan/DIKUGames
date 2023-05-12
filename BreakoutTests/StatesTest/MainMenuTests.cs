@@ -8,9 +8,9 @@ using System.IO;
 
 namespace Breakout.States;
 [TestFixture]
-public class MainMenuTest{
-    private MainMenu mainMenu; 
-    public MainMenuTest(){
+public class MainMenuTest {
+    private MainMenu mainMenu;
+    public MainMenuTest() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
     [SetUp]
@@ -24,7 +24,7 @@ public class MainMenuTest{
         Assert.AreEqual(mainMenu.ActiveMenuButton, 0);
     }
     [Test]
-    public void TestKeyPress(){
+    public void TestKeyPress() {
         // Pressing down changes active button
         Assert.AreEqual(mainMenu.ActiveMenuButton, 0);
         mainMenu.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Down);

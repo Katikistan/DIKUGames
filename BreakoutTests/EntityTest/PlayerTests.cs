@@ -52,7 +52,7 @@ public class TestPlayer {
     [Test]
     public void TestPlayerIsCentered() {
         playerPos = player.GetPosition();
-        Assert.That(playerPos.X+ (player.Shape.Extent.X / 2f), Is.EqualTo(0.5));
+        Assert.That(playerPos.X + (player.Shape.Extent.X / 2f), Is.EqualTo(0.5));
     }
     [Test]
     public void TestMoveLeft() {

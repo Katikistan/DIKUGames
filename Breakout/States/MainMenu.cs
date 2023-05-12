@@ -11,12 +11,16 @@ public class MainMenu : IGameState {
     private static MainMenu instance = null;
     private Entity backGround;
     public Entity BackGround {
-        get { return backGround; }
+        get {
+            return backGround;
+        }
     }
     private Text[] menuButtons = new Text[2];
     private int activeMenuButton;
     public int ActiveMenuButton {
-        get { return activeMenuButton; }
+        get {
+            return activeMenuButton;
+        }
     }
     private const int NEW_GAME = 0;
     private const int QUIT = 1;
