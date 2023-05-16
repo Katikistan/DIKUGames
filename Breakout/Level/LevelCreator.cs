@@ -42,6 +42,14 @@ public class LevelCreator {
             this.meta = levelReader.Meta;
             this.legend = levelReader.Legend;
             CreateBlocks();
+            string time ="";
+            meta.TryGetValue*("Time", out time!);
+            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
+                EventType = GameEventType.TimedEvent,
+                Message = "LEVEL_TIME",
+                StringArg1 = time
+            });           
+
             return true;
         } else {
             return false;
