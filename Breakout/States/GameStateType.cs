@@ -5,7 +5,8 @@ public enum GameStateType {
     GameRunning,
     GamePaused,
     MainMenu,
-    GameLost
+    GameLost,
+    GameWon
 }
 public class StateTransformer {
     public static GameStateType TransformStringToState(string state) {
@@ -18,6 +19,8 @@ public class StateTransformer {
                 return GameStateType.MainMenu;
             case "GAME_LOST":
                 return GameStateType.GameLost;
+            case "GAME_WON":
+                return GameStateType.GameWon;
             default:
                 throw new ArgumentException("Invalid GameStateType string");
         }

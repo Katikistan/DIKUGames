@@ -34,11 +34,15 @@ public class StateMachine : IGameEventProcessor {
             case GameStateType.GamePaused:
                 ActiveState = GamePaused.GetInstance();
                 break;
+            // case "MAIN_MENU":
             case GameStateType.MainMenu:
                 ActiveState = MainMenu.GetInstance();
                 break;
             case GameStateType.GameLost:
                 ActiveState = GameLost.GetInstance();
+                break;
+            case GameStateType.GameWon:
+                ActiveState = GameWon.GetInstance();
                 break;
         }
     }

@@ -61,7 +61,7 @@ public class GameRunning : IGameState {
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                 EventType = GameEventType.GameStateEvent,
                 Message = "CHANGE_STATE",
-                StringArg1 = "MAIN_MENU"
+                StringArg1 = "GAME_WON"
             });
             return;
         } else if (LevelManager.EmptyLevel()) {
