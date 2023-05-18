@@ -14,6 +14,9 @@ public class Timer {
     private Text timerText;
     private Vec2F position;
     private Vec3I white;
+    public int TimeLeft {
+        get {return timeLeft;}
+    }
     public Timer(Vec2F pos, int init) {
         timer = new StaticTimer();
         timeLeft = init;

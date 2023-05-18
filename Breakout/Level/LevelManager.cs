@@ -30,6 +30,9 @@ public class LevelManager : IGameEventProcessor {
     public LevelCreator LevelCreator {
         get => levelCreator;
     }
+    public Timer LevelTimer {
+        get => levelTimer;
+    }
 
     public LevelManager() {
         levelCreator = new LevelCreator();
@@ -93,6 +96,15 @@ public class LevelManager : IGameEventProcessor {
         BlockCollision.Collide(balls, blocks);
         WallCollision.Collide(balls);
     }
+    private void CheckTime() {
+        if (levelTimer.TimeLeft < 1) {
+            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
+                EventType = GameEventType.GameStateEvent,
+                Message = "CHANGE_STATE",
+                StringArg1 = "GAME_LOST"
+            });
+        }
+    }
     public void Render() {
         player.Render();
         blocks.RenderEntities();
@@ -101,6 +113,7 @@ public class LevelManager : IGameEventProcessor {
     }
     public void Update() {
         CheckCollisions();
+        CheckTime();
         player.Move();
         MoveBalls();
     }
