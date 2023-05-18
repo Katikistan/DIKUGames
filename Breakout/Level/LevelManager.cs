@@ -6,6 +6,7 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using System.IO;
 using Breakout.Collisions;
+using Breakout.Timers;
 namespace Breakout.Levels;
 using Breakout.Balls;
 
@@ -14,6 +15,7 @@ public class LevelManager : IGameEventProcessor {
     private EntityContainer<Block> blocks;
     private EntityContainer<Ball> balls;
     private Player player;
+    private Timer levelTimer;
     public Player Player {
         get {
             return player;
@@ -46,6 +48,13 @@ public class LevelManager : IGameEventProcessor {
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
         balls.AddEntity(BallCreator.CreateBall());
+        int timer = 0;
+        string time = "";
+        levelCreator.Meta.TryGetValue("Time", out time);
+        if (time != "") {
+            timer = int.Parse(time);
+        }
+        levelTimer = new Timer(new Vec2F(0.0f, -0.23f), timer);
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.StatusEvent) {
@@ -88,6 +97,7 @@ public class LevelManager : IGameEventProcessor {
         player.Render();
         blocks.RenderEntities();
         balls.RenderEntities();
+        levelTimer.Render();
     }
     public void Update() {
         CheckCollisions();
