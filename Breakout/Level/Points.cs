@@ -18,11 +18,11 @@ public class Points : IGameEventProcessor {
             switch (gameEvent.Message) {
                 case "GET POINTS":
                     points += gameEvent.IntArg1;
-                    CreateText();
+                    UpdateText();
                     break;
                 case "RESET POINTS":
                     points = 0;
-                    CreateText();
+                    UpdateText();
                     break;
             }
         }
@@ -30,10 +30,8 @@ public class Points : IGameEventProcessor {
     public int GetPoints() {
         return points;
     }
-    private void CreateText() {
-        pointText = new Text($"Points: {points}",
-        new Vec2F(0.0f, -0.275f), new Vec2F(0.25f, 0.35f));
-        pointText.SetColor(white);
+    private void UpdateText() {
+        pointText.SetText($"Points: {points}");
     }
     public void Render() {
         pointText.RenderText();

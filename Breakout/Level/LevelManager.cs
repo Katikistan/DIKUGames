@@ -6,6 +6,7 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using System.IO;
 using Breakout.Collisions;
+using Breakout.Timers;
 namespace Breakout.Levels;
 using Breakout.Balls;
 
@@ -14,6 +15,8 @@ public class LevelManager : IGameEventProcessor {
     private EntityContainer<Block> blocks;
     private EntityContainer<Ball> balls;
     private Player player;
+    private Timer levelTimer;
+    private int timer;
     public Player Player {
         get {
             return player;
@@ -28,6 +31,9 @@ public class LevelManager : IGameEventProcessor {
     public LevelCreator LevelCreator {
         get => levelCreator;
     }
+    public Timer LevelTimer {
+        get => levelTimer;
+    }
 
     public LevelManager() {
         levelCreator = new LevelCreator();
@@ -36,6 +42,8 @@ public class LevelManager : IGameEventProcessor {
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         balls = new EntityContainer<Ball>(3);
         blocks = new EntityContainer<Block>(0);
+        timer = 0;
+        levelTimer = new Timer(new Vec2F(0.0f, -0.23f), timer);
     }
     /// <summary>
     /// Removes balls and creates newlevel using string levelfile
@@ -46,6 +54,12 @@ public class LevelManager : IGameEventProcessor {
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
         balls.AddEntity(BallCreator.CreateBall());
+        string time = "";
+        levelCreator.Meta.TryGetValue("Time", out time);
+        if (time != "") {
+            timer = int.Parse(time);
+        }
+        levelTimer.SetTime(timer);
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.StatusEvent) {
@@ -84,13 +98,24 @@ public class LevelManager : IGameEventProcessor {
         BlockCollision.Collide(balls, blocks);
         WallCollision.Collide(balls);
     }
+    private void CheckTime() {
+        if (levelTimer.TimeLeft < 1) {
+            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
+                EventType = GameEventType.GameStateEvent,
+                Message = "CHANGE_STATE",
+                StringArg1 = "GAME_LOST"
+            });
+        }
+    }
     public void Render() {
         player.Render();
         blocks.RenderEntities();
         balls.RenderEntities();
+        levelTimer.Render();
     }
     public void Update() {
         CheckCollisions();
+        CheckTime();
         player.Move();
         MoveBalls();
     }

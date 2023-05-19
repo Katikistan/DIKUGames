@@ -27,6 +27,11 @@ public class LevelCreator {
             levelReader = value;
         }
     }
+    public Dictionary<string, string> Meta {
+        get {
+            return meta;
+        }
+    }
     public LevelCreator() {
         this.levelReader = new LevelReader();
         this.blocks = new EntityContainer<Block>(0);
