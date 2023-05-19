@@ -16,6 +16,7 @@ public class LevelManager : IGameEventProcessor {
     private EntityContainer<Ball> balls;
     private Player player;
     private Timer levelTimer;
+    private int timer;
     public Player Player {
         get {
             return player;
@@ -41,6 +42,8 @@ public class LevelManager : IGameEventProcessor {
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         balls = new EntityContainer<Ball>(3);
         blocks = new EntityContainer<Block>(0);
+        timer = 0;
+        levelTimer = new Timer(new Vec2F(0.0f, -0.23f), timer);
     }
     /// <summary>
     /// Removes balls and creates newlevel using string levelfile
@@ -51,13 +54,12 @@ public class LevelManager : IGameEventProcessor {
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
         balls.AddEntity(BallCreator.CreateBall());
-        int timer = 0;
         string time = "";
         levelCreator.Meta.TryGetValue("Time", out time);
         if (time != "") {
             timer = int.Parse(time);
         }
-        levelTimer = new Timer(new Vec2F(0.0f, -0.23f), timer);
+        levelTimer.SetTime(timer);
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.StatusEvent) {

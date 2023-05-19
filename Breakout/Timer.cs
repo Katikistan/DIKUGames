@@ -6,46 +6,48 @@ using DIKUArcade.Math;
 namespace Breakout.Timers;
 
 public class Timer {
-    private StaticTimer timer;
     private int timeLeft;
-    private int timeElapsed;
-    private int secondsElapsed;
-    private int creationTime;
     private Text timerText;
+    private int timeElapsed;
+    private int previousTime;
     private Vec2F position;
     private Vec3I white;
     public int TimeLeft {
         get {return timeLeft;}
     }
     public Timer(Vec2F pos, int init) {
-        timer = new StaticTimer();
         timeLeft = init;
         position = pos;
-        secondsElapsed = 1;
-        creationTime = (int)StaticTimer.GetElapsedMilliseconds();
         white = new Vec3I(255, 255, 255);
+        timerText = new Text($"Time: {timeLeft}s", 
+        position, new Vec2F(0.25f, 0.35f));
+        timerText.SetColor(white);
+        timeElapsed = 0;
+    }
+    public void SetTime(int s) {
+        timeLeft = s;
     }
     private void UpdateTime(){
+        previousTime = timeLeft;
         timeElapsed = (int)StaticTimer.GetElapsedMilliseconds();
-        if ((creationTime + (secondsElapsed*1000)) < timeElapsed) {
-            secondsElapsed++;
+        if (1000 < timeElapsed) {
             timeLeft--;
+            StaticTimer.RestartTimer();
         }
     }
-    private void CreateText() {
+    private void UpdateText() {
         if (timeLeft > 0) {
             UpdateTime();
-            timerText = new Text($"Time: {timeLeft}s",
-            position, new Vec2F(0.25f, 0.35f));
-            timerText.SetColor(white);
+            if (previousTime != timeLeft){
+                timerText.SetText($"Time: {timeLeft}s");
+            }
         }
         else {
-            timerText = new Text($" ",
-            position, new Vec2F(0.25f, 0.35f));
+            timerText.SetText("");
         }
     }
     public void Render() {
-        CreateText();
+        UpdateText();
         timerText.RenderText();
     }
 }
