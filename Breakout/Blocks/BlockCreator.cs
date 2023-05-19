@@ -13,6 +13,8 @@ public static class BlockCreator {
                 return new Hardened(shape, image);
             case "Unbreakable":
                 return new Unbreakable(shape, image);
+            case "PowerUp":
+                return new Unbreakable(shape, image);
             default:
                 return new DefaultBlock(shape, image);
         }

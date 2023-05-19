@@ -34,7 +34,6 @@ public class StateMachine : IGameEventProcessor {
             case GameStateType.GamePaused:
                 ActiveState = GamePaused.GetInstance();
                 break;
-            // case "MAIN_MENU":
             case GameStateType.MainMenu:
                 ActiveState = MainMenu.GetInstance();
                 break;
