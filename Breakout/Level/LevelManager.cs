@@ -9,11 +9,14 @@ using Breakout.Collisions;
 using Breakout.Timers;
 namespace Breakout.Levels;
 using Breakout.Balls;
+using Breakout.Powerups;
 
 public class LevelManager : IGameEventProcessor {
     private LevelCreator levelCreator;
     private EntityContainer<Block> blocks;
     private EntityContainer<Ball> balls;
+    public EntityContainer<Powerup> powerups;
+
     private Player player;
     private Timer levelTimer;
     private int timer;
@@ -42,6 +45,9 @@ public class LevelManager : IGameEventProcessor {
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         balls = new EntityContainer<Ball>(3);
         blocks = new EntityContainer<Block>(0);
+
+        powerups = new EntityContainer<Powerup>(1); // midlertidigt, til proof of concept til powerups
+
         timer = 0;
         levelTimer = new Timer(new Vec2F(0.0f, -0.23f), timer);
     }
@@ -54,6 +60,7 @@ public class LevelManager : IGameEventProcessor {
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
         balls.AddEntity(BallCreator.CreateBall());
+        powerups.AddEntity(PowerUpGenerator.MakePowerups());
         string time = "";
         levelCreator.Meta.TryGetValue("Time", out time);
         if (time != "") {
@@ -93,10 +100,20 @@ public class LevelManager : IGameEventProcessor {
             ball.Move();
         }
     }
+
+    private void MovePowerups() {
+        foreach (Powerup powerup in powerups) {
+            powerup.Move();
+        }
+    }
+
     private void CheckCollisions() {
         PlayerCollision.Collide(balls, player);
         BlockCollision.Collide(balls, blocks);
         WallCollision.Collide(balls);
+        powerups.Iterate(powerup => { // midlertidigt, til proof of concept til powerups
+            powerup.Collide(player);
+        });
     }
     private void CheckTime() {
         if (levelTimer.TimeLeft < 1) {
@@ -111,6 +128,7 @@ public class LevelManager : IGameEventProcessor {
         player.Render();
         blocks.RenderEntities();
         balls.RenderEntities();
+        powerups.RenderEntities();
         levelTimer.Render();
     }
     public void Update() {
@@ -118,5 +136,7 @@ public class LevelManager : IGameEventProcessor {
         CheckTime();
         player.Move();
         MoveBalls();
+        MovePowerups();
+        
     }
 }
