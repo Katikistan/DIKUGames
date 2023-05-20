@@ -1,0 +1,23 @@
+using DIKUArcade.Entities;
+using DIKUArcade.Events;
+
+namespace Breakout.Blocks;
+/// <summary>
+/// Powerup block has 1 health points and grants player 10 points when destroyed and drops a powerup/hazard.
+/// </summary>
+public class PowerupBlock : Block {
+    public PowerupBlock(Shape shape, string imageFile) : base(shape, imageFile) {
+    }
+    public override void LoseHealth() {
+        health -= 1;
+        if (health == 0) {
+            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
+            EventType = GameEventType.StatusEvent,
+            Message = "SPAWN POWERUP",
+            VecArg1 = this.Shape.Position
+            });
+            DeleteEntity();
+            GivePoints();
+        }
+    }
+}

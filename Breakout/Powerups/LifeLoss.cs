@@ -4,14 +4,14 @@ using DIKUArcade.Graphics;
 
 namespace Breakout.Powerups;
 
-public class LifePlus : Powerup {
-    public LifePlus(DynamicShape shape, IBaseImage image) : base(shape, image) {
+public class LifeLoss : Powerup {
+    public LifeLoss(DynamicShape shape, IBaseImage image) : base(shape, image) {
         
     }
     public override void Effect() {
         BreakoutBus.GetBus().RegisterEvent(new GameEvent {
             EventType = GameEventType.StatusEvent,
-            Message = "LIFE PLUS",
+            Message = "LIFE LOSS",
             ObjectArg1 = 1
         });
     }

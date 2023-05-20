@@ -1,5 +1,10 @@
 using DIKUArcade.Entities;
+using Breakout.Powerups;
 namespace Breakout.Blocks;
+
+
+
+
 public static class BlockCreator {
     /// <summary>
     /// Creates a block
@@ -14,7 +19,9 @@ public static class BlockCreator {
             case "Unbreakable":
                 return new Unbreakable(shape, image);
             case "PowerUp":
-                return new Unbreakable(shape, image);
+                PowerupBlock PBlock = new PowerupBlock(shape, image);
+                PBlock.powerup = PowerUpCreater.CreatePowerUp(shape.Position);            
+                return PBlock;
             default:
                 return new DefaultBlock(shape, image);
         }

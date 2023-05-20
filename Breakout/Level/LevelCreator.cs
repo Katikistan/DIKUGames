@@ -2,7 +2,11 @@ using Breakout.Blocks;
 using DIKUArcade.Entities;
 using DIKUArcade.Math;
 using System.Collections.Generic;
-
+using Breakout.Powerups;
+using DIKUArcade.Entities;
+using DIKUArcade.Graphics;
+using DIKUArcade.Math;
+using System.IO;
 
 namespace Breakout.Levels;
 /// <summary>
@@ -19,6 +23,8 @@ public class LevelCreator {
             return blocks;
         }
     }
+    public EntityContainer<Powerup> powerups;
+
     public LevelReader LevelReader {
         get {
             return levelReader;
@@ -78,4 +84,5 @@ public class LevelCreator {
             }
         }
     }
+    
 }

@@ -20,12 +20,12 @@ using System.IO;
 
 namespace Breakout.Powerups;
 
-public static class PowerUpGenerator{
+public static class PowerUpCreater{
 
-    public static Powerup MakePowerups() {
+    public static Powerup CreatePowerUp(Vec2F pos) {
             
             return new LifePlus(new DynamicShape(
-                new Vec2F(0.45f, 0.5f),
+                pos,
                 new Vec2F(0.03f, 0.03f),
                 new Vec2F(0.00f, -0.01f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "LifePickUp.png")));

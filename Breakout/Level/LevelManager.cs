@@ -60,7 +60,7 @@ public class LevelManager : IGameEventProcessor {
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
         balls.AddEntity(BallCreator.CreateBall());
-        powerups.AddEntity(PowerUpGenerator.MakePowerups());
+        powerups.AddEntity(PowerUpCreater.CreatePowerUp(new Vec2F(0.03f, 0.05f)));
         string time = "";
         levelCreator.Meta.TryGetValue("Time", out time);
         if (time != "") {
@@ -76,6 +76,9 @@ public class LevelManager : IGameEventProcessor {
                     break;
                 case "NEW BALL":
                     balls.AddEntity(BallCreator.CreateBall());
+                    break;
+                case "SPAWN POWERUP":
+                    powerups.AddEntity(PowerUpCreater.CreatePowerUp(gameEvent.VecArg1));
                     break;
             }
         }

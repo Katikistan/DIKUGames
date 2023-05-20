@@ -1,4 +1,6 @@
 using DIKUArcade.Entities;
+using DIKUArcade.Events;
+
 namespace Breakout.Blocks;
 /// <summary>
 /// Default block has 1 health points and grants player 10 points when destroyed.

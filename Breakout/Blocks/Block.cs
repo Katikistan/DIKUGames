@@ -2,10 +2,13 @@ using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
+using Breakout.Powerups;
 using System.IO;
 
 namespace Breakout.Blocks;
 public abstract class Block : Entity {
+
+    internal Powerup powerup;
 
     internal int value = 10;
     /// <summary>
