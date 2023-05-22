@@ -25,7 +25,7 @@ public static class PowerUpCreater{
     public static Powerup CreatePowerUp(Vec2F pos) {
             
             return new LifePlus(new DynamicShape(
-                pos,
+                new Vec2F(pos.X+0.025f, pos.Y),
                 new Vec2F(0.03f, 0.03f),
                 new Vec2F(0.00f, -0.01f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "LifePickUp.png")));
