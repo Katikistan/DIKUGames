@@ -8,8 +8,6 @@ using System.IO;
 namespace Breakout.Blocks;
 public abstract class Block : Entity {
 
-    internal Powerup powerup;
-
     internal int value = 10;
     /// <summary>
     /// Amount of points given to player when block is destroyed.

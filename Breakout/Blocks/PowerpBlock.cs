@@ -14,7 +14,7 @@ public class PowerupBlock : Block {
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "SPAWN POWERUP",
-            VecArg1 = this.Shape.Position
+            ObjectArg1 = (object)Shape.Position
             });
             DeleteEntity();
             GivePoints();

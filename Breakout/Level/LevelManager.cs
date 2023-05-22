@@ -46,7 +46,7 @@ public class LevelManager : IGameEventProcessor {
         balls = new EntityContainer<Ball>(3);
         blocks = new EntityContainer<Block>(0);
 
-        powerups = new EntityContainer<Powerup>(1); // midlertidigt, til proof of concept til powerups
+        powerups = new EntityContainer<Powerup>(10); // midlertidigt, til proof of concept til powerups
 
         timer = 0;
         levelTimer = new Timer(new Vec2F(0.0f, -0.23f), timer);
@@ -60,7 +60,7 @@ public class LevelManager : IGameEventProcessor {
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
         balls.AddEntity(BallCreator.CreateBall());
-        powerups.AddEntity(PowerUpCreater.CreatePowerUp(new Vec2F(0.03f, 0.05f)));
+        // powerups.AddEntity(PowerUpCreator.CreatePowerUp(new Vec2F(0.03f, 0.05f)));
         string time = "";
         levelCreator.Meta.TryGetValue("Time", out time);
         if (time != "") {
@@ -78,7 +78,9 @@ public class LevelManager : IGameEventProcessor {
                     balls.AddEntity(BallCreator.CreateBall());
                     break;
                 case "SPAWN POWERUP":
-                    powerups.AddEntity(PowerUpCreater.CreatePowerUp(gameEvent.VecArg1));
+                    Vec2F pos = (Vec2F)gameEvent.ObjectArg1;
+                    // Vec2F pos = new Vec2F(float.Parse(gameEvent.StringArg1),float.Parse(gameEvent.StringArg2));
+                    powerups.AddEntity(PowerUpCreator.CreatePowerUp(pos));
                     break;
             }
         }
@@ -140,6 +142,6 @@ public class LevelManager : IGameEventProcessor {
         player.Move();
         MoveBalls();
         MovePowerups();
-        
+
     }
 }

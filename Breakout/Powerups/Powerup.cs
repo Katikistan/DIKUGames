@@ -9,11 +9,11 @@ using Breakout.Players;
 using DIKUArcade.Physics;
 namespace Breakout.Powerups;
 
-public abstract class Powerup : Entity{
+public abstract class Powerup : Entity {
 
     public Powerup(DynamicShape shape, IBaseImage image) : base(shape, image) {
     }
-    
+
     public void Move() {
         this.Shape.Move();
     }
@@ -28,7 +28,7 @@ public abstract class Powerup : Entity{
             return false;
         }
     }
-    
 
-    
+
+
 }

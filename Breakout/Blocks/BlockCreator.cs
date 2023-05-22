@@ -19,9 +19,7 @@ public static class BlockCreator {
             case "Unbreakable":
                 return new Unbreakable(shape, image);
             case "PowerUp":
-                PowerupBlock PBlock = new PowerupBlock(shape, image);
-                PBlock.powerup = PowerUpCreater.CreatePowerUp(shape.Position);            
-                return PBlock;
+                return new PowerupBlock(shape, image);
             default:
                 return new DefaultBlock(shape, image);
         }

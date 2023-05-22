@@ -6,7 +6,7 @@ namespace Breakout.Powerups;
 
 public class PowerUpBus : GameEventBus, IGameEventProcessor {
 
-    
+
     public PowerUpBus() {
     }
 
@@ -14,7 +14,6 @@ public class PowerUpBus : GameEventBus, IGameEventProcessor {
         if (gameEvent.EventType == GameEventType.StatusEvent) {
             switch (gameEvent.Message) {
                 case "SPAWN POWERUP":
-                    
                     break;
             }
         }

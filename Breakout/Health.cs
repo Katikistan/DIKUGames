@@ -16,6 +16,11 @@ public class Health : IGameEventProcessor {
             switch (gameEvent.Message) {
                 case "LOSE HEALTH":
                     LoseHealth();
+                    display.SetText("Lives:" + health.ToString());
+                    break;
+                case "GET HEALTH":
+                    health += gameEvent.IntArg1;
+                    display.SetText("Lives:" + health.ToString());
                     break;
             }
         }
@@ -26,7 +31,6 @@ public class Health : IGameEventProcessor {
     /// </summary>
     public void LoseHealth() {
         health -= 1;
-        display.SetText("Lives:" + health.ToString());
         if (health <= 0) {
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                 EventType = GameEventType.GameStateEvent,

@@ -3,9 +3,7 @@ using DIKUArcade.Entities;
 using DIKUArcade.Math;
 using System.Collections.Generic;
 using Breakout.Powerups;
-using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
-using DIKUArcade.Math;
 using System.IO;
 
 namespace Breakout.Levels;
@@ -84,5 +82,5 @@ public class LevelCreator {
             }
         }
     }
-    
+
 }
