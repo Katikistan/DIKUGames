@@ -32,6 +32,13 @@ public class Player : Entity, IGameEventProcessor {
                 case "RELEASE RIGHT":
                     SetMoveRight(false);
                     break;
+                case "SLIM JIM":
+                    if (gameEvent.StringArg1 == "START") {
+                        shape.Extent.X = shape.Extent.X / 2;
+                    } else if (gameEvent.StringArg1 == "END") {
+                        shape.Extent.X = shape.Extent.X * 2;
+                    }
+                    break;
             }
         }
     }
