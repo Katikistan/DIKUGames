@@ -3,7 +3,7 @@ using DIKUArcade.Math;
 using DIKUArcade.Events;
 namespace Breakout;
 public class Health : IGameEventProcessor {
-    private int health;
+    public int health;
     private Text display;
     public Health() {
         health = 3;
@@ -32,6 +32,7 @@ public class Health : IGameEventProcessor {
     public void LoseHealth() {
         health -= 1;
         if (health <= 0) {
+            health = 0;
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                 EventType = GameEventType.GameStateEvent,
                 Message = "CHANGE_STATE",

@@ -56,7 +56,7 @@ public class LevelManager : IGameEventProcessor {
         balls.ClearContainer();
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
-        balls.AddEntity(BallCreator.CreateBall());
+        balls.AddEntity(BallCreator.CreateBall(new Vec2F(0.45f, 0.2f), new Vec2F(0.001f, 0.015f)));
         levelTimer.SetTime(levelCreator.Timer);
     }
     public void ProcessEvent(GameEvent gameEvent) {
@@ -66,7 +66,7 @@ public class LevelManager : IGameEventProcessor {
                     blocks.ClearContainer();
                     break;
                 case "NEW BALL":
-                    balls.AddEntity(BallCreator.CreateBall());
+                    balls.AddEntity(BallCreator.CreateBall(new Vec2F(0.45f, 0.2f), new Vec2F(0.001f, 0.015f)));
                     break;
                 case "SPAWN POWERUP":
                     Vec2F pos = (Vec2F)gameEvent.ObjectArg1;
@@ -78,6 +78,17 @@ public class LevelManager : IGameEventProcessor {
                     } else if (gameEvent.StringArg1 == "END") {
                         hardBall = false;
                     }
+                    break;
+                case "SPLIT":
+                    balls.Iterate(ball => {
+                        if(balls.CountEntities()<18){
+                        pos = ball.Shape.Position;
+                        ball.DeleteEntity();
+                        balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F (0.0f, 0.015f)));
+                        balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F (-0.0106f, 0.0106f)));
+                        balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F (0.0106f, 0.0106f)));
+                        }
+                        });
                     break;
             }
         }
