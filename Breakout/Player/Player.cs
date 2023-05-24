@@ -6,7 +6,7 @@ namespace Breakout.Players;
 public class Player : Entity, IGameEventProcessor {
     private float moveLeft = 0.0f;
     private float moveRight = 0.0f;
-    private const float MOVEMENT_SPEED = 0.01f;
+    private float movementSpeed = 0.01f;
     private DynamicShape shape;
     public DynamicShape _Shape {
         get {
@@ -39,6 +39,20 @@ public class Player : Entity, IGameEventProcessor {
                         shape.Extent.X = shape.Extent.X * 2;
                     }
                     break;
+                case "WIDE":
+                    if (gameEvent.StringArg1 == "START") {
+                        shape.Extent.X = shape.Extent.X * 2;
+                    } else if (gameEvent.StringArg1 == "END") {
+                        shape.Extent.X = shape.Extent.X / 2;
+                    }
+                    break;
+                case "SPEED":
+                    if (gameEvent.StringArg1 == "START") {
+                        movementSpeed = movementSpeed * 2;
+                    } else if (gameEvent.StringArg1 == "END") {
+                        movementSpeed = movementSpeed / 2;
+                    }
+                    break;
             }
         }
     }
@@ -55,7 +69,7 @@ public class Player : Entity, IGameEventProcessor {
     }
     private void SetMoveLeft(bool val) {
         if (val) {
-            moveLeft = -MOVEMENT_SPEED;
+            moveLeft = -movementSpeed;
         } else {
             moveLeft = 0.0f;
         }
@@ -63,7 +77,7 @@ public class Player : Entity, IGameEventProcessor {
     }
     private void SetMoveRight(bool val) {
         if (val) {
-            moveRight = MOVEMENT_SPEED;
+            moveRight = movementSpeed;
         } else {
             moveRight = 0.0f;
         }

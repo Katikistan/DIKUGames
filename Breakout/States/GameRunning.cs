@@ -47,7 +47,6 @@ public class GameRunning : IGameState {
         LevelManager.NewLevel(Levels[0]);
         points = new Points();
         health = new Health();
-        BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, LevelManager);
     }
     public void ResetState() {
         GameRunning.instance = null;

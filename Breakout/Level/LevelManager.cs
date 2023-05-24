@@ -19,6 +19,7 @@ public class LevelManager : IGameEventProcessor {
     private Player player;
     private Timer levelTimer;
     private int timer;
+    private bool hardBall = false;
     public Player Player {
         get {
             return player;
@@ -48,6 +49,7 @@ public class LevelManager : IGameEventProcessor {
 
         timer = 0;
         levelTimer = new Timer(new Vec2F(0.0f, -0.23f), timer);
+        BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, this);
     }
     /// <summary>
     /// Removes balls and creates newlevel using string levelfile
