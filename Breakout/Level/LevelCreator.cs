@@ -51,6 +51,7 @@ public class LevelCreator {
             this.meta = levelReader.Meta;
             this.legend = levelReader.Legend;
             CreateBlocks();
+            
             return true;
         } else {
             return false;

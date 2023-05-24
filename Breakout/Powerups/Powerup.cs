@@ -16,19 +16,9 @@ public abstract class Powerup : Entity {
 
     public void Move() {
         this.Shape.Move();
-    }
-    public abstract void Effect();
-    public bool Collide(Player player) {
-        CollisionData collision = CollisionDetection.Aabb((DynamicShape)this.Shape, player.Shape);
-        if (collision.Collision) {
-            this.Effect();
-            this.DeleteEntity();
-            return true;
-        } else {
-            return false;
+        if (Shape.Position.Y <= 0.0 - Shape.Extent.Y) {
+            DeleteEntity();
         }
     }
-
-
-
+    public abstract void Effect();
 }
