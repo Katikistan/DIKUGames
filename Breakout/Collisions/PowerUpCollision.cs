@@ -18,6 +18,7 @@ public static class PowerUpCollision {
             if (collision.Collision) {
                 powerup.Effect();
                 hit = true;
+                powerup.DeleteEntity();
             }
         });
         return hit;

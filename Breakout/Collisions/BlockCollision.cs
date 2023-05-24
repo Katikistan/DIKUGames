@@ -9,7 +9,7 @@ public static class BlockCollision {
     /// Will check for collsions between ball and blocks,
     /// blocks are deleted and ball direction is changed when collisions occur.
     /// </summary>
-    public static void Collide(EntityContainer<Ball> balls, EntityContainer<Block> blocks) {
+    public static void Collide(EntityContainer<Ball> balls, EntityContainer<Block> blocks, bool hardBall) {
         balls.Iterate(ball => {
             // Iterating through every block deletes blocks marked for deletion
             blocks.Iterate(block => {
@@ -21,14 +21,17 @@ public static class BlockCollision {
                     switch (collisionDirection) {
                         case CollisionDirection.CollisionDirUp:
                         case CollisionDirection.CollisionDirDown:
-                            ball._Shape.ChangeDirection(
-                                new Vec2F(currentDirection.X, -currentDirection.Y));
-
+                            if (!hardBall) {
+                                ball._Shape.ChangeDirection(
+                                    new Vec2F(currentDirection.X, -currentDirection.Y));
+                            }
                             break;
                         case CollisionDirection.CollisionDirLeft:
                         case CollisionDirection.CollisionDirRight:
-                            ball._Shape.ChangeDirection(
-                                new Vec2F(-currentDirection.X, currentDirection.Y));
+                            if (!hardBall) {
+                                ball._Shape.ChangeDirection(
+                                    new Vec2F(-currentDirection.X, currentDirection.Y));
+                            }
                             break;
                     }
                 }

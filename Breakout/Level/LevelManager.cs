@@ -17,8 +17,8 @@ public class LevelManager : IGameEventProcessor {
     private EntityContainer<Ball> balls;
     public EntityContainer<Powerup> powerups;
     private Player player;
-    private Timer levelTimer;
     private bool hardBall = false;
+    private Timer levelTimer;
     public Player Player {
         get {
             return player;
@@ -72,6 +72,13 @@ public class LevelManager : IGameEventProcessor {
                     Vec2F pos = (Vec2F)gameEvent.ObjectArg1;
                     powerups.AddEntity(PowerUpCreator.CreatePowerUp(pos));
                     break;
+                case "HARD BALL":
+                    if (gameEvent.StringArg1 == "START") {
+                        hardBall = true;
+                    } else if (gameEvent.StringArg1 == "END") {
+                        hardBall = false;
+                    }
+                    break;
             }
         }
     }
@@ -102,7 +109,7 @@ public class LevelManager : IGameEventProcessor {
     }
     private void CheckCollisions() {
         PlayerCollision.Collide(balls, player);
-        BlockCollision.Collide(balls, blocks);
+        BlockCollision.Collide(balls, blocks, hardBall);
         WallCollision.Collide(balls);
         PowerUpCollision.Collide(powerups,player);
     }

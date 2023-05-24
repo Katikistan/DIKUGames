@@ -13,6 +13,12 @@ public class HardBall : Powerup {
         BreakoutBus.GetBus().RegisterEvent(new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "HARD BALL",
+            StringArg1 = "START"
         });
+        BreakoutBus.GetBus().RegisterTimedEvent(new GameEvent {
+            EventType = GameEventType.StatusEvent,
+            Message = "HARD BALL",
+            StringArg1 = "END"
+            }, TimePeriod.NewSeconds(10.0));
     }
 }
