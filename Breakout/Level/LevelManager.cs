@@ -18,7 +18,6 @@ public class LevelManager : IGameEventProcessor {
     public EntityContainer<Powerup> powerups;
     private Player player;
     private Timer levelTimer;
-    private int timer;
     private bool hardBall = false;
     public Player Player {
         get {
@@ -46,9 +45,7 @@ public class LevelManager : IGameEventProcessor {
         blocks = new EntityContainer<Block>(0);
 
         powerups = new EntityContainer<Powerup>(10); // midlertidigt, til proof of concept til powerups
-
-        timer = 0;
-        levelTimer = new Timer(new Vec2F(0.0f, -0.23f), timer);
+        levelTimer = new Timer(new Vec2F(0.0f, -0.23f), 0);
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, this);
     }
     /// <summary>
@@ -60,12 +57,7 @@ public class LevelManager : IGameEventProcessor {
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
         balls.AddEntity(BallCreator.CreateBall());
-        string time = "";
-        levelCreator.Meta.TryGetValue("Time", out time);
-        if (time != "") {
-            timer = int.Parse(time);
-        }
-        levelTimer.SetTime(timer);
+        levelTimer.SetTime(levelCreator.Timer);
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.StatusEvent) {
@@ -128,7 +120,9 @@ public class LevelManager : IGameEventProcessor {
         blocks.RenderEntities();
         balls.RenderEntities();
         powerups.RenderEntities();
-        // levelTimer.Render();
+        if (levelCreator.HasTimer) {
+            levelTimer.Render();
+        }
     }
     public void Update() {
         CheckCollisions();
