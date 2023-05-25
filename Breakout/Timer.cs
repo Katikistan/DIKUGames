@@ -10,6 +10,7 @@ public class Timer {
     private Text timerText;
     private int timeElapsed;
     private int previousTime;
+    private int n;
     private Vec2F position;
     private Vec3I white;
     public int TimeLeft {
@@ -23,6 +24,7 @@ public class Timer {
         position, new Vec2F(0.25f, 0.35f));
         timerText.SetColor(white);
         timeElapsed = 0;
+        n = 0;
     }
     public void SetTime(int s) {
         timeLeft = s;
@@ -30,9 +32,9 @@ public class Timer {
     private void UpdateTime(){
         previousTime = timeLeft;
         timeElapsed = (int)StaticTimer.GetElapsedMilliseconds();
-        if (1000 < timeElapsed) {
+        if (n + 1000 < timeElapsed) {
             timeLeft--;
-            StaticTimer.RestartTimer();
+            n = (int)StaticTimer.GetElapsedMilliseconds();
         }
     }
     private void UpdateText() {
