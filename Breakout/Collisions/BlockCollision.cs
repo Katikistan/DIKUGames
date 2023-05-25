@@ -15,7 +15,12 @@ public static class BlockCollision {
             blocks.Iterate(block => {
                 CollisionData blockCollision = CollisionDetection.Aabb(ball._Shape, block.Shape);
                 if (blockCollision.Collision) { // True if there is collision between the ball and block
-                    block.LoseHealth();
+                    if (!hardBall) {
+                        block.LoseHealth();
+                    }
+                    else {
+                        block.DeleteEntity();
+                    }
                     CollisionDirection collisionDirection = blockCollision.CollisionDir;
                     Vec2F currentDirection = ball._Shape.Direction;
                     switch (collisionDirection) {
