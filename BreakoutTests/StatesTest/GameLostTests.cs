@@ -12,7 +12,7 @@ public class GameLostTest {
     StateTransformer stateTransformer;
     public GameLostTest() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
-        
+
     }
     [SetUp]
     public void Setup() {
@@ -25,7 +25,7 @@ public class GameLostTest {
     }
     [Test]
     public void TestSwitchGameLost() {
-        
+
         Assert.That(statemachine.ActiveState != GameLost.GetInstance());
         statemachine.ProcessEvent(new GameEvent {
                         EventType = GameEventType.GameStateEvent,
@@ -36,13 +36,13 @@ public class GameLostTest {
         Assert.That(statemachine.ActiveState == GameLost.GetInstance());
     }
 
-    
+
     [Test]
     public void TestGameLost() {
         gamelost.InitializeGameState();
-        gamelost.KeyPress(KeyboardKey.Up);
-        Assert.That(gamelost.activeMenuButton == 0);
-        gamelost.KeyPress(KeyboardKey.Down);
-        Assert.That(gamelost.activeMenuButton == 1);
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
+        Assert.That(gamelost.ActiveMenuButton == 0);
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
+        Assert.That(gamelost.ActiveMenuButton == 1);
     }
 }

@@ -17,7 +17,8 @@ public class TestPoints {
         BreakoutBus.GetBus().InitializeEventBus(
             new List<GameEventType> {
                 GameEventType.StatusEvent,
-                GameEventType.PlayerEvent //Used in levelmanager test
+                GameEventType.PlayerEvent,
+                GameEventType.GameStateEvent
             });
         points = new Points();
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, points);

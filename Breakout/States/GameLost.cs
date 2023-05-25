@@ -13,6 +13,9 @@ public class GameLost : IGameState {
     private Text[] menuButtons = new Text[2];
     private Text gameOverText;
     private int activeMenuButton;
+    public int ActiveMenuButton {
+        get => activeMenuButton;
+    }
     private const int MAIN_MENU = 0;
     private const int QUIT = 1;
     private Vec3I white = new Vec3I(255, 255, 255);
@@ -88,7 +91,7 @@ public class GameLost : IGameState {
                 activeMenuButton = QUIT;
                 break;
             case KeyboardKey.Enter:
-                if (activeMenuButton == MAIN_MENU) {
+                if (ActiveMenuButton == MAIN_MENU) {
                     BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                         EventType = GameEventType.GameStateEvent,
                         Message = "CHANGE_STATE",

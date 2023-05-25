@@ -3,6 +3,7 @@ using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using Breakout.Players;
+using Breakout;
 namespace BreakoutTests.EntityTest;
 [TestFixture]
 public class TestPlayer {
@@ -21,6 +22,10 @@ public class TestPlayer {
     }
     [SetUp]
     public void Setup() {
+        BreakoutBus.GetBus().InitializeEventBus(
+            new List<GameEventType> {
+                GameEventType.PlayerEvent,
+            });
         movementSpeed = 0.01f;
         startPosX = 0.425f;
         startPosY = 0.05f;
