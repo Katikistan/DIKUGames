@@ -48,7 +48,7 @@ public class Player : Entity, IGameEventProcessor {
                     break;
                 case "SPEED":
                     if (gameEvent.StringArg1 == "START") {
-                        movementSpeed = 0.2f;
+                        movementSpeed = 0.02f;
                     } else if (gameEvent.StringArg1 == "END") {
                         movementSpeed = 0.01f;
                     }

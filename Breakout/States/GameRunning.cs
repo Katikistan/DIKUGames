@@ -43,6 +43,7 @@ public class GameRunning : IGameState {
         Levels.Add("level1.txt");
         Levels.Add("level2.txt");
         Levels.Add("level3.txt");
+        Levels.Add("level4.txt");
         Levels.Add("wall.txt");
         LevelManager.NewLevel(Levels[0]);
         points = new Points();
