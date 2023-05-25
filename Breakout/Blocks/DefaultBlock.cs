@@ -8,8 +8,8 @@ namespace Breakout.Blocks;
 public class DefaultBlock : Block {
     public DefaultBlock(Shape shape, string imageFile) : base(shape, imageFile) {
     }
-    public override void LoseHealth() {
-        health -= 1;
+    public override void LoseHealth(int amount) {
+        health -= amount;
         if (health == 0) {
             DeleteEntity();
             GivePoints();
