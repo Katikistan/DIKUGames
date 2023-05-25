@@ -17,7 +17,6 @@ public class LifePlus : Powerup {
             Message = "GET HEALTH",
             IntArg1 = 1
         });
-        DeleteEntity();
     }
 
 }

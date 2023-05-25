@@ -25,34 +25,32 @@ public class HealthTest {
         gamelost = new GameLost();
         statemachine = new StateMachine();
         health = new Health();
-
-
     }
     [Test]
     public void TestLoseHealth() {
-        Assert.That(health.health == 3);
+        Assert.That(health._Health == 3);
         health.LoseHealth();
-        Assert.That(health.health == 2);
+        Assert.That(health._Health == 2);
         health.LoseHealth();
-        Assert.That(health.health == 1);
+        Assert.That(health._Health == 1);
         Assert.That(statemachine.ActiveState != GameLost.GetInstance());
         health.LoseHealth();
-        Assert.That(health.health == 0);
+        Assert.That(health._Health == 0);
         health.LoseHealth();
-        Assert.That(health.health == 0);
+        Assert.That(health._Health == 0);
         BreakoutBus.GetBus().ProcessEvents();
         //ved ikke hvad der skal gøres for at statemachinen reageree
         Assert.That(statemachine.ActiveState == GameLost.GetInstance());
     }
     [Test]
     public void TestGainHealth() {
-        Assert.That(health.health == 3);
+        Assert.That(health._Health == 3);
         health.ProcessEvent(new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "GET HEALTH",
             IntArg1 = 1
         });
-        Assert.That(health.health == 4);
+        Assert.That(health._Health == 4);
 
     }
 }

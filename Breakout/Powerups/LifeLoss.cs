@@ -13,7 +13,6 @@ public class LifeLoss : Powerup {
             EventType = GameEventType.StatusEvent,
             Message = "LOSE HEALTH",
         });
-        DeleteEntity();
     }
 
 }
