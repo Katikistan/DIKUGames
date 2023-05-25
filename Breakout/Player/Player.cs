@@ -34,23 +34,23 @@ public class Player : Entity, IGameEventProcessor {
                     break;
                 case "SLIM JIM":
                     if (gameEvent.StringArg1 == "START") {
-                        shape.Extent.X = shape.Extent.X / 2;
+                        shape.Extent.X = 0.075f;
                     } else if (gameEvent.StringArg1 == "END") {
-                        shape.Extent.X = shape.Extent.X * 2;
+                        shape.Extent.X = 0.15f;
                     }
                     break;
                 case "WIDE":
                     if (gameEvent.StringArg1 == "START") {
-                        shape.Extent.X = shape.Extent.X * 2;
+                        shape.Extent.X = 0.30f ;
                     } else if (gameEvent.StringArg1 == "END") {
-                        shape.Extent.X = shape.Extent.X / 2;
+                        shape.Extent.X = 0.15f;
                     }
                     break;
                 case "SPEED":
                     if (gameEvent.StringArg1 == "START") {
-                        movementSpeed = movementSpeed * 2;
+                        movementSpeed = 0.2f;
                     } else if (gameEvent.StringArg1 == "END") {
-                        movementSpeed = movementSpeed / 2;
+                        movementSpeed = 0.01f;
                     }
                     break;
             }

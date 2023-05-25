@@ -12,12 +12,12 @@ public class Wide : Powerup {
     public override void Effect() {
         BreakoutBus.GetBus().RegisterEvent(new GameEvent {
             EventType = GameEventType.PlayerEvent,
-            Message = "Wide",
+            Message = "WIDE",
             StringArg1 = "START"
         });
         BreakoutBus.GetBus().RegisterTimedEvent(new GameEvent {
             EventType = GameEventType.PlayerEvent,
-            Message = "Wide",
+            Message = "WIDE",
             StringArg1 = "END"
             }, TimePeriod.NewSeconds(10.0));
     }

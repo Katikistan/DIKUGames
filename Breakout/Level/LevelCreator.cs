@@ -64,7 +64,6 @@ public class LevelCreator {
             this.legend = levelReader.Legend;
             CreateBlocks();
             InitializeTimer();
-            
             return true;
         } else {
             return false;
