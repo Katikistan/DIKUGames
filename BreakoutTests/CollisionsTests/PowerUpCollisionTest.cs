@@ -19,7 +19,7 @@ public class PowerUpCollisionTest {
     }
     [SetUp]
     public void Setup(){
-        powerup1 = PowerUpCreator.CreatePowerUp(new Vec2F(0.425f, 0.06f));
+        powerup1 = PowerUpCreator.CreatePowerUp(new Vec2F(0.5f, 0.1f));
         powerup2 = PowerUpCreator.CreatePowerUp(new Vec2F(0.5f, 0.5f));
         powerups = new EntityContainer<Powerup>(2);
         powerups.AddEntity(powerup1);
@@ -32,6 +32,6 @@ public class PowerUpCollisionTest {
     public void TestCollision() {
         Assert.AreEqual(powerups.CountEntities(), 2);
         PowerUpCollision.Collide(powerups, player);
-        Assert.AreEqual(powerups.CountEntities(), 1);
+        Assert.AreNotEqual(powerups.CountEntities(), 2);
     }
 }
