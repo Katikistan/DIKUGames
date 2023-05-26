@@ -16,9 +16,9 @@ public class GameRunningTest {
     }
     [Test]
     public void TestInitializeGameState() {
-        Assert.AreNotEqual(gameRunning.LevelManager, null!);
-        Assert.AreNotEqual(gameRunning.Points, null!);
-        Assert.AreNotEqual(gameRunning.Background, null!);
+        Assert.That(gameRunning.LevelManager, Is.Not.EqualTo(null!));
+        Assert.That(gameRunning.Points, Is.Not.EqualTo (null!));
+        Assert.That(gameRunning.Background, Is.Not.EqualTo(null!));
 
         Assert.That(gameRunning.Health is Health);
         Assert.That(gameRunning.Background is Entity);
@@ -26,9 +26,9 @@ public class GameRunningTest {
         Assert.That(gameRunning.LevelManager is LevelManager);
         Assert.That(gameRunning.Points is Points);
 
-        Assert.AreEqual(gameRunning.Levels[0], "level1.txt");
-        Assert.AreEqual(gameRunning.Levels[1], "level2.txt");
-        Assert.AreEqual(gameRunning.Levels[2], "level3.txt");
+        Assert.That(gameRunning.Levels[0], Is.EqualTo("level1.txt"));
+        Assert.That(gameRunning.Levels[1], Is.EqualTo("level2.txt"));
+        Assert.That(gameRunning.Levels[2], Is.EqualTo("level3.txt"));
     }
     [Test]
     public void TestLoadLevels() {
