@@ -9,7 +9,6 @@ public class GameLostTest {
     GameLost gamelost;
     Health health;
     StateMachine statemachine;
-    StateTransformer stateTransformer;
     public GameLostTest() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
 
