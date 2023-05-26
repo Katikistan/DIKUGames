@@ -33,7 +33,7 @@ public class GameRunningTest {
     [Test]
     public void TestLoadLevels() {
         // If levels is empty a new level is created
-        Assert.That(5, Is.EqualTo(gameRunning.Levels.Count));
+        Assert.That(gameRunning.Levels.Count, Is.EqualTo(5));
         for (int i = 0; i < gameRunning.Levels.Count; i++) {
             gameRunning.Levels.RemoveAt(i);
         }
