@@ -27,7 +27,7 @@ public class TestBall {
         Vec2F currentpos = new Vec2F(ball._Shape.Position.X, ball._Shape.Position.Y);
         Assert.That(currentpos.X, Is.Not.EqualTo(startpos.X));
         Assert.That(currentpos.Y, Is.Not.EqualTo(startpos.Y));
-        Assert.That(currentpos.X, Is.Not.EqualTo(newpos.X));
-        Assert.That(currentpos.Y, Is.Not.EqualTo(newpos.Y));
+        Assert.That(currentpos.X, Is.EqualTo(newpos.X));
+        Assert.That(currentpos.Y, Is.EqualTo(newpos.Y));
     }
 }
