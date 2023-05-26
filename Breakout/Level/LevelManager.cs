@@ -36,6 +36,10 @@ public class LevelManager : IGameEventProcessor {
     public Timer LevelTimer {
         get => levelTimer;
     }
+    public bool HardBall {
+        get => hardBall;
+    }
+
     public LevelManager() {
         levelCreator = new LevelCreator();
         player = new Player(
