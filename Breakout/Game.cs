@@ -9,14 +9,6 @@ namespace Breakout;
 public class Game : DIKUGame, IGameEventProcessor {
     private StateMachine stateMachine;
     public Game(WindowArgs windowArgs) : base(windowArgs) {
-        BreakoutBus.GetBus().InitializeEventBus(
-            new List<GameEventType> {
-                GameEventType.InputEvent,
-                GameEventType.WindowEvent,
-                GameEventType.PlayerEvent,
-                GameEventType.GameStateEvent,
-                GameEventType.StatusEvent
-            });
         window.SetKeyEventHandler(KeyHandler);
         BreakoutBus.GetBus().Subscribe(GameEventType.InputEvent, this);
         BreakoutBus.GetBus().Subscribe(GameEventType.WindowEvent, this);

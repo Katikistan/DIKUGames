@@ -28,7 +28,7 @@ public class WallCollisionTests {
         balls.AddEntity(ball2);
         WallCollision.Collide(balls);
 
-        Assert.AreEqual(ball1._Shape.Direction.X, -ball2._Shape.Direction.X);
+        Assert.That(ball1._Shape.Direction.X, Is.EqualTo(-ball2._Shape.Direction.X));
     }
     [Test]
     public void TestCollideRightWall() {
@@ -40,7 +40,7 @@ public class WallCollisionTests {
         balls.AddEntity(ball1);
         balls.AddEntity(ball2);
         WallCollision.Collide(balls);
-        Assert.AreEqual(ball1._Shape.Direction.X, -ball2._Shape.Direction.X);
+        Assert.That(ball1._Shape.Direction.X, Is.EqualTo(-ball2._Shape.Direction.X));
     }
     [Test]
     public void TestCollideTopWall() {
@@ -54,7 +54,7 @@ public class WallCollisionTests {
         balls.AddEntity(ball2);
         WallCollision.Collide(balls);
 
-        Assert.AreEqual(ball1._Shape.Direction.Y, -ball2._Shape.Direction.Y);
+        Assert.That(ball1._Shape.Direction.Y, Is.EqualTo(-ball2._Shape.Direction.Y));
     }
     [Test]
     public void TestCollideBottom() {
@@ -65,8 +65,8 @@ public class WallCollisionTests {
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         balls.AddEntity(ball1);
         balls.AddEntity(ball2);
-        Assert.AreEqual(balls.CountEntities(), 2);
+        Assert.That(balls.CountEntities(), Is.EqualTo(2));
         WallCollision.Collide(balls);
-        Assert.AreEqual(balls.CountEntities(), 1);
+        Assert.That(balls.CountEntities(), Is.EqualTo(1));
     }
 }

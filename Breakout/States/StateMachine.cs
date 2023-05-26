@@ -40,6 +40,9 @@ public class StateMachine : IGameEventProcessor {
             case GameStateType.GameLost:
                 ActiveState = GameLost.GetInstance();
                 break;
+            case GameStateType.GameWon:
+                ActiveState = GameWon.GetInstance();
+                break;
         }
     }
 }

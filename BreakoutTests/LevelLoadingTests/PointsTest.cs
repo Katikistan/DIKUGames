@@ -14,11 +14,6 @@ public class TestPoints {
     private Block hardened;
     public TestPoints() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
-        BreakoutBus.GetBus().InitializeEventBus(
-            new List<GameEventType> {
-                GameEventType.StatusEvent,
-                GameEventType.PlayerEvent //Used in levelmanager test
-            });
         points = new Points();
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, points);
 
@@ -53,13 +48,13 @@ public class TestPoints {
     [Test]
     public void TestBlockGetPoints() {
         Assert.That(points.GetPoints(), Is.EqualTo(0));
-        defaultBlock.LoseHealth();
+        defaultBlock.LoseHealth(1);
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(10));
-        hardened.LoseHealth();
+        hardened.LoseHealth(1);
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(10));
-        hardened.LoseHealth();
+        hardened.LoseHealth(1);
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(30));
     }

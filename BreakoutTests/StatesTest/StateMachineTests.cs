@@ -22,28 +22,28 @@ public class StateMachineTest {
     }
     [Test]
     public void TestStateMachine() {
-        Assert.AreEqual(statemachine.ActiveState, MainMenu.GetInstance());
+        Assert.That(statemachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));
 
         statemachine.ProcessEvent(new GameEvent {
             EventType = GameEventType.GameStateEvent,
             Message = "CHANGE_STATE",
             StringArg1 = "GAME_RUNNING"
         });
-        Assert.AreEqual(statemachine.ActiveState, GameRunning.GetInstance());
+        Assert.That(statemachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
 
         statemachine.ProcessEvent(new GameEvent {
             EventType = GameEventType.GameStateEvent,
             Message = "CHANGE_STATE",
             StringArg1 = "GAME_PAUSED"
         });
-        Assert.AreEqual(statemachine.ActiveState, GamePaused.GetInstance());
+        Assert.That(statemachine.ActiveState, Is.EqualTo(GamePaused.GetInstance()));
 
         statemachine.ProcessEvent(new GameEvent {
             EventType = GameEventType.GameStateEvent,
             Message = "RESUME_STATE",
             StringArg1 = "GAME_RUNNING"
         });
-        Assert.AreEqual(statemachine.ActiveState, GameRunning.GetInstance());
+        Assert.That(statemachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
 
 
         statemachine.ProcessEvent(new GameEvent {
@@ -52,7 +52,7 @@ public class StateMachineTest {
             StringArg1 = "GAME_LOST"
         });
 
-        Assert.AreEqual(statemachine.ActiveState, GameLost.GetInstance());
+        Assert.That(statemachine.ActiveState, Is.EqualTo(GameLost.GetInstance()));
         Assert.That(gamerunning is IGameState);
         Assert.That(gamePaused is IGameState);
         Assert.That(gamelost is IGameState);

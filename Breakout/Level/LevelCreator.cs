@@ -2,7 +2,9 @@ using Breakout.Blocks;
 using DIKUArcade.Entities;
 using DIKUArcade.Math;
 using System.Collections.Generic;
-
+using Breakout.Powerups;
+using DIKUArcade.Graphics;
+using System.IO;
 
 namespace Breakout.Levels;
 /// <summary>
@@ -13,18 +15,37 @@ public class LevelCreator {
     private Dictionary<string, string> meta;
     private Dictionary<char, string> legend;
     private LevelReader levelReader;
+    private int timer;
+    private bool hasTimer;
     private EntityContainer<Block> blocks;
     public EntityContainer<Block> Blocks {
         get {
             return blocks;
         }
     }
+    public EntityContainer<Powerup> powerups;
+
     public LevelReader LevelReader {
         get {
             return levelReader;
         }
         set {
             levelReader = value;
+        }
+    }
+    public int Timer {
+        get {
+            return timer;
+        }
+    }
+    public bool HasTimer {
+        get {
+            return hasTimer;
+        }
+    }
+    public Dictionary<string, string> Meta {
+        get {
+            return meta;
         }
     }
     public LevelCreator() {
@@ -42,6 +63,7 @@ public class LevelCreator {
             this.meta = levelReader.Meta;
             this.legend = levelReader.Legend;
             CreateBlocks();
+            InitializeTimer();
             return true;
         } else {
             return false;
@@ -71,6 +93,18 @@ public class LevelCreator {
                     blocks.AddEntity(block);
                 }
             }
+        }
+    }
+    private void InitializeTimer(){
+        string time = "";
+        meta.TryGetValue("Time", out time);
+        if (time != "" && time != null) {
+            hasTimer = true;
+            timer = int.Parse(time);
+        }
+        else {
+            hasTimer = false;
+            timer = System.Int32.MaxValue;
         }
     }
 }

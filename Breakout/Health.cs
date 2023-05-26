@@ -5,6 +5,11 @@ namespace Breakout;
 public class Health : IGameEventProcessor {
     private int health;
     private Text display;
+
+    public int _Health {
+        get => health;
+    }
+
     public Health() {
         health = 3;
         display = new Text($"Lives: {health}", new Vec2F(0.8f, -0.275f), new Vec2F(0.25f, 0.35f));
@@ -16,6 +21,11 @@ public class Health : IGameEventProcessor {
             switch (gameEvent.Message) {
                 case "LOSE HEALTH":
                     LoseHealth();
+                    display.SetText("Lives:" + health.ToString());
+                    break;
+                case "GET HEALTH":
+                    health += gameEvent.IntArg1;
+                    display.SetText("Lives:" + health.ToString());
                     break;
             }
         }
@@ -26,8 +36,8 @@ public class Health : IGameEventProcessor {
     /// </summary>
     public void LoseHealth() {
         health -= 1;
-        display.SetText("Lives:" + health.ToString());
         if (health <= 0) {
+            health = 0;
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                 EventType = GameEventType.GameStateEvent,
                 Message = "CHANGE_STATE",

@@ -3,10 +3,10 @@ using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using Breakout.Players;
+using Breakout;
 namespace BreakoutTests.EntityTest;
 [TestFixture]
 public class TestPlayer {
-    private GameEventBus testEventBus = null!;
     private Player player = null!;
     private Vec2F playerPos = null!;
     private GameEvent eventMoveLeft;
@@ -21,16 +21,14 @@ public class TestPlayer {
     }
     [SetUp]
     public void Setup() {
+
         movementSpeed = 0.01f;
         startPosX = 0.425f;
         startPosY = 0.05f;
-        testEventBus = new GameEventBus();
-        testEventBus.InitializeEventBus(
-            new List<GameEventType> { GameEventType.PlayerEvent });
         player = new Player(
             new DynamicShape(new Vec2F(startPosX, startPosY), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        testEventBus.Subscribe(GameEventType.PlayerEvent, player);
+        BreakoutBus.GetBus().Subscribe(GameEventType.PlayerEvent, player);
 
         eventMoveLeft = (new GameEvent {
             EventType = GameEventType.PlayerEvent,
@@ -56,46 +54,46 @@ public class TestPlayer {
     }
     [Test]
     public void TestMoveLeft() {
-        testEventBus.RegisterEvent(eventMoveLeft);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
     }
     [Test]
     public void TestMoveRight() {
-        testEventBus.RegisterEvent(eventMoveRight);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
     }
     [Test]
     public void TestRealeseLeft() {
-        testEventBus.RegisterEvent(eventMoveLeft);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         // Player moved to the left
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
         // Left key is released
-        testEventBus.RegisterEvent(eventRealeseLeft);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventRealeseLeft);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         // Player pos is the same/hasn't moved
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
     }
     [Test]
     public void TestRealeseRight() {
-        testEventBus.RegisterEvent(eventMoveRight);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         // Player moved to the right
         Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
         // Right key is released
-        testEventBus.RegisterEvent(eventRealeseRight);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventRealeseRight);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         // Player pos is the same/hasn't moved
@@ -106,8 +104,8 @@ public class TestPlayer {
         player = new Player(
             new DynamicShape(new Vec2F(0.0f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        testEventBus.RegisterEvent(eventMoveLeft);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         player.Move();
         player.Move();
@@ -119,8 +117,8 @@ public class TestPlayer {
         player = new Player(
             new DynamicShape(new Vec2F(1.0f - 0.1f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        testEventBus.RegisterEvent(eventMoveRight);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         player.Move();
         player.Move();
@@ -129,9 +127,9 @@ public class TestPlayer {
     }
     [Test]
     public void TestMoveLeftRight() {
-        testEventBus.RegisterEvent(eventMoveLeft);
-        testEventBus.RegisterEvent(eventMoveRight);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
+        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
+        BreakoutBus.GetBus().ProcessEvents();
         // Both left and right "keys" are pressed
         player.Move();
         player.Move();
@@ -140,17 +138,17 @@ public class TestPlayer {
     }
     [Test]
     public void TestMoveLeftRight2() {
-        testEventBus.RegisterEvent(eventMoveLeft);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
+        BreakoutBus.GetBus().ProcessEvents();
         // Player moves to the left
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
         // Player realeses left key
-        testEventBus.RegisterEvent(eventRealeseLeft);
+        BreakoutBus.GetBus().RegisterEvent(eventRealeseLeft);
         // Player presses right key
-        testEventBus.RegisterEvent(eventMoveRight);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         // Player moved left and right back to start
@@ -162,8 +160,8 @@ public class TestPlayer {
             EventType = GameEventType.PlayerEvent,
             Message = "move left"
         });
-        testEventBus.RegisterEvent(eventMoveLeft);
-        testEventBus.ProcessEvents();
+        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
+        BreakoutBus.GetBus().ProcessEvents();
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX));

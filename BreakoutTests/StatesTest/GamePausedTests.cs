@@ -6,7 +6,6 @@ namespace Breakout.States;
 [TestFixture]
 public class GamePausedTest {
     private GamePaused gamePaused;
-    private StateMachine stateMachine;
     public GamePausedTest() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }

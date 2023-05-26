@@ -6,14 +6,19 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using System.IO;
 using Breakout.Collisions;
+using Breakout.Timers;
 namespace Breakout.Levels;
 using Breakout.Balls;
+using Breakout.Powerups;
 
 public class LevelManager : IGameEventProcessor {
     private LevelCreator levelCreator;
     private EntityContainer<Block> blocks;
     private EntityContainer<Ball> balls;
+    public EntityContainer<Powerup> powerups;
     private Player player;
+    private bool hardBall = false;
+    private Timer levelTimer;
     public Player Player {
         get {
             return player;
@@ -28,6 +33,12 @@ public class LevelManager : IGameEventProcessor {
     public LevelCreator LevelCreator {
         get => levelCreator;
     }
+    public Timer LevelTimer {
+        get => levelTimer;
+    }
+    public bool HardBall {
+        get => hardBall;
+    }
 
     public LevelManager() {
         levelCreator = new LevelCreator();
@@ -36,6 +47,10 @@ public class LevelManager : IGameEventProcessor {
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         balls = new EntityContainer<Ball>(3);
         blocks = new EntityContainer<Block>(0);
+
+        powerups = new EntityContainer<Powerup>(10); // midlertidigt, til proof of concept til powerups
+        levelTimer = new Timer(new Vec2F(0.0f, -0.23f), 0);
+        BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, this);
     }
     /// <summary>
     /// Removes balls and creates newlevel using string levelfile
@@ -45,7 +60,8 @@ public class LevelManager : IGameEventProcessor {
         balls.ClearContainer();
         levelCreator.CreateLevel(level);
         blocks = levelCreator.Blocks;
-        balls.AddEntity(BallCreator.CreateBall());
+        balls.AddEntity(BallCreator.CreateBall(new Vec2F(0.45f, 0.2f), new Vec2F(0.001f, 0.015f)));
+        levelTimer.SetTime(levelCreator.Timer);
     }
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.StatusEvent) {
@@ -54,7 +70,29 @@ public class LevelManager : IGameEventProcessor {
                     blocks.ClearContainer();
                     break;
                 case "NEW BALL":
-                    balls.AddEntity(BallCreator.CreateBall());
+                    balls.AddEntity(BallCreator.CreateBall(new Vec2F(0.45f, 0.2f), new Vec2F(0.001f, 0.015f)));
+                    break;
+                case "SPAWN POWERUP":
+                    Vec2F pos = (Vec2F)gameEvent.ObjectArg1;
+                    powerups.AddEntity(PowerUpCreator.CreatePowerUp(pos));
+                    break;
+                case "HARD BALL":
+                    if (gameEvent.StringArg1 == "START") {
+                        hardBall = true;
+                    } else if (gameEvent.StringArg1 == "END") {
+                        hardBall = false;
+                    }
+                    break;
+                case "SPLIT":
+                    balls.Iterate(ball => {
+                        if(balls.CountEntities()<18){
+                        pos = ball.Shape.Position;
+                        ball.DeleteEntity();
+                        balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F (0.0f, 0.015f)));
+                        balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F (-0.0106f, 0.0106f)));
+                        balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F (0.0106f, 0.0106f)));
+                        }
+                        });
                     break;
             }
         }
@@ -79,19 +117,40 @@ public class LevelManager : IGameEventProcessor {
             ball.Move();
         }
     }
+    private void MovePowerups() {
+        foreach (Powerup powerup in powerups) {
+            powerup.Move();
+        }
+    }
     private void CheckCollisions() {
         PlayerCollision.Collide(balls, player);
-        BlockCollision.Collide(balls, blocks);
+        BlockCollision.Collide(balls, blocks, hardBall);
         WallCollision.Collide(balls);
+        PowerUpCollision.Collide(powerups,player);
+    }
+    private void CheckTime() {
+        if (levelTimer.TimeLeft < 1) {
+            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
+                EventType = GameEventType.GameStateEvent,
+                Message = "CHANGE_STATE",
+                StringArg1 = "GAME_LOST"
+            });
+        }
     }
     public void Render() {
         player.Render();
         blocks.RenderEntities();
         balls.RenderEntities();
+        powerups.RenderEntities();
+        if (levelCreator.HasTimer) {
+            levelTimer.Render();
+        }
     }
     public void Update() {
         CheckCollisions();
+        CheckTime();
         player.Move();
         MoveBalls();
+        MovePowerups();
     }
 }

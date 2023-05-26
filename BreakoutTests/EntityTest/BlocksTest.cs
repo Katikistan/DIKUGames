@@ -41,20 +41,20 @@ public class BlockTests {
     public void TestDecHealth() {
         // defaultblock
         Assert.That(defaultblock.Health, Is.EqualTo(1));
-        defaultblock.LoseHealth();
+        defaultblock.LoseHealth(1);
         Assert.That(defaultblock.Health, Is.EqualTo(0));
-        defaultblock.LoseHealth();
+        defaultblock.LoseHealth(1);
         Assert.That(defaultblock.Health, Is.EqualTo(-1));
         // hardened
         Assert.That(hardened.Health, Is.EqualTo(2)); //
-        hardened.LoseHealth();
+        hardened.LoseHealth(1);
         Assert.That(hardened.Health, Is.EqualTo(1));
-        hardened.LoseHealth();
+        hardened.LoseHealth(1);
         Assert.That(hardened.Health, Is.EqualTo(0));
         // unbreakable
         for (int i = 0; i < 10; i++) {
             Assert.That(unbreakable.Health, Is.EqualTo(1));
-            unbreakable.LoseHealth();
+            unbreakable.LoseHealth(1);
             Assert.That(unbreakable.Health, Is.EqualTo(1));
         }
 
@@ -63,17 +63,17 @@ public class BlockTests {
     [Test]
     public void TestBlockIsDead() {
         Assert.That(!defaultblock.IsDeleted());
-        defaultblock.LoseHealth();
+        defaultblock.LoseHealth(1);
         Assert.That(defaultblock.IsDeleted());
         // hardened
         Assert.That(!hardened.IsDeleted());
-        hardened.LoseHealth();
+        hardened.LoseHealth(1);
         Assert.That(!hardened.IsDeleted());
-        hardened.LoseHealth();
+        hardened.LoseHealth(1);
         Assert.That(hardened.IsDeleted()); //
         // unbreakable
         for (int i = 0; i < 10; i++) {
-            unbreakable.LoseHealth();
+            unbreakable.LoseHealth(1);
             Assert.That(!unbreakable.IsDeleted());
         }
     }

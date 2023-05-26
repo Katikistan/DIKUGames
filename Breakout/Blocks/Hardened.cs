@@ -21,8 +21,8 @@ public class Hardened : Block {
     /// <summary>
     /// Decreases Block health, if health is less than 1 the block is marked for deletion.
     /// </summary>
-    public override void LoseHealth() {
-        health -= 1;
+    public override void LoseHealth(int amount) {
+        health -= amount;
         if (health == 1 && File.Exists(Damaged)) {
             Image = new Image(Damaged);
         } else if (health == 0) {

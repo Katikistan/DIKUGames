@@ -4,13 +4,11 @@ using DIKUArcade.Math;
 using System.IO;
 namespace Breakout.Balls;
 public static class BallCreator {
-    public static Ball CreateBall() {
+    public static Ball CreateBall(Vec2F pos, Vec2F dir) {
         return new Ball(new DynamicShape(
-            new Vec2F(0.45f, 0.2f),
+            pos,
             new Vec2F(0.03f, 0.03f),
-            new Vec2F(0.001f, 0.015f)),
+            dir),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-
     }
 }
-// xml

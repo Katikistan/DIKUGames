@@ -10,7 +10,7 @@ public class TestBall {
     }
     [SetUp]
     public void Setup() {
-        ball = BallCreator.CreateBall();
+        ball = BallCreator.CreateBall(new Vec2F(0.45f, 0.2f), new Vec2F(0.001f, 0.015f));
     }
     [Test]
     public void TestIsEntity() {

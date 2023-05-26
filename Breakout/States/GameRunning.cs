@@ -4,6 +4,7 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Input;
 using DIKUArcade.Math;
 using DIKUArcade.State;
+using Breakout.Timers;
 using Breakout.Levels;
 using System.IO;
 using System.Collections.Generic;
@@ -42,10 +43,11 @@ public class GameRunning : IGameState {
         Levels.Add("level1.txt");
         Levels.Add("level2.txt");
         Levels.Add("level3.txt");
+        Levels.Add("level4.txt");
+        Levels.Add("wall.txt");
         LevelManager.NewLevel(Levels[0]);
         points = new Points();
         health = new Health();
-        BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, LevelManager);
     }
     public void ResetState() {
         GameRunning.instance = null;
@@ -61,7 +63,7 @@ public class GameRunning : IGameState {
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                 EventType = GameEventType.GameStateEvent,
                 Message = "CHANGE_STATE",
-                StringArg1 = "MAIN_MENU"
+                StringArg1 = "GAME_WON"
             });
             return;
         } else if (LevelManager.EmptyLevel()) {

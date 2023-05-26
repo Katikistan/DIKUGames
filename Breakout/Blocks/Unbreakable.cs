@@ -11,6 +11,6 @@ public class Unbreakable : Block {
     /// <summary>
     /// Does nothing, beacuse unbreakable blocks can't lose health and die
     /// </summary>
-    public override void LoseHealth() {
+    public override void LoseHealth(int amount) {
     }
 }

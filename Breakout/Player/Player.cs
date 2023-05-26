@@ -6,13 +6,16 @@ namespace Breakout.Players;
 public class Player : Entity, IGameEventProcessor {
     private float moveLeft = 0.0f;
     private float moveRight = 0.0f;
-    private const float MOVEMENT_SPEED = 0.01f;
+    private float movementSpeed = 0.01f;
     private DynamicShape shape;
     public DynamicShape _Shape {
         get {
             return shape;
         }
     }
+
+    public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
+
     public Player(DynamicShape shape, IBaseImage image) : base(shape, image) {
         this.shape = base.Shape.AsDynamicShape();
         BreakoutBus.GetBus().Subscribe(GameEventType.PlayerEvent, this);
@@ -32,6 +35,27 @@ public class Player : Entity, IGameEventProcessor {
                 case "RELEASE RIGHT":
                     SetMoveRight(false);
                     break;
+                case "SLIM JIM":
+                    if (gameEvent.StringArg1 == "START") {
+                        shape.Extent.X = 0.075f;
+                    } else if (gameEvent.StringArg1 == "END") {
+                        shape.Extent.X = 0.15f;
+                    }
+                    break;
+                case "WIDE":
+                    if (gameEvent.StringArg1 == "START") {
+                        shape.Extent.X = 0.30f ;
+                    } else if (gameEvent.StringArg1 == "END") {
+                        shape.Extent.X = 0.15f;
+                    }
+                    break;
+                case "SPEED":
+                    if (gameEvent.StringArg1 == "START") {
+                        movementSpeed = 0.02f;
+                    } else if (gameEvent.StringArg1 == "END") {
+                        movementSpeed = 0.01f;
+                    }
+                    break;
             }
         }
     }
@@ -48,7 +72,7 @@ public class Player : Entity, IGameEventProcessor {
     }
     private void SetMoveLeft(bool val) {
         if (val) {
-            moveLeft = -MOVEMENT_SPEED;
+            moveLeft = -movementSpeed;
         } else {
             moveLeft = 0.0f;
         }
@@ -56,7 +80,7 @@ public class Player : Entity, IGameEventProcessor {
     }
     private void SetMoveRight(bool val) {
         if (val) {
-            moveRight = MOVEMENT_SPEED;
+            moveRight = movementSpeed;
         } else {
             moveRight = 0.0f;
         }

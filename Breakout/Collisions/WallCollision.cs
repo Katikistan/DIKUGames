@@ -15,6 +15,17 @@ public static class WallCollision {
             CollideTopWall(ball);
             CollideBottom(ball);
         });
+        if (balls.CountEntities() == 0) {
+            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
+                EventType = GameEventType.StatusEvent,
+                Message = "LOSE HEALTH"
+            });
+            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
+                EventType = GameEventType.StatusEvent,
+                Message = "NEW BALL"
+            });
+        }
+
     }
     private static void CollideLeftWall(Ball ball) {
         if (ball._Shape.Position.X < 0) {
@@ -34,14 +45,6 @@ public static class WallCollision {
     private static void CollideBottom(Ball ball) {
         if (ball._Shape.Position.Y <= 0.0 - ball._Shape.Extent.Y) {
             ball.DeleteEntity();
-            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
-                EventType = GameEventType.StatusEvent,
-                Message = "LOSE HEALTH"
-            });
-            BreakoutBus.GetBus().RegisterEvent(new GameEvent {
-                EventType = GameEventType.StatusEvent,
-                Message = "NEW BALL"
-            });
         }
     }
 }

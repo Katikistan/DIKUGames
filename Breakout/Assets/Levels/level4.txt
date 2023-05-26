@@ -1,0 +1,43 @@
+Map:
+------------
+------------
+---bbbbbb---
+---b-##-b---
+---b-##-b---
+---bbbbbb---
+------------
+------------
+---Y----Y---
+000Y----Y000
+000Y----Y000
+000Y----Y000
+000Y-##-Y000
+000Y----Y000
+111111111111
+------------
+------------
+------------
+------------
+------------
+------------
+------------
+------------
+------------
+------------
+Map/
+
+Meta:
+Name: LEVEL 4
+PowerUp: #
+Unbreakable: Y
+Hardened: 1
+Meta/
+
+Legend:
+0) orange-block.png
+w) darkgreen-block.png
+1) blue-block.png
+#) green-block.png
+Y) brown-block.png
+b) yellow-block.png
+Legend/
