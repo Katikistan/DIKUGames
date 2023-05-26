@@ -14,12 +14,6 @@ public class TestPoints {
     private Block hardened;
     public TestPoints() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
-        BreakoutBus.GetBus().InitializeEventBus(
-            new List<GameEventType> {
-                GameEventType.StatusEvent,
-                GameEventType.PlayerEvent,
-                GameEventType.GameStateEvent
-            });
         points = new Points();
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, points);
 
