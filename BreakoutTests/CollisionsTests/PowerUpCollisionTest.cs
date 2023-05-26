@@ -30,8 +30,8 @@ public class PowerUpCollisionTest {
     }
     [Test]
     public void TestCollision() {
-        Assert.AreEqual(powerups.CountEntities(), 2);
+        Assert.That(powerups.CountEntities(), Is.EqualTo(2));
         PowerUpCollision.Collide(powerups, player);
-        Assert.AreNotEqual(powerups.CountEntities(), 2);
+        Assert.That(powerups.CountEntities(), Is.Not.EqualTo(2));
     }
 }

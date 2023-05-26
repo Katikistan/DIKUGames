@@ -51,7 +51,7 @@ public class PlayerCollisionTest {
                 ball.Move();
             });
         }
-        Assert.AreEqual(ballleft._Shape.Direction.Y, 0.01409f);
+        Assert.That(ballleft._Shape.Direction.Y, Is.EqualTo(0.01409f));
         ballleft.DeleteEntity();
 
         // leftleft side of player hit test
@@ -61,7 +61,7 @@ public class PlayerCollisionTest {
                 ball.Move();
             });
         }
-        Assert.AreEqual(ballleftleft._Shape.Direction.Y, 0.0106f);
+        Assert.That(ballleftleft._Shape.Direction.Y, Is.EqualTo(0.0106f));
         ballleftleft.DeleteEntity();
 
         // middle of player hit test
@@ -71,7 +71,7 @@ public class PlayerCollisionTest {
                 ball.Move();
             });
         }
-        Assert.AreEqual(ballmid._Shape.Direction.Y, 0.015f);
+        Assert.That(ballmid._Shape.Direction.Y, Is.EqualTo(0.015f));
         ballmid.DeleteEntity();
 
         // right side of player hit test
@@ -81,7 +81,7 @@ public class PlayerCollisionTest {
                 ball.Move();
             });
         }
-        Assert.AreEqual(ballright._Shape.Direction.Y, 0.01409f);
+        Assert.That(ballright._Shape.Direction.Y, Is.EqualTo(0.01409f));
         ballright.DeleteEntity();
 
         // rightright side of player hit test
@@ -91,7 +91,7 @@ public class PlayerCollisionTest {
                 ball.Move();
             });
         }
-        Assert.AreEqual(ballrightright._Shape.Direction.Y, 0.0106f);
+        Assert.That(ballrightright._Shape.Direction.Y, Is.EqualTo(0.0106f));
         ballrightright.DeleteEntity();
     }
 }
