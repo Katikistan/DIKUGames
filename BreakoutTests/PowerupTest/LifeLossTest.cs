@@ -36,8 +36,8 @@ public class LifeLossTest {
     }
     [Test]
     public void TestLifeLoss() {
-        Assert.That(health._Health == 3);
-        Assert.That(powerups.CountEntities() == 1);
+        Assert.That(health._Health, Is.EqualTo(3));
+        Assert.That(powerups.CountEntities(), Is.EqualTo(1));
         // Testing if lifeplus powerup collides with player and changes health
         while (health._Health == 3) {
             if (!PowerUpCollision.Collide(powerups, player)) {
@@ -53,7 +53,7 @@ public class LifeLossTest {
                 });
             }
         }
-        Assert.AreEqual(health._Health, 2);
-        Assert.That(powerups.CountEntities() == 0);
+        Assert.That(health._Health, Is.EqualTo(2));
+        Assert.That(powerups.CountEntities(), Is.EqualTo(0));
     }
 }
