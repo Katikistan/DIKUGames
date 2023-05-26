@@ -13,6 +13,9 @@ public class Player : Entity, IGameEventProcessor {
             return shape;
         }
     }
+
+    public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
+
     public Player(DynamicShape shape, IBaseImage image) : base(shape, image) {
         this.shape = base.Shape.AsDynamicShape();
         BreakoutBus.GetBus().Subscribe(GameEventType.PlayerEvent, this);
