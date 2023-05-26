@@ -13,7 +13,6 @@ public class HealthTest {
     GameLost gamelost;
     Health health;
     StateMachine statemachine;
-    StateTransformer stateTransformer;
     public HealthTest() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
