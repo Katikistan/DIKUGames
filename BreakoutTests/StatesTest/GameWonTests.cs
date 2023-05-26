@@ -11,7 +11,6 @@ public class GameWonTest {
     GameWon gamewon;
     Health health;
     StateMachine statemachine;
-    StateTransformer stateTransformer;
     public GameWonTest() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
 
