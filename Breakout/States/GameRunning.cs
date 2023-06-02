@@ -44,7 +44,7 @@ public class GameRunning : IGameState {
         Levels.Add("level4.txt");
         Levels.Add("wall.txt");
         LevelManager.NewLevel(Levels[0]);
-        points = new Points();
+        points = Points.getInstance();
         health = new Health();
     }
     public void ResetState() {

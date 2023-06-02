@@ -8,6 +8,7 @@ using System.IO;
 namespace Breakout.States;
 public class GameWon : IGameState {
     private static GameWon instance = null;
+    private Points points = null!;
     private Entity background;
     private Text[] menuButtons = new Text[2];
     private Text gameOverText;
@@ -53,6 +54,7 @@ public class GameWon : IGameState {
             );
         gameOverText.SetColor(white);
         activeMenuButton = MAIN_MENU;
+        points = Points.getInstance();
     }
     public void ResetState() {
         GameWon.instance = null;
@@ -74,6 +76,7 @@ public class GameWon : IGameState {
         gameOverText.RenderText();
         menuButtons[QUIT].RenderText();
         menuButtons[MAIN_MENU].RenderText();
+        points.Render();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {

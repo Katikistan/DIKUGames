@@ -9,6 +9,7 @@ using System.IO;
 namespace Breakout.States;
 public class GameLost : IGameState {
     private static GameLost instance = null;
+    private Points points = null!;
     private Entity background;
     private Text[] menuButtons = new Text[2];
     private Text gameOverText;
@@ -52,6 +53,7 @@ public class GameLost : IGameState {
             new Vec2F(0.4f, 0.4f)
             );
         activeMenuButton = MAIN_MENU;
+        points = Points.getInstance();
     }
     public void ResetState() {
         GameLost.instance = null;
@@ -73,6 +75,7 @@ public class GameLost : IGameState {
         gameOverText.RenderText();
         menuButtons[QUIT].RenderText();
         menuButtons[MAIN_MENU].RenderText();
+        points.Render();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {

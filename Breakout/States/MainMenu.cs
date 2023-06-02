@@ -44,6 +44,7 @@ public class MainMenu : IGameState {
             new Vec2F(0.46f, 0.1f),
             new Vec2F(0.4f, 0.4f));
         activeMenuButton = NEW_GAME;
+        Points.getInstance().ResetPoints();
     }
     public void ResetState() {
         MainMenu.instance = null;
