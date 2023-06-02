@@ -66,6 +66,8 @@ public class GameLost : IGameState {
             new Vec2F(0.4f, 0.4f)
             );
         activeMenuButton = MAIN_MENU;
+        menuButtons[MAIN_MENU].SetColor(red);
+        menuButtons[QUIT].SetColor(white);
     }
     public void ResetState() {
         GameLost.instance = null;
@@ -77,7 +79,7 @@ public class GameLost : IGameState {
         gameOverText.RenderText();
         menuButtons[QUIT].RenderText();
         menuButtons[MAIN_MENU].RenderText();
-        // pointsText.RenderText();
+        pointsText.RenderText();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {
