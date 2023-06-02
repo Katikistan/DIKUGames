@@ -63,6 +63,8 @@ public class GamePaused : IGameState {
             new Vec2F(0.4f, 0.4f)
             );
         pauseText.SetColor(white);
+        menuButtons[CONTINUE].SetColor(red);
+        menuButtons[MAIN_MENU].SetColor(white);
     }
     public void ResetState() {
         GamePaused.instance = null;
@@ -71,16 +73,6 @@ public class GamePaused : IGameState {
     }
     public void RenderState() {
         background.RenderEntity();
-        switch (activeMenuButton) {
-            case (CONTINUE):
-                menuButtons[CONTINUE].SetColor(red);
-                menuButtons[MAIN_MENU].SetColor(white);
-                break;
-            case (MAIN_MENU):
-                menuButtons[CONTINUE].SetColor(white);
-                menuButtons[MAIN_MENU].SetColor(red);
-                break;
-        }
         pauseText.RenderText();
         menuButtons[CONTINUE].RenderText();
         menuButtons[MAIN_MENU].RenderText();
@@ -94,9 +86,13 @@ public class GamePaused : IGameState {
         switch (key) {
             case KeyboardKey.Up:
                 activeMenuButton = CONTINUE;
+                menuButtons[CONTINUE].SetColor(red);
+                menuButtons[MAIN_MENU].SetColor(white);
                 break;
             case KeyboardKey.Down:
                 activeMenuButton = MAIN_MENU;
+                menuButtons[CONTINUE].SetColor(red);
+                menuButtons[MAIN_MENU].SetColor(white);
                 break;
             case KeyboardKey.Enter:
                 if (activeMenuButton == CONTINUE) {

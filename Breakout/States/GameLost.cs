@@ -62,16 +62,6 @@ public class GameLost : IGameState {
     }
     public void RenderState() {
         background.RenderEntity();
-        switch (activeMenuButton) {
-            case (MAIN_MENU):
-                menuButtons[MAIN_MENU].SetColor(red);
-                menuButtons[QUIT].SetColor(white);
-                break;
-            case (QUIT):
-                menuButtons[QUIT].SetColor(red);
-                menuButtons[MAIN_MENU].SetColor(white);
-                break;
-        }
         gameOverText.RenderText();
         menuButtons[QUIT].RenderText();
         menuButtons[MAIN_MENU].RenderText();
@@ -86,9 +76,13 @@ public class GameLost : IGameState {
         switch (key) {
             case KeyboardKey.Up:
                 activeMenuButton = MAIN_MENU;
+                menuButtons[MAIN_MENU].SetColor(red);
+                menuButtons[QUIT].SetColor(white);
                 break;
             case KeyboardKey.Down:
                 activeMenuButton = QUIT;
+                menuButtons[QUIT].SetColor(red);
+                menuButtons[MAIN_MENU].SetColor(white);
                 break;
             case KeyboardKey.Enter:
                 if (ActiveMenuButton == MAIN_MENU) {

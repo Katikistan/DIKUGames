@@ -44,6 +44,8 @@ public class MainMenu : IGameState {
             new Vec2F(0.46f, 0.1f),
             new Vec2F(0.4f, 0.4f));
         activeMenuButton = NEW_GAME;
+        menuButtons[NEW_GAME].SetColor(red);
+        menuButtons[QUIT].SetColor(white);
         Points.getInstance().ResetPoints();
     }
     public void ResetState() {
@@ -53,16 +55,6 @@ public class MainMenu : IGameState {
     }
     public void RenderState() {
         backGround.RenderEntity();
-        switch (activeMenuButton) {
-            case (NEW_GAME):
-                menuButtons[NEW_GAME].SetColor(red);
-                menuButtons[QUIT].SetColor(white);
-                break;
-            case (QUIT):
-                menuButtons[NEW_GAME].SetColor(white);
-                menuButtons[QUIT].SetColor(red);
-                break;
-        }
         menuButtons[NEW_GAME].RenderText();
         menuButtons[QUIT].RenderText();
     }
@@ -75,9 +67,13 @@ public class MainMenu : IGameState {
         switch (key) {
             case KeyboardKey.Up:
                 activeMenuButton = NEW_GAME;
+                menuButtons[NEW_GAME].SetColor(red);
+                menuButtons[QUIT].SetColor(white);
                 break;
             case KeyboardKey.Down:
                 activeMenuButton = QUIT;
+                menuButtons[NEW_GAME].SetColor(white);
+                menuButtons[QUIT].SetColor(red);
                 break;
             case KeyboardKey.Enter:
                 if (activeMenuButton == NEW_GAME) {
