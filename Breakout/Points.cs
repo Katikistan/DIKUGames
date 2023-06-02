@@ -17,7 +17,6 @@ public class Points : IGameEventProcessor {
     public static Points getInstance() {
         if (Points.instance == null) {
             Points.instance = new Points();
-
         }
         return Points.instance;
     }
