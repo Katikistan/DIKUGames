@@ -10,7 +10,7 @@ public class Points : IGameEventProcessor {
     public Points() {
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, this);
         pointText = new Text($"Points: {points}",
-            new Vec2F(0.0f, -0.275f), new Vec2F(0.25f, 0.35f));
+            new Vec2F(0.4f, -0.285f), new Vec2F(0.25f, 0.35f));
         white = new Vec3I(255, 255, 255);
         pointText.SetColor(white);
     }

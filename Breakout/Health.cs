@@ -8,7 +8,7 @@ public class Health : IGameEventProcessor {
     public int _Health { get => health; }
     public Health() {
         health = 3;
-        display = new Text($"Lives: {health}", new Vec2F(0.8f, -0.275f), new Vec2F(0.25f, 0.35f));
+        display = new Text($"Lives: {health}", new Vec2F(0.85f, -0.275f), new Vec2F(0.25f, 0.35f));
         display.SetColor(new Vec3I(255, 255, 255));
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, this);
     }

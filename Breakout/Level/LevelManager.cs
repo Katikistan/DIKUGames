@@ -49,7 +49,7 @@ public class LevelManager : IGameEventProcessor {
         blocks = new EntityContainer<Block>(0);
 
         powerups = new EntityContainer<Powerup>(10); // midlertidigt, til proof of concept til powerups
-        levelTimer = new Timer(new Vec2F(0.0f, -0.23f), 0);
+        levelTimer = new Timer(new Vec2F(0.0f, -0.285f), 0);
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, this);
     }
     /// <summary>
