@@ -8,12 +8,7 @@ public class Player : Entity, IGameEventProcessor {
     private float moveRight = 0.0f;
     private float movementSpeed = 0.01f;
     private DynamicShape shape;
-    public DynamicShape _Shape {
-        get {
-            return shape;
-        }
-    }
-
+    public DynamicShape _Shape { get { return shape; } }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
 
     public Player(DynamicShape shape, IBaseImage image) : base(shape, image) {

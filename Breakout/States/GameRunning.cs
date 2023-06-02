@@ -1,11 +1,10 @@
+using Breakout.Levels;
 using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Input;
 using DIKUArcade.Math;
 using DIKUArcade.State;
-using Breakout.Timers;
-using Breakout.Levels;
 using System.IO;
 using System.Collections.Generic;
 namespace Breakout.States;
@@ -23,7 +22,6 @@ public class GameRunning : IGameState {
     public Points Points { get => points; }
     public LevelManager LevelManager { get => levelManager;  }
     public static GameRunning Instance { get => instance;}
-
     public static GameRunning GetInstance() {
         if (GameRunning.instance == null) {
             GameRunning.instance = new GameRunning();
@@ -77,7 +75,6 @@ public class GameRunning : IGameState {
         levelManager.Update();
         LoadLevels();
     }
-
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         switch (action) {
             case KeyboardAction.KeyPress:

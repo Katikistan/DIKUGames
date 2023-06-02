@@ -5,11 +5,7 @@ namespace Breakout;
 public class Health : IGameEventProcessor {
     private int health;
     private Text display;
-
-    public int _Health {
-        get => health;
-    }
-
+    public int _Health { get => health; }
     public Health() {
         health = 3;
         display = new Text($"Lives: {health}", new Vec2F(0.8f, -0.275f), new Vec2F(0.25f, 0.35f));

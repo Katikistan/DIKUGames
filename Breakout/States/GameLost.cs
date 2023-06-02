@@ -34,13 +34,12 @@ public class GameLost : IGameState {
                 new Vec2F(1.0f, 1.0f)),
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
-
         gameOverText = new Text(
             "Game over",
             new Vec2F(0.375f, 0.05f),
             new Vec2F(0.7f, 0.7f)
             );
-
+        gameOverText.SetColor(white);
         menuButtons[MAIN_MENU] = new Text(
             "Main Menu",
             new Vec2F(0.42f, 0.2f),
@@ -52,12 +51,10 @@ public class GameLost : IGameState {
             new Vec2F(0.4f, 0.1f),
             new Vec2F(0.4f, 0.4f)
             );
-        gameOverText.SetColor(white);
         activeMenuButton = MAIN_MENU;
     }
     public void ResetState() {
         GameLost.instance = null;
-
     }
     public void UpdateState() {
     }

@@ -2,6 +2,9 @@ using Breakout.Balls;
 using DIKUArcade.Entities;
 using DIKUArcade.Events;
 namespace Breakout.Collisions;
+/// <summary>
+/// Handles collisions between balls and walls
+/// </summary>
 public static class WallCollision {
     /// <summary>
     /// Will check for collsions between ball and walls.

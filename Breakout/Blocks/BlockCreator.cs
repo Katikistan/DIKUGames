@@ -1,10 +1,8 @@
 using DIKUArcade.Entities;
-using Breakout.Powerups;
 namespace Breakout.Blocks;
-
-
-
-
+    /// <summary>
+    /// A class for creating block types depending on meta data.
+    /// </summary>
 public static class BlockCreator {
     /// <summary>
     /// Creates a block

@@ -3,9 +3,11 @@ using DIKUArcade;
 using DIKUArcade.Events;
 using DIKUArcade.GUI;
 using DIKUArcade.Input;
-using System.Collections.Generic;
 
 namespace Breakout;
+/// <summary>
+///  Class responsible for handling a statemachine and keyinputs
+/// </summary>
 public class Game : DIKUGame, IGameEventProcessor {
     private StateMachine stateMachine;
     public Game(WindowArgs windowArgs) : base(windowArgs) {

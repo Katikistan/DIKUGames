@@ -5,7 +5,6 @@ using DIKUArcade.Input;
 using DIKUArcade.Math;
 using DIKUArcade.State;
 using System.IO;
-
 namespace Breakout.States;
 public class GameWon : IGameState {
     private static GameWon instance = null;
@@ -57,7 +56,6 @@ public class GameWon : IGameState {
     }
     public void ResetState() {
         GameWon.instance = null;
-
     }
     public void UpdateState() {
     }

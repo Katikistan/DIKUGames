@@ -1,6 +1,8 @@
 using System;
-
 namespace Breakout.States;
+/// <summary>
+///  Enum for game state types such as gameRunning.
+/// </summary>
 public enum GameStateType {
     GameRunning,
     GamePaused,
@@ -8,7 +10,13 @@ public enum GameStateType {
     GameLost,
     GameWon
 }
+/// <summary>
+///  A class used to transform strings into state tyopes.
+/// </summary>
 public class StateTransformer {
+    /// <summary>
+    ///  Transforms strings into state types.
+    /// </summary>
     public static GameStateType TransformStringToState(string state) {
         switch (state) {
             case "GAME_RUNNING":

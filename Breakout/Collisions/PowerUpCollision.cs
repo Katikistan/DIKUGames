@@ -1,10 +1,11 @@
-using Breakout.Balls;
 using Breakout.Players;
 using DIKUArcade.Entities;
-using DIKUArcade.Math;
 using DIKUArcade.Physics;
 using Breakout.Powerups;
 namespace Breakout.Collisions;
+/// <summary>
+/// Handles collisions between the player and powerups
+/// </summary>
 public static class PowerUpCollision {
     /// <summary>
     /// Will check for collsions between powerup and the player,

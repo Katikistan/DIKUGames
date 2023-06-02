@@ -8,6 +8,9 @@ namespace Breakout.Blocks;
 public class DefaultBlock : Block {
     public DefaultBlock(Shape shape, string imageFile) : base(shape, imageFile) {
     }
+    /// <summary>
+    /// Decreases health, if health is 0 the block is marked for deletion.
+    /// </summary>
     public override void LoseHealth(int amount) {
         health -= amount;
         if (health == 0) {

@@ -1,10 +1,7 @@
 using DIKUArcade.Timers;
 using DIKUArcade.Graphics;
-using DIKUArcade.Events;
 using DIKUArcade.Math;
-
 namespace Breakout.Timers;
-
 public class Timer {
     private int timeLeft;
     private Text timerText;
@@ -20,7 +17,7 @@ public class Timer {
         timeLeft = init;
         position = pos;
         white = new Vec3I(255, 255, 255);
-        timerText = new Text($"Time: {timeLeft}s", 
+        timerText = new Text($"Time: {timeLeft}s",
         position, new Vec2F(0.25f, 0.35f));
         timerText.SetColor(white);
         timeElapsed = 0;
