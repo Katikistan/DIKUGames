@@ -54,8 +54,7 @@ public class TestPlayer {
     }
     [Test]
     public void TestMoveLeft() {
-        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveLeft);
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));

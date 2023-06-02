@@ -7,28 +7,22 @@ using Breakout.Blocks;
 namespace BreakoutTests.EntityTest;
 [TestFixture]
 public class TestPoints {
-    private Points points;
+    private Points points = Points.getInstance();
     private GameEvent getPoints;
     private GameEvent resetPoints;
     private Block defaultBlock;
     private Block hardened;
     public TestPoints() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
-        points = new Points();
-        BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, points);
-
     }
     [SetUp]
     public void Setup() {
-        points = new Points();
+        points.ResetPoints();
+        points = Points.getInstance();
         getPoints = (new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "GET POINTS",
             IntArg1 = 10
-        });
-        resetPoints = (new GameEvent {
-            EventType = GameEventType.StatusEvent,
-            Message = "RESET POINTS"
         });
         defaultBlock = new DefaultBlock(
         new StationaryShape(new Vec2F(0.5f, 0.5f), new Vec2F(0.5f, 0.5f)), "blue-block.png");
@@ -38,11 +32,9 @@ public class TestPoints {
     [Test]
     public void TestGetPoints() {
         Assert.That(points.GetPoints(), Is.EqualTo(0));
-        BreakoutBus.GetBus().RegisterEvent(getPoints);
-        BreakoutBus.GetBus().ProcessEvents();
+        points.ProcessEvent(getPoints);
         Assert.That(points.GetPoints(), Is.EqualTo(10));
-        BreakoutBus.GetBus().RegisterEvent(getPoints);
-        BreakoutBus.GetBus().ProcessEvents();
+        points.ProcessEvent(getPoints);
         Assert.That(points.GetPoints(), Is.EqualTo(20));
     }
     [Test]
@@ -61,11 +53,10 @@ public class TestPoints {
     [Test]
     public void TestResetPoints() {
         Assert.That(points.GetPoints(), Is.EqualTo(0));
-        BreakoutBus.GetBus().RegisterEvent(getPoints);
-        BreakoutBus.GetBus().ProcessEvents();
+        points.ProcessEvent(getPoints);
         Assert.That(points.GetPoints(), Is.EqualTo(10));
-        BreakoutBus.GetBus().RegisterEvent(resetPoints);
-        BreakoutBus.GetBus().ProcessEvents();
+        points.ResetPoints();
+        points = Points.getInstance();
         Assert.That(points.GetPoints(), Is.EqualTo(0));
     }
 }
