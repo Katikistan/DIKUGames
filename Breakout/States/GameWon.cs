@@ -12,6 +12,8 @@ public class GameWon : IGameState {
     private Entity background;
     private Text[] menuButtons = new Text[2];
     private Text gameOverText;
+    private Text pointsText;
+    private int pointsValue;
     private int activeMenuButton;
     public int ActiveMenuButton {
         get => activeMenuButton;
@@ -28,6 +30,9 @@ public class GameWon : IGameState {
         return GameWon.instance;
     }
     public void InitializeGameState() {
+        points = Points.getInstance();
+        pointsValue = points.GetPoints();
+
         background = new Entity(
             new StationaryShape(
                 new Vec2F(0.0f, 0.0f),
@@ -37,24 +42,28 @@ public class GameWon : IGameState {
 
         gameOverText = new Text(
             "Game Won",
-            new Vec2F(0.375f, 0.05f),
+            new Vec2F(0.30f, 0.17f),
             new Vec2F(0.7f, 0.7f)
             );
-
+        pointsText = new Text(
+            $"Points: {pointsValue}",
+            new Vec2F(0.41f, 0.32f),
+            new Vec2F(0.4f, 0.4f)
+        );
         menuButtons[MAIN_MENU] = new Text(
             "Main Menu",
-            new Vec2F(0.42f, 0.2f),
+            new Vec2F(0.39f, 0.1f),
             new Vec2F(0.4f, 0.4f)
             );
 
         menuButtons[QUIT] = new Text(
             "Quit game",
-            new Vec2F(0.4f, 0.1f),
+            new Vec2F(0.4f, 0f),
             new Vec2F(0.4f, 0.4f)
             );
         gameOverText.SetColor(white);
+        pointsText.SetColor(white);
         activeMenuButton = MAIN_MENU;
-        points = Points.getInstance();
     }
     public void ResetState() {
         GameWon.instance = null;
@@ -76,7 +85,7 @@ public class GameWon : IGameState {
         gameOverText.RenderText();
         menuButtons[QUIT].RenderText();
         menuButtons[MAIN_MENU].RenderText();
-        points.Render();
+        pointsText.RenderText();
     }
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {
