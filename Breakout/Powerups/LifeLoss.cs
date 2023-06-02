@@ -3,9 +3,8 @@ using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using System.IO;
 namespace Breakout.Powerups;
-
 public class LifeLoss : Powerup {
-    public LifeLoss(DynamicShape shape) : base(shape, new Image (
+    public LifeLoss(DynamicShape shape) : base(shape, new Image(
         Path.Combine("..", "Breakout", "Assets", "Images", "LoseLife.png"))) {
     }
     public override void Effect() {
@@ -14,5 +13,4 @@ public class LifeLoss : Powerup {
             Message = "LOSE HEALTH",
         });
     }
-
 }

@@ -16,12 +16,24 @@ public class GameRunning : IGameState {
     private Entity background = null!;
     private List<string> levels;
     // Public getters for testing
-    public Health Health { get => health; }
-    public Entity Background { get => background; }
-    public List<string> Levels { get => levels; }
-    public Points Points { get => points; }
-    public LevelManager LevelManager { get => levelManager;  }
-    public static GameRunning Instance { get => instance;}
+    public Health Health {
+        get => health;
+    }
+    public Entity Background {
+        get => background;
+    }
+    public List<string> Levels {
+        get => levels;
+    }
+    public Points Points {
+        get => points;
+    }
+    public LevelManager LevelManager {
+        get => levelManager;
+    }
+    public static GameRunning Instance {
+        get => instance;
+    }
     public static GameRunning GetInstance() {
         if (GameRunning.instance == null) {
             GameRunning.instance = new GameRunning();

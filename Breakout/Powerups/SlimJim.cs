@@ -1,12 +1,11 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
-using System.IO;
 using DIKUArcade.Timers;
+using System.IO;
 namespace Breakout.Powerups;
-
 public class SlimJim : Powerup {
-    public SlimJim(DynamicShape shape) : base(shape, new Image (
+    public SlimJim(DynamicShape shape) : base(shape, new Image(
         Path.Combine("..", "Breakout", "Assets", "Images", "SlimJim.png"))) {
     }
     public override void Effect() {
@@ -19,6 +18,6 @@ public class SlimJim : Powerup {
             EventType = GameEventType.PlayerEvent,
             Message = "SLIM JIM",
             StringArg1 = "END"
-            }, TimePeriod.NewSeconds(10.0));
+        }, TimePeriod.NewSeconds(10.0));
     }
 }

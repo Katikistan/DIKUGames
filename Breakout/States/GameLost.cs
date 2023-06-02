@@ -5,7 +5,6 @@ using DIKUArcade.Input;
 using DIKUArcade.Math;
 using DIKUArcade.State;
 using System.IO;
-
 namespace Breakout.States;
 public class GameLost : IGameState {
     private static GameLost instance = null;
@@ -45,13 +44,13 @@ public class GameLost : IGameState {
             new Vec2F(0.30f, 0.17f),
             new Vec2F(0.7f, 0.7f)
             );
-    
+
         pointsText = new Text(
             $"Points: {pointsValue}",
             new Vec2F(0.41f, 0.32f),
             new Vec2F(0.4f, 0.4f)
         );
-        
+
         gameOverText.SetColor(white);
         pointsText.SetColor(white);
 
@@ -114,5 +113,4 @@ public class GameLost : IGameState {
                 break;
         }
     }
-
 }

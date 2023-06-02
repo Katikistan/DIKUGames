@@ -1,12 +1,11 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
-using System.IO;
 using DIKUArcade.Timers;
+using System.IO;
 namespace Breakout.Powerups;
-
 public class PlayerSpeed : Powerup {
-    public PlayerSpeed(DynamicShape shape) : base(shape, new Image (
+    public PlayerSpeed(DynamicShape shape) : base(shape, new Image(
         Path.Combine("..", "Breakout", "Assets", "Images", "DoubleSpeedPowerUp.png"))) {
     }
     public override void Effect() {
@@ -19,6 +18,6 @@ public class PlayerSpeed : Powerup {
             EventType = GameEventType.PlayerEvent,
             Message = "SPEED",
             StringArg1 = "END"
-            }, TimePeriod.NewSeconds(10.0));
+        }, TimePeriod.NewSeconds(10.0));
     }
 }
