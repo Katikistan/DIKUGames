@@ -4,7 +4,10 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Timers;
 using System.IO;
 namespace Breakout.Powerups;
-
+/// <summary>
+/// When picked up, player size is increased by sending out a PlayerEvent.
+/// The powerup is timed and therefore temporary
+/// </summary>
 public class Wide : Powerup {
     public Wide(DynamicShape shape) : base(shape, new Image(
         Path.Combine("..", "Breakout", "Assets", "Images", "WidePowerUp.png"))) {

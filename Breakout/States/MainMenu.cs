@@ -6,6 +6,9 @@ using DIKUArcade.Math;
 using DIKUArcade.State;
 using System.IO;
 namespace Breakout.States;
+/// <summary>
+///  A main menu state
+/// </summary>
 public class MainMenu : IGameState {
     private static MainMenu instance = null;
     private Entity backGround;
@@ -23,6 +26,9 @@ public class MainMenu : IGameState {
     private const int QUIT = 1;
     private Vec3I white = new Vec3I(255, 255, 255);
     private Vec3I red = new Vec3I(255, 0, 0);
+    /// <summary>
+    ///  Gets or creates an instance of the MainMenu state
+    /// </summary>
     public static MainMenu GetInstance() {
         if (MainMenu.instance == null) {
             MainMenu.instance = new MainMenu();
@@ -30,6 +36,9 @@ public class MainMenu : IGameState {
         }
         return MainMenu.instance;
     }
+    /// <summary>
+    ///  Inizializes the Game state, this functions as a constructor for the state
+    /// </summary>
     public void InitializeGameState() {
         backGround = new Entity(
             new StationaryShape(
@@ -48,16 +57,28 @@ public class MainMenu : IGameState {
         menuButtons[QUIT].SetColor(white);
         Points.getInstance().ResetPoints();
     }
+    /// <summary>
+    /// Resets the state
+    /// </summary>
     public void ResetState() {
         MainMenu.instance = null;
     }
+    /// <summary>
+    ///  Updates the state, this an empty method
+    /// </summary>
     public void UpdateState() {
     }
+    /// <summary>
+    ///  Renders objects in the state
+    /// </summary>
     public void RenderState() {
         backGround.RenderEntity();
         menuButtons[NEW_GAME].RenderText();
         menuButtons[QUIT].RenderText();
     }
+    /// <summary>
+    ///  Handles key input events such as key presses and key realising
+    /// </summary>
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {
             KeyPress(key);

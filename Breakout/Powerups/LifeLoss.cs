@@ -3,6 +3,9 @@ using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using System.IO;
 namespace Breakout.Powerups;
+/// <summary>
+/// When picked up, the powerup sends and event making
+/// </summary>
 public class LifeLoss : Powerup {
     public LifeLoss(DynamicShape shape) : base(shape, new Image(
         Path.Combine("..", "Breakout", "Assets", "Images", "LoseLife.png"))) {

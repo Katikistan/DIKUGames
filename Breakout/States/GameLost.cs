@@ -6,6 +6,9 @@ using DIKUArcade.Math;
 using DIKUArcade.State;
 using System.IO;
 namespace Breakout.States;
+/// <summary>
+///  A state for when the game is lost
+/// </summary>
 public class GameLost : IGameState {
     private static GameLost instance = null;
     private Points points = null!;
@@ -22,6 +25,9 @@ public class GameLost : IGameState {
     private const int QUIT = 1;
     private Vec3I white = new Vec3I(255, 255, 255);
     private Vec3I red = new Vec3I(255, 0, 0);
+    /// <summary>
+    ///  Gets or creates an instance of the GameLost state
+    /// </summary>
     public static GameLost GetInstance() {
         if (GameLost.instance == null) {
             GameLost.instance = new GameLost();
@@ -29,6 +35,9 @@ public class GameLost : IGameState {
         }
         return GameLost.instance;
     }
+    /// <summary>
+    ///  Inizializes the Game state, this functions as a constructor for the state
+    /// </summary>
     public void InitializeGameState() {
         points = Points.getInstance();
         pointsValue = points.GetPoints();
@@ -69,11 +78,20 @@ public class GameLost : IGameState {
         menuButtons[MAIN_MENU].SetColor(red);
         menuButtons[QUIT].SetColor(white);
     }
+    /// <summary>
+    /// Resets the state
+    /// </summary>
     public void ResetState() {
         GameLost.instance = null;
     }
+    /// <summary>
+    ///  Updates the state, this an empty method
+    /// </summary>
     public void UpdateState() {
     }
+    /// <summary>
+    ///  Renders objects in the state
+    /// </summary>
     public void RenderState() {
         background.RenderEntity();
         gameOverText.RenderText();
@@ -81,6 +99,9 @@ public class GameLost : IGameState {
         menuButtons[MAIN_MENU].RenderText();
         pointsText.RenderText();
     }
+    /// <summary>
+    ///  Handles key input events such as key presses and key realising
+    /// </summary>
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {
             KeyPress(key);

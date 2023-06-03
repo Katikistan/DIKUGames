@@ -7,6 +7,9 @@ using DIKUArcade.State;
 using System.IO;
 
 namespace Breakout.States;
+/// <summary>
+///  A state for when the game is paused
+/// </summary>
 public class GamePaused : IGameState {
     private static GamePaused instance = null;
     private Entity background;
@@ -32,6 +35,9 @@ public class GamePaused : IGameState {
     private const int MAIN_MENU = 1;
     private Vec3I white = new Vec3I(255, 255, 255);
     private Vec3I red = new Vec3I(255, 0, 0);
+    /// <summary>
+    ///  Gets or creates an instance of the GamePaused state
+    /// </summary>
     public static GamePaused GetInstance() {
         if (GamePaused.instance == null) {
             GamePaused.instance = new GamePaused();
@@ -39,6 +45,9 @@ public class GamePaused : IGameState {
         }
         return GamePaused.instance;
     }
+    /// <summary>
+    ///  Inizializes the Game state, this functions as a constructor for the state
+    /// </summary>
     public void InitializeGameState() {
         background = new Entity(
             new StationaryShape(
@@ -66,17 +75,29 @@ public class GamePaused : IGameState {
         menuButtons[CONTINUE].SetColor(red);
         menuButtons[MAIN_MENU].SetColor(white);
     }
+    /// <summary>
+    /// Resets the state
+    /// </summary>
     public void ResetState() {
         GamePaused.instance = null;
     }
+    /// <summary>
+    ///  Updates the state, this an empty method
+    /// </summary>
     public void UpdateState() {
     }
+    /// <summary>
+    ///  Renders objects in the state
+    /// </summary>
     public void RenderState() {
         background.RenderEntity();
         pauseText.RenderText();
         menuButtons[CONTINUE].RenderText();
         menuButtons[MAIN_MENU].RenderText();
     }
+    /// <summary>
+    ///  Handles key input events such as key presses and key realising
+    /// </summary>
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {
             KeyPress(key);

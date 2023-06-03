@@ -6,6 +6,9 @@ using DIKUArcade.Math;
 using DIKUArcade.State;
 using System.IO;
 namespace Breakout.States;
+/// <summary>
+///  A state for when the game is won
+/// </summary>
 public class GameWon : IGameState {
     private static GameWon instance = null;
     private Points points = null!;
@@ -22,6 +25,9 @@ public class GameWon : IGameState {
     private const int QUIT = 1;
     private Vec3I white = new Vec3I(255, 255, 255);
     private Vec3I red = new Vec3I(255, 0, 0);
+    /// <summary>
+    ///  Gets or creates an instance of the GameWon state
+    /// </summary>
     public static GameWon GetInstance() {
         if (GameWon.instance == null) {
             GameWon.instance = new GameWon();
@@ -29,6 +35,9 @@ public class GameWon : IGameState {
         }
         return GameWon.instance;
     }
+    /// <summary>
+    ///  Inizializes the Game state, this functions as a constructor for the state
+    /// </summary>
     public void InitializeGameState() {
         points = Points.getInstance();
         pointsValue = points.GetPoints();
@@ -68,11 +77,20 @@ public class GameWon : IGameState {
         menuButtons[QUIT].SetColor(white);
         points = Points.getInstance();
     }
+    /// <summary>
+    /// Resets the state
+    /// </summary>
     public void ResetState() {
         GameWon.instance = null;
     }
+    /// <summary>
+    ///  Updates the state, this an empty method
+    /// </summary>
     public void UpdateState() {
     }
+    /// <summary>
+    ///  Renders objects in the state
+    /// </summary>
     public void RenderState() {
         background.RenderEntity();
         gameOverText.RenderText();
@@ -80,6 +98,9 @@ public class GameWon : IGameState {
         menuButtons[MAIN_MENU].RenderText();
         pointsText.RenderText();
     }
+    /// <summary>
+    ///  Handles key input events such as key presses and key realising
+    /// </summary>
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         if (action == KeyboardAction.KeyPress) {
             KeyPress(key);
