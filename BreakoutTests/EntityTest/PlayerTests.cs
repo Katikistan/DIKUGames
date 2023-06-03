@@ -21,7 +21,6 @@ public class TestPlayer {
     }
     [SetUp]
     public void Setup() {
-
         movementSpeed = 0.01f;
         startPosX = 0.425f;
         startPosY = 0.05f;
