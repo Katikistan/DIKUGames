@@ -10,14 +10,16 @@ using Breakout.Timers;
 namespace Breakout.Levels;
 using Breakout.Balls;
 using Breakout.Powerups;
-
+/// <summary>
+/// Class that creates and manages game objects, such as blocks, balls and the player.
+/// </summary>
 public class LevelManager : IGameEventProcessor {
     private LevelCreator levelCreator;
     private EntityContainer<Block> blocks;
     private EntityContainer<Ball> balls;
     public EntityContainer<Powerup> powerups;
     private Player player;
-    private bool hardBall = false;
+    private bool hardBalls = false;
     private Timer levelTimer;
     public Player Player {
         get {
@@ -36,19 +38,18 @@ public class LevelManager : IGameEventProcessor {
     public Timer LevelTimer {
         get => levelTimer;
     }
-    public bool HardBall {
-        get => hardBall;
+    public bool HardBalls {
+        get => hardBalls;
     }
-
     public LevelManager() {
         levelCreator = new LevelCreator();
         player = new Player(
             new DynamicShape(new Vec2F(0.425f, 0.06f), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        balls = new EntityContainer<Ball>(3);
+        balls = new EntityContainer<Ball>(18);
         blocks = new EntityContainer<Block>(0);
 
-        powerups = new EntityContainer<Powerup>(10); // midlertidigt, til proof of concept til powerups
+        powerups = new EntityContainer<Powerup>(10);
         levelTimer = new Timer(new Vec2F(0.0f, -0.285f), 0);
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, this);
     }
@@ -57,12 +58,15 @@ public class LevelManager : IGameEventProcessor {
     /// </summary>
     /// <param name="level">Name of the level file that will be loaded</param>
     public void NewLevel(string level) {
-        balls.ClearContainer();
-        levelCreator.CreateLevel(level);
-        blocks = levelCreator.Blocks;
+        balls.ClearContainer(); // Reseting balls
+        levelCreator.CreateLevel(level); // Creating new level
+        blocks = levelCreator.Blocks; // Block container for new level becomes current block container
         balls.AddEntity(BallCreator.CreateBall(new Vec2F(0.45f, 0.2f), new Vec2F(0.001f, 0.015f)));
-        levelTimer.SetTime(levelCreator.Timer);
+        levelTimer.SetTime(levelCreator.Timer); // Timer for level is set
     }
+    /// <summary>
+    /// Proceeses StatusEvents
+    /// </summary>
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.StatusEvent) {
             switch (gameEvent.Message) {
@@ -73,26 +77,25 @@ public class LevelManager : IGameEventProcessor {
                     balls.AddEntity(BallCreator.CreateBall(new Vec2F(0.45f, 0.2f), new Vec2F(0.001f, 0.015f)));
                     break;
                 case "SPAWN POWERUP":
-                    Vec2F pos = (Vec2F)gameEvent.ObjectArg1;
+                    Vec2F pos = (Vec2F) gameEvent.ObjectArg1;
                     powerups.AddEntity(PowerUpCreator.CreatePowerUp(pos));
                     break;
                 case "HARD BALL":
                     if (gameEvent.StringArg1 == "START") {
-                        hardBall = true;
+                        hardBalls = true;
                     } else if (gameEvent.StringArg1 == "END") {
-                        hardBall = false;
+                        hardBalls = false;
                     }
                     break;
                 case "SPLIT":
                     balls.Iterate(ball => {
-                        if(balls.CountEntities()<18){
-                        pos = ball.Shape.Position;
-                        ball.DeleteEntity();
-                        balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F (0.0f, 0.015f)));
-                        balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F (-0.0106f, 0.0106f)));
-                        balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F (0.0106f, 0.0106f)));
+                        if (balls.CountEntities() < 18) { // amount of balls that can be added is capped to 18
+                            pos = ball.Shape.Position;
+                            // 2 balls are added that go in different directions
+                            balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F(-0.0106f, 0.0106f)));
+                            balls.AddEntity(BallCreator.CreateBall(pos, new Vec2F(0.0106f, 0.0106f)));
                         }
-                        });
+                    });
                     break;
             }
         }
@@ -109,9 +112,6 @@ public class LevelManager : IGameEventProcessor {
         }
         return true;
     }
-    /// <summary>
-    /// Moves balls in the entitycontainer
-    /// </summary>
     private void MoveBalls() {
         foreach (Ball ball in balls) {
             ball.Move();
@@ -124,9 +124,9 @@ public class LevelManager : IGameEventProcessor {
     }
     private void CheckCollisions() {
         PlayerCollision.Collide(balls, player);
-        BlockCollision.Collide(balls, blocks, hardBall);
+        BlockCollision.Collide(balls, blocks, hardBalls);
         WallCollision.Collide(balls);
-        PowerUpCollision.Collide(powerups,player);
+        PowerUpCollision.Collide(powerups, player);
     }
     private void CheckTime() {
         if (levelTimer.TimeLeft < 1) {

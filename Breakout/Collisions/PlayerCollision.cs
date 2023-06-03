@@ -27,7 +27,7 @@ public static class PlayerCollision {
                 hit = true;
                 float ballx = ball._Shape.Position.X + (ball._Shape.Extent.X / 2); //Middle of ball
                 float playerExtentX = player.Shape.Extent.X;
-                if (ballx < playerposx + (playerExtentX / 5)) { 
+                if (ballx < playerposx + (playerExtentX / 5)) {
                     ball._Shape.ChangeDirection(vec45);
                 } else if (ballx < playerposx + (playerExtentX / 5) * 2 &&
                             ballx > playerposx + (player.Shape.Extent.X / 5)) {

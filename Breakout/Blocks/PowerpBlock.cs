@@ -15,9 +15,9 @@ public class PowerupBlock : Block {
         health -= amount;
         if (health == 0) {
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
-            EventType = GameEventType.StatusEvent,
-            Message = "SPAWN POWERUP",
-            ObjectArg1 = (object)Shape.Position
+                EventType = GameEventType.StatusEvent,
+                Message = "SPAWN POWERUP",
+                ObjectArg1 = (object) Shape.Position
             });
             DeleteEntity();
             GivePoints();

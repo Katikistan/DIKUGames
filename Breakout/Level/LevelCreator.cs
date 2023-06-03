@@ -76,14 +76,13 @@ public class LevelCreator {
             }
         }
     }
-    private void InitializeTimer(){
+    private void InitializeTimer() {
         string time = "";
         meta.TryGetValue("Time", out time);
         if (time != "" && time != null) {
             hasTimer = true;
             timer = int.Parse(time);
-        }
-        else {
+        } else {
             hasTimer = false;
             timer = System.Int32.MaxValue;
         }

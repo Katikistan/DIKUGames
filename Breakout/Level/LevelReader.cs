@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 namespace Breakout.Levels;
+/// <summary>
+/// A levelReader used in Level to extract Map, Meta and Legend from a txt file.
+/// </summary>
 public class LevelReader {
     private string path;
     private string[] txtlines;
@@ -15,11 +18,6 @@ public class LevelReader {
     public Dictionary<string, string> Meta {
         get => meta;
     }
-
-    /// <summary>
-    /// A levelReader used in Level to extract Map, Meta and Legend from a txt file.
-    /// </summary>
-    /// <param name="path">The file path level files will be read from</param>
     public LevelReader() {
         this.path = Path.Combine(Constants.MAIN_PATH, "Assets", "Levels");
     }

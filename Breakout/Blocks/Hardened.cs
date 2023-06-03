@@ -4,7 +4,7 @@ using DIKUArcade.Math;
 using System.IO;
 namespace Breakout.Blocks;
 /// <summary>
-/// Has 2 health points and grants player 20 points when destroyed.
+/// Block has 2 health points and grants player 20 points when destroyed.
 /// </summary>
 public class Hardened : Block {
     private string DamagedImg;

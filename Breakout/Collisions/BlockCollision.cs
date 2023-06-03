@@ -12,13 +12,13 @@ public static class BlockCollision {
     /// Will check for collsions between ball and blocks,
     /// blocks lose health and ball direction is changed when collisions occur.
     /// </summary>
-    public static void Collide(EntityContainer<Ball> balls, EntityContainer<Block> blocks, bool hardBall) {
+    public static void Collide(EntityContainer<Ball> balls, EntityContainer<Block> blocks, bool hardBalls) {
         balls.Iterate(ball => {
             // Iterating through every block deletes blocks marked for deletion
             blocks.Iterate(block => {
                 CollisionData blockCollision = CollisionDetection.Aabb(ball._Shape, block.Shape);
                 if (blockCollision.Collision) { // True if there is collision between the ball and block
-                    if (hardBall) {
+                    if (hardBalls) {
                         // If hardball powerup is active block should be deleted
                         block.LoseHealth(block.Health);
                         block.DeleteEntity();
@@ -31,7 +31,7 @@ public static class BlockCollision {
                     switch (collisionDirection) {
                         case CollisionDirection.CollisionDirUp:
                         case CollisionDirection.CollisionDirDown:
-                            if (!hardBall) {
+                            if (!hardBalls) {
                                 // If hardball is active, ball shouldnt change direction.
                                 ball._Shape.ChangeDirection(
                                     new Vec2F(currentDirection.X, -currentDirection.Y));
@@ -39,7 +39,7 @@ public static class BlockCollision {
                             break;
                         case CollisionDirection.CollisionDirLeft:
                         case CollisionDirection.CollisionDirRight:
-                            if (!hardBall) {
+                            if (!hardBalls) {
                                 // If hardball is active, ball shouldnt change direction.
                                 ball._Shape.ChangeDirection(
                                     new Vec2F(-currentDirection.X, currentDirection.Y));

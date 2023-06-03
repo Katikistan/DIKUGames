@@ -15,7 +15,7 @@ public static class PowerUpCollision {
         bool hit = false;
         powerups.Iterate(powerup => {
             CollisionData collision = CollisionDetection.Aabb(
-                (DynamicShape)powerup.Shape, player.Shape);
+                (DynamicShape) powerup.Shape, player.Shape);
             if (collision.Collision) {
                 powerup.Effect();
                 hit = true;

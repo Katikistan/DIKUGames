@@ -9,7 +9,7 @@ public static class WallCollision {
     /// <summary>
     /// Will check for collsions between ball and walls.
     /// If ball hits a wall it's send the opposite direction.
-    /// If balls hits bottom, the player loses health and a new ball is spawned.
+    /// If balls hits bottom, lose health event and a new ball event is send.
     /// </summary>
     public static void Collide(EntityContainer<Ball> balls) {
         balls.Iterate(ball => {

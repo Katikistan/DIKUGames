@@ -2,6 +2,9 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using DIKUArcade.Events;
 namespace Breakout;
+/// <summary>
+/// Player health.
+/// </summary>
 public class Health : IGameEventProcessor {
     private int health;
     private Text display;
@@ -14,6 +17,9 @@ public class Health : IGameEventProcessor {
         display.SetColor(new Vec3I(255, 255, 255));
         BreakoutBus.GetBus().Subscribe(GameEventType.StatusEvent, this);
     }
+    /// <summary>
+    /// Uses StausEvents to either lose or get health.
+    /// </summary>
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.StatusEvent) {
             switch (gameEvent.Message) {
