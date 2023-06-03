@@ -6,7 +6,6 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using System.IO;
 using Breakout.Collisions;
-using Breakout.Timers;
 namespace Breakout.Levels;
 using Breakout.Balls;
 using Breakout.Powerups;

@@ -1,7 +1,7 @@
 using DIKUArcade.Timers;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-namespace Breakout.Timers;
+namespace Breakout;
 public class Timer {
     private int timeLeft;
     private Text timerText;
