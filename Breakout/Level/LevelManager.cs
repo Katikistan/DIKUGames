@@ -16,7 +16,7 @@ public class LevelManager : IGameEventProcessor {
     private LevelCreator levelCreator;
     private EntityContainer<Block> blocks;
     private EntityContainer<Ball> balls;
-    public EntityContainer<Powerup> powerups;
+    private EntityContainer<Powerup> powerups;
     private Player player;
     private bool hardBalls = false;
     private Timer levelTimer;
@@ -31,8 +31,8 @@ public class LevelManager : IGameEventProcessor {
     public EntityContainer<Ball> Balls {
         get => balls;
     }
-    public LevelCreator LevelCreator {
-        get => levelCreator;
+    public EntityContainer<Powerup> Powerups {
+        get => powerups;
     }
     public Timer LevelTimer {
         get => levelTimer;
