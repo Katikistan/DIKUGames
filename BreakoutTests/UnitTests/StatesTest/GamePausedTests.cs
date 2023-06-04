@@ -1,16 +1,20 @@
 using Breakout.States;
+using Breakout;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Input;
 namespace BreakoutTests.StatesTests;
 [TestFixture]
 public class GamePausedTests {
+    StateMachine statemachine;
     private GamePaused gamePaused;
     public GamePausedTests() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
     [SetUp]
     public void Setup() {
+        statemachine = new StateMachine();
+
         gamePaused = new GamePaused();
         gamePaused.InitializeGameState();
     }
@@ -32,5 +36,18 @@ public class GamePausedTests {
         // Pressing up changes the active button
         gamePaused.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Up);
         Assert.AreEqual(gamePaused.ActiveMenuButton, 0);
+    }
+    [Test]
+    public void TestgamePausedEnterKey() {
+        gamePaused.InitializeGameState();
+
+        gamePaused.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
+        gamePaused.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
+
+        BreakoutBus.GetBus().ProcessEvents();
+        Assert.That(statemachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
+
+        gamePaused.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
+        gamePaused.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
     }
 }

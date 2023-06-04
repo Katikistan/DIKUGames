@@ -18,7 +18,7 @@ public class PlayerCollisionTests {
     private Player player;
     [SetUp]
     public void Setup() {
-        ballleft = new Ball(new DynamicShape(new Vec2F(0.51399916f, 0.1f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
+        ballleft = new Ball(new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         ballleftleft = new Ball(new DynamicShape(new Vec2F(0.425f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
@@ -52,6 +52,7 @@ public class PlayerCollisionTests {
             });
         }
         Assert.That(ballleft._Shape.Direction.Y, Is.EqualTo(0.01409f));
+        Assert.That(ballleft._Shape.Direction.X, Is.EqualTo(-0.0051f));
         ballleft.DeleteEntity();
 
         // leftleft side of player hit test
