@@ -6,7 +6,6 @@ using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 namespace BreakoutTests.CollisionTests;
-
 [TestFixture]
 public class BlockCollisionTests {
     private EntityContainer<Block> blocks;
