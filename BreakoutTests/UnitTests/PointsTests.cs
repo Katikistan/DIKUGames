@@ -8,7 +8,6 @@ namespace BreakoutTests;
 public class PointsTests {
     private Points points = Points.getInstance();
     private GameEvent givePoints;
-    private GameEvent resetPoints;
     private Block defaultBlock;
     private Block hardened;
     private Block powerupBlock;
