@@ -1,15 +1,20 @@
 using Breakout.States;
+using Breakout;
 using DIKUArcade.Entities;
 using DIKUArcade.Input;
 namespace BreakoutTests.StatesTests;
 [TestFixture]
 public class MainMenuTests {
+    StateMachine statemachine;
+
     private MainMenu mainMenu;
     public MainMenuTests() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
     [SetUp]
     public void Setup() {
+        statemachine = new StateMachine();
+
         mainMenu = new MainMenu();
         mainMenu.InitializeGameState();
     }
@@ -30,5 +35,18 @@ public class MainMenuTests {
         // Pressing up changes the active button
         mainMenu.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Up);
         Assert.That(mainMenu.ActiveMenuButton, Is.EqualTo(0));
+    }
+    [Test]
+    public void TestmainMenuEnterKey() {
+        mainMenu.InitializeGameState();
+
+        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
+        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
+
+        BreakoutBus.GetBus().ProcessEvents();
+        Assert.That(statemachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
+
+        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
+        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
     }
 }

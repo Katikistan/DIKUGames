@@ -41,4 +41,17 @@ public class GameLostTests {
         gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
         Assert.That(gamelost.ActiveMenuButton == 1);
     }
+    [Test]
+    public void TestGameLostEnterKey() {
+        gamelost.InitializeGameState();
+
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
+
+        BreakoutBus.GetBus().ProcessEvents();
+        Assert.That(statemachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));
+
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
+    }
 }
