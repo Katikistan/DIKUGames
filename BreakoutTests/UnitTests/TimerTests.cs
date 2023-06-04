@@ -17,12 +17,22 @@ public class TimerTests {
         while (timer.TimeLeft == 100) {
             timer.Render();
         }
-        Assert.That(99 == timer.TimeLeft);
+        Assert.That(99, Is.EqualTo(timer.TimeLeft));
     }
     [Test]
     public void SetTimeTest(){
         Assert.That(100 == timer.TimeLeft);
         timer.SetTime(10);
-        Assert.That(10 == timer.TimeLeft);
+        Assert.That(10, Is.EqualTo(timer.TimeLeft));
+    }
+    [Test]
+    public void NoTimeLeftTest(){
+        timer.SetTime(1);
+        Assert.That(timer.TimeLeft, Is.EqualTo(1));
+        while (timer.TimeLeft > 0) {
+            timer.Render();
+        }
+        timer.Render();
+        Assert.That(timer.TimeLeft, Is.EqualTo(0));
     }
 }
