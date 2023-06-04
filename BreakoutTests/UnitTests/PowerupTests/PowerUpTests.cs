@@ -41,6 +41,5 @@ public class PowerUpTests {
         Assert.That(powerups.CountEntities() == 0);
 
 
-
     }
 }

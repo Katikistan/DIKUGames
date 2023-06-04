@@ -7,7 +7,6 @@ public class LevelReaderTests {
     public void Setup() {
         levelReader = new LevelReader();
     }
-    // test man kan loade et nyt level
     [Test]
     public void TestReadLevel() {
         bool validFile = levelReader.ReadLevel("level1.txt");
@@ -80,6 +79,14 @@ public class LevelReaderTests {
         // Trying to get meta that's not in dictionary
         levelReader.Meta!.TryGetValue("nometa", out meta!);
         Assert.That(meta, Is.EqualTo(null));
+    }
+    [Test]
+    public void TestInvalidMap() {
+        levelReader.ReadLevel("NoMap.txt");
+        Assert.That(levelReader.Map, Is.EqualTo(null));
+        levelReader.ReadLevel("level1.txt");
+        // Testing that there is a map
+        Assert.That(levelReader.Map != null);
     }
     [Test]
     public void TestInvalidLegend() {
