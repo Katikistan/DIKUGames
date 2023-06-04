@@ -17,7 +17,6 @@ public class PointsTests {
     }
     [SetUp]
     public void Setup() {
-
         points.ResetPoints();
         points = Points.getInstance();
         givePoints = (new GameEvent {

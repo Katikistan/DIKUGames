@@ -73,9 +73,9 @@ public class BlockTests {
 
         // powerupBlock
         Assert.That(powerupBlock.Health, Is.EqualTo(1));
-        defaultBlock.LoseHealth(1);
+        powerupBlock.LoseHealth(1);
         Assert.That(powerupBlock.Health, Is.EqualTo(0));
-        defaultBlock.LoseHealth(1);
+        powerupBlock.LoseHealth(1);
         Assert.That(powerupBlock.Health, Is.EqualTo(-1));
     }
     [Test]
@@ -101,9 +101,9 @@ public class BlockTests {
             Assert.That(!unbreakable.IsDeleted());
         }
         Assert.That(!powerupBlock.IsDeleted());
-        defaultBlock.LoseHealth(1);
+        powerupBlock.LoseHealth(1);
         Assert.That(powerupBlock.IsDeleted());
-        defaultBlock.LoseHealth(1);
+        powerupBlock.LoseHealth(1);
         Assert.That(powerupBlock.IsDeleted());
     }
 }
