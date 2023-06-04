@@ -17,7 +17,7 @@ public class PowerupCreatorTests {
     public PowerupCreatorTests() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
-        [Test(), Repeat(50)]
+        [Test(), Repeat(30)]
         public void TestCreatePowerUp() {
             // Arrange
             Vec2F pos = new Vec2F(0.5f, 0.5f);

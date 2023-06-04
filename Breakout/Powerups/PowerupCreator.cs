@@ -45,13 +45,8 @@ public static class PowerUpCreator {
                 pos,
                 extent,
                 dir));
-            case 7:
-                return new HardBall(new DynamicShape(
-                pos,
-                extent,
-                dir));
             default:
-                return new LifePlus(new DynamicShape(
+                return new HardBall(new DynamicShape(
                 pos,
                 extent,
                 dir));
