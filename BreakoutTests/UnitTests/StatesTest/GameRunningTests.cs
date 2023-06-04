@@ -102,7 +102,8 @@ public class GameRunningTests {
         // Player pos is the same/hasn't moved
         Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
     }
-        public void TestMoveAKey(){
+    [Test]
+    public void TestMoveAKey(){
         float movementSpeed = 0.01f;
         float startPosX = 0.425f;
         gameRunning.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.A);
