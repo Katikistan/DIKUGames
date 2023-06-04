@@ -247,7 +247,7 @@ var assemblies = [
       { "name": "Breakout.Powerups.LifePlus", "rp": "Breakout_LifePlus.html", "cl": 10, "ucl": 0, "cal": 10, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "Breakout.Powerups.PlayerSpeed", "rp": "Breakout_PlayerSpeed.html", "cl": 15, "ucl": 0, "cal": 15, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "Breakout.Powerups.Powerup", "rp": "Breakout_Powerup.html", "cl": 8, "ucl": 0, "cal": 8, "tl": 23, "cb": 2, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Breakout.Powerups.PowerUpCreator", "rp": "Breakout_PowerUpCreator.html", "cl": 34, "ucl": 4, "cal": 38, "tl": 61, "cb": 7, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Breakout.Powerups.PowerUpCreator", "rp": "Breakout_PowerUpCreator.html", "cl": 34, "ucl": 0, "cal": 34, "tl": 56, "cb": 7, "tb": 7, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "Breakout.Powerups.SlimJim", "rp": "Breakout_SlimJim.html", "cl": 15, "ucl": 0, "cal": 15, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "Breakout.Powerups.Split", "rp": "Breakout_Split.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "Breakout.Powerups.Wide", "rp": "Breakout_Wide.html", "cl": 15, "ucl": 0, "cal": 15, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
