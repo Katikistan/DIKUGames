@@ -1,3 +1,4 @@
+using Breakout;
 using Breakout.Balls;
 using Breakout.Collisions;
 using Breakout.Levels;
@@ -25,7 +26,7 @@ public class SplitTests {
     public void Setup() {
         levelmanager = new LevelManager();
         ball = BallCreator.CreateBall(new Vec2F(0.45f, 0.2f), new Vec2F(0.001f, 0.015f));
-        split = new LifeLoss(new DynamicShape(
+        split = new Split(new DynamicShape(
                 new Vec2F(0.425f, 0.1f),
                 new Vec2F(0.03f, 0.03f),
                 new Vec2F(0.00f, -0.01f)));
@@ -38,19 +39,17 @@ public class SplitTests {
     }
     [Test]
     public void TestSplit() {
-        Assert.That(levelmanager.Balls.CountEntities() == 0);
         levelmanager.Balls.AddEntity(ball);
+        levelmanager.Powerups.AddEntity(split);
         Assert.That(levelmanager.Balls.CountEntities() == 1);
-        // Testing if lifeplus powerup collides with player and changes health
-        while (!PowerUpCollision.Collide(powerups, player)) {
-            powerups.Iterate(powerup => {
+        // Split powerup drops until collision with player
+        while (!PowerUpCollision.Collide(levelmanager.Powerups, player)) {
+            levelmanager.Powerups.Iterate(powerup => {
                 powerup.Move();
             });
         }
-        levelmanager.ProcessEvent(new GameEvent {
-            EventType = GameEventType.StatusEvent,
-            Message = "SPLIT",
-        });
-        Assert.That(levelmanager.Balls.CountEntities() == 3);
+        BreakoutBus.GetBus().ProcessEvents();
+        //checking if the nmumber of balls tripled as expected after the gameevent is proccessed
+        Assert.That(levelmanager.Balls.CountEntities(), Is.EqualTo(3));
     }
 }
