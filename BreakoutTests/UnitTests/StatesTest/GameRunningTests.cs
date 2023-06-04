@@ -35,9 +35,9 @@ public class GameRunningTests {
     }
     [Test]
     public void TestInitializeGameState() {
-        Assert.AreNotEqual(gameRunning.LevelManager, null!);
-        Assert.AreNotEqual(gameRunning.Points, null!);
-        Assert.AreNotEqual(gameRunning.Background, null!);
+        Assert.That(gameRunning.LevelManager, Is.Not.EqualTo(null!));
+        Assert.That(gameRunning.Points, Is.Not.EqualTo(null!));
+        Assert.That(gameRunning.Background, Is.Not.EqualTo(null!));
 
         Assert.That(gameRunning.Health is Health);
         Assert.That(gameRunning.Background is Entity);
@@ -45,19 +45,19 @@ public class GameRunningTests {
         Assert.That(gameRunning.LevelManager is LevelManager);
         Assert.That(gameRunning.Points is Points);
 
-        Assert.AreEqual(gameRunning.Levellst[0], "level1.txt");
-        Assert.AreEqual(gameRunning.Levellst[1], "level2.txt");
-        Assert.AreEqual(gameRunning.Levellst[2], "level3.txt");
+        Assert.That(gameRunning.Levellst[0], Is.EqualTo("level1.txt"));
+        Assert.That(gameRunning.Levellst[1], Is.EqualTo("level2.txt"));
+        Assert.That(gameRunning.Levellst[2], Is.EqualTo("level3.txt"));
     }
     [Test]
     public void TestUpdateState() {
         // If levels is empty a new level is created
-        Assert.AreEqual(5,gameRunning.Levellst.Count);
+        Assert.That(gameRunning.Levellst.Count, Is.EqualTo(5));
         for (int i = 0; i < gameRunning.Levellst.Count; i++) {
             gameRunning.Levellst.RemoveAt(i);
         }
         gameRunning.UpdateState();
-        Assert.AreEqual(gameRunning.Levellst.Count, 2);
+        Assert.That(gameRunning.Levellst.Count, Is.EqualTo(2));
     }
     [Test]
     public void TestLoadLevels() {
