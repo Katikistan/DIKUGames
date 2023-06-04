@@ -10,8 +10,6 @@ public class GameRunningTests {
     private GameRunning gameRunning;
     private GameEvent gameWonState;
     private GameEvent pressEscape;
-    private GameEvent playerMoveLeft;
-    private GameEvent playerMoveRight;
     private StateMachine stateMachine;
     public GameRunningTests() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();

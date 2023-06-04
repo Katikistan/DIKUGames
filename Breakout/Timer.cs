@@ -23,9 +23,15 @@ public class Timer {
         timeElapsed = 0;
         n = 0;
     }
+    /// <summary>
+    /// Sets the time left to an input value
+    /// </summary>
     public void SetTime(int s) {
         timeLeft = s;
     }
+    /// <summary>
+    /// Updates the time and decrements the amount of seconds if a second has passed
+    /// </summary>
     private void UpdateTime(){
         previousTime = timeLeft;
         timeElapsed = (int)StaticTimer.GetElapsedMilliseconds();
@@ -34,6 +40,9 @@ public class Timer {
             n = (int)StaticTimer.GetElapsedMilliseconds();
         }
     }
+    /// <summary>
+    /// Updates the text for the timer.
+    /// </summary>
     private void UpdateText() {
         if (timeLeft > 0) {
             UpdateTime();
@@ -45,6 +54,9 @@ public class Timer {
             timerText.SetText("");
         }
     }
+    /// <summary>
+    /// Renders the timer on the screen.
+    /// </summary>
     public void Render() {
         UpdateText();
         timerText.RenderText();
