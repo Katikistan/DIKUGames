@@ -87,6 +87,7 @@ public class WallCollisionTests {
         // ball1 does not collide with the bottom, ball2 does
         Assert.That(health._Health, Is.EqualTo(3));
         Assert.That(balls.CountEntities(), Is.EqualTo(0));
+        BreakoutBus.GetBus().Flush();
         WallCollision.Collide(balls);
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(health._Health, Is.EqualTo(2));
