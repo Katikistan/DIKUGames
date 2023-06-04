@@ -38,7 +38,7 @@ public class GameWonTests {
     }
     [Test]
     public void TestSwitchGameWon() {
-        Assert.That(statemachine.ActiveState != GameLost.GetInstance());
+        Assert.That(statemachine.ActiveState != GameWon.GetInstance());
         statemachine.ProcessEvent(changewon);
         //ved ikke hvad der skal gøres for at statemachinen reageree
         Assert.That(statemachine.ActiveState == GameWon.GetInstance());
@@ -52,6 +52,18 @@ public class GameWonTests {
         Assert.That(gamewon.ActiveMenuButton == 0);
         gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
         Assert.That(gamewon.ActiveMenuButton == 1);
+    }
+    [Test]
+    public void TestGameWonEnterKey() {
+        gamewon.InitializeGameState();
 
+        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
+        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
+
+        BreakoutBus.GetBus().ProcessEvents();
+        Assert.That(statemachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));
+
+        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
+        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
     }
 }
