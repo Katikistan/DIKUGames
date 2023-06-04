@@ -112,8 +112,8 @@ public class GamePaused : IGameState {
                 break;
             case KeyboardKey.Down:
                 activeMenuButton = MAIN_MENU;
-                menuButtons[CONTINUE].SetColor(red);
-                menuButtons[MAIN_MENU].SetColor(white);
+                menuButtons[CONTINUE].SetColor(white);
+                menuButtons[MAIN_MENU].SetColor(red);
                 break;
             case KeyboardKey.Enter:
                 if (activeMenuButton == CONTINUE) {
