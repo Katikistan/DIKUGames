@@ -4,59 +4,75 @@ using DIKUArcade.State;
 namespace BreakoutTests.StatesTests;
 [TestFixture]
 public class StateMachineTests {
-    private GameRunning gamerunning;
-    private MainMenu mainmenu;
+    private GameRunning gameRunning;
+    private MainMenu mainMenu;
     private GamePaused gamePaused;
-    private GameLost gamelost;
+    private GameLost gameLost;
+    private GameWon gameWon;
 
-    private StateMachine statemachine;
+    private StateMachine stateMachine;
     public StateMachineTests() {
         DIKUArcade.GUI.Window.CreateOpenGLContext();
     }
-    [SetUp]
-    public void Setup() {
-        gamerunning = new GameRunning();
-        mainmenu = new MainMenu();
-        gamePaused = new GamePaused();
-        gamelost = new GameLost();
-        statemachine = new StateMachine();
-    }
     [Test]
     public void TestStateMachine() {
-        Assert.That(statemachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));
+        stateMachine = new StateMachine();
+        Assert.That(stateMachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));
 
-        statemachine.ProcessEvent(new GameEvent {
+        stateMachine.ProcessEvent(new GameEvent {
             EventType = GameEventType.GameStateEvent,
             Message = "CHANGE_STATE",
             StringArg1 = "GAME_RUNNING"
         });
-        Assert.That(statemachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
+        Assert.That(stateMachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
 
-        statemachine.ProcessEvent(new GameEvent {
+        stateMachine.ProcessEvent(new GameEvent {
             EventType = GameEventType.GameStateEvent,
             Message = "CHANGE_STATE",
             StringArg1 = "GAME_PAUSED"
         });
-        Assert.That(statemachine.ActiveState, Is.EqualTo(GamePaused.GetInstance()));
+        Assert.That(stateMachine.ActiveState, Is.EqualTo(GamePaused.GetInstance()));
 
-        statemachine.ProcessEvent(new GameEvent {
+        stateMachine.ProcessEvent(new GameEvent {
             EventType = GameEventType.GameStateEvent,
             Message = "RESUME_STATE",
             StringArg1 = "GAME_RUNNING"
         });
-        Assert.That(statemachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
+        Assert.That(stateMachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
 
-
-        statemachine.ProcessEvent(new GameEvent {
+        stateMachine.ProcessEvent(new GameEvent {
             EventType = GameEventType.GameStateEvent,
             Message = "CHANGE_STATE",
             StringArg1 = "GAME_LOST"
         });
+        Assert.That(stateMachine.ActiveState, Is.EqualTo(GameLost.GetInstance()));
 
-        Assert.That(statemachine.ActiveState, Is.EqualTo(GameLost.GetInstance()));
-        Assert.That(gamerunning is IGameState);
+        stateMachine.ProcessEvent(new GameEvent {
+            EventType = GameEventType.GameStateEvent,
+            Message = "CHANGE_STATE",
+            StringArg1 = "GAME_WON"
+        });
+        Assert.That(stateMachine.ActiveState, Is.EqualTo(GameWon.GetInstance()));
+
+        stateMachine.ProcessEvent(new GameEvent {
+            EventType = GameEventType.GameStateEvent,
+            Message = "CHANGE_STATE",
+            StringArg1 = "MAIN_MENU"
+        });
+        Assert.That(stateMachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));
+    }
+    [Test]
+    public void TestIsIGameState() {
+        gameRunning = new GameRunning();
+        mainMenu = new MainMenu();
+        gamePaused = new GamePaused();
+        gameLost = new GameLost();
+        gameWon = new GameWon();
+
+        Assert.That(gameRunning is IGameState);
         Assert.That(gamePaused is IGameState);
-        Assert.That(gamelost is IGameState);
-        Assert.That(mainmenu is IGameState);
+        Assert.That(gameLost is IGameState);
+        Assert.That(gameWon is IGameState);
+        Assert.That(mainMenu is IGameState);
     }
 }

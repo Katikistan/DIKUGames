@@ -30,7 +30,6 @@ public class LifePlusTests {
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         powerups = new EntityContainer<Powerup>(5);
         powerups.AddEntity(lifeplus);
-
     }
     [Test]
     public void TestLifePlus() {
