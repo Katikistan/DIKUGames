@@ -22,20 +22,20 @@ public class GamePausedTests {
     public void TestInitializeGameState() {
         Assert.That(gamePaused.Background is Entity);
         Assert.That(gamePaused.PauseText is Text);
-        Assert.AreEqual(gamePaused.ActiveMenuButton, 0);
+        Assert.That(gamePaused.ActiveMenuButton, Is.EqualTo(0));
     }
     [Test]
     public void TestKeyPress() {
         // Pressing down changes active button
-        Assert.AreEqual(gamePaused.ActiveMenuButton, 0);
+        Assert.That(gamePaused.ActiveMenuButton, Is.EqualTo(0));
         gamePaused.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Down);
-        Assert.AreEqual(gamePaused.ActiveMenuButton, 1);
+        Assert.That(gamePaused.ActiveMenuButton, Is.EqualTo(1));
         // Pressing down again does not change the active button
         gamePaused.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Down);
-        Assert.AreEqual(gamePaused.ActiveMenuButton, 1);
+        Assert.That(gamePaused.ActiveMenuButton, Is.EqualTo(1));
         // Pressing up changes the active button
         gamePaused.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Up);
-        Assert.AreEqual(gamePaused.ActiveMenuButton, 0);
+        Assert.That(gamePaused.ActiveMenuButton, Is.EqualTo(0));
     }
     [Test]
     public void TestgamePausedEnterKey() {

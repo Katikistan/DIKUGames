@@ -42,7 +42,7 @@ public class LifePlusTests {
                     powerup.Move();
                 });
             } else {
-                Assert.That(health._Health == 3);
+                Assert.That(health._Health, Is.EqualTo(3));
                 health.ProcessEvent(new GameEvent {
                     EventType = GameEventType.StatusEvent,
                     Message = "GET HEALTH",
@@ -50,7 +50,7 @@ public class LifePlusTests {
                 });
             }
         }
-        Assert.AreEqual(health._Health, 4);
-        Assert.That(powerups.CountEntities() == 0);
+        Assert.That(health._Health, Is.EqualTo(4));
+        Assert.That(powerups.CountEntities(), Is.EqualTo(0));
     }
 }

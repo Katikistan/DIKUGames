@@ -1,9 +1,9 @@
+using Breakout;
 using Breakout.Balls;
 using Breakout.Collisions;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-using Breakout;
 namespace BreakoutTests.CollisionTests;
 
 [TestFixture]

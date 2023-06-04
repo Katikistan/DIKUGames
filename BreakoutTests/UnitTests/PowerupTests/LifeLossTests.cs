@@ -51,7 +51,7 @@ public class LifeLossTests {
                 });
             }
         }
-        Assert.AreEqual(health._Health, 2);
+        Assert.That(health._Health, Is.EqualTo(2));
         Assert.That(powerups.CountEntities() == 0);
     }
 }
