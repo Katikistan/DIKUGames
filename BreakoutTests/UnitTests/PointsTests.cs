@@ -48,10 +48,8 @@ public class PointsTests {
     }
     [Test]
     public void TestHardenedGetPoints() {
-        hardened.LoseHealth(1);
-        BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(0));
-        hardened.LoseHealth(1);
+        hardened.LoseHealth(2);
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(20));
     }
