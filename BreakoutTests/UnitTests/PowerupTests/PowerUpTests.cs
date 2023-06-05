@@ -3,7 +3,7 @@ using Breakout.Players;
 using Breakout.Powerups;
 using DIKUArcade.Entities;
 using DIKUArcade.Math;
-namespace BreakoutTests.PowerupTests;
+namespace BreakoutTests.Unit.PowerupTests;
 [TestFixture]
 public class PowerUpTests {
     public Powerup powerup;

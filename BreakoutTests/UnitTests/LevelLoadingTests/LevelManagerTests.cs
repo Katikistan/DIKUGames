@@ -4,7 +4,7 @@ using Breakout.Powerups;
 using Breakout.States;
 using DIKUArcade.Events;
 using DIKUArcade.Math;
-namespace BreakoutTests.LevelLoadingTests;
+namespace BreakoutTests.Unit.LevelLoadingTests;
 [TestFixture]
 public class LevelManagerTests {
     LevelManager levelManager;

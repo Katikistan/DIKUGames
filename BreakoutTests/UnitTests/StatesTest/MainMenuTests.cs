@@ -2,7 +2,7 @@ using Breakout.States;
 using Breakout;
 using DIKUArcade.Entities;
 using DIKUArcade.Input;
-namespace BreakoutTests.StatesTests;
+namespace BreakoutTests.Unit.StatesTests;
 [TestFixture]
 public class MainMenuTests {
     StateMachine statemachine;

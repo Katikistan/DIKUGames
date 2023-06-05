@@ -2,7 +2,7 @@ using Breakout;
 using Breakout.States;
 using DIKUArcade.Events;
 using DIKUArcade.Input;
-namespace BreakoutTests.StatesTests;
+namespace BreakoutTests.Unit.StatesTests;
 [TestFixture]
 public class GameLostTests {
     GameRunning gamerunning;

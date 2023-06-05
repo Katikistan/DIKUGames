@@ -1,5 +1,5 @@
 using Breakout.States;
-namespace BreakoutTests.StatesTests;
+namespace BreakoutTests.Unit.StatesTests;
 [TestFixture]
 public class TransformStateTests {
     [Test]

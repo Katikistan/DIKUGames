@@ -9,7 +9,7 @@ using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Math;
 using DIKUArcade.Graphics;
-namespace BreakoutTests.PowerupTests;
+namespace BreakoutTests.Unit.PowerupTests;
 [TestFixture]
 public class HardBallTests{
     public Player player;

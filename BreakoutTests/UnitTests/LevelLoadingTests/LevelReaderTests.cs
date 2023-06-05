@@ -1,5 +1,5 @@
 using Breakout.Levels;
-namespace BreakoutTests.LevelLoadingTests;
+namespace BreakoutTests.Unit.LevelLoadingTests;
 [TestFixture]
 public class LevelReaderTests {
     private LevelReader levelReader = null!;

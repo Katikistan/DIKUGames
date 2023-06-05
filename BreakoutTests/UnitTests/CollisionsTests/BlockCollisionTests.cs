@@ -5,7 +5,7 @@ using Breakout.Levels;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-namespace BreakoutTests.CollisionTests;
+namespace BreakoutTests.Unit.CollisionTests;
 [TestFixture]
 public class BlockCollisionTests {
     private EntityContainer<Block> blocks;

@@ -1,7 +1,7 @@
 using Breakout;
 using Breakout.States;
 using DIKUArcade.Events;
-namespace BreakoutTests;
+namespace BreakoutTests.Unit;
 [TestFixture]
 public class HealthTests {
     GameRunning gamerunning;

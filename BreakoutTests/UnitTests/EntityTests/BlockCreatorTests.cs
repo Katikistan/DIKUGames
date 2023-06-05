@@ -1,7 +1,7 @@
 using Breakout.Blocks;
 using DIKUArcade.Entities;
 using DIKUArcade.Math;
-namespace BreakoutTests.EntityTests;
+namespace BreakoutTests.Unit.EntityTests;
 [TestFixture]
 public class BlockCreatorTests {
     private Shape shape;

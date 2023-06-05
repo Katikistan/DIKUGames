@@ -3,7 +3,7 @@ using DIKUArcade.Entities;
 using DIKUArcade.Math;
 using Breakout;
 using Breakout.Blocks;
-namespace BreakoutTests;
+namespace BreakoutTests.Unit;
 [TestFixture]
 public class PointsTests {
     private Points points = Points.GetInstance();

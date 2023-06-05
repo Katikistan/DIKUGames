@@ -8,7 +8,7 @@ using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-namespace BreakoutTests.PowerupTests;
+namespace BreakoutTests.Unit.PowerupTests;
 [TestFixture]
 public class SplitTests {
     public Ball ball;

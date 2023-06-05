@@ -1,5 +1,5 @@
 using DIKUArcade.Math;
-namespace BreakoutTests;
+namespace BreakoutTests.Unit;
 
 [TestFixture]
 public class TimerTests {

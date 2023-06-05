@@ -4,7 +4,7 @@ using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-namespace BreakoutTests.EntityTests;
+namespace BreakoutTests.Unit.EntityTests;
 [TestFixture]
 public class PlayerTests {
     private Player player = null!;

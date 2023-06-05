@@ -3,7 +3,7 @@ using Breakout;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Input;
-namespace BreakoutTests.StatesTests;
+namespace BreakoutTests.Unit.StatesTests;
 [TestFixture]
 public class GamePausedTests {
     StateMachine statemachine;

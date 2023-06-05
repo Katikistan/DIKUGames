@@ -6,7 +6,7 @@ using DIKUArcade.Events;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-namespace BreakoutTests.PowerupTests;
+namespace BreakoutTests.Unit.PowerupTests;
 [TestFixture]
 public class PlayerSpeedTests {
     public Powerup playerSpeed;
