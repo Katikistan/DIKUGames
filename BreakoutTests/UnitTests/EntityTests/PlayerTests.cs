@@ -60,38 +60,33 @@ public class PlayerTests {
     }
     [Test]
     public void TestMoveRight() {
-        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveRight);
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
     }
     [Test]
     public void TestRealeseLeft() {
-        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveLeft);
         player.Move();
         playerPos = player.GetPosition();
         // Player moved to the left
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
         // Left key is released
-        BreakoutBus.GetBus().RegisterEvent(eventRealeseLeft);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventRealeseLeft);
         player.Move();
         // Player pos is the same/hasn't moved
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
     }
     [Test]
     public void TestRealeseRight() {
-        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveRight);
         player.Move();
         playerPos = player.GetPosition();
         // Player moved to the right
         Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
         // Right key is released
-        BreakoutBus.GetBus().RegisterEvent(eventRealeseRight);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventRealeseRight);
         player.Move();
         playerPos = player.GetPosition();
         // Player pos is the same/hasn't moved
@@ -102,8 +97,7 @@ public class PlayerTests {
         player = new Player(
             new DynamicShape(new Vec2F(0.0f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveLeft);
         player.Move();
         player.Move();
         player.Move();
@@ -115,8 +109,7 @@ public class PlayerTests {
         player = new Player(
             new DynamicShape(new Vec2F(1.0f - 0.1f, 0.1f), new Vec2F(0.1f, 0.1f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
-        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveRight);
         player.Move();
         player.Move();
         player.Move();
@@ -125,9 +118,8 @@ public class PlayerTests {
     }
     [Test]
     public void TestMoveLeftRight() {
-        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
-        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveLeft);
+        player.ProcessEvent(eventMoveRight);
         // Both left and right "keys" are pressed
         player.Move();
         player.Move();
@@ -136,17 +128,15 @@ public class PlayerTests {
     }
     [Test]
     public void TestMoveLeftRight2() {
-        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveLeft);
         // Player moves to the left
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
         // Player realeses left key
-        BreakoutBus.GetBus().RegisterEvent(eventRealeseLeft);
+        player.ProcessEvent(eventRealeseLeft);
         // Player presses right key
-        BreakoutBus.GetBus().RegisterEvent(eventMoveRight);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveRight);
         player.Move();
         playerPos = player.GetPosition();
         // Player moved left and right back to start
@@ -158,8 +148,7 @@ public class PlayerTests {
             EventType = GameEventType.PlayerEvent,
             Message = "move left"
         });
-        BreakoutBus.GetBus().RegisterEvent(eventMoveLeft);
-        BreakoutBus.GetBus().ProcessEvents();
+        player.ProcessEvent(eventMoveLeft);
         player.Move();
         playerPos = player.GetPosition();
         Assert.That(playerPos.X, Is.EqualTo(startPosX));
