@@ -1,4 +1,5 @@
-<diagram program="umletino" version="15.1"><zoom_level>3</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>366</x><y>370</y><w>81</w><h>78</h></coordinates><panel_attributes>LevelManager
+<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><help_text>Space for diagram notes
+</help_text><element><id>UMLClass</id><coordinates><x>714</x><y>805</y><w>189</w><h>182</h></coordinates><panel_attributes>LevelManager
 --
 - levelCreator: LevelCreator &lt;&lt;get&gt;&gt;
 + Player: Player &lt;&lt;get&gt;&gt;
@@ -15,7 +16,9 @@
 - CheckCollisions(): void
 - CheckTime(): void
 + Render() : void
-+ Update() : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>222</x><y>430</y><w>63</w><h>45</h></coordinates><panel_attributes>LevelReader
++ Update() : void
+bg=blue
+transparency=60</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>945</y><w>147</w><h>105</h></coordinates><panel_attributes>LevelReader
 --
 - path: string
 - txtlines: string[]
@@ -27,7 +30,9 @@
 + MapValid(): bool
 - ReadMap() : void
 - ReadMeta() : void
-- ReadLegend() : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>294</x><y>403</y><w>66</w><h>57</h></coordinates><panel_attributes>LevelCreator
+- ReadLegend() : void
+bg=blue
+transparency=60</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>546</x><y>882</y><w>154</w><h>133</h></coordinates><panel_attributes>LevelCreator
 --
 - map: string[]
 - meta: Dictionary&lt;string, string&gt;
@@ -40,7 +45,9 @@
 + CreateLevel(string level) : bool
 - CreateBlocks() : void
 - InitializeTimer(): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>375</x><y>481</y><w>63</w><h>45</h></coordinates><panel_attributes>&lt;&lt;Abstract&gt;&gt;
+bg=blue
+transparency=60
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>735</x><y>1064</y><w>147</w><h>105</h></coordinates><panel_attributes>&lt;&lt;Abstract&gt;&gt;
 /Block/
 --
 - value: int 
@@ -50,7 +57,10 @@
 # position: Vec2F
 --
 + LoseHealth(amount:int) : void
-# GivePoints(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>375</x><y>550</y><w>27</w><h>9</h></coordinates><panel_attributes>DefaultBlock</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>387</x><y>259</y><w>66</w><h>63</h></coordinates><panel_attributes>GameRunning
+# GivePoints(): void
+bg=pink
+transparency=50</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>707</x><y>1225</y><w>63</w><h>21</h></coordinates><panel_attributes>DefaultBlock
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>763</x><y>546</y><w>154</w><h>147</h></coordinates><panel_attributes>GameRunning
 --
 - instance: GameRunning &lt;&lt;static&gt;&gt; 
 - background: Entity
@@ -64,22 +74,25 @@
 - LoadLevels(): void
 -  KeyPress(key) : void
 -  KeyRelease(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>288</x><y>205</y><w>66</w><h>33</h></coordinates><panel_attributes>StateMachine
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>532</x><y>420</y><w>154</w><h>77</h></coordinates><panel_attributes>StateMachine
 --
 + ActiveState: IGameState
 --
-- SwitchState(stateType) : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>534</x><y>193</y><w>63</w><h>24</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
+- SwitchState(stateType) : void
+bg=red
+transparency=60</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1106</x><y>392</y><w>147</w><h>56</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
 BreakoutBus
 --
 - eventBus
 --
-+ GetBus() : GameEventBus</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>297</x><y>181</y><w>60</w><h>21</h></coordinates><panel_attributes>Game
++ GetBus() : GameEventBus
+bg=#3c7a00</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>553</x><y>364</y><w>140</w><h>49</h></coordinates><panel_attributes>Game
 --
 - stateMachine: StateMachine
 --
 - KeyHandler(action,key)
-
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>477</x><y>481</y><w>63</w><h>60</h></coordinates><panel_attributes>Player
+bg=magenta
+transparency=60</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>973</x><y>1064</y><w>147</w><h>140</h></coordinates><panel_attributes>Player
 --
 - moveLeft: float
 - moveRight: float
@@ -93,18 +106,22 @@ BreakoutBus
 - SetMoveLeft(val: bool): void
 - SetMoveRight(val: bool): void
 + GetPosition(): Vec2F
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>405</x><y>523</y><w>9</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>258</x><y>457</y><w>57</w><h>33</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-&lt; Retrieves level data</panel_attributes><additional_attributes>170;10;170;90;10;90;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>396</x><y>214</y><w>63</w><h>30</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>777</x><y>1162</y><w>21</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>462</x><y>1008</y><w>133</w><h>77</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+&lt; Retrieves level data</panel_attributes><additional_attributes>170;10;170;90;10;90;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>784</x><y>441</y><w>147</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 /IGameState/
 --
 ResetState() : void
 UpdateState() : void
 Renderstate() : void
-HandleKeyEvent(action, key) : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>339</x><y>445</y><w>69</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-&lt; Creates blocks &amp; sets timer </panel_attributes><additional_attributes>200;10;200;80;10;80;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>243</x><y>151</y><w>81</w><h>18</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+HandleKeyEvent(action, key) : void
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>651</x><y>980</y><w>161</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+&lt; Creates blocks &amp; sets timer </panel_attributes><additional_attributes>200;10;200;80;10;80;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>427</x><y>294</y><w>189</w><h>42</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 /IGameEventProcessor/
 -
-+ProcessEvent(gameEvent: GameEvent): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>321</x><y>163</y><w>240</w><h>36</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;780;10;780;100</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>166</y><w>33</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80;90;80</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>187</y><w>24</w><h>36</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;100;60;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>336</x><y>550</y><w>27</w><h>9</h></coordinates><panel_attributes>Hardened</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>417</x><y>550</y><w>27</w><h>9</h></coordinates><panel_attributes>Unbreakable</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>384</x><y>538</y><w>51</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;150;10;150;40</additional_attributes></element><element><id>Relation</id><coordinates><x>345</x><y>538</y><w>48</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;40;10;10;140;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>465</x><y>259</y><w>69</w><h>78</h></coordinates><panel_attributes>GameLost
++ProcessEvent(gameEvent: GameEvent): void
+bg=#3c7a00</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>609</x><y>322</y><w>560</w><h>84</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;780;10;780;100</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>329</y><w>77</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80;90;80</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>378</y><w>56</w><h>84</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;100;60;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>616</x><y>1225</y><w>63</w><h>21</h></coordinates><panel_attributes>Hardened
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>805</x><y>1225</y><w>63</w><h>21</h></coordinates><panel_attributes>Unbreakable
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>1197</y><w>119</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;150;10;150;40</additional_attributes></element><element><id>Relation</id><coordinates><x>637</x><y>1197</y><w>112</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;40;10;10;140;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>945</x><y>546</y><w>161</w><h>182</h></coordinates><panel_attributes>GameLost
 --
 - instance: GameLost &lt;&lt;static&gt;&gt; 
 - background: Entity
@@ -122,10 +139,12 @@ HandleKeyEvent(action, key) : void</panel_attributes><additional_attributes></ad
 + GetInstance() : GameLost &lt;&lt;static&gt;&gt;
 + InitializeGameState() : void
 -  KeyPress(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>522</x><y>454</y><w>51</w><h>18</h></coordinates><panel_attributes>&lt;&lt;static
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1078</x><y>1001</y><w>119</w><h>42</h></coordinates><panel_attributes>&lt;&lt;static
 PlayerCollision
 --
-+ Collide(balls, player): bool</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>624</x><y>484</y><w>63</w><h>36</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
++ Collide(balls, player): bool
+bg=green
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1323</x><y>1071</y><w>147</w><h>84</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
 WallCollision
 --
 + Collide(balls): void
@@ -133,17 +152,20 @@ WallCollision
 - CollideRightWall(ball): void
 - CollideTopWall(ball): void
 - CollideBottom(ball): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>423</x><y>460</y><w>75</w><h>18</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
+bg=green
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>847</x><y>1015</y><w>175</w><h>42</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
 BlockCollision
 --
-+ Collide(balls, block, hardBall:bool): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>558</x><y>484</y><w>63</w><h>33</h></coordinates><panel_attributes>Ball
++ Collide(balls, block, hardBall:bool): void
+bg=green
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1162</x><y>1071</y><w>147</w><h>77</h></coordinates><panel_attributes>Ball
 --
 - shape : DynamicShape
 + _Shape : DynamicShape &lt;&lt;get&gt;&gt;
 --
 + Move(): void
 + Render(): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>603</x><y>364</y><w>63</w><h>57</h></coordinates><panel_attributes>Points
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1267</x><y>791</y><w>147</w><h>133</h></coordinates><panel_attributes>Points
 --
 - instance: Points &lt;&lt;static&gt;&gt;
 - int points
@@ -154,37 +176,49 @@ BlockCollision
 + ResetPoints(): void
 + GetPoints(): int
 - UpdateText(): void
-+ void Render(): void </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>502</y><w>99</w><h>18</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
++ void Render(): void 
+bg=cyan
+transparency=80</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>1113</y><w>231</w><h>42</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
 BlockCreator
 --
 + CreateBlock(shape, image:string, meta: string): Block
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>450</x><y>550</y><w>27</w><h>9</h></coordinates><panel_attributes>PowerUpBlock</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>538</y><w>51</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;150;10;150;40</additional_attributes></element><element><id>Relation</id><coordinates><x>387</x><y>538</y><w>9</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>367</y><w>72</w><h>18</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
+bg=yellow
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>882</x><y>1225</y><w>63</w><h>21</h></coordinates><panel_attributes>PowerUpBlock
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>812</x><y>1197</y><w>119</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;150;10;150;40</additional_attributes></element><element><id>Relation</id><coordinates><x>735</x><y>1197</y><w>21</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>798</y><w>168</w><h>42</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
 BallCreator
 --
 + CreateBall(pos:Vec2F, dir: Vec2F): Ball
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>369</x><y>184</y><w>111</w><h>15</h></coordinates><panel_attributes>StateTransformer
+bg=yellow
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>721</x><y>371</y><w>259</w><h>35</h></coordinates><panel_attributes>StateTransformer
 --
 + TransformStringToState(state: string): GameStateType &lt;&lt;static&gt;&gt;
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>528</x><y>553</y><w>63</w><h>18</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
+bg=red
+transparency=60</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1078</x><y>1232</y><w>147</w><h>42</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
 PowerUpCollision
 --
 + Collide (powerups, player): bool 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>550</y><w>51</w><h>21</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+bg=green
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1260</x><y>1225</y><w>119</w><h>49</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
 /PowerUp/
 --
 + Move(): void
-+ Effect(): void &lt;&lt;abstract&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>598</y><w>51</w><h>9</h></coordinates><panel_attributes>HardBall
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>216</x><y>391</y><w>72</w><h>27</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
++ Effect(): void &lt;&lt;abstract&gt;
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1106</x><y>1323</y><w>70</w><h>21</h></coordinates><panel_attributes>HardBall
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>364</x><y>854</y><w>168</w><h>63</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
 PowerUpCreator
 --
 - extent: Vec2F
 - dir: Vec2F
 --
-+ CreatePowerUp(pos: Vec2F): Powerup </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>642</x><y>598</y><w>51</w><h>9</h></coordinates><panel_attributes>LifeLoss
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>588</x><y>598</y><w>51</w><h>9</h></coordinates><panel_attributes>Lifeplus
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>426</x><y>598</y><w>51</w><h>9</h></coordinates><panel_attributes>PlayerSpeed
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>318</x><y>598</y><w>51</w><h>9</h></coordinates><panel_attributes>SlimJim
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>534</x><y>598</y><w>51</w><h>9</h></coordinates><panel_attributes>Split</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>372</x><y>598</y><w>51</w><h>9</h></coordinates><panel_attributes>Wide</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>462</x><y>370</y><w>51</w><h>60</h></coordinates><panel_attributes>Timer
++ CreatePowerUp(pos: Vec2F): Powerup 
+bg=yellow
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1372</x><y>1323</y><w>77</w><h>21</h></coordinates><panel_attributes>LifeLoss
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1281</x><y>1323</y><w>77</w><h>21</h></coordinates><panel_attributes>Lifeplus
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1008</x><y>1323</y><w>84</w><h>21</h></coordinates><panel_attributes>PlayerSpeed
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>847</x><y>1323</y><w>63</w><h>21</h></coordinates><panel_attributes>SlimJim
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1190</x><y>1323</y><w>77</w><h>21</h></coordinates><panel_attributes>Split
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>924</x><y>1323</y><w>70</w><h>21</h></coordinates><panel_attributes>Wide
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>938</x><y>805</y><w>119</w><h>140</h></coordinates><panel_attributes>Timer
 --
 - timerText: Text
 - timeElapsed: int
@@ -198,15 +232,16 @@ PowerUpCreator
 - UpdateTime(): void
 - UpdateText(): void
 + Render(): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>522</x><y>370</y><w>51</w><h>42</h></coordinates><panel_attributes>Health
+bg=blue
+transparency=85</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1078</x><y>805</y><w>119</w><h>98</h></coordinates><panel_attributes>Health
 --
 - display: Text
 + _Health: int &lt;&lt;get&gt;&gt;
 --
 + LoseHealth(): void
 + Render(): void
-
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>615</x><y>568</y><w>18</w><h>36</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>30;10;30;70;10;70;10;100;40;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>558</x><y>259</y><w>69</w><h>81</h></coordinates><panel_attributes>GameWon
+bg=magenta
+transparency=80</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1295</x><y>1267</y><w>49</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>30;10;30;50;10;50;10;80;50;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1162</x><y>546</y><w>161</w><h>189</h></coordinates><panel_attributes>GameWon
 --
 - instance: GameWon &lt;&lt;static&gt;&gt; 
 - background: Entity
@@ -224,7 +259,7 @@ PowerUpCreator
 + GetInstance() : GameWon &lt;&lt;static&gt;&gt;
 + InitializeGameState() : void
 -  KeyPress(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>306</x><y>259</y><w>69</w><h>69</h></coordinates><panel_attributes>GamePaused
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>574</x><y>546</y><w>161</w><h>161</h></coordinates><panel_attributes>GamePaused
 --
 - instance: GamePaused &lt;&lt;static&gt;&gt; 
 - background: Entity
@@ -240,7 +275,7 @@ PowerUpCreator
 + GetInstance() : GamePaused &lt;&lt;static&gt;&gt;
 + InitializeGameState() : void
 -  KeyPress(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>231</x><y>259</y><w>69</w><h>63</h></coordinates><panel_attributes>MainMenu
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>399</x><y>546</y><w>161</w><h>147</h></coordinates><panel_attributes>MainMenu
 --
 - instance: MainMenu &lt;&lt;static&gt;&gt; 
 - background: Entity
@@ -254,6 +289,12 @@ PowerUpCreator
 + GetInstance() : MainMenu &lt;&lt;static&gt;&gt;
 + InitializeGameState() : void
 -  KeyPress(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>474</x><y>214</y><w>30</w><h>12</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+bg=orange
+transparency=50</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>966</x><y>441</y><w>70</w><h>28</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
 /GameStateType/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>216</x><y>166</y><w>201</w><h>210</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>130;10;130;50;10;50;10;640;650;640;650;680</additional_attributes></element><element><id>Relation</id><coordinates><x>207</x><y>154</y><w>309</w><h>423</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;10;20;10;10;1390;1010;1390;1010;1290</additional_attributes></element><element><id>Relation</id><coordinates><x>312</x><y>139</y><w>372</w><h>294</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;40;10;10;1220;10;1220;960;800;960;800;910</additional_attributes></element><element><id>Relation</id><coordinates><x>321</x><y>157</y><w>330</w><h>213</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;1070;10;1080;690</additional_attributes></element><element><id>Relation</id><coordinates><x>351</x><y>214</y><w>51</w><h>15</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;10;60;30;150;30</additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>241</y><w>9</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>426</x><y>250</y><w>177</w><h>15</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;570;10;570;30</additional_attributes></element><element><id>Relation</id><coordinates><x>261</x><y>250</y><w>174</w><h>15</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;30;10;10;560;10</additional_attributes></element><element><id>Relation</id><coordinates><x>498</x><y>250</y><w>9</w><h>15</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>250</y><w>9</w><h>15</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>321</x><y>457</y><w>9</w><h>51</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>405</x><y>445</y><w>9</w><h>42</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>612</x><y>514</y><w>9</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>444</x><y>403</y><w>24</w><h>9</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;10</additional_attributes></element><element><id>Relation</id><coordinates><x>438</x><y>319</y><w>171</w><h>63</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;120;520;120;520;190;550;190</additional_attributes></element><element><id>Relation</id><coordinates><x>531</x><y>322</y><w>93</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;10;60;80;290;80;290;140</additional_attributes></element><element><id>Relation</id><coordinates><x>624</x><y>313</y><w>18</w><h>57</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;10;40;170</additional_attributes></element><element><id>Relation</id><coordinates><x>423</x><y>319</y><w>120</w><h>57</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;150;380;150;380;170</additional_attributes></element><element><id>Relation</id><coordinates><x>531</x><y>409</y><w>177</w><h>147</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>370;470;370;440;570;440;570;80;10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>444</x><y>442</y><w>144</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;460;10;460;140</additional_attributes></element><element><id>Relation</id><coordinates><x>339</x><y>376</y><w>33</w><h>9</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>285</x><y>394</y><w>87</w><h>9</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;270;10</additional_attributes></element><element><id>Relation</id><coordinates><x>537</x><y>526</y><w>78</w><h>30</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>240;80;240;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>426</x><y>445</y><w>96</w><h>42</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;30;300;30;300;120</additional_attributes></element><element><id>Relation</id><coordinates><x>444</x><y>436</y><w>258</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;840;10;840;320;610;320;610;380</additional_attributes></element><element><id>Relation</id><coordinates><x>339</x><y>586</y><w>294</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>960;10;10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>396</x><y>586</y><w>279</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>910;10;10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>666</x><y>586</y><w>9</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>586</y><w>9</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>504</x><y>586</y><w>9</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>555</x><y>586</y><w>9</w><h>18</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element></diagram>
+bg=red
+transparency=60</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>364</x><y>329</y><w>413</w><h>490</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>130;10;130;50;10;50;10;640;570;640;570;680</additional_attributes></element><element><id>Relation</id><coordinates><x>343</x><y>301</y><w>721</w><h>987</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;10;20;10;10;1390;1010;1390;1010;1290</additional_attributes></element><element><id>Relation</id><coordinates><x>588</x><y>266</y><w>868</w><h>686</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;40;10;10;1220;10;1220;960;800;960;800;910</additional_attributes></element><element><id>Relation</id><coordinates><x>609</x><y>308</y><w>770</w><h>497</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;1080;10;1080;690</additional_attributes></element><element><id>Relation</id><coordinates><x>679</x><y>455</y><w>119</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;150;10</additional_attributes></element><element><id>Relation</id><coordinates><x>840</x><y>504</y><w>21</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>854</x><y>525</y><w>413</w><h>35</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;570;10;570;30</additional_attributes></element><element><id>Relation</id><coordinates><x>469</x><y>525</y><w>406</w><h>35</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;30;10;10;560;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1022</x><y>525</y><w>21</w><h>35</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>644</x><y>525</y><w>21</w><h>35</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>609</x><y>1008</y><w>21</w><h>119</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>805</x><y>980</y><w>21</w><h>98</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>1288</x><y>1141</y><w>21</w><h>98</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>896</x><y>882</y><w>56</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;10</additional_attributes></element><element><id>Relation</id><coordinates><x>882</x><y>686</y><w>399</w><h>147</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;120;520;120;520;190;550;190</additional_attributes></element><element><id>Relation</id><coordinates><x>1099</x><y>693</y><w>217</w><h>112</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;10;60;80;290;80;290;140</additional_attributes></element><element><id>Relation</id><coordinates><x>1316</x><y>672</y><w>42</w><h>133</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;10;40;170</additional_attributes></element><element><id>Relation</id><coordinates><x>847</x><y>686</y><w>280</w><h>133</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;150;380;150;380;170</additional_attributes></element><element><id>Relation</id><coordinates><x>1099</x><y>896</y><w>413</w><h>343</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>370;470;370;440;570;440;570;80;10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>896</x><y>973</y><w>336</w><h>112</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;460;10;460;140</additional_attributes></element><element><id>Relation</id><coordinates><x>651</x><y>819</y><w>77</w><h>21</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>525</x><y>861</y><w>203</w><h>21</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;270;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1113</x><y>1169</y><w>182</w><h>70</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>240;80;240;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>854</x><y>980</y><w>224</w><h>98</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;30;300;30;300;120</additional_attributes></element><element><id>Relation</id><coordinates><x>896</x><y>959</y><w>602</w><h>280</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;840;10;840;320;610;320;610;380</additional_attributes></element><element><id>Relation</id><coordinates><x>1393</x><y>1295</y><w>21</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>1043</x><y>1295</y><w>21</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>1141</x><y>1295</y><w>21</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>1225</x><y>1295</y><w>21</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>875</x><y>1120</y><w>112</w><h>21</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;140;10</additional_attributes></element><element><id>Relation</id><coordinates><x>924</x><y>1050</y><w>21</w><h>91</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>1302</x><y>1106</y><w>35</w><h>21</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1113</x><y>1183</y><w>77</w><h>63</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;90;10;90;70</additional_attributes></element><element><id>Relation</id><coordinates><x>1218</x><y>1239</y><w>56</w><h>21</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;60;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>679</x><y>399</y><w>175</w><h>49</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;50;10;40;230;40;230;10</additional_attributes></element><element><id>Relation</id><coordinates><x>798</x><y>686</y><w>21</w><h>133</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>1113</x><y>1106</y><w>63</w><h>21</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1134</x><y>1036</y><w>21</w><h>91</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>959</x><y>1295</y><w>21</w><h>42</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>875</x><y>1295</y><w>21</w><h>42</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>875</x><y>1295</y><w>539</w><h>21</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>750;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>973</x><y>385</y><w>49</w><h>70</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;50;10;50;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1253</x><y>1015</y><w>98</w><h>21</h></coordinates><panel_attributes>/DIKUArcade.Entity/
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1421</x><y>1218</y><w>70</w><h>21</h></coordinates><panel_attributes>/DIKUArcade.Entity/
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>889</x><y>1169</y><w>77</w><h>21</h></coordinates><panel_attributes>/DIKUArcade.Entity/
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>875</x><y>1134</y><w>70</w><h>49</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>80;50;80;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>924</x><y>1134</y><w>63</w><h>49</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;50;10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1260</x><y>1029</y><w>49</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;60;10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1372</x><y>1232</y><w>91</w><h>42</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>110;10;110;40;10;40</additional_attributes></element></diagram>

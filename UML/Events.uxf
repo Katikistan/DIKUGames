@@ -1,180 +1,67 @@
-<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>1632</x><y>144</y><w>216</w><h>208</h></coordinates><panel_attributes>LevelManager
---
-- levelCreator: LevelCreator &lt;&lt;get&gt;&gt;
-+ Player: Player &lt;&lt;get&gt;&gt;
-+ Blocks: EntityContainer&lt;Block&gt; &lt;&lt;get&gt;&gt;
-+ Balls: EntityContainer&lt;Ball&gt; &lt;&lt;get&gt;&gt;
-+ Powerups: EntityContainer&lt;Powerup&gt; &lt;&lt;get&gt;&gt;
-+ LevelTimer: Timer &lt;&lt;get&gt;&gt;
-
---
-+ NewLevel(level: string) : void
-- EmptyLevel(): void
-- MoveBalls(): void
-- MovePowerups(): void
-- CheckCollisions(): void
-- CheckTime(): void
-+ Render() : void
-+ Update() : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>928</x><y>152</y><w>168</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Abstract&gt;&gt;
-/Block/
---
-- value: int 
-+ health: int 
-+ Value: int &lt;&lt;get&gt;&gt;
-+ Health: int &lt;&lt;get&gt;&gt;
-# position: Vec2F
---
-+ LoseHealth(amount:int) : void
-# GivePoints(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>496</y><w>176</w><h>168</h></coordinates><panel_attributes>GameRunning
---
-- instance: GameRunning &lt;&lt;static&gt;&gt; 
-- background: Entity
-+ Levelslst: list&lt;string&gt;  &lt;&lt;get&gt;&gt;
-+ Health: Health &lt;&lt;get&gt;&gt;
-+ Points: Points &lt;&lt;get&gt;&gt;
-+ LevelManager: LevelManager  &lt;&lt;get&gt;&gt;
---
-+ GetInstance() : GameRunning &lt;&lt;static&gt;&gt;
-+ InitializeGameState() : void
-- LoadLevels(): void
--  KeyPress(key) : void
--  KeyRelease(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>672</x><y>144</y><w>176</w><h>88</h></coordinates><panel_attributes>StateMachine
---
-+ ActiveState: IGameState
---
-- SwitchState(stateType) : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>288</x><y>96</y><w>168</w><h>160</h></coordinates><panel_attributes>Player
---
-- moveLeft: float
-- moveRight: float
-- moveSpeed: float
-- shape: DynamicShape
-+ _Shape: DynamicShape &lt;&lt;get&gt;&gt;
-+ MovementSpeed: float &lt;&lt;get, set&gt;&gt;
---
-- UpdateDirection() : void
-+ Move() : void
-- SetMoveLeft(val: bool): void
-- SetMoveRight(val: bool): void
-+ GetPosition(): Vec2F
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1000</x><y>0</y><w>216</w><h>48</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+<diagram program="umletino" version="15.1"><zoom_level>17</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>850</x><y>629</y><w>238</w><h>51</h></coordinates><panel_attributes>LevelManager
+bg=magenta
+transparency=70
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>782</x><y>357</y><w>204</w><h>51</h></coordinates><panel_attributes>Block
+bg=yellow
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>374</y><w>170</w><h>51</h></coordinates><panel_attributes>GameRunning
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>289</y><w>204</w><h>68</h></coordinates><panel_attributes>StateMachine
+bg=red
+transparency=50</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>357</x><y>170</y><w>204</w><h>51</h></coordinates><panel_attributes>Player
+bg=pink
+transparency=50</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>782</x><y>153</y><w>272</w><h>85</h></coordinates><panel_attributes>
 /IGameEventProcessor/
--
-+ProcessEvent(gameEvent: GameEvent): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>744</x><y>496</y><w>184</w><h>208</h></coordinates><panel_attributes>GameLost
---
-- instance: GameLost &lt;&lt;static&gt;&gt; 
-- background: Entity
-- points: Points
-- menuButtons: Text[]
-- gameOverText: Text
-- pointsText: Text
-- pointsValue: int
-+ ActiveMenuButton: int &lt;&lt;get&gt;&gt;
-- MAIN_MENU: int
-- QUIT: int
-- white: Vec3I
-- red: Vec3I
---
-+ GetInstance() : GameLost &lt;&lt;static&gt;&gt;
-+ InitializeGameState() : void
--  KeyPress(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1152</x><y>144</y><w>168</w><h>152</h></coordinates><panel_attributes>Points
---
-- instance: Points &lt;&lt;static&gt;&gt;
-- int points
-- Text pointText
-- Vec3I white
---
-+ GetInstance(): Points &lt;&lt;static&gt;&gt;
-+ ResetPoints(): void
-+ GetPoints(): int
-- UpdateText(): void
-+ void Render(): void </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1968</x><y>296</y><w>72</w><h>24</h></coordinates><panel_attributes>PowerUpBlock
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1616</x><y>432</y><w>136</w><h>24</h></coordinates><panel_attributes>HardBall
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1488</x><y>392</y><w>136</w><h>24</h></coordinates><panel_attributes>LifeLoss
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1304</x><y>392</y><w>136</w><h>24</h></coordinates><panel_attributes>Lifeplus
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>200</y><w>136</w><h>24</h></coordinates><panel_attributes>PlayerSpeed
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>184</y><w>136</w><h>24</h></coordinates><panel_attributes>Split</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>152</y><w>136</w><h>24</h></coordinates><panel_attributes>Wide</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1408</x><y>144</y><w>136</w><h>112</h></coordinates><panel_attributes>Health
---
-- display: Text
-+ _Health: int &lt;&lt;get&gt;&gt;
---
-+ LoseHealth(): void
-+ Render(): void
-
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>960</x><y>496</y><w>184</w><h>216</h></coordinates><panel_attributes>GameWon
---
-- instance: GameWon &lt;&lt;static&gt;&gt; 
-- background: Entity
-- points: Points
-- menuButtons: Text[]
-- gameOverText: Text
-- pointsText: Text
-- pointsValue: int
-+ ActiveMenuButton: int &lt;&lt;get&gt;&gt;
-- MAIN_MENU: int
-- QUIT: int
-- white: Vec3I
-- red: Vec3I
---
-+ GetInstance() : GameWon &lt;&lt;static&gt;&gt;
-+ InitializeGameState() : void
--  KeyPress(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>528</x><y>496</y><w>184</w><h>184</h></coordinates><panel_attributes>GamePaused
---
-- instance: GamePaused &lt;&lt;static&gt;&gt; 
-- background: Entity
-- points: Points
-- menuButtons: Text[]
-- pauseText: Text
-+ ActiveMenuButton: int &lt;&lt;get&gt;&gt;
-- CONTINUE int
-- MAIN_MENU: int
-- white: Vec3I
-- red: Vec3I
---
-+ GetInstance() : GamePaused &lt;&lt;static&gt;&gt;
-+ InitializeGameState() : void
--  KeyPress(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>328</x><y>496</y><w>184</w><h>168</h></coordinates><panel_attributes>MainMenu
---
-- instance: MainMenu &lt;&lt;static&gt;&gt; 
-- background: Entity
-- menuButtons: Text[]
-+ ActiveMenuButton: int &lt;&lt;get&gt;&gt;
-- NEW_GAME: int
-- QUIT: int
-- white: Vec3I
-- red: Vec3I
---
-+ GetInstance() : MainMenu &lt;&lt;static&gt;&gt;
-+ InitializeGameState() : void
--  KeyPress(key) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>104</y><w>136</w><h>24</h></coordinates><panel_attributes>SlimJim
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1088</x><y>176</y><w>80</w><h>32</h></coordinates><panel_attributes>lt=-
-give points</panel_attributes><additional_attributes>80;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1840</x><y>296</y><w>144</w><h>40</h></coordinates><panel_attributes>lt=-
+bg=dark_gray
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>578</y><w>170</w><h>51</h></coordinates><panel_attributes>GameLost
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1173</x><y>357</y><w>136</w><h>51</h></coordinates><panel_attributes>Points
+bg=blue
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>697</x><y>527</y><w>187</w><h>51</h></coordinates><panel_attributes>PowerUpBlock
+bg=yellow
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>663</x><y>748</y><w>136</w><h>51</h></coordinates><panel_attributes>HardBall
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1615</x><y>289</y><w>170</w><h>51</h></coordinates><panel_attributes>LifeLoss
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1462</x><y>408</y><w>170</w><h>51</h></coordinates><panel_attributes>Lifeplus
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>544</x><y>0</y><w>153</w><h>51</h></coordinates><panel_attributes>PlayerSpeed
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1003</x><y>799</y><w>170</w><h>51</h></coordinates><panel_attributes>Split
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>187</y><w>153</w><h>51</h></coordinates><panel_attributes>Wide
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1343</x><y>255</y><w>187</w><h>51</h></coordinates><panel_attributes>Health
+bg=orange
+transparency=50
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>442</y><w>170</w><h>51</h></coordinates><panel_attributes>GameWon
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>510</y><w>170</w><h>51</h></coordinates><panel_attributes>GamePaused
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>646</y><w>170</w><h>51</h></coordinates><panel_attributes>MainMenu
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>153</x><y>85</y><w>153</w><h>51</h></coordinates><panel_attributes>SlimJim
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>969</x><y>357</y><w>238</w><h>68</h></coordinates><panel_attributes>lt=-
+Give points &gt;</panel_attributes><additional_attributes>120;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>867</x><y>527</y><w>238</w><h>136</h></coordinates><panel_attributes>lt=-
 &lt; Create powerup 
-</panel_attributes><additional_attributes>10;20;160;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1536</x><y>200</y><w>104</w><h>208</h></coordinates><panel_attributes>lt=-
-Lose health &gt;</panel_attributes><additional_attributes>10;10;30;10;30;240</additional_attributes></element><element><id>Relation</id><coordinates><x>1840</x><y>176</y><w>104</w><h>32</h></coordinates><panel_attributes>lt=-
-&lt; Split ball</panel_attributes><additional_attributes>10;20;110;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1368</x><y>216</y><w>88</w><h>192</h></coordinates><panel_attributes>lt=-
-gives health &gt;</panel_attributes><additional_attributes>50;10;10;10;10;220</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1384</x><y>448</y><w>136</w><h>112</h></coordinates><panel_attributes>&lt;&lt;static&gt;&gt;
-WallCollision
---
-+ Collide(balls): void
-- CollideLeftWall(ball): void
-- CollideRightWall(ball): void
-- CollideTopWall(ball): void
-- CollideBottom(ball): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1456</x><y>248</y><w>88</w><h>216</h></coordinates><panel_attributes>lt=-
-Lose health &gt;</panel_attributes><additional_attributes>80;10;80;40;10;40;10;250</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>248</y><w>160</w><h>264</h></coordinates><panel_attributes>lt=-
-Moves Player with keyinputs &gt;</panel_attributes><additional_attributes>180;10;180;50;10;50;10;310</additional_attributes></element><element><id>Relation</id><coordinates><x>784</x><y>224</y><w>96</w><h>288</h></coordinates><panel_attributes>lt=-
-Changes state &gt;</panel_attributes><additional_attributes>10;10;10;340</additional_attributes></element><element><id>Relation</id><coordinates><x>808</x><y>224</y><w>256</w><h>288</h></coordinates><panel_attributes>lt=-
-&lt; Changes state </panel_attributes><additional_attributes>10;10;10;160;300;160;300;340</additional_attributes></element><element><id>Relation</id><coordinates><x>248</x><y>184</y><w>440</w><h>328</h></coordinates><panel_attributes>lt=-
-Changes state &gt;</panel_attributes><additional_attributes>530;10;420;10;420;160;170;160;170;280;10;280;10;390</additional_attributes></element><element><id>Relation</id><coordinates><x>432</x><y>224</y><w>272</w><h>288</h></coordinates><panel_attributes>lt=-
-Changes state &gt;</panel_attributes><additional_attributes>320;10;320;170;10;170;10;340</additional_attributes></element><element><id>Relation</id><coordinates><x>128</x><y>104</y><w>176</w><h>32</h></coordinates><panel_attributes>lt=-
-Decreases size &gt;</panel_attributes><additional_attributes>200;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>128</x><y>152</y><w>176</w><h>32</h></coordinates><panel_attributes>lt=-
-Increases size &gt;</panel_attributes><additional_attributes>200;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>128</x><y>200</y><w>176</w><h>32</h></coordinates><panel_attributes>lt=-
-Increases Speed &gt;</panel_attributes><additional_attributes>200;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>608</x><y>224</y><w>144</w><h>288</h></coordinates><panel_attributes>lt=-
-Changes state &gt;</panel_attributes><additional_attributes>150;10;150;210;10;210;10;340</additional_attributes></element><element><id>Relation</id><coordinates><x>1688</x><y>344</y><w>104</w><h>104</h></coordinates><panel_attributes>lt=-
-Activates HardBall</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>1008</x><y>40</y><w>24</w><h>128</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>1112</x><y>40</y><w>144</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50;160;50;160;130</additional_attributes></element><element><id>Relation</id><coordinates><x>1208</x><y>16</y><w>288</w><h>144</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;340;10;340;160</additional_attributes></element><element><id>Relation</id><coordinates><x>1208</x><y>16</y><w>576</w><h>144</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;700;10;700;160</additional_attributes></element><element><id>Relation</id><coordinates><x>752</x><y>16</y><w>264</w><h>144</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>310;10;10;10;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>376</x><y>16</y><w>640</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>780;10;10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>840</x><y>184</y><w>584</w><h>144</h></coordinates><panel_attributes>lt=-
-&lt; Game lost when health is 0 </panel_attributes><additional_attributes>10;10;60;10;60;160;640;160;640;10;710;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1512</x><y>344</y><w>312</w><h>200</h></coordinates><panel_attributes>lt=-
-Creates ball &gt;</panel_attributes><additional_attributes>370;10;370;230;10;230</additional_attributes></element></diagram>
+</panel_attributes><additional_attributes>100;60;100;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1513</x><y>238</y><w>221</w><h>85</h></coordinates><panel_attributes>lt=-
+&lt; Lose health </panel_attributes><additional_attributes>10;20;110;20;110;30</additional_attributes></element><element><id>Relation</id><coordinates><x>867</x><y>663</y><w>170</w><h>187</h></coordinates><panel_attributes>lt=-
+&lt; Split ball</panel_attributes><additional_attributes>10;10;10;90;80;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1462</x><y>289</y><w>187</w><h>153</h></coordinates><panel_attributes>lt=-
+Gives health &gt;</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1122</x><y>629</y><w>289</w><h>51</h></coordinates><panel_attributes>WallCollision
+bg=green
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1275</x><y>289</y><w>306</w><h>374</h></coordinates><panel_attributes>lt=-
+ Lose health &gt;</panel_attributes><additional_attributes>80;10;80;150;10;150;10;200</additional_attributes></element><element><id>Relation</id><coordinates><x>272</x><y>204</y><w>204</w><h>204</h></coordinates><panel_attributes>lt=-
+Moves Player  &gt;</panel_attributes><additional_attributes>100;10;100;40;40;40;40;100</additional_attributes></element><element><id>Relation</id><coordinates><x>289</x><y>85</y><w>238</w><h>119</h></coordinates><panel_attributes>lt=-
+Decreases size &gt;</panel_attributes><additional_attributes>120;50;120;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>136</x><y>170</y><w>255</w><h>85</h></coordinates><panel_attributes>lt=-
+Increases size &gt;</panel_attributes><additional_attributes>130;10;90;10;90;30;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>527</x><y>34</y><w>255</w><h>170</h></coordinates><panel_attributes>lt=-
+&lt; Increases Speed </panel_attributes><additional_attributes>10;80;40;10</additional_attributes></element><element><id>Relation</id><coordinates><x>646</x><y>629</y><w>238</w><h>153</h></coordinates><panel_attributes>lt=-
+Activates HardBall &gt;</panel_attributes><additional_attributes>120;20;50;20;50;70</additional_attributes></element><element><id>Relation</id><coordinates><x>799</x><y>221</y><w>51</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>986</x><y>221</y><w>340</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60;180;60;180;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1037</x><y>204</y><w>374</w><h>85</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;200;10;200;30</additional_attributes></element><element><id>Relation</id><coordinates><x>918</x><y>170</y><w>935</w><h>612</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>80;10;530;10;530;150;480;150;480;340;10;340;10;300</additional_attributes></element><element><id>Relation</id><coordinates><x>612</x><y>221</y><w>204</w><h>102</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>100;10;10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>544</x><y>170</y><w>272</w><h>51</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>140;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>663</x><y>289</y><w>731</w><h>221</h></coordinates><panel_attributes>lt=-
+&lt; Game lost when health is 0 </panel_attributes><additional_attributes>10;40;10;110;410;110;410;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1020</x><y>663</y><w>238</w><h>85</h></coordinates><panel_attributes>lt=-
+&lt; Creates ball </panel_attributes><additional_attributes>10;10;10;30;120;30;120;10</additional_attributes></element><element><id>Relation</id><coordinates><x>442</x><y>340</y><w>221</w><h>374</h></coordinates><panel_attributes>lt=-
+&lt; Change state &gt;</panel_attributes><additional_attributes>100;10;100;100;30;100;30;200</additional_attributes></element><element><id>Relation</id><coordinates><x>476</x><y>374</y><w>51</w><h>323</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;10;10;150;10;130;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>646</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>561</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>510</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>425</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>357</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element></diagram>
