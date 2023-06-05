@@ -43,12 +43,15 @@ public class PointsTests {
         Assert.That(points.GetPoints(), Is.EqualTo(0));
         defaultBlock.LoseHealth(1);
         BreakoutBus.GetBus().ProcessEvents();
+        BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(10));
     }
+
     [Test]
     public void TestHardenedGetPoints() {
         Assert.That(points.GetPoints(), Is.EqualTo(0));
         hardened.LoseHealth(2);
+        BreakoutBus.GetBus().ProcessEvents();
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(20));
     }
@@ -56,6 +59,7 @@ public class PointsTests {
     public void TestPowerupBlockGetPoints() {
         Assert.That(points.GetPoints(), Is.EqualTo(0));
         powerupBlock.LoseHealth(1);
+        BreakoutBus.GetBus().ProcessEvents();
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(10));
     }

@@ -1,19 +1,8 @@
-using Breakout;
-using Breakout.Collisions;
-using Breakout.Players;
 using Breakout.Powerups;
-using DIKUArcade.Entities;
-using DIKUArcade.Events;
-using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 namespace BreakoutTests.Integration.PowerupTests;
 [TestFixture]
 public class PowerupCreatorTests {
-    public Powerup lifeplus;
-    public Health health;
-    public EntityContainer<Powerup> powerups;
-    public Player player;
-
     public PowerupCreatorTests() {
         CreateGL.CreateOpenGL();
     }
