@@ -51,11 +51,13 @@ public class WideTests {
     [Test]
     public void TestEffect() {
         Assert.That(player.MovementSpeed, Is.Not.EqualTo(0.02f));
+        //dropping wide powerup onto player
         while (!PowerUpCollision.Collide(powerups, player)){
             powerups.Iterate(powerup => {
                 powerup.Move();
             });
         }
+        //checking for desired widening effect on player
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(player.Shape.Extent.X, Is.EqualTo(0.3f));
     }

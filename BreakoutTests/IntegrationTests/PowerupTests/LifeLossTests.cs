@@ -36,7 +36,7 @@ public class LifeLossTests {
     public void TestLifeLoss() {
         Assert.That(health._Health == 3);
         Assert.That(powerups.CountEntities() == 1);
-        // Testing if lifeplus powerup collides with player and changes health
+        // Testing if lifeloss powerup collides with player and changes health
         while (health._Health == 3) {
             if (!PowerUpCollision.Collide(powerups, player)) {
                 powerups.Iterate(powerup => {

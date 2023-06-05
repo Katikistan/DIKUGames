@@ -74,11 +74,13 @@ public class HardBallTests{
 
     [Test]
     public void TestHardBallEffect() {
+        //hardball powerup drops onto player
         while (!PowerUpCollision.Collide(powerups, player)){
             powerups.Iterate(powerup => {
                 powerup.Move();
             });
         }
+        //checking if desired effect has happened
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(levelManager.HardBalls, Is.EqualTo(true));
     }
