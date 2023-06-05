@@ -1,6 +1,6 @@
+using Breakout.Balls;
 using DIKUArcade.Entities;
 using DIKUArcade.Math;
-using Breakout.Balls;
 namespace BreakoutTests.Unit.EntityTests;
 [TestFixture]
 public class BallTests {

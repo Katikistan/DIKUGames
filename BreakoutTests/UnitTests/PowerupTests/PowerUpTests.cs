@@ -38,7 +38,5 @@ public class PowerUpTests {
             powerup.Move();
         });
         Assert.That(powerups.CountEntities() == 0);
-
-
     }
 }

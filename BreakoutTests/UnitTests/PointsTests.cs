@@ -1,6 +1,4 @@
 using DIKUArcade.Events;
-using DIKUArcade.Entities;
-using DIKUArcade.Math;
 using Breakout;
 using Breakout.Blocks;
 namespace BreakoutTests.Unit;
