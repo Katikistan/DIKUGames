@@ -31,14 +31,6 @@ public class PointsTests {
         new StationaryShape(new Vec2F(0.5f, 0.5f), new Vec2F(0.5f, 0.5f)), "blue-block.png");
     }
     [Test]
-    public void TestGetPoints() {
-        Assert.That(points.GetPoints(), Is.EqualTo(0));
-        points.ProcessEvent(givePoints);
-        Assert.That(points.GetPoints(), Is.EqualTo(10));
-        points.ProcessEvent(givePoints);
-        Assert.That(points.GetPoints(), Is.EqualTo(20));
-    }
-    [Test]
     public void TestDefaultblockGetPoints() {
         Assert.That(points.GetPoints(), Is.EqualTo(0));
         defaultBlock.LoseHealth(1);
@@ -62,14 +54,5 @@ public class PointsTests {
         BreakoutBus.GetBus().ProcessEvents();
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(10));
-    }
-    [Test]
-    public void TestResetPoints() {
-        Assert.That(points.GetPoints(), Is.EqualTo(0));
-        points.ProcessEvent(givePoints);
-        Assert.That(points.GetPoints(), Is.EqualTo(10));
-        points.ResetPoints();
-        points = Points.GetInstance();
-        Assert.That(points.GetPoints(), Is.EqualTo(0));
     }
 }

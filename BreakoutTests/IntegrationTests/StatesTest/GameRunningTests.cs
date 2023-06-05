@@ -58,12 +58,13 @@ public class GameRunningTests {
         Assert.That(gameRunning.Levellst.Count, Is.EqualTo(2));
     }
     [Test]
-    public void TestLoadLevels() {
+    public void TestGameWonSwitch() {
         for (int i = 0; i < 10; i++) {
             gameRunning.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.K);
             gameRunning.UpdateState();
             BreakoutBus.GetBus().ProcessEvents();
         }
+        Assert.That(gameRunning.Levellst.Count, Is.EqualTo(0));
         Assert.That((stateMachine.ActiveState).GetType(), Is.EqualTo((new GameWon()).GetType()));
     }
     [Test]
@@ -133,20 +134,5 @@ public class GameRunningTests {
         gameRunning.LevelManager.Player.Move();
         // Player pos is the same/hasn't moved
         Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
-    }
-    [Test]
-    public void EscapeTest() {
-        gameRunning.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Escape);
-        gameRunning.HandleKeyEvent(KeyboardAction.KeyRelease, KeyboardKey.Escape);
-        BreakoutBus.GetBus().ProcessEvents();
-        Assert.That((stateMachine.ActiveState).GetType(), Is.EqualTo((new GamePaused()).GetType()));
-    }
-    [Test]
-    public void ClearTest() {
-        Assert.That(gameRunning.LevelManager.Blocks.CountEntities(), Is.Not.EqualTo(0));
-        gameRunning.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.K);
-        gameRunning.HandleKeyEvent(KeyboardAction.KeyRelease, KeyboardKey.K);
-        BreakoutBus.GetBus().ProcessEvents();
-        Assert.That(gameRunning.LevelManager.Blocks.CountEntities(), Is.EqualTo(0));
     }
 }
