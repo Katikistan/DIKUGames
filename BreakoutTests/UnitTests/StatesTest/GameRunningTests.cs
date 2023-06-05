@@ -60,6 +60,8 @@ public class GameRunningTests {
         gameRunning.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.K);
         gameRunning.HandleKeyEvent(KeyboardAction.KeyRelease, KeyboardKey.K);
         BreakoutBus.GetBus().ProcessEvents();
+        BreakoutBus.GetBus().ProcessEvents();
+
         Assert.That(gameRunning.LevelManager.Blocks.CountEntities(), Is.EqualTo(0));
     }
 }
