@@ -32,6 +32,7 @@ public class PointsTests {
     }
     [Test]
     public void TestDefaultblockGetPoints() {
+        //testing that points are incremented by the right amount after block is destroyed
         Assert.That(points.GetPoints(), Is.EqualTo(0));
         defaultBlock.LoseHealth(1);
         BreakoutBus.GetBus().ProcessEvents();
@@ -41,6 +42,7 @@ public class PointsTests {
 
     [Test]
     public void TestHardenedGetPoints() {
+        //testing that points are incremented by the right amount after block is destroyed
         Assert.That(points.GetPoints(), Is.EqualTo(0));
         hardened.LoseHealth(2);
         BreakoutBus.GetBus().ProcessEvents();
@@ -49,6 +51,7 @@ public class PointsTests {
     }
     [Test]
     public void TestPowerupBlockGetPoints() {
+        //testing that points are incremented by the right amount after block is destroyed
         Assert.That(points.GetPoints(), Is.EqualTo(0));
         powerupBlock.LoseHealth(1);
         BreakoutBus.GetBus().ProcessEvents();

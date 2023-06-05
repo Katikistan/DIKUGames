@@ -33,6 +33,7 @@ public class GameRunningTests {
     }
     [Test]
     public void TestInitializeGameState() {
+        //testing all the fields are correct
         Assert.That(gameRunning.LevelManager, Is.Not.EqualTo(null!));
         Assert.That(gameRunning.Points, Is.Not.EqualTo(null!));
         Assert.That(gameRunning.Background, Is.Not.EqualTo(null!));

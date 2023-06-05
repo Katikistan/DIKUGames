@@ -36,6 +36,7 @@ public class BlockCollisionTests {
         balls.AddEntity(collisionBall);
         Vec2F ballDirection = new Vec2F((float) collisionBall._Shape.Direction.X, (float) collisionBall._Shape.Direction.Y);
         BlockCollision.Collide(balls, blocks, false);
+        
         Assert.That(blockCount, Is.Not.EqualTo(blocks.CountEntities()));
         Assert.That(ballDirection.X, Is.EqualTo(collisionBall._Shape.Direction.X));
         Assert.That(ballDirection.Y, Is.EqualTo(-collisionBall._Shape.Direction.Y));
@@ -51,6 +52,7 @@ public class BlockCollisionTests {
         balls.AddEntity(collisionBall);
         Vec2F ballDirection = new Vec2F((float) collisionBall._Shape.Direction.X, (float) collisionBall._Shape.Direction.Y);
         BlockCollision.Collide(balls, blocks, false);
+
         Assert.That(blockCount, Is.Not.EqualTo(blocks.CountEntities()));
         Assert.That(ballDirection.X, Is.EqualTo(-collisionBall._Shape.Direction.X));
         Assert.That(ballDirection.Y, Is.EqualTo(collisionBall._Shape.Direction.Y));
@@ -66,6 +68,7 @@ public class BlockCollisionTests {
         balls.AddEntity(collisionBall);
         Vec2F ballDirection = new Vec2F((float) collisionBall._Shape.Direction.X, (float) collisionBall._Shape.Direction.Y);
         BlockCollision.Collide(balls, blocks, true);
+        //checking that hardball's direction is unchanged after collisions
         Assert.That(blockCount, Is.Not.EqualTo(blocks.CountEntities()));
         Assert.That(ballDirection.X, Is.EqualTo(collisionBall._Shape.Direction.X));
         Assert.That(ballDirection.Y, Is.EqualTo(collisionBall._Shape.Direction.Y));

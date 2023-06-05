@@ -51,7 +51,7 @@ public class PlayerCollisionTests {
     [Test]
     public void TestCollide() {
 
-        // left side of player hit test
+        // mid-left side of player hit test
         while (!PlayerCollision.Collide(balls, player)) {
             balls.Iterate(ball => {
                 ball.Move();
@@ -61,7 +61,7 @@ public class PlayerCollisionTests {
         Assert.That(ballleft._Shape.Direction.X, Is.EqualTo(-0.0051f));
         ballleft.DeleteEntity();
 
-        // leftleft side of player hit test
+        // left side of player hit test
 
         while (!PlayerCollision.Collide(balls, player)) {
             balls.Iterate(ball => {
@@ -81,7 +81,7 @@ public class PlayerCollisionTests {
         Assert.That(ballmid._Shape.Direction.Y, Is.EqualTo(0.015f));
         ballmid.DeleteEntity();
 
-        // right side of player hit test
+        // mid-right side of player hit test
 
         while (!PlayerCollision.Collide(balls, player)) {
             balls.Iterate(ball => {
