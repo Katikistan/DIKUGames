@@ -23,7 +23,6 @@ public class PowerUpTests {
                 new Vec2F(0.00f, -0.01f)));
         powerups = new EntityContainer<Powerup>(5);
         powerups.AddEntity(powerup);
-
     }
     [Test]
     public void PowerUpTest() {
