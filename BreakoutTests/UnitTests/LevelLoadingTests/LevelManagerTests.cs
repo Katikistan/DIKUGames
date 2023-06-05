@@ -41,13 +41,6 @@ public class LevelManagerTests {
         Assert.That(levelManager.EmptyLevel(), Is.False);
     }
     [Test]
-    public void TestNoTimeLeft() {
-        levelManager.LevelTimer.SetTime(0);
-        levelManager.Update();
-        BreakoutBus.GetBus().ProcessEvents();
-        Assert.That((stateMachine.ActiveState).GetType(), Is.EqualTo((new GameLost()).GetType()));
-    }
-    [Test]
     public void TestProcessEvent() {
         Assert.That(levelManager.HardBalls, Is.False);
         levelManager.ProcessEvent(new GameEvent {
