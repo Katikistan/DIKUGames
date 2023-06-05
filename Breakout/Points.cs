@@ -20,7 +20,7 @@ public class Points : IGameEventProcessor {
     /// <summary>
     /// Retrieves or creates and instance of points
     /// </summary>
-    public static Points getInstance() {
+    public static Points GetInstance() {
         if (Points.instance == null) {
             Points.instance = new Points();
         }

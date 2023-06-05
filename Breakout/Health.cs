@@ -8,7 +8,9 @@ namespace Breakout;
 public class Health : IGameEventProcessor {
     private int health;
     private Text display;
-    public int _Health { get => health; }
+    public int _Health {
+        get => health;
+    }
     public Health() {
         health = 3;
         display = new Text($"Lives: {health}",

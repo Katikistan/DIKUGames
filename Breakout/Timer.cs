@@ -11,7 +11,7 @@ public class Timer {
     private Vec2F position;
     private Vec3I white;
     public int TimeLeft {
-        get {return timeLeft;}
+        get => timeLeft;
     }
     public Timer(Vec2F pos, int init) {
         timeLeft = init;
@@ -32,12 +32,12 @@ public class Timer {
     /// <summary>
     /// Updates the time and decrements the amount of seconds if a second has passed
     /// </summary>
-    private void UpdateTime(){
+    private void UpdateTime() {
         previousTime = timeLeft;
-        timeElapsed = (int)StaticTimer.GetElapsedMilliseconds();
+        timeElapsed = (int) StaticTimer.GetElapsedMilliseconds();
         if (n + 1000 < timeElapsed) {
             timeLeft--;
-            n = (int)StaticTimer.GetElapsedMilliseconds();
+            n = (int) StaticTimer.GetElapsedMilliseconds();
         }
     }
     /// <summary>
@@ -46,11 +46,10 @@ public class Timer {
     private void UpdateText() {
         if (timeLeft > 0) {
             UpdateTime();
-            if (previousTime != timeLeft){
+            if (previousTime != timeLeft) {
                 timerText.SetText($"Time: {timeLeft}s");
             }
-        }
-        else {
+        } else {
             timerText.SetText("");
         }
     }
