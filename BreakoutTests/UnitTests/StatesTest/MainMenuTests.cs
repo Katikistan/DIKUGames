@@ -46,7 +46,5 @@ public class MainMenuTests {
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(statemachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
 
-        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
-        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
     }
 }

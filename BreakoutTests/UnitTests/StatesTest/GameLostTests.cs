@@ -50,8 +50,5 @@ public class GameLostTests {
 
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(statemachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));
-
-        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
-        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
     }
 }

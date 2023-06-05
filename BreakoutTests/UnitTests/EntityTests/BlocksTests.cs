@@ -15,10 +15,13 @@ public class BlockTests {
     public void Setup() {
         defaultBlock = new DefaultBlock(
         new StationaryShape(new Vec2F(0.5f, 0.5f), new Vec2F(0.5f, 0.5f)), "blue-block.png");
+
         hardened = new Hardened(
         new StationaryShape(new Vec2F(0.5f, 0.5f), new Vec2F(0.5f, 0.5f)), "blue-block.png");
+
         unbreakable = new Unbreakable(
         new StationaryShape(new Vec2F(0.5f, 0.5f), new Vec2F(0.5f, 0.5f)), "blue-block.png");
+
         powerupBlock = new PowerupBlock(
         new StationaryShape(new Vec2F(0.5f, 0.5f), new Vec2F(0.5f, 0.5f)), "blue-block.png");
     }
@@ -100,6 +103,8 @@ public class BlockTests {
             unbreakable.LoseHealth(1);
             Assert.That(!unbreakable.IsDeleted());
         }
+
+        // powerupBlock
         Assert.That(!powerupBlock.IsDeleted());
         powerupBlock.LoseHealth(1);
         Assert.That(powerupBlock.IsDeleted());

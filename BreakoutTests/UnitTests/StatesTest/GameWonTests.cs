@@ -62,8 +62,5 @@ public class GameWonTests {
 
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(statemachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));
-
-        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
-        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
     }
 }

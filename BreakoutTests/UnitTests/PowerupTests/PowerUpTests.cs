@@ -28,8 +28,10 @@ public class PowerUpTests {
     public void PowerUpTest() {
         Assert.That(powerups.CountEntities() == 1);
         Assert.That(powerup.Shape.Position.Y == 0.1f);
+
         powerup.Move();
         Assert.That(powerup.Shape.Position.Y == 0.09f);
+
         powerup.Shape.Position.Y = 0.01f;
         powerup.Move();
         powerup.Move();

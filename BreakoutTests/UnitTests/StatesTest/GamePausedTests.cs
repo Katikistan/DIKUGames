@@ -47,7 +47,12 @@ public class GamePausedTests {
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(statemachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));
 
+        gamePaused.ResetState();
+        gamePaused.InitializeGameState();
+        
         gamePaused.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
         gamePaused.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
+        BreakoutBus.GetBus().ProcessEvents();
+        Assert.That(statemachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));
     }
 }

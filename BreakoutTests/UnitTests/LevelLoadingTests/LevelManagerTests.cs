@@ -49,6 +49,7 @@ public class LevelManagerTests {
             StringArg1 = "START"
         });
         Assert.That(levelManager.HardBalls, Is.True);
+
         levelManager.ProcessEvent(new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "HARD BALL",
@@ -72,10 +73,15 @@ public class LevelManagerTests {
         Assert.That(levelManager.Balls.CountEntities(), Is.EqualTo(3));
 
         Assert.That(levelManager.Powerups.CountEntities(), Is.EqualTo(0));
+        levelManager.ProcessEvent(new GameEvent {
+            EventType = GameEventType.StatusEvent,
+            Message = "SPAWN POWERUP",
+            ObjectArg1 = (object)(new Vec2F(0.425f, 0.1f))
+        });
+        Assert.That(levelManager.Powerups.CountEntities(), Is.EqualTo(1));
     }
     [Test]
     public void TestPowerupMove() {
-        Assert.That(levelManager.Powerups.CountEntities(), Is.EqualTo(0));
         levelManager.ProcessEvent(new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "SPAWN POWERUP",
