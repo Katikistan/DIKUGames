@@ -21,23 +21,27 @@ public class LevelManager : IGameEventProcessor {
     private bool hardBalls = false;
     private Timer levelTimer;
     public Player Player {
-        get {
-            return player;
-        }
+        // Used for testing
+        get => player;
     }
     public EntityContainer<Block> Blocks {
+        // Used for testing
         get => blocks;
     }
     public EntityContainer<Ball> Balls {
+        // Used for testing
         get => balls;
     }
     public EntityContainer<Powerup> Powerups {
+        // Used for testing
         get => powerups;
     }
     public Timer LevelTimer {
+        // Used for testing
         get => levelTimer;
     }
     public bool HardBalls {
+        // Used for testing
         get => hardBalls;
     }
     public LevelManager() {
@@ -61,7 +65,7 @@ public class LevelManager : IGameEventProcessor {
         levelCreator.CreateLevel(level); // Creating new level
         blocks = levelCreator.Blocks; // Block container for new level becomes current block container
         balls.AddEntity(BallCreator.CreateBall(new Vec2F(0.45f, 0.2f), new Vec2F(0.001f, 0.015f)));
-        levelTimer.SetTime(levelCreator.Timer); // Timer for level is set
+        levelTimer.SetTime(levelCreator.Time); // Timer for level is set
     }
     /// <summary>
     /// Proceeses StatusEvents

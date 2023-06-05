@@ -1,16 +1,6 @@
 using System;
 namespace Breakout.States;
 /// <summary>
-///  Enum for game state types such as gameRunning.
-/// </summary>
-public enum GameStateType {
-    GameRunning,
-    GamePaused,
-    MainMenu,
-    GameLost,
-    GameWon
-}
-/// <summary>
 ///  A class used to transform strings into state tyopes.
 /// </summary>
 public class StateTransformer {

@@ -6,7 +6,7 @@ using Breakout.Blocks;
 namespace BreakoutTests;
 [TestFixture]
 public class PointsTests {
-    private Points points = Points.getInstance();
+    private Points points = Points.GetInstance();
     private GameEvent givePoints;
     private Block defaultBlock;
     private Block hardened;
@@ -17,7 +17,7 @@ public class PointsTests {
     [SetUp]
     public void Setup() {
         points.ResetPoints();
-        points = Points.getInstance();
+        points = Points.GetInstance();
         givePoints = (new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "GET POINTS",
@@ -65,7 +65,7 @@ public class PointsTests {
         points.ProcessEvent(givePoints);
         Assert.That(points.GetPoints(), Is.EqualTo(10));
         points.ResetPoints();
-        points = Points.getInstance();
+        points = Points.GetInstance();
         Assert.That(points.GetPoints(), Is.EqualTo(0));
     }
 }

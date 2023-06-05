@@ -13,34 +13,40 @@ public class PlayerCollisionTests {
     private Ball ballright;
     private Ball ballleftleft;
     private Ball ballrightright;
-
     private EntityContainer<Ball> balls;
     private Player player;
     [SetUp]
     public void Setup() {
-        ballleft = new Ball(new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
+        ballleft = new Ball(new DynamicShape(
+            new Vec2F(0.45f, 0.1f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ballleftleft = new Ball(new DynamicShape(new Vec2F(0.425f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
+
+        ballleftleft = new Ball(new DynamicShape(
+            new Vec2F(0.425f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ballmid = new Ball(new DynamicShape(new Vec2F(0.475f, 0.3f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
+
+        ballmid = new Ball(new DynamicShape(
+            new Vec2F(0.475f, 0.3f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ballright = new Ball(new DynamicShape(new Vec2F(0.525f, 0.4f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
+
+        ballright = new Ball(new DynamicShape(
+            new Vec2F(0.525f, 0.4f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ballrightright = new Ball(new DynamicShape(new Vec2F(0.56f, 0.5f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
+
+        ballrightright = new Ball(new DynamicShape(
+            new Vec2F(0.56f, 0.5f), new Vec2F(0.03f, 0.03f), new Vec2F(0.00f, -0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
+
         player = new Player(
             new DynamicShape(new Vec2F(0.425f, 0.06f), new Vec2F(0.15f, 0.04f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
+
         balls = new EntityContainer<Ball>(5);
         balls.AddEntity(ballleft);
         balls.AddEntity(ballleftleft);
         balls.AddEntity(ballmid);
         balls.AddEntity(ballright);
         balls.AddEntity(ballrightright);
-
-
-
-
     }
     [Test]
     public void TestCollide() {

@@ -14,22 +14,16 @@ public class GamePaused : IGameState {
     private static GamePaused instance = null;
     private Entity background;
     public Entity Background {
-        get {
-            return background;
-        }
+        get => background;
     }
     private Text[] menuButtons = new Text[2];
     private Text pauseText;
     public Text PauseText {
-        get {
-            return pauseText;
-        }
+        get => pauseText;
     }
     private int activeMenuButton;
     public int ActiveMenuButton {
-        get {
-            return activeMenuButton;
-        }
+        get => activeMenuButton;
     }
     private const int CONTINUE = 0;
     private const int MAIN_MENU = 1;

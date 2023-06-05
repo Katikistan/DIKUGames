@@ -39,7 +39,7 @@ public class GameWon : IGameState {
     ///  Inizializes the Game state, this functions as a constructor for the state
     /// </summary>
     public void InitializeGameState() {
-        points = Points.getInstance();
+        points = Points.GetInstance();
         pointsValue = points.GetPoints();
 
         background = new Entity(
@@ -75,7 +75,7 @@ public class GameWon : IGameState {
         activeMenuButton = MAIN_MENU;
         menuButtons[MAIN_MENU].SetColor(red);
         menuButtons[QUIT].SetColor(white);
-        points = Points.getInstance();
+        points = Points.GetInstance();
     }
     /// <summary>
     /// Resets the state

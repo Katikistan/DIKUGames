@@ -15,7 +15,7 @@ public class LevelCreatorTests {
         levelCreator.CreateLevel("level1.txt");
         Assert.That(levelCreator.Blocks.CountEntities(), Is.EqualTo(76));
         Assert.That(levelCreator.HasTimer, Is.EqualTo(true));
-        Assert.That(levelCreator.Timer, Is.EqualTo(300));
+        Assert.That(levelCreator.Time, Is.EqualTo(300));
         levelCreator.CreateLevel("level2.txt");
         Assert.That(levelCreator.Blocks.CountEntities(), Is.EqualTo(72));
         levelCreator.CreateLevel("nolevel.txt");
@@ -23,6 +23,6 @@ public class LevelCreatorTests {
         Assert.That(levelCreator.Blocks.CountEntities(), Is.EqualTo(72));
         levelCreator.CreateLevel("Wall.txt");
         Assert.That(levelCreator.HasTimer, Is.EqualTo(false));
-        Assert.That(levelCreator.Timer, Is.EqualTo(System.Int32.MaxValue));
+        Assert.That(levelCreator.Time, Is.EqualTo(System.Int32.MaxValue));
     }
 }

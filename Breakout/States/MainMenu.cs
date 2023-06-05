@@ -13,9 +13,7 @@ public class MainMenu : IGameState {
     private static MainMenu instance = null;
     private Entity backGround;
     public Entity BackGround {
-        get {
-            return backGround;
-        }
+        get => backGround;
     }
     private Text[] menuButtons = new Text[2];
     private int activeMenuButton;
@@ -55,7 +53,7 @@ public class MainMenu : IGameState {
         activeMenuButton = NEW_GAME;
         menuButtons[NEW_GAME].SetColor(red);
         menuButtons[QUIT].SetColor(white);
-        Points.getInstance().ResetPoints();
+        Points.GetInstance().ResetPoints();
     }
     /// <summary>
     /// Resets the state

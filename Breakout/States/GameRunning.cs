@@ -34,9 +34,6 @@ public class GameRunning : IGameState {
     public LevelManager LevelManager {
         get => levelManager;
     }
-    public static GameRunning Instance {
-        get => instance;
-    }
     /// <summary>
     ///  Gets or creates an instance of the GameRunning state
     /// </summary>
@@ -65,7 +62,7 @@ public class GameRunning : IGameState {
         Levellst.Add("level4.txt");
         Levellst.Add("wall.txt");
         LevelManager.NewLevel(Levellst[0]);
-        points = Points.getInstance();
+        points = Points.GetInstance();
         health = new Health();
     }
     /// <summary>

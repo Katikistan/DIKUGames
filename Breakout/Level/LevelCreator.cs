@@ -11,7 +11,7 @@ public class LevelCreator {
     private Dictionary<string, string> meta;
     private Dictionary<char, string> legend;
     private LevelReader levelReader;
-    private int timer;
+    private int time;
     private bool hasTimer;
     private EntityContainer<Block> blocks;
     public EntityContainer<Block> Blocks {
@@ -19,9 +19,9 @@ public class LevelCreator {
             return blocks;
         }
     }
-    public int Timer {
+    public int Time {
         get {
-            return timer;
+            return time;
         }
     }
     public bool HasTimer {
@@ -77,14 +77,14 @@ public class LevelCreator {
         }
     }
     private void InitializeTimer() {
-        string time = "";
-        meta.TryGetValue("Time", out time);
-        if (time != "" && time != null) {
+        string timeval = "";
+        meta.TryGetValue("Time", out timeval);
+        if (timeval != "" && timeval != null) {
             hasTimer = true;
-            timer = int.Parse(time);
+            time = int.Parse(timeval);
         } else {
             hasTimer = false;
-            timer = System.Int32.MaxValue;
+            time = System.Int32.MaxValue;
         }
     }
 }

@@ -39,7 +39,7 @@ public class GameLost : IGameState {
     ///  Inizializes the Game state, this functions as a constructor for the state
     /// </summary>
     public void InitializeGameState() {
-        points = Points.getInstance();
+        points = Points.GetInstance();
         pointsValue = points.GetPoints();
 
         background = new Entity(
