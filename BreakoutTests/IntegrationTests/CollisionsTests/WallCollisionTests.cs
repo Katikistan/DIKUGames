@@ -25,17 +25,10 @@ public class WallCollisionTests {
     }
     [Test]
     public void TestCollideLeftWall() {
-        // ball1 does not collide with the left wall, ball2 does
-        // ball1 = new Ball(new DynamicShape(new Vec2F(0.45f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f, 0.015f)),
-        // new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        // ball2 = new Ball(new DynamicShape(new Vec2F(0.0f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(-0.001f, 0.015f)),
-        // new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        // balls.AddEntity(ball1);
-        // balls.AddEntity(ball2);
-        // WallCollision.Collide(balls);
         ball2 = new Ball(new DynamicShape(new Vec2F(0.0f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(-0.0106f, 0.0106f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         balls.AddEntity(ball2);
+        // moving ball into left wall until collision
         while (ball2._Shape.Direction.X == -0.0106f) {
             balls.Iterate(ball =>{
                 ball.Move();
@@ -80,8 +73,10 @@ public class WallCollisionTests {
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         balls.AddEntity(ball1);
         balls.AddEntity(ball2);
+        
         Assert.That(balls.CountEntities(), Is.EqualTo(2));
         WallCollision.Collide(balls);
+        //The collided ball should be deleted from balls
         Assert.That(balls.CountEntities(), Is.EqualTo(1));
     }
 
@@ -102,9 +97,10 @@ public class WallCollisionTests {
         balls.AddEntity(ball2);
         Assert.That(balls.CountEntities(), Is.EqualTo(1));
         Assert.That(levelmanager.Balls.CountEntities(), Is.EqualTo(0));
-        BreakoutBus.GetBus().Flush();
         WallCollision.Collide(balls);
         BreakoutBus.GetBus().ProcessEvents();
+        //a new ball should be created after the last active ball goes out the bottom of screen
+        
         Assert.That(levelmanager.Balls.CountEntities(), Is.EqualTo(1));
     }
 }
