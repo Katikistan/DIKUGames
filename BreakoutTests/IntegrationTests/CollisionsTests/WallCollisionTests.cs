@@ -1,6 +1,7 @@
 using Breakout;
 using Breakout.Balls;
 using Breakout.Collisions;
+using Breakout.Levels;
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
@@ -12,6 +13,7 @@ public class WallCollisionTests {
     private EntityContainer<Ball> balls;
     private Ball ball1;
     private Ball ball2;
+    public LevelManager levelmanager;
     public WallCollisionTests() {
         CreateGL.CreateOpenGL();
     }
@@ -19,6 +21,7 @@ public class WallCollisionTests {
     public void Setup() {
         balls = new EntityContainer<Ball>(2);
         health = new Health();
+        levelmanager = new LevelManager();
     }
     [Test]
     public void TestCollideLeftWall() {
@@ -91,5 +94,17 @@ public class WallCollisionTests {
         WallCollision.Collide(balls);
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(health._Health, Is.EqualTo(2));
+    }
+    [Test]
+    public void TestNewBall() {
+        ball2 = new Ball(new DynamicShape(new Vec2F(0.45f, -0.1f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f, 0.015f)),
+        new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
+        balls.AddEntity(ball2);
+        Assert.That(balls.CountEntities(), Is.EqualTo(1));
+        Assert.That(levelmanager.Balls.CountEntities(), Is.EqualTo(0));
+        BreakoutBus.GetBus().Flush();
+        WallCollision.Collide(balls);
+        BreakoutBus.GetBus().ProcessEvents();
+        Assert.That(levelmanager.Balls.CountEntities(), Is.EqualTo(1));
     }
 }
