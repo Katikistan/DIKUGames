@@ -43,8 +43,10 @@ public class PointsTests {
         Assert.That(points.GetPoints(), Is.EqualTo(0));
         defaultBlock.LoseHealth(1);
         BreakoutBus.GetBus().ProcessEvents();
+        BreakoutBus.GetBus().ProcessEvents();
         Assert.That(points.GetPoints(), Is.EqualTo(10));
     }
+
     [Test]
     public void TestHardenedGetPoints() {
         Assert.That(points.GetPoints(), Is.EqualTo(0));
