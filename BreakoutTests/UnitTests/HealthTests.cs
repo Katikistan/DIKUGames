@@ -35,7 +35,7 @@ public class HealthTests {
         health.LoseHealth();
         Assert.That(health._Health == 0);
         BreakoutBus.GetBus().ProcessEvents();
-        //ved ikke hvad der skal gøres for at statemachinen reageree
+        
         Assert.That(statemachine.ActiveState == GameLost.GetInstance());
     }
     [Test]
