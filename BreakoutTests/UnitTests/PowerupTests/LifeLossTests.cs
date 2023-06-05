@@ -15,7 +15,7 @@ public class LifeLossTests {
     public Player player;
 
     public LifeLossTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
 

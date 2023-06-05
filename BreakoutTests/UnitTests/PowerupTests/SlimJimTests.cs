@@ -15,7 +15,7 @@ public class SlimJimTests {
     public EntityContainer<Powerup> powerups;
     public Player player;
     public SlimJimTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
 

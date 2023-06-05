@@ -13,7 +13,7 @@ public class WallCollisionTests {
     private Ball ball1;
     private Ball ball2;
     public WallCollisionTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

@@ -15,7 +15,7 @@ public class PowerupCreatorTests {
     public Player player;
 
     public PowerupCreatorTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
         [Test(), Repeat(30)]
         public void TestCreatePowerUp() {

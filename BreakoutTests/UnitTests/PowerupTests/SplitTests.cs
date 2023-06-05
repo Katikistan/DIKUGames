@@ -19,7 +19,7 @@ public class SplitTests {
     public Player player;
     public LevelManager levelmanager;
     public SplitTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
 

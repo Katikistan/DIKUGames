@@ -9,7 +9,7 @@ public class GamePausedTests {
     StateMachine statemachine;
     private GamePaused gamePaused;
     public GamePausedTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

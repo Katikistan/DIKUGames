@@ -9,7 +9,7 @@ public class MainMenuTests {
 
     private MainMenu mainMenu;
     public MainMenuTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

@@ -23,7 +23,7 @@ public class HardBallTests{
     private EntityContainer<Block> blocks;
     private DynamicShape blockShape;
     public HardBallTests(){
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup(){

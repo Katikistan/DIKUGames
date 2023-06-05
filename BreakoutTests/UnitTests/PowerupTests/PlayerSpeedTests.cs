@@ -15,7 +15,7 @@ public class PlayerSpeedTests {
     public Player player;
 
     public PlayerSpeedTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {
@@ -29,7 +29,7 @@ public class PlayerSpeedTests {
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "player.png")));
         powerups = new EntityContainer<Powerup>(5);
         powerups.AddEntity(playerSpeed);
-        
+
     }
     [Test]
     public void PlayerSpeedTest() {

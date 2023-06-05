@@ -6,7 +6,7 @@ namespace BreakoutTests.EntityTests;
 public class BallTests {
     private Ball ball;
     public BallTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

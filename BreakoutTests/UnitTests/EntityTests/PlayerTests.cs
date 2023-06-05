@@ -17,7 +17,7 @@ public class PlayerTests {
     private float startPosY;
     private float movementSpeed;
     public PlayerTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

@@ -13,7 +13,7 @@ public class PowerUpCollisionTests {
     private Powerup powerup2;
     private EntityContainer<Powerup> powerups;
     public PowerUpCollisionTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup(){

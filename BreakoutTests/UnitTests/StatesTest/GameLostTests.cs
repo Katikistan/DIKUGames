@@ -12,7 +12,7 @@ public class GameLostTests {
     Health health;
     StateMachine statemachine;
     public GameLostTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

@@ -12,7 +12,7 @@ public class StateMachineTests {
 
     private StateMachine stateMachine;
     public StateMachineTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [Test]
     public void TestStateMachine() {

@@ -4,7 +4,7 @@ namespace BreakoutTests.LevelLoadingTests;
 public class LevelCreatorTests {
     private LevelCreator levelCreator = null!;
     public LevelCreatorTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

@@ -12,7 +12,7 @@ public class PointsTests {
     private Block hardened;
     private Block powerupBlock;
     public PointsTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

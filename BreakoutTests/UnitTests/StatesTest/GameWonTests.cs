@@ -14,7 +14,7 @@ public class GameWonTests {
     Health health;
     StateMachine statemachine;
     public GameWonTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
 
     }
     [SetUp]

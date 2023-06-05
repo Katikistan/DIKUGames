@@ -8,7 +8,7 @@ public class BlockCreatorTests {
     private string image;
     private Block block;
     public BlockCreatorTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

@@ -5,7 +5,7 @@ namespace BreakoutTests;
 public class TimerTests {
     private Breakout.Timer timer;
     public TimerTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

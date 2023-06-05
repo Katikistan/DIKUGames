@@ -9,7 +9,7 @@ public class BlockTests {
     private Block unbreakable;
     private Block powerupBlock;
     public BlockTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

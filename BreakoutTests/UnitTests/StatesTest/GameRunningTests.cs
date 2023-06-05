@@ -12,7 +12,7 @@ public class GameRunningTests {
     private GameEvent pressEscape;
     private StateMachine stateMachine;
     public GameRunningTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

@@ -10,7 +10,7 @@ public class LevelManagerTests {
     LevelManager levelManager;
     StateMachine stateMachine;
     public LevelManagerTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
     public void Setup() {

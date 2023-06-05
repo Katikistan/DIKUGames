@@ -15,7 +15,7 @@ public class LifePlusTests {
     public Player player;
 
     public LifePlusTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
 

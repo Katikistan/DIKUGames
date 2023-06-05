@@ -15,7 +15,7 @@ public class WideTests {
     public Player player;
 
     public WideTests() {
-        DIKUArcade.GUI.Window.CreateOpenGLContext();
+        CreateGL.CreateOpenGL();
     }
     [SetUp]
 
