@@ -57,6 +57,12 @@ public class HardBallTests{
                     StringArg1 = "START"
                 });
         Assert.That(levelManager.HardBalls);
+        levelManager.ProcessEvent(new GameEvent {
+                    EventType = GameEventType.StatusEvent,
+                    Message = "HARD BALL",
+                    StringArg1 = "END"
+                });
+        Assert.That(!levelManager.HardBalls);
     }
     [Test]
     public void TestCollision() {
