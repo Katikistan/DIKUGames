@@ -21,7 +21,7 @@ public class LevelCreatorTests {
         levelCreator.CreateLevel("nolevel.txt");
         // level isnt created beacuse nolevel.txt dosent exist.
         Assert.That(levelCreator.Blocks.CountEntities(), Is.EqualTo(72));
-        levelCreator.CreateLevel("Wall.txt");
+        levelCreator.CreateLevel("wall.txt");
         Assert.That(levelCreator.HasTimer, Is.EqualTo(false));
         Assert.That(levelCreator.Time, Is.EqualTo(System.Int32.MaxValue));
     }
