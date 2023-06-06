@@ -52,7 +52,7 @@ public class SlimJimTests {
     public void TestSlimJimEffect() {
         Assert.That(player.Shape.Extent.X, Is.EqualTo(0.150f));
 
-        while (!PowerUpCollision.Collide(powerups, player)){
+        while (!PowerUpCollision.Collide(powerups, player)) {
             powerups.Iterate(powerup => {
                 powerup.Move();
             });

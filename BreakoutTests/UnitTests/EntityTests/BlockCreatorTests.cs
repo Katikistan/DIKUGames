@@ -28,7 +28,7 @@ public class BlockCreatorTests {
 
         block = BlockCreator.CreateBlock(shape, image, "Hardened");
         Assert.That(block is Hardened);
-        
+
         block = BlockCreator.CreateBlock(shape, image, "Unbreakable");
         Assert.That(block is Unbreakable);
     }

@@ -25,12 +25,15 @@ public class WallCollisionTests {
     }
     [Test]
     public void TestCollideLeftWall() {
-        ball2 = new Ball(new DynamicShape(new Vec2F(0.0f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(-0.0106f, 0.0106f)),
+        ball2 = new Ball(new DynamicShape(
+            new Vec2F(0.0f, 0.2f),
+            new Vec2F(0.03f, 0.03f),
+            new Vec2F(-0.0106f, 0.0106f)),
             new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         balls.AddEntity(ball2);
         // moving ball into left wall until collision
         while (ball2._Shape.Direction.X == -0.0106f) {
-            balls.Iterate(ball =>{
+            balls.Iterate(ball => {
                 ball.Move();
             });
             WallCollision.Collide(balls);
@@ -41,10 +44,18 @@ public class WallCollisionTests {
     [Test]
     public void TestCollideRightWall() {
         // ball1 does not collide with the right wall, ball2 does
-        ball1 = new Ball(new DynamicShape(new Vec2F(0.45f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f, 0.015f)),
+        ball1 = new Ball(new DynamicShape(
+            new Vec2F(0.45f, 0.2f),
+            new Vec2F(0.03f, 0.03f),
+            new Vec2F(0.001f, 0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ball2 = new Ball(new DynamicShape(new Vec2F(0.99f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f, 0.015f)),
+
+        ball2 = new Ball(new DynamicShape(
+            new Vec2F(0.99f, 0.2f),
+            new Vec2F(0.03f, 0.03f),
+            new Vec2F(0.001f, 0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
+
         balls.AddEntity(ball1);
         balls.AddEntity(ball2);
         WallCollision.Collide(balls);
@@ -53,9 +64,16 @@ public class WallCollisionTests {
     [Test]
     public void TestCollideTopWall() {
         // ball1 does not collide with the top wall, ball2 does
-        ball1 = new Ball(new DynamicShape(new Vec2F(0.45f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f, 0.015f)),
+        ball1 = new Ball(new DynamicShape(
+            new Vec2F(0.45f, 0.2f),
+            new Vec2F(0.03f, 0.03f),
+            new Vec2F(0.001f, 0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ball2 = new Ball(new DynamicShape(new Vec2F(0.45f, 1.0f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f, 0.015f)),
+
+        ball2 = new Ball(new DynamicShape(
+            new Vec2F(0.45f, 1.0f),
+            new Vec2F(0.03f, 0.03f),
+            new Vec2F(0.001f, 0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
 
         balls.AddEntity(ball1);
@@ -67,13 +85,19 @@ public class WallCollisionTests {
     [Test]
     public void TestCollideBottom() {
         // ball1 does not collide with the bottom, ball2 does
-        ball1 = new Ball(new DynamicShape(new Vec2F(0.45f, 0.2f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f, 0.015f)),
+        ball1 = new Ball(new DynamicShape(
+            new Vec2F(0.45f, 0.2f),
+            new Vec2F(0.03f, 0.03f),
+            new Vec2F(0.001f, 0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
-        ball2 = new Ball(new DynamicShape(new Vec2F(0.45f, -0.1f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f, 0.015f)),
+        ball2 = new Ball(new DynamicShape(
+            new Vec2F(0.45f, -0.1f),
+            new Vec2F(0.03f, 0.03f),
+            new Vec2F(0.001f, 0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         balls.AddEntity(ball1);
         balls.AddEntity(ball2);
-        
+
         Assert.That(balls.CountEntities(), Is.EqualTo(2));
         WallCollision.Collide(balls);
         //The collided ball should be deleted from balls
@@ -92,7 +116,10 @@ public class WallCollisionTests {
     }
     [Test]
     public void TestNewBall() {
-        ball2 = new Ball(new DynamicShape(new Vec2F(0.45f, -0.1f), new Vec2F(0.03f, 0.03f), new Vec2F(0.001f, 0.015f)),
+        ball2 = new Ball(new DynamicShape(
+            new Vec2F(0.45f, -0.1f),
+            new Vec2F(0.03f, 0.03f),
+            new Vec2F(0.001f, 0.015f)),
         new Image(Path.Combine("..", "Breakout", "Assets", "Images", "ball2.png")));
         balls.AddEntity(ball2);
         Assert.That(balls.CountEntities(), Is.EqualTo(1));
@@ -100,7 +127,7 @@ public class WallCollisionTests {
         WallCollision.Collide(balls);
         BreakoutBus.GetBus().ProcessEvents();
         //a new ball should be created after the last active ball goes out the bottom of screen
-        
+
         Assert.That(levelmanager.Balls.CountEntities(), Is.EqualTo(1));
     }
 }

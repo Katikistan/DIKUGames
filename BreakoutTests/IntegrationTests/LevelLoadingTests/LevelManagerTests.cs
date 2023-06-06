@@ -26,7 +26,7 @@ public class LevelManagerTests {
         Assert.That((stateMachine.ActiveState).GetType(), Is.EqualTo((new GameLost()).GetType()));
     }
     [Test]
-    public void TestRemovePowerUp(){
+    public void TestRemovePowerUp() {
         Assert.That(levelManager.Powerups.CountEntities(), Is.EqualTo(0));
         // Adding an entity to the powerups entity container
         levelManager.Powerups.AddEntity(PowerUpCreator.CreatePowerUp(new Vec2F(0.425f, 0.1f)));

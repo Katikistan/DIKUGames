@@ -45,14 +45,14 @@ public class WideTests {
             EventType = GameEventType.PlayerEvent,
             Message = "WIDE",
             StringArg1 = "END"
-            });
+        });
         Assert.That(player.Shape.Extent.X == 0.15f);
     }
     [Test]
     public void TestEffect() {
         Assert.That(player.MovementSpeed, Is.Not.EqualTo(0.02f));
         //dropping wide powerup onto player
-        while (!PowerUpCollision.Collide(powerups, player)){
+        while (!PowerUpCollision.Collide(powerups, player)) {
             powerups.Iterate(powerup => {
                 powerup.Move();
             });

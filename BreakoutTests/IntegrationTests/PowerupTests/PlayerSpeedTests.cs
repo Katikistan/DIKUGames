@@ -50,7 +50,7 @@ public class PlayerSpeedTests {
     [Test]
     public void TestEffect() {
         Assert.That(player.MovementSpeed, Is.Not.EqualTo(0.02f));
-        while (!PowerUpCollision.Collide(powerups, player)){
+        while (!PowerUpCollision.Collide(powerups, player)) {
             powerups.Iterate(powerup => {
                 powerup.Move();
             });

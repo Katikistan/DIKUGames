@@ -76,7 +76,7 @@ public class LevelManagerTests {
         levelManager.ProcessEvent(new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "SPAWN POWERUP",
-            ObjectArg1 = (object)(new Vec2F(0.425f, 0.1f))
+            ObjectArg1 = (object) (new Vec2F(0.425f, 0.1f))
         });
         Assert.That(levelManager.Powerups.CountEntities(), Is.EqualTo(1));
     }
@@ -85,7 +85,7 @@ public class LevelManagerTests {
         levelManager.ProcessEvent(new GameEvent {
             EventType = GameEventType.StatusEvent,
             Message = "SPAWN POWERUP",
-            ObjectArg1 = (object)(new Vec2F(0.425f, 0.1f))
+            ObjectArg1 = (object) (new Vec2F(0.425f, 0.1f))
         });
         Assert.That(levelManager.Powerups.CountEntities(), Is.EqualTo(1));
         foreach (Powerup powerup in levelManager.Powerups) {

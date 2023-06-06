@@ -11,7 +11,7 @@ using DIKUArcade.Math;
 using DIKUArcade.Graphics;
 namespace BreakoutTests.Integration.PowerupTests;
 [TestFixture]
-public class HardBallTests{
+public class HardBallTests {
     public Player player;
     public Powerup hardballpower;
     private LevelManager levelManager;
@@ -22,11 +22,11 @@ public class HardBallTests{
 
     private EntityContainer<Block> blocks;
     private DynamicShape blockShape;
-    public HardBallTests(){
+    public HardBallTests() {
         CreateGL.CreateOpenGL();
     }
     [SetUp]
-    public void Setup(){
+    public void Setup() {
         hardballpower = new HardBall(new DynamicShape(
                 new Vec2F(0.425f, 0.1f),
                 new Vec2F(0.03f, 0.03f),
@@ -52,16 +52,16 @@ public class HardBallTests{
     public void TestHardBallEvent() {
         Assert.That(!levelManager.HardBalls);
         levelManager.ProcessEvent(new GameEvent {
-                    EventType = GameEventType.StatusEvent,
-                    Message = "HARD BALL",
-                    StringArg1 = "START"
-                });
+            EventType = GameEventType.StatusEvent,
+            Message = "HARD BALL",
+            StringArg1 = "START"
+        });
         Assert.That(levelManager.HardBalls);
         levelManager.ProcessEvent(new GameEvent {
-                    EventType = GameEventType.StatusEvent,
-                    Message = "HARD BALL",
-                    StringArg1 = "END"
-                });
+            EventType = GameEventType.StatusEvent,
+            Message = "HARD BALL",
+            StringArg1 = "END"
+        });
         Assert.That(!levelManager.HardBalls);
     }
     [Test]
@@ -75,7 +75,7 @@ public class HardBallTests{
     [Test]
     public void TestHardBallEffect() {
         //hardball powerup drops onto player
-        while (!PowerUpCollision.Collide(powerups, player)){
+        while (!PowerUpCollision.Collide(powerups, player)) {
             powerups.Iterate(powerup => {
                 powerup.Move();
             });

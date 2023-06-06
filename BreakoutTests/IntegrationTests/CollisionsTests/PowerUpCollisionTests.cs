@@ -16,7 +16,7 @@ public class PowerUpCollisionTests {
         CreateGL.CreateOpenGL();
     }
     [SetUp]
-    public void Setup(){
+    public void Setup() {
         powerup1 = PowerUpCreator.CreatePowerUp(new Vec2F(0.5f, 0.1f));
         powerup2 = PowerUpCreator.CreatePowerUp(new Vec2F(0.5f, 0.5f));
         powerups = new EntityContainer<Powerup>(2);

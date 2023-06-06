@@ -27,26 +27,26 @@ public class GameLostTests {
     public void TestSwitchGameLost() {
         Assert.That(statemachine.ActiveState != GameLost.GetInstance());
         statemachine.ProcessEvent(new GameEvent {
-                        EventType = GameEventType.GameStateEvent,
-                        Message = "CHANGE_STATE",
-                        StringArg1 = "GAME_LOST"
-                    });
+            EventType = GameEventType.GameStateEvent,
+            Message = "CHANGE_STATE",
+            StringArg1 = "GAME_LOST"
+        });
         Assert.That(statemachine.ActiveState == GameLost.GetInstance());
     }
     [Test]
     public void TestGameLost() {
         gamelost.InitializeGameState();
-        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Up);
         Assert.That(gamelost.ActiveMenuButton == 0);
-        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Down);
         Assert.That(gamelost.ActiveMenuButton == 1);
     }
     [Test]
     public void TestGameLostEnterKey() {
         gamelost.InitializeGameState();
 
-        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
-        gamelost.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Up);
+        gamelost.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Enter);
 
         BreakoutBus.GetBus().ProcessEvents();
 

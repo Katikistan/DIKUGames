@@ -40,8 +40,8 @@ public class MainMenuTests {
     public void TestmainMenuEnterKey() {
         mainMenu.InitializeGameState();
 
-        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
-        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
+        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Up);
+        mainMenu.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Enter);
 
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(statemachine.ActiveState, Is.EqualTo(GameRunning.GetInstance()));

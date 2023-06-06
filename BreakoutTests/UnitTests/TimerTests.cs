@@ -20,13 +20,13 @@ public class TimerTests {
         Assert.That(timer.TimeLeft, Is.EqualTo(99));
     }
     [Test]
-    public void SetTimeTest(){
+    public void SetTimeTest() {
         Assert.That(100 == timer.TimeLeft);
         timer.SetTime(10);
         Assert.That(timer.TimeLeft, Is.EqualTo(10));
     }
     [Test]
-    public void NoTimeLeftTest(){
+    public void NoTimeLeftTest() {
         timer.SetTime(1);
         Assert.That(timer.TimeLeft, Is.EqualTo(1));
         while (timer.TimeLeft > 0) {

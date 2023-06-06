@@ -26,15 +26,15 @@ public class GameWonTests {
         statemachine = new StateMachine();
         health = new Health();
         changewon = (new GameEvent {
-                        EventType = GameEventType.GameStateEvent,
-                        Message = "CHANGE_STATE",
-                        StringArg1 = "GAME_WON"
-                    });
+            EventType = GameEventType.GameStateEvent,
+            Message = "CHANGE_STATE",
+            StringArg1 = "GAME_WON"
+        });
         changemain = (new GameEvent {
-                        EventType = GameEventType.GameStateEvent,
-                        Message = "CHANGE_STATE",
-                        StringArg1 = "MAIN_MENU"
-                    });
+            EventType = GameEventType.GameStateEvent,
+            Message = "CHANGE_STATE",
+            StringArg1 = "MAIN_MENU"
+        });
     }
     [Test]
     public void TestSwitchGameWon() {
@@ -48,17 +48,17 @@ public class GameWonTests {
     [Test]
     public void TestGameWon() {
         gamewon.InitializeGameState();
-        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
+        gamewon.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Up);
         Assert.That(gamewon.ActiveMenuButton == 0);
-        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Down);
+        gamewon.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Down);
         Assert.That(gamewon.ActiveMenuButton == 1);
     }
     [Test]
     public void TestGameWonEnterKey() {
         gamewon.InitializeGameState();
 
-        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Up);
-        gamewon.HandleKeyEvent(KeyboardAction.KeyPress,KeyboardKey.Enter);
+        gamewon.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Up);
+        gamewon.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Enter);
 
         BreakoutBus.GetBus().ProcessEvents();
         Assert.That(statemachine.ActiveState, Is.EqualTo(MainMenu.GetInstance()));

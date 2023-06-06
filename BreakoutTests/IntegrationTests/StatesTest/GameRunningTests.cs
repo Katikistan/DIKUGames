@@ -69,7 +69,7 @@ public class GameRunningTests {
         Assert.That((stateMachine.ActiveState).GetType(), Is.EqualTo((new GameWon()).GetType()));
     }
     [Test]
-    public void TestMoveLeftKey(){
+    public void TestMoveLeftKey() {
         float movementSpeed = 0.01f;
         float startPosX = 0.425f;
         gameRunning.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Left);
@@ -86,7 +86,7 @@ public class GameRunningTests {
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
     }
     [Test]
-    public void TestMoveRightKey(){
+    public void TestMoveRightKey() {
         float movementSpeed = 0.01f;
         float startPosX = 0.425f;
         gameRunning.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.Right);
@@ -103,7 +103,7 @@ public class GameRunningTests {
         Assert.That(playerPos.X, Is.EqualTo(startPosX + movementSpeed));
     }
     [Test]
-    public void TestMoveAKey(){
+    public void TestMoveAKey() {
         float movementSpeed = 0.01f;
         float startPosX = 0.425f;
         gameRunning.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.A);
@@ -120,7 +120,7 @@ public class GameRunningTests {
         Assert.That(playerPos.X, Is.EqualTo(startPosX - movementSpeed));
     }
     [Test]
-    public void TestMoveDKey(){
+    public void TestMoveDKey() {
         float movementSpeed = 0.01f;
         float startPosX = 0.425f;
         gameRunning.HandleKeyEvent(KeyboardAction.KeyPress, KeyboardKey.D);
