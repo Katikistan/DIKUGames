@@ -13,6 +13,7 @@ public class BlockTests {
     }
     [SetUp]
     public void Setup() {
+        // Arrange
         defaultBlock = new DefaultBlock(
         new StationaryShape(new Vec2F(0.5f, 0.5f), new Vec2F(0.5f, 0.5f)), "blue-block.png");
 
@@ -55,8 +56,10 @@ public class BlockTests {
     public void TestDecHealth() {
         // defaultBlock
         Assert.That(defaultBlock.Health, Is.EqualTo(1));
+        // Act
         defaultBlock.LoseHealth(1);
         Assert.That(defaultBlock.Health, Is.EqualTo(0));
+        // Act
         defaultBlock.LoseHealth(1);
         Assert.That(defaultBlock.Health, Is.EqualTo(-1));
 
