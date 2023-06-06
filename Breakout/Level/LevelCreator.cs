@@ -2,10 +2,6 @@ using Breakout.Blocks;
 using DIKUArcade.Entities;
 using DIKUArcade.Math;
 using System.Collections.Generic;
-using Breakout.Powerups;
-using DIKUArcade.Graphics;
-using System.IO;
-
 namespace Breakout.Levels;
 /// <summary>
 /// Used to create a level from a string levelfile. Uses a level reader to read level file.
@@ -15,7 +11,7 @@ public class LevelCreator {
     private Dictionary<string, string> meta;
     private Dictionary<char, string> legend;
     private LevelReader levelReader;
-    private int timer;
+    private int time;
     private bool hasTimer;
     private EntityContainer<Block> blocks;
     public EntityContainer<Block> Blocks {
@@ -23,29 +19,14 @@ public class LevelCreator {
             return blocks;
         }
     }
-    public EntityContainer<Powerup> powerups;
-
-    public LevelReader LevelReader {
+    public int Time {
         get {
-            return levelReader;
-        }
-        set {
-            levelReader = value;
-        }
-    }
-    public int Timer {
-        get {
-            return timer;
+            return time;
         }
     }
     public bool HasTimer {
         get {
             return hasTimer;
-        }
-    }
-    public Dictionary<string, string> Meta {
-        get {
-            return meta;
         }
     }
     public LevelCreator() {
@@ -95,16 +76,15 @@ public class LevelCreator {
             }
         }
     }
-    private void InitializeTimer(){
-        string time = "";
-        meta.TryGetValue("Time", out time);
-        if (time != "" && time != null) {
+    private void InitializeTimer() {
+        string timeval = "";
+        meta.TryGetValue("Time", out timeval);
+        if (timeval != "" && timeval != null) {
             hasTimer = true;
-            timer = int.Parse(time);
-        }
-        else {
+            time = int.Parse(timeval);
+        } else {
             hasTimer = false;
-            timer = System.Int32.MaxValue;
+            time = System.Int32.MaxValue;
         }
     }
 }

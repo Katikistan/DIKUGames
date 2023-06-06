@@ -1,16 +1,14 @@
 using DIKUArcade.Entities;
-using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using System.IO;
-
 namespace Breakout.Blocks;
+/// <summary>
+/// Block has 2 health points and grants player 20 points when destroyed.
+/// </summary>
 public class Hardened : Block {
     private string DamagedImg;
     private string Damaged;
-    /// <summary>
-    /// Hardened block has 2 health points and grants player 20 points when destroyed.
-    /// </summary>
     public Hardened(Shape shape, string imageFile) : base(shape, imageFile) {
         position = new Vec2F(shape.Position.X, shape.Position.Y);
         DamagedImg = imageFile.Insert(imageFile.Length - 4, "-damaged");
@@ -19,7 +17,7 @@ public class Hardened : Block {
         value = 20;
     }
     /// <summary>
-    /// Decreases Block health, if health is less than 1 the block is marked for deletion.
+    /// Decreases Block health, if health is 0 the block is marked for deletion
     /// </summary>
     public override void LoseHealth(int amount) {
         health -= amount;

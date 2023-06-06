@@ -3,9 +3,11 @@ using DIKUArcade;
 using DIKUArcade.Events;
 using DIKUArcade.GUI;
 using DIKUArcade.Input;
-using System.Collections.Generic;
 
 namespace Breakout;
+/// <summary>
+///  Class responsible for handling a statemachine and keyinputs
+/// </summary>
 public class Game : DIKUGame, IGameEventProcessor {
     private StateMachine stateMachine;
     public Game(WindowArgs windowArgs) : base(windowArgs) {
@@ -16,6 +18,9 @@ public class Game : DIKUGame, IGameEventProcessor {
         stateMachine = new StateMachine();
         BreakoutBus.GetBus().Subscribe(GameEventType.GameStateEvent, stateMachine);
     }
+    /// <summary>
+    ///  processes windowevents, can close window
+    /// </summary>
     public void ProcessEvent(GameEvent gameEvent) {
         if (gameEvent.EventType == GameEventType.WindowEvent) {
             switch (gameEvent.StringArg1) {
@@ -28,9 +33,15 @@ public class Game : DIKUGame, IGameEventProcessor {
     private void KeyHandler(KeyboardAction action, KeyboardKey key) {
         stateMachine.ActiveState.HandleKeyEvent(action, key);
     }
+    /// <summary>
+    ///  Renders the active state
+    /// </summary>
     public override void Render() {
         stateMachine.ActiveState.RenderState();
     }
+    /// <summary>
+    ///  Updates the active state
+    /// </summary>
     public override void Update() {
         BreakoutBus.GetBus().ProcessEventsSequentially();
         stateMachine.ActiveState.UpdateState();

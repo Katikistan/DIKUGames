@@ -1,29 +1,42 @@
+using Breakout.Levels;
 using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Input;
 using DIKUArcade.Math;
 using DIKUArcade.State;
-using Breakout.Timers;
-using Breakout.Levels;
 using System.IO;
 using System.Collections.Generic;
 namespace Breakout.States;
+/// <summary>
+///  A state for when the game is running.
+/// </summary>
 public class GameRunning : IGameState {
     private static GameRunning instance = null;
     private LevelManager levelManager = null!;
     private Points points = null!;
     private Health health;
     private Entity background = null!;
-    private List<string> levels;
+    private List<string> levelslst;
     // Public getters for testing
-    public Health Health { get => health; }
-    public Entity Background { get => background; }
-    public List<string> Levels { get => levels; }
-    public Points Points { get => points; }
-    public LevelManager LevelManager { get => levelManager;  }
-    public static GameRunning Instance { get => instance;}
-
+    public Health Health {
+        get => health;
+    }
+    public Entity Background {
+        get => background;
+    }
+    public List<string> Levellst {
+        get => levelslst;
+    }
+    public Points Points {
+        get => points;
+    }
+    public LevelManager LevelManager {
+        get => levelManager;
+    }
+    /// <summary>
+    ///  Gets or creates an instance of the GameRunning state
+    /// </summary>
     public static GameRunning GetInstance() {
         if (GameRunning.instance == null) {
             GameRunning.instance = new GameRunning();
@@ -31,6 +44,9 @@ public class GameRunning : IGameState {
         }
         return GameRunning.instance;
     }
+    /// <summary>
+    ///  Inizializes the Game state, this functions as a constructor for the state
+    /// </summary>
     public void InitializeGameState() {
         background = new Entity(
             new StationaryShape(
@@ -39,19 +55,25 @@ public class GameRunning : IGameState {
                 new Image(Path.Combine(
                 "..", "Breakout", "Assets", "Images", "SpaceBackground.png")));
         levelManager = new LevelManager();
-        levels = new List<string>();
-        Levels.Add("level1.txt");
-        Levels.Add("level2.txt");
-        Levels.Add("level3.txt");
-        Levels.Add("level4.txt");
-        Levels.Add("wall.txt");
-        LevelManager.NewLevel(Levels[0]);
-        points = new Points();
+        levelslst = new List<string>();
+        Levellst.Add("level1.txt");
+        Levellst.Add("level2.txt");
+        Levellst.Add("level3.txt");
+        Levellst.Add("level4.txt");
+        Levellst.Add("wall.txt");
+        LevelManager.NewLevel(Levellst[0]);
+        points = Points.GetInstance();
         health = new Health();
     }
+    /// <summary>
+    /// Resets the state
+    /// </summary>
     public void ResetState() {
         GameRunning.instance = null;
     }
+    /// <summary>
+    ///  Renders objects in the state
+    /// </summary>
     public void RenderState() {
         background.RenderEntity();
         levelManager.Render();
@@ -59,7 +81,7 @@ public class GameRunning : IGameState {
         health.Render();
     }
     private void LoadLevels() {
-        if (levels.Count == 0) { // No levels left to load.
+        if (levelslst.Count == 0) { // No levels left to load.
             BreakoutBus.GetBus().RegisterEvent(new GameEvent {
                 EventType = GameEventType.GameStateEvent,
                 Message = "CHANGE_STATE",
@@ -68,16 +90,21 @@ public class GameRunning : IGameState {
             return;
         } else if (LevelManager.EmptyLevel()) {
             // If level contains no blocks except unbreakable blocks
-            levels.RemoveAt(0); // Removes current level form level list
-            if (Levels.Count > 0) // Shouldnt try to access index 0 in an empty list
-                levelManager.NewLevel(Levels[0]);
+            levelslst.RemoveAt(0); // Removes current level from level list
+            if (Levellst.Count > 0) // Shouldnt try to access index 0 in an empty list
+                levelManager.NewLevel(Levellst[0]);
         }
     }
+    /// <summary>
+    ///  Updates the state and loads new levelslst when the level is empty
+    /// </summary>
     public void UpdateState() {
         levelManager.Update();
         LoadLevels();
     }
-
+    /// <summary>
+    ///  Handles key input events such as key presses and key realising
+    /// </summary>
     public void HandleKeyEvent(KeyboardAction action, KeyboardKey key) {
         switch (action) {
             case KeyboardAction.KeyPress:

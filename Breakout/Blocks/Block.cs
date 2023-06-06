@@ -2,12 +2,12 @@ using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
-using Breakout.Powerups;
 using System.IO;
-
 namespace Breakout.Blocks;
+/// <summary>
+/// An abstract block type
+/// </summary>
 public abstract class Block : Entity {
-
     protected int value = 10;
     /// <summary>
     /// Amount of points given to player when block is destroyed.
@@ -24,7 +24,6 @@ public abstract class Block : Entity {
         }
     }
     protected Vec2F position;
-
     public Block(Shape shape, string imageFile) :
     base(shape, new Image(
         Path.Combine("..", "Breakout", "Assets", "Images", imageFile))) {

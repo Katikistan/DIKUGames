@@ -1,12 +1,15 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Events;
 using DIKUArcade.Graphics;
-using System.IO;
 using DIKUArcade.Timers;
+using System.IO;
 namespace Breakout.Powerups;
-
+/// <summary>
+/// Balls destroy blocks regardless of health and don't change direction when hitting blocks.
+/// The powerup is timed and therefore temporary
+/// </summary>
 public class HardBall : Powerup {
-    public HardBall(DynamicShape shape) : base(shape, new Image (
+    public HardBall(DynamicShape shape) : base(shape, new Image(
         Path.Combine("..", "Breakout", "Assets", "Images", "ExtraBallPowerUp.png"))) {
     }
     public override void Effect() {
@@ -19,6 +22,6 @@ public class HardBall : Powerup {
             EventType = GameEventType.StatusEvent,
             Message = "HARD BALL",
             StringArg1 = "END"
-            }, TimePeriod.NewSeconds(10.0));
+        }, TimePeriod.NewSeconds(10.0));
     }
 }

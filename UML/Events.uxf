@@ -1,0 +1,67 @@
+<diagram program="umletino" version="15.1"><zoom_level>17</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>850</x><y>629</y><w>238</w><h>51</h></coordinates><panel_attributes>LevelManager
+bg=magenta
+transparency=70
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>782</x><y>357</y><w>204</w><h>51</h></coordinates><panel_attributes>Block
+bg=yellow
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>374</y><w>170</w><h>51</h></coordinates><panel_attributes>GameRunning
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>289</y><w>204</w><h>68</h></coordinates><panel_attributes>StateMachine
+bg=red
+transparency=50</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>357</x><y>170</y><w>204</w><h>51</h></coordinates><panel_attributes>Player
+bg=pink
+transparency=50</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>782</x><y>153</y><w>272</w><h>85</h></coordinates><panel_attributes>
+/IGameEventProcessor/
+bg=dark_gray
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>578</y><w>170</w><h>51</h></coordinates><panel_attributes>GameLost
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1173</x><y>357</y><w>136</w><h>51</h></coordinates><panel_attributes>Points
+bg=blue
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>697</x><y>527</y><w>187</w><h>51</h></coordinates><panel_attributes>PowerUpBlock
+bg=yellow
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>663</x><y>748</y><w>136</w><h>51</h></coordinates><panel_attributes>HardBall
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1615</x><y>289</y><w>170</w><h>51</h></coordinates><panel_attributes>LifeLoss
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1462</x><y>408</y><w>170</w><h>51</h></coordinates><panel_attributes>Lifeplus
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>544</x><y>0</y><w>153</w><h>51</h></coordinates><panel_attributes>PlayerSpeed
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1003</x><y>799</y><w>170</w><h>51</h></coordinates><panel_attributes>Split
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>187</y><w>153</w><h>51</h></coordinates><panel_attributes>Wide
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1343</x><y>255</y><w>187</w><h>51</h></coordinates><panel_attributes>Health
+bg=orange
+transparency=50
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>442</y><w>170</w><h>51</h></coordinates><panel_attributes>GameWon
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>510</y><w>170</w><h>51</h></coordinates><panel_attributes>GamePaused
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>646</y><w>170</w><h>51</h></coordinates><panel_attributes>MainMenu
+bg=red
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>153</x><y>85</y><w>153</w><h>51</h></coordinates><panel_attributes>SlimJim
+bg=cyan
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>969</x><y>357</y><w>238</w><h>68</h></coordinates><panel_attributes>lt=-
+Give points &gt;</panel_attributes><additional_attributes>120;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>867</x><y>527</y><w>238</w><h>136</h></coordinates><panel_attributes>lt=-
+&lt; Create powerup 
+</panel_attributes><additional_attributes>100;60;100;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1513</x><y>238</y><w>221</w><h>85</h></coordinates><panel_attributes>lt=-
+&lt; Lose health </panel_attributes><additional_attributes>10;20;110;20;110;30</additional_attributes></element><element><id>Relation</id><coordinates><x>867</x><y>663</y><w>170</w><h>187</h></coordinates><panel_attributes>lt=-
+&lt; Split ball</panel_attributes><additional_attributes>10;10;10;90;80;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1462</x><y>289</y><w>187</w><h>153</h></coordinates><panel_attributes>lt=-
+Gives health &gt;</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1122</x><y>629</y><w>289</w><h>51</h></coordinates><panel_attributes>WallCollision
+bg=green
+transparency=70</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1275</x><y>289</y><w>306</w><h>374</h></coordinates><panel_attributes>lt=-
+ Lose health &gt;</panel_attributes><additional_attributes>80;10;80;150;10;150;10;200</additional_attributes></element><element><id>Relation</id><coordinates><x>272</x><y>204</y><w>204</w><h>204</h></coordinates><panel_attributes>lt=-
+Moves Player  &gt;</panel_attributes><additional_attributes>100;10;100;40;40;40;40;100</additional_attributes></element><element><id>Relation</id><coordinates><x>289</x><y>85</y><w>238</w><h>119</h></coordinates><panel_attributes>lt=-
+Decreases size &gt;</panel_attributes><additional_attributes>120;50;120;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>136</x><y>170</y><w>255</w><h>85</h></coordinates><panel_attributes>lt=-
+Increases size &gt;</panel_attributes><additional_attributes>130;10;90;10;90;30;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>527</x><y>34</y><w>255</w><h>170</h></coordinates><panel_attributes>lt=-
+&lt; Increases Speed </panel_attributes><additional_attributes>10;80;40;10</additional_attributes></element><element><id>Relation</id><coordinates><x>646</x><y>629</y><w>238</w><h>153</h></coordinates><panel_attributes>lt=-
+Activates HardBall &gt;</panel_attributes><additional_attributes>120;20;50;20;50;70</additional_attributes></element><element><id>Relation</id><coordinates><x>799</x><y>221</y><w>51</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>986</x><y>221</y><w>340</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60;180;60;180;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1037</x><y>204</y><w>374</w><h>85</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;200;10;200;30</additional_attributes></element><element><id>Relation</id><coordinates><x>918</x><y>170</y><w>935</w><h>612</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>80;10;530;10;530;150;480;150;480;340;10;340;10;300</additional_attributes></element><element><id>Relation</id><coordinates><x>612</x><y>221</y><w>204</w><h>102</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>100;10;10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>544</x><y>170</y><w>272</w><h>51</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>140;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>663</x><y>289</y><w>731</w><h>221</h></coordinates><panel_attributes>lt=-
+&lt; Game lost when health is 0 </panel_attributes><additional_attributes>10;40;10;110;410;110;410;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1020</x><y>663</y><w>238</w><h>85</h></coordinates><panel_attributes>lt=-
+&lt; Creates ball </panel_attributes><additional_attributes>10;10;10;30;120;30;120;10</additional_attributes></element><element><id>Relation</id><coordinates><x>442</x><y>340</y><w>221</w><h>374</h></coordinates><panel_attributes>lt=-
+&lt; Change state &gt;</panel_attributes><additional_attributes>100;10;100;100;30;100;30;200</additional_attributes></element><element><id>Relation</id><coordinates><x>476</x><y>374</y><w>51</w><h>323</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;10;10;150;10;130;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>646</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>561</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>510</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>425</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element><element><id>Relation</id><coordinates><x>425</x><y>357</y><w>102</w><h>68</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element></diagram>

@@ -3,7 +3,13 @@ using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using System.IO;
 namespace Breakout.Balls;
+/// <summary>
+///  Creates a ball entity
+/// </summary>
 public static class BallCreator {
+    /// <summary>
+    ///  Creates a ball using a position and a directional vector
+    /// </summary>
     public static Ball CreateBall(Vec2F pos, Vec2F dir) {
         return new Ball(new DynamicShape(
             pos,

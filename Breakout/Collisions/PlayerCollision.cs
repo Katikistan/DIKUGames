@@ -4,6 +4,9 @@ using DIKUArcade.Entities;
 using DIKUArcade.Math;
 using DIKUArcade.Physics;
 namespace Breakout.Collisions;
+/// <summary>
+/// Handles collisions between balls and the player
+/// </summary>
 public static class PlayerCollision {
     /// <summary>
     /// Will check for collsions between ball and the player,
