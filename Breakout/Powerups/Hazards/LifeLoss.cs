@@ -4,7 +4,7 @@ using DIKUArcade.Graphics;
 using System.IO;
 namespace Breakout.Powerups;
 /// <summary>
-/// When picked up, the powerup sends and event making
+/// When picked up, the powerup sends and event decreasing health by 1
 /// </summary>
 public class LifeLoss : Powerup {
     public LifeLoss(DynamicShape shape) : base(shape, new Image(
